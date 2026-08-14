@@ -6,6 +6,7 @@ import {
   getLearningDashboard,
   getRecentActivity,
   rateVocabularyCard,
+  submitConversationEvaluation,
   submitDiagnosticAttempt,
   updateLearnerProfile,
 } from "../db";
@@ -22,6 +23,7 @@ export const learningRouter = router({
     update: protectedProcedure.input(z.object({
       dailyMinutes: z.number().int().min(30).max(180),
       engineeringSpecialty: z.string().min(2).max(80),
+      goalTrack: z.enum(["job_interviews", "daily_work", "general_communication"]),
       vocabularyWeight: z.number().int().min(5).max(70),
       grammarWeight: z.number().int().min(5).max(70),
       listeningWeight: z.number().int().min(5).max(70),
@@ -37,6 +39,10 @@ export const learningRouter = router({
       response: z.string().min(1).max(5000),
       score: z.number().min(0).max(100),
     })).mutation(({ ctx, input }) => submitDiagnosticAttempt(ctx.user.id, input)),
+  }),
+  conversation: router({
+    submitScore: protectedProcedure.input(z.object({ scoreOutOfTen: z.number().min(0).max(10), prompt: z.string().min(2).max(1200) }))
+      .mutation(({ ctx, input }) => submitConversationEvaluation(ctx.user.id, input)),
   }),
   tasks: router({
     complete: protectedProcedure.input(z.object({ taskId: z.number().int().positive(), completed: z.boolean() }))

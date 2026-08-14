@@ -16,8 +16,13 @@ import {
   buildDailyTaskPlan,
   buildCalibrationGaps,
   clampScore,
+  completeVocabularyReviewWorkflow,
+  isVocabularyReviewComplete,
+  persistConversationEvaluationWorkflow,
   practicalBand,
   reviewSchedule,
+  selectDailyConversationPlan,
+  selectDailyListeningPlan,
   summarizeDailySkills,
   type CardRating,
   type SkillKey,
@@ -191,6 +196,10 @@ export async function getLearningDashboard(userId: number) {
     snapshot,
     skillProgress,
     dailyReport,
+    dailyContent: {
+      conversation: selectDailyConversationPlan(dateKey, profile.engineeringSpecialty, profile.goalTrack),
+      listening: selectDailyListeningPlan(dateKey, snapshot.practicalBand),
+    },
     stats: {
       totalCards: cards.length,
       strongCards: cards.filter(card => card.reviewStrength >= 3).length,
@@ -200,7 +209,7 @@ export async function getLearningDashboard(userId: number) {
   };
 }
 
-export async function updateLearnerProfile(userId: number, input: Omit<Pick<LearnerProfile, "dailyMinutes" | "engineeringSpecialty" | "vocabularyWeight" | "grammarWeight" | "listeningWeight" | "speakingWeight" | "writingWeight">, "id">) {
+export async function updateLearnerProfile(userId: number, input: Omit<Pick<LearnerProfile, "dailyMinutes" | "engineeringSpecialty" | "goalTrack" | "vocabularyWeight" | "grammarWeight" | "listeningWeight" | "speakingWeight" | "writingWeight">, "id">) {
   const db = await getDb();
   if (!db) throw new Error("قاعدة البيانات غير متاحة حاليًا");
   const profile = await ensureLearnerWorkspace(userId);
@@ -226,6 +235,26 @@ export async function completeDailyTask(userId: number, taskId: number, complete
   await recomputeSnapshot(userId);
 }
 
+export async function submitConversationEvaluation(userId: number, input: { scoreOutOfTen: number; prompt: string }) {
+  const db = await getDb();
+  if (!db) throw new Error("قاعدة البيانات غير متاحة حاليًا");
+  await ensureLearnerWorkspace(userId);
+  const speakingTask = (await db.select({ id: dailyTasks.id }).from(dailyTasks)
+    .where(and(eq(dailyTasks.userId, userId), eq(dailyTasks.dateKey, dateKeyFor()), eq(dailyTasks.taskKey, "speaking"))).limit(1))[0];
+  return persistConversationEvaluationWorkflow({
+    scoreOutOfTen: input.scoreOutOfTen,
+    prompt: input.prompt,
+    persistEvidence: async evidence => {
+      await db.insert(diagnosticAttempts).values({ userId, skill: "speaking", evidenceType: "ai-conversation-evaluation", ...evidence });
+    },
+    markSpeakingTaskComplete: async () => {
+      if (!speakingTask) return;
+      await db.update(dailyTasks).set({ status: "completed", completedAt: new Date() }).where(eq(dailyTasks.id, speakingTask.id));
+    },
+    refreshCalibration: async () => { await recomputeSnapshot(userId); },
+  });
+}
+
 export async function getDueCards(userId: number) {
   const db = await getDb();
   if (!db) throw new Error("قاعدة البيانات غير متاحة حاليًا");
@@ -241,6 +270,16 @@ export async function rateVocabularyCard(userId: number, cardId: number, rating:
   const schedule = reviewSchedule(rating, card.reviewStrength);
   await db.update(vocabularyCards).set({ reviewStrength: schedule.nextStrength, reviewCount: card.reviewCount + 1, nextReviewAt: schedule.nextReviewAt }).where(eq(vocabularyCards.id, card.id));
   await db.insert(cardReviews).values({ userId, cardId, rating, strengthAfter: schedule.nextStrength });
+  const remainingDueCards = await db.select({ id: vocabularyCards.id }).from(vocabularyCards)
+    .where(and(eq(vocabularyCards.userId, userId), lte(vocabularyCards.nextReviewAt, new Date()))).limit(1);
+  await completeVocabularyReviewWorkflow({
+    remainingDueCardCount: remainingDueCards.length,
+    markVocabularyTaskComplete: async () => {
+      await db.update(dailyTasks).set({ status: "completed", completedAt: new Date() })
+        .where(and(eq(dailyTasks.userId, userId), eq(dailyTasks.dateKey, dateKeyFor()), eq(dailyTasks.taskKey, "vocabulary")));
+    },
+    refreshCalibration: async () => { await recomputeSnapshot(userId); },
+  });
   return schedule;
 }
 

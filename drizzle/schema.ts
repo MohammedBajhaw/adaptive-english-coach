@@ -29,6 +29,7 @@ export const learnerProfiles = mysqlTable(
     userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
     dailyMinutes: int("dailyMinutes").notNull().default(50),
     engineeringSpecialty: varchar("engineeringSpecialty", { length: 80 }).notNull().default("general"),
+    goalTrack: varchar("goalTrack", { length: 40 }).notNull().default("job_interviews"),
     startingBand: varchar("startingBand", { length: 16 }).notNull().default("A2/B1"),
     vocabularyWeight: int("vocabularyWeight").notNull().default(25),
     grammarWeight: int("grammarWeight").notNull().default(20),

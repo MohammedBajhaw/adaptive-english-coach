@@ -10,6 +10,7 @@ import {
   Flame,
   LayoutDashboard,
   LogIn,
+  MessageCircle,
   Settings2,
 } from "lucide-react";
 import { useLocation } from "wouter";
@@ -17,6 +18,9 @@ import { useLocation } from "wouter";
 const menuItems = [
   { icon: LayoutDashboard, label: "نظرة اليوم", path: "/" },
   { icon: BrainCircuit, label: "المعايرة", path: "/diagnostic" },
+  { icon: BookOpenCheck, label: "القواعد", path: "/grammar" },
+  { icon: MessageCircle, label: "محادثة", path: "/conversation" },
+  { icon: ChartNoAxesCombined, label: "استماع", path: "/listening" },
   { icon: BookOpenCheck, label: "البطاقات", path: "/cards" },
   { icon: Settings2, label: "خطتي", path: "/settings" },
 ];

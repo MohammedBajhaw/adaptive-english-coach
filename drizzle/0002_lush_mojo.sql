@@ -1,0 +1,1 @@
+ALTER TABLE `learner_profiles` ADD `goalTrack` varchar(40) DEFAULT 'job_interviews' NOT NULL;

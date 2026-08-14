@@ -15,6 +15,13 @@
       "when": 1786683053548,
       "tag": "0001_lowly_wilson_fisk",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1786684506227,
+      "tag": "0002_lush_mojo",
+      "breakpoints": true
     }
   ]
 }
