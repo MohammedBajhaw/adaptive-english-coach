@@ -11,6 +11,8 @@ import {
   submitDiagnosticAttempt,
   updateLearnerProfile,
   getReminderProfile,
+  getLearnerNotifications,
+  markLearnerNotificationRead,
   updateReminderPreferences,
 } from "../db";
 import { correctWritingWithConfiguredProvider, getCorrectionProviderStatus } from "../ai-correction";
@@ -82,5 +84,9 @@ export const learningRouter = router({
       const job = await createHeartbeatJob({ name: `learning-reminder-${ctx.user.id}`, cron, path: "/api/scheduled/learning-reminder", description: "Daily learning reminder" }, sessionToken);
       return updateReminderPreferences(ctx.user.id, { ...input, taskUid: job.taskUid });
     }),
+  }),
+  notifications: router({
+    list: protectedProcedure.query(({ ctx }) => getLearnerNotifications(ctx.user.id)),
+    markRead: protectedProcedure.input(z.object({ notificationId: z.number().int().positive() })).mutation(({ ctx, input }) => markLearnerNotificationRead(ctx.user.id, input.notificationId)),
   }),
 });

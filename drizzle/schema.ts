@@ -136,7 +136,26 @@ export const dailyTasks = mysqlTable(
   ],
 );
 
+export const learnerNotifications = mysqlTable(
+  "learner_notifications",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+    kind: varchar("kind", { length: 48 }).notNull(),
+    sourceDateKey: varchar("sourceDateKey", { length: 10 }).notNull(),
+    title: varchar("title", { length: 180 }).notNull(),
+    content: text("content").notNull(),
+    readAt: timestamp("readAt"),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+  },
+  table => [
+    uniqueIndex("learner_notifications_user_kind_date_unique").on(table.userId, table.kind, table.sourceDateKey),
+    index("learner_notifications_user_created_idx").on(table.userId, table.createdAt),
+  ],
+);
+
 export type LearnerProfile = typeof learnerProfiles.$inferSelect;
 export type VocabularyCard = typeof vocabularyCards.$inferSelect;
 export type DailyTask = typeof dailyTasks.$inferSelect;
+export type LearnerNotification = typeof learnerNotifications.$inferSelect;
 export type User = typeof users.$inferSelect;

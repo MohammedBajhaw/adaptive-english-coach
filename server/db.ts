@@ -5,6 +5,7 @@ import {
   dailyTasks,
   diagnosticAttempts,
   learnerProfiles,
+  learnerNotifications,
   skillSnapshots,
   users,
   vocabularyCards,
@@ -357,8 +358,24 @@ export async function getScheduledReminder(taskUid: string) {
   return { dateKey, message: reminderMessage({ dueCards: dueCards.length, pendingTasks: pendingTasks.length }) };
 }
 
-export async function markScheduledReminderDispatched(taskUid: string, dateKey: string) {
+export async function createScheduledReminder(taskUid: string, dateKey: string, message: { title: string; content: string }) {
   const db = await getDb();
   if (!db) throw new Error("قاعدة البيانات غير متاحة حاليًا");
-  await db.update(learnerProfiles).set({ lastReminderDateKey: dateKey }).where(eq(learnerProfiles.reminderScheduleTaskUid, taskUid));
+  const profile = (await db.select().from(learnerProfiles).where(eq(learnerProfiles.reminderScheduleTaskUid, taskUid)).limit(1))[0];
+  if (!profile) return false;
+  await db.insert(learnerNotifications).values({ userId: profile.userId, kind: "daily-review", sourceDateKey: dateKey, title: message.title, content: message.content }).onDuplicateKeyUpdate({ set: { title: message.title, content: message.content } });
+  await db.update(learnerProfiles).set({ lastReminderDateKey: dateKey }).where(eq(learnerProfiles.id, profile.id));
+  return true;
+}
+
+export async function getLearnerNotifications(userId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("قاعدة البيانات غير متاحة حاليًا");
+  return db.select().from(learnerNotifications).where(eq(learnerNotifications.userId, userId)).orderBy(desc(learnerNotifications.createdAt)).limit(8);
+}
+
+export async function markLearnerNotificationRead(userId: number, notificationId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("قاعدة البيانات غير متاحة حاليًا");
+  await db.update(learnerNotifications).set({ readAt: new Date() }).where(and(eq(learnerNotifications.id, notificationId), eq(learnerNotifications.userId, userId)));
 }

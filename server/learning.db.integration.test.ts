@@ -1,7 +1,7 @@
 import { afterEach, beforeAll, describe, expect, it } from "vitest";
 import { and, desc, eq } from "drizzle-orm";
-import { dailyTasks, diagnosticAttempts, skillSnapshots, users, vocabularyCards } from "../drizzle/schema";
-import { ensureLearnerWorkspace, getDb, getLearningDashboard, getProgressReports, rateVocabularyCard, submitConversationEvaluation } from "./db";
+import { dailyTasks, diagnosticAttempts, learnerProfiles, skillSnapshots, users, vocabularyCards } from "../drizzle/schema";
+import { createScheduledReminder, ensureLearnerWorkspace, getDb, getLearnerNotifications, getLearningDashboard, getProgressReports, getScheduledReminder, rateVocabularyCard, submitConversationEvaluation } from "./db";
 import { appRouter } from "./routers";
 import type { TrpcContext } from "./_core/context";
 
@@ -98,5 +98,20 @@ integrationDescribe("learning database integration", () => {
     const report = await caller.learning.reports();
     expect(report.weekly.skills.find(item => item.skill === "speaking")).toMatchObject({ evidenceCount: 1, completedTasks: 1 });
     expect(report.monthly.snapshotCount).toBeGreaterThan(0);
+  }, 20_000);
+
+  it("creates one in-app reminder from the scheduled task and prevents duplicate delivery on the same day", async () => {
+    const { db, userId } = await createWorkspace();
+    const taskUid = `reminder-test-${userId}`;
+    await db.update(learnerProfiles).set({ reminderEnabled: 1, reminderScheduleTaskUid: taskUid, lastReminderDateKey: null }).where(eq(learnerProfiles.userId, userId));
+    const scheduled = await getScheduledReminder(taskUid);
+    expect(scheduled).not.toBeNull();
+    const created = await createScheduledReminder(taskUid, scheduled!.dateKey, scheduled!.message);
+    const notifications = await getLearnerNotifications(userId);
+    const duplicate = await getScheduledReminder(taskUid);
+    expect(created).toBe(true);
+    expect(notifications).toHaveLength(1);
+    expect(notifications[0]).toMatchObject({ kind: "daily-review", sourceDateKey: scheduled!.dateKey });
+    expect(duplicate).toBeNull();
   }, 20_000);
 });
