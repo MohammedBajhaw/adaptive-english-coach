@@ -22,6 +22,7 @@ const menuItems = [
   { icon: MessageCircle, label: "محادثة", path: "/conversation" },
   { icon: ChartNoAxesCombined, label: "استماع", path: "/listening" },
   { icon: BookOpenCheck, label: "البطاقات", path: "/cards" },
+  { icon: ChartNoAxesCombined, label: "التقارير", path: "/reports" },
   { icon: Settings2, label: "خطتي", path: "/settings" },
 ];
 

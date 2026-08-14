@@ -1,5 +1,12 @@
 export type SkillKey = "vocabulary" | "grammar" | "listening" | "speaking" | "writing";
 export type CardRating = "again" | "hard" | "good" | "easy";
+export type GoalTrack = "job_interviews" | "daily_work" | "general_communication";
+
+export const goalTrackLabels: Record<GoalTrack, string> = {
+  job_interviews: "مقابلات العمل",
+  daily_work: "العمل الهندسي اليومي",
+  general_communication: "التواصل العام",
+};
 
 export const skillLabels: Record<SkillKey, string> = {
   vocabulary: "المفردات",
@@ -155,34 +162,96 @@ function specialtyName(specialty: string) {
   return names[specialty] ?? names.general;
 }
 
+const wordTranslations: Record<string, string> = {
+  sensor: "مستشعر", actuator: "مشغّل", "control system": "نظام تحكم", reliable: "موثوق", "test results": "نتائج الاختبار",
+  troubleshoot: "يشخّص ويحل المشكلة", fault: "عطل", calibrate: "يعاير", signal: "إشارة", "root cause": "السبب الجذري",
+  initiative: "مبادرة", adapt: "يتأقلم", collaborate: "يتعاون", improve: "يحسّن", responsibility: "مسؤولية",
+  deadline: "موعد نهائي", prototype: "نموذج أولي", coordinate: "ينسّق", risk: "مخاطرة", handover: "تسليم المهمة",
+  status: "الحالة", verify: "يتحقق", component: "مكوّن", "next step": "الخطوة التالية", suggest: "يقترح",
+  benefit: "فائدة", constraint: "قيد", feasible: "قابل للتنفيذ", feedback: "تغذية راجعة", background: "خلفية",
+  "interested in": "مهتم بـ", develop: "يطوّر", experience: "خبرة", goal: "هدف", step: "خطوة",
+  process: "عملية", connect: "يربط", measure: "يقيس", result: "نتيجة", clarify: "يوضّح",
+  confirm: "يؤكد", mean: "يعني", "could you": "هل يمكنك", understand: "يفهم",
+};
+
 const interviewThemes = [
-  { id: "project-interview", title: "مقابلة عن مشروع التخرج", topic: "your graduation project, its goal, and your contribution", words: ["sensor", "actuator", "control system", "reliable", "test results"] },
-  { id: "technical-interview", title: "مقابلة عن حل مشكلة تقنية", topic: "a technical fault, how you diagnosed it, and the next test", words: ["troubleshoot", "fault", "calibrate", "signal", "root cause"] },
-  { id: "strengths-interview", title: "نقاط قوة مهنية", topic: "your strengths, a challenge, and how you learned from it", words: ["initiative", "adapt", "collaborate", "improve", "responsibility"] },
+  { id: "project-interview", title: "مقابلة عن مشروع التخرج", topic: "your graduation project, its goal, and your contribution", topicArabic: "مشروع تخرجك، هدفه، ومساهمتك فيه", words: ["sensor", "actuator", "control system", "reliable", "test results"] },
+  { id: "technical-interview", title: "مقابلة عن حل مشكلة تقنية", topic: "a technical fault, how you diagnosed it, and the next test", topicArabic: "عطل تقني، كيف شخصته، وما الاختبار التالي", words: ["troubleshoot", "fault", "calibrate", "signal", "root cause"] },
+  { id: "strengths-interview", title: "نقاط قوة مهنية", topic: "your strengths, a challenge, and how you learned from it", topicArabic: "نقاط قوتك، تحدٍ واجهته، وما تعلمته منه", words: ["initiative", "adapt", "collaborate", "improve", "responsibility"] },
 ] as const;
 
 const dailyWorkThemes = [
-  { id: "team-update", title: "تحديث لفريق العمل", topic: "a short project update, a delay, and a practical solution", words: ["deadline", "prototype", "coordinate", "risk", "improve"] },
-  { id: "handover", title: "تسليم مهمة تقنية", topic: "handing over a technical task and explaining its current status", words: ["handover", "status", "verify", "component", "next step"] },
-  { id: "meeting-idea", title: "فكرة في اجتماع", topic: "suggesting an improvement in a team meeting", words: ["suggest", "benefit", "constraint", "feasible", "feedback"] },
+  { id: "team-update", title: "تحديث لفريق العمل", topic: "a short project update, a delay, and a practical solution", topicArabic: "تحديث قصير عن مشروع وتأخير وحل عملي", words: ["deadline", "prototype", "coordinate", "risk", "improve"] },
+  { id: "handover", title: "تسليم مهمة تقنية", topic: "handing over a technical task and explaining its current status", topicArabic: "تسليم مهمة تقنية وشرح حالتها الحالية", words: ["handover", "status", "verify", "component", "next step"] },
+  { id: "meeting-idea", title: "فكرة في اجتماع", topic: "suggesting an improvement in a team meeting", topicArabic: "اقتراح تحسين في اجتماع فريق", words: ["suggest", "benefit", "constraint", "feasible", "feedback"] },
 ] as const;
 
 const generalCommunicationThemes = [
-  { id: "professional-introduction", title: "تقديم مهني مختصر", topic: "introducing yourself, your field, and what you enjoy learning", words: ["background", "interested in", "develop", "experience", "goal"] },
-  { id: "explaining-process", title: "شرح عملية بسيطة", topic: "explaining a simple technical process to a non-specialist", words: ["step", "process", "connect", "measure", "result"] },
-  { id: "asking-clarification", title: "طلب توضيح باحتراف", topic: "asking for clarification and responding politely in a work conversation", words: ["clarify", "confirm", "mean", "could you", "understand"] },
+  { id: "professional-introduction", title: "تقديم مهني مختصر", topic: "introducing yourself, your field, and what you enjoy learning", topicArabic: "تقديم نفسك وتخصصك وما تحب تعلمه", words: ["background", "interested in", "develop", "experience", "goal"] },
+  { id: "explaining-process", title: "شرح عملية بسيطة", topic: "explaining a simple technical process to a non-specialist", topicArabic: "شرح عملية تقنية بسيطة لغير المتخصص", words: ["step", "process", "connect", "measure", "result"] },
+  { id: "asking-clarification", title: "طلب توضيح باحتراف", topic: "asking for clarification and responding politely in a work conversation", topicArabic: "طلب توضيح والرد بلطف في محادثة عمل", words: ["clarify", "confirm", "mean", "could you", "understand"] },
 ] as const;
 
-export function selectDailyConversationPlan(dateKey: string, specialty: string, goalTrack = "job_interviews") {
-  const themes = goalTrack === "daily_work" ? dailyWorkThemes : goalTrack === "general_communication" ? generalCommunicationThemes : interviewThemes;
+type ConversationTheme = {
+  id: string;
+  title: string;
+  topic: string;
+  topicArabic: string;
+  words: readonly string[];
+};
+
+const themeSets: Record<GoalTrack, readonly ConversationTheme[]> = {
+  job_interviews: interviewThemes,
+  daily_work: dailyWorkThemes,
+  general_communication: generalCommunicationThemes,
+};
+
+export function parseGoalTracks(value = "job_interviews"): GoalTrack[] {
+  const valid = new Set<GoalTrack>(["job_interviews", "daily_work", "general_communication"]);
+  const tracks = value.split(",").filter((item): item is GoalTrack => valid.has(item as GoalTrack));
+  return tracks.length ? tracks : ["job_interviews"];
+}
+
+export function selectDailyConversationPlan(dateKey: string, specialty: string, serializedGoalTracks = "job_interviews") {
+  const goalTracks = parseGoalTracks(serializedGoalTracks);
+  const themes = goalTracks.flatMap(track => themeSets[track]);
   const theme = themes[dayIndex(dateKey, themes.length)]!;
   const field = specialtyName(specialty);
   return {
     ...theme,
-    goalTrack,
+    goalTracks,
+    goalLabel: goalTracks.map(track => goalTrackLabels[track]).join(" + "),
+    words: theme.words.map(english => ({ english, arabic: wordTranslations[english] ?? english })),
     targetMinutes: 8,
     prompt: `Act as a supportive English interviewer for a recent ${field} graduate at A2/B1 level. Have an 8-minute conversation about ${theme.topic}. Ask one question at a time and wait for my answer. Encourage me to use these words naturally: ${theme.words.join(", ")}. Correct only important errors after every 2–3 answers so the conversation remains natural. At the end, give a complete evaluation with: 1) fluency, 2) vocabulary, 3) grammar, 4) clarity, 5) three corrected sentences from my answers, and 6) one overall score out of 10. State the final score clearly as: Overall score: X/10.`,
   };
+}
+
+export function gradeGrammarChoices(selected: Array<number | null>, answers: number[]) {
+  const correct = selected.reduce<number>((total, choice, index) => total + (choice === answers[index] ? 1 : 0), 0);
+  return { correct, total: answers.length, score: Math.round((correct / answers.length) * 70) };
+}
+
+export function buildPeriodSkillMetrics(input: {
+  scoreHistory: Record<SkillKey, number[]>;
+  evidenceCounts: Record<SkillKey, number>;
+  completedTasks: Record<SkillKey, number>;
+  strongCards: number;
+}) {
+  return (Object.keys(skillLabels) as SkillKey[]).map(skill => {
+    const history = input.scoreHistory[skill];
+    const latestScore = history.at(-1) ?? 42;
+    const averageScore = history.length ? Math.round(history.reduce((sum, score) => sum + score, 0) / history.length) : 42;
+    return {
+      skill,
+      latestScore,
+      averageScore,
+      scoreChange: history.length > 1 ? latestScore - history[0]! : 0,
+      evidenceCount: input.evidenceCounts[skill],
+      completedTasks: input.completedTasks[skill],
+      strongCards: skill === "vocabulary" ? input.strongCards : undefined,
+    };
+  });
 }
 
 const guidedListeningPlans = [

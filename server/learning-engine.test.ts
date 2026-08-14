@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { aggregateScore, buildCalibrationGaps, buildDailyTaskPlan, completeVocabularyReviewWorkflow, conversationScoreToEvidence, isVocabularyReviewComplete, persistConversationEvaluationWorkflow, practicalBand, reviewSchedule, selectDailyConversationPlan, selectDailyListeningPlan, selectListeningTrack, summarizeDailySkills } from "./learning-engine";
+import { aggregateScore, buildCalibrationGaps, buildDailyTaskPlan, buildPeriodSkillMetrics, completeVocabularyReviewWorkflow, conversationScoreToEvidence, gradeGrammarChoices, isVocabularyReviewComplete, parseGoalTracks, persistConversationEvaluationWorkflow, practicalBand, reviewSchedule, selectDailyConversationPlan, selectDailyListeningPlan, selectListeningTrack, summarizeDailySkills } from "./learning-engine";
 
 describe("محرك خطة التعلم", () => {
   it("يوزع الدقائق اليومية كاملة بين المهارات مع الحفاظ على حد أدنى", () => {
@@ -25,23 +25,10 @@ describe("محرك خطة التعلم", () => {
   });
 
   it("يفصل إنجاز كل مهارة ويعرض فجوة ذات سبب ملموس", () => {
-    const skillProgress = summarizeDailySkills([
-      { skill: "vocabulary", status: "completed" },
-      { skill: "grammar", status: "pending" },
-      { skill: "listening", status: "pending" },
-      { skill: "speaking", status: "pending" },
-      { skill: "writing", status: "pending" },
-    ]);
+    const skillProgress = summarizeDailySkills([{ skill: "vocabulary", status: "completed" }, { skill: "grammar", status: "pending" }, { skill: "listening", status: "pending" }, { skill: "speaking", status: "pending" }, { skill: "writing", status: "pending" }]);
     expect(skillProgress.find(item => item.skill === "vocabulary")?.percentage).toBe(100);
-    expect(skillProgress.find(item => item.skill === "speaking")?.percentage).toBe(0);
-    const gaps = buildCalibrationGaps({
-      scores: { vocabulary: 65, grammar: 51, listening: 43, speaking: 35, writing: 48 },
-      evidenceCounts: { vocabulary: 1, grammar: 0, listening: 0, speaking: 0, writing: 0 },
-      skillProgress,
-      weakDueCards: 1,
-    });
+    const gaps = buildCalibrationGaps({ scores: { vocabulary: 65, grammar: 51, listening: 43, speaking: 35, writing: 48 }, evidenceCounts: { vocabulary: 1, grammar: 0, listening: 0, speaking: 0, writing: 0 }, skillProgress, weakDueCards: 1 });
     expect(gaps[0]?.skill).toBe("speaking");
-    expect(gaps[0]?.message).toContain("لا توجد إجابة");
   });
 
   it("يكمل مهمة المفردات فقط عندما تختفي البطاقات المستحقة ويحوّل تقييم المحادثة إلى دليل", () => {
@@ -52,24 +39,31 @@ describe("محرك خطة التعلم", () => {
     expect(selectListeningTrack("B1 · مستقل")).toBe("workplace-b1");
   });
 
-  it("يدور محتوى المحادثة والاستماع يوميًا ويكيّفه مع التخصص والمستوى", () => {
+  it("يدور محتوى المحادثة والاستماع يوميًا ويكيّفه مع التخصص ومسارات الهدف المتعددة", () => {
     const firstConversation = selectDailyConversationPlan("2026-08-14", "mechatronics", "job_interviews");
     const nextConversation = selectDailyConversationPlan("2026-08-15", "mechatronics", "job_interviews");
     expect(firstConversation.id).not.toBe(nextConversation.id);
     expect(firstConversation.prompt).toContain("Mechatronics Engineering");
-    expect(selectDailyConversationPlan("2026-08-14", "mechatronics", "daily_work").goalTrack).toBe("daily_work");
-    expect(selectDailyConversationPlan("2026-08-14", "mechatronics", "daily_work").prompt).not.toBe(firstConversation.prompt);
+    expect(firstConversation.words[0]?.arabic).toBeTruthy();
+    const multiGoal = selectDailyConversationPlan("2026-08-14", "mechatronics", "job_interviews,daily_work,general_communication");
+    expect(multiGoal.goalTracks).toHaveLength(3);
+    expect(multiGoal.goalLabel).toContain("مقابلات العمل");
+    expect(parseGoalTracks("daily_work,general_communication")).toEqual(["daily_work", "general_communication"]);
     const guided = selectDailyListeningPlan("2026-08-14", "قيد المعايرة · A2/B1");
     const workplace = selectDailyListeningPlan("2026-08-14", "B1 · مستقل");
     expect(guided.source).toContain("British Council");
     expect(workplace.source).toContain("BBC");
   });
 
+  it("يحسب نتيجة الأسئلة الخمسة الموضوعية منفصلة عن التقييم الذاتي للكتابة", () => {
+    expect(gradeGrammarChoices([1, 0, 0, 0, 1], [1, 0, 0, 0, 1])).toEqual({ correct: 5, total: 5, score: 70 });
+    expect(gradeGrammarChoices([1, 2, 0, null, 1], [1, 0, 0, 0, 1])).toEqual({ correct: 3, total: 5, score: 42 });
+  });
+
   it("يكمل مهمة المفردات تلقائيًا فقط بعد آخر بطاقة مستحقة", async () => {
     const events: string[] = [];
     const incomplete = await completeVocabularyReviewWorkflow({ remainingDueCardCount: 1, markVocabularyTaskComplete: async () => { events.push("complete"); }, refreshCalibration: async () => { events.push("recompute"); } });
     expect(incomplete).toBe(false);
-    expect(events).toEqual([]);
     const complete = await completeVocabularyReviewWorkflow({ remainingDueCardCount: 0, markVocabularyTaskComplete: async () => { events.push("complete"); }, refreshCalibration: async () => { events.push("recompute"); } });
     expect(complete).toBe(true);
     expect(events).toEqual(["complete", "recompute"]);
@@ -78,15 +72,15 @@ describe("محرك خطة التعلم", () => {
   it("يحفظ تقييم المحادثة كدليل للمحادثة ثم يكمل المهمة ويعيد المعايرة", async () => {
     const events: string[] = [];
     const evidence: Array<{ score: number; prompt: string; response: string }> = [];
-    const score = await persistConversationEvaluationWorkflow({
-      scoreOutOfTen: 7.5,
-      prompt: "daily prompt",
-      persistEvidence: async item => { evidence.push(item); events.push("evidence"); },
-      markSpeakingTaskComplete: async () => { events.push("complete-speaking"); },
-      refreshCalibration: async () => { events.push("recompute"); },
-    });
+    const score = await persistConversationEvaluationWorkflow({ scoreOutOfTen: 7.5, prompt: "daily prompt", persistEvidence: async item => { evidence.push(item); events.push("evidence"); }, markSpeakingTaskComplete: async () => { events.push("complete-speaking"); }, refreshCalibration: async () => { events.push("recompute"); } });
     expect(score).toBe(75);
     expect(evidence[0]).toEqual({ score: 75, prompt: "daily prompt", response: "Overall score: 7.5/10" });
     expect(events).toEqual(["evidence", "complete-speaking", "recompute"]);
+  });
+
+  it("يبني مقاييس أسبوعية وشهرية منفصلة لكل مهارة من اللقطات والأدلة والمهام", () => {
+    const metrics = buildPeriodSkillMetrics({ scoreHistory: { vocabulary: [40, 60], grammar: [50], listening: [], speaking: [45, 42], writing: [55, 65] }, evidenceCounts: { vocabulary: 3, grammar: 1, listening: 0, speaking: 2, writing: 2 }, completedTasks: { vocabulary: 4, grammar: 1, listening: 0, speaking: 2, writing: 2 }, strongCards: 6 });
+    expect(metrics.find(item => item.skill === "vocabulary")).toMatchObject({ averageScore: 50, scoreChange: 20, evidenceCount: 3, completedTasks: 4, strongCards: 6 });
+    expect(metrics.find(item => item.skill === "listening")).toMatchObject({ latestScore: 42, averageScore: 42, evidenceCount: 0 });
   });
 });

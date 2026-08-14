@@ -15,6 +15,7 @@ import {
   aggregateScore,
   buildDailyTaskPlan,
   buildCalibrationGaps,
+  buildPeriodSkillMetrics,
   clampScore,
   completeVocabularyReviewWorkflow,
   isVocabularyReviewComplete,
@@ -69,24 +70,29 @@ export async function getUserByOpenId(openId: string) {
 const starterCards = [
   {
     term: "reliable", arabicMeaning: "موثوق؛ يمكن الاعتماد عليه", partOfSpeech: "adjective", ipa: "/rɪˈlaɪ.ə.bəl/", engineeringDomain: "general engineering",
-    examples: ["This sensor provides reliable data.", "We need a reliable power supply.", "The test results are reliable.", "A reliable design reduces risk.", "The team chose a reliable material."],
+    examples: [{ english: "This sensor provides reliable data.", arabic: "يوفر هذا المستشعر بيانات موثوقة." }, { english: "We need a reliable power supply.", arabic: "نحتاج إلى مصدر طاقة موثوق." }, { english: "The test results are reliable.", arabic: "نتائج الاختبار موثوقة." }, { english: "A reliable design reduces risk.", arabic: "التصميم الموثوق يقلل المخاطر." }, { english: "The team chose a reliable material.", arabic: "اختار الفريق مادة موثوقة." }],
   },
   {
     term: "conduct", arabicMeaning: "يجري أو ينفّذ، خاصة اختبارًا أو دراسة", partOfSpeech: "verb", ipa: "/kənˈdʌkt/", engineeringDomain: "testing",
-    examples: ["We will conduct a safety test.", "The engineers conducted an inspection.", "Please conduct the experiment carefully.", "They conduct routine maintenance every month.", "Our lab can conduct material analysis."],
+    examples: [{ english: "We will conduct a safety test.", arabic: "سنجري اختبار سلامة." }, { english: "The engineers conducted an inspection.", arabic: "أجرى المهندسون فحصًا." }, { english: "Please conduct the experiment carefully.", arabic: "يرجى تنفيذ التجربة بعناية." }, { english: "They conduct routine maintenance every month.", arabic: "ينفذون صيانة دورية كل شهر." }, { english: "Our lab can conduct material analysis.", arabic: "يمكن لمختبرنا إجراء تحليل للمواد." }],
   },
   {
     term: "efficient", arabicMeaning: "فعّال ويحقق النتيجة بأقل وقت أو طاقة أو موارد", partOfSpeech: "adjective", ipa: "/ɪˈfɪʃ.ənt/", engineeringDomain: "operations",
-    examples: ["This motor is more efficient.", "We need an efficient workflow.", "The new system uses energy efficiently.", "Efficient planning saves time.", "Her solution is simple and efficient."],
+    examples: [{ english: "This motor is more efficient.", arabic: "هذا المحرك أكثر كفاءة." }, { english: "We need an efficient workflow.", arabic: "نحتاج إلى سير عمل فعّال." }, { english: "The new system uses energy efficiently.", arabic: "يستخدم النظام الجديد الطاقة بكفاءة." }, { english: "Efficient planning saves time.", arabic: "التخطيط الفعّال يوفر الوقت." }, { english: "Her solution is simple and efficient.", arabic: "حلها بسيط وفعّال." }],
   },
   {
     term: "maintain", arabicMeaning: "يصون أو يحافظ على حالة جيدة", partOfSpeech: "verb", ipa: "/meɪnˈteɪn/", engineeringDomain: "maintenance",
-    examples: ["Technicians maintain the equipment.", "We must maintain the correct pressure.", "The company maintains high standards.", "This machine is easy to maintain.", "They maintain a detailed service record."],
+    examples: [{ english: "Technicians maintain the equipment.", arabic: "يصون الفنيون المعدات." }, { english: "We must maintain the correct pressure.", arabic: "يجب أن نحافظ على الضغط الصحيح." }, { english: "The company maintains high standards.", arabic: "تحافظ الشركة على معايير عالية." }, { english: "This machine is easy to maintain.", arabic: "هذه الآلة سهلة الصيانة." }, { english: "They maintain a detailed service record.", arabic: "يحافظون على سجل خدمة مفصل." }],
   },
   {
     term: "constraint", arabicMeaning: "قيد أو عامل يحد من الخيارات المتاحة", partOfSpeech: "noun", ipa: "/kənˈstreɪnt/", engineeringDomain: "design",
-    examples: ["Budget is a major design constraint.", "Time constraints affected the project.", "Safety is not a constraint we can ignore.", "The team listed each technical constraint.", "We found a solution within the constraints."],
+    examples: [{ english: "Budget is a major design constraint.", arabic: "الميزانية قيد رئيسي في التصميم." }, { english: "Time constraints affected the project.", arabic: "أثرت قيود الوقت في المشروع." }, { english: "Safety is not a constraint we can ignore.", arabic: "السلامة ليست قيدًا يمكن تجاهله." }, { english: "The team listed each technical constraint.", arabic: "سرد الفريق كل قيد تقني." }, { english: "We found a solution within the constraints.", arabic: "وجدنا حلًا ضمن القيود." }],
   },
+  { term: "calibrate", arabicMeaning: "يعاير جهازًا ليعطي قياسًا دقيقًا", partOfSpeech: "verb", ipa: "/ˈkæl.ɪ.breɪt/", engineeringDomain: "mechatronics", examples: [{ english: "We need to calibrate the sensor.", arabic: "نحتاج إلى معايرة المستشعر." }, { english: "The team calibrated the camera.", arabic: "عاير الفريق الكاميرا." }, { english: "Calibrate the device before testing.", arabic: "عاير الجهاز قبل الاختبار." }, { english: "The technician is calibrating the meter.", arabic: "الفني يعاير جهاز القياس." }, { english: "Regular calibration improves accuracy.", arabic: "المعايرة الدورية تحسن الدقة." }] },
+  { term: "prototype", arabicMeaning: "نموذج أولي للاختبار قبل الإنتاج", partOfSpeech: "noun", ipa: "/ˈprəʊ.tə.taɪp/", engineeringDomain: "product development", examples: [{ english: "We built a prototype for the project.", arabic: "بنينا نموذجًا أوليًا للمشروع." }, { english: "The prototype needs more testing.", arabic: "يحتاج النموذج الأولي إلى مزيد من الاختبار." }, { english: "This prototype uses a small motor.", arabic: "يستخدم هذا النموذج الأولي محركًا صغيرًا." }, { english: "The client approved the prototype.", arabic: "وافق العميل على النموذج الأولي." }, { english: "A prototype helps us find problems early.", arabic: "يساعد النموذج الأولي في اكتشاف المشكلات مبكرًا." }] },
+  { term: "troubleshoot", arabicMeaning: "يشخّص مشكلة ويعمل على حلها", partOfSpeech: "verb", ipa: "/ˈtrʌb.əl.ʃuːt/", engineeringDomain: "diagnostics", examples: [{ english: "We must troubleshoot the control system.", arabic: "يجب أن نشخص مشكلة نظام التحكم." }, { english: "She can troubleshoot electrical faults.", arabic: "يمكنها تشخيص الأعطال الكهربائية وحلها." }, { english: "Troubleshoot the signal before replacing the part.", arabic: "شخّص مشكلة الإشارة قبل استبدال القطعة." }, { english: "The manual helps technicians troubleshoot quickly.", arabic: "يساعد الدليل الفنيين على حل المشكلات سريعًا." }, { english: "They are troubleshooting a network error.", arabic: "هم يشخصون خطأ في الشبكة." }] },
+  { term: "actuator", arabicMeaning: "مشغّل يحول إشارة التحكم إلى حركة", partOfSpeech: "noun", ipa: "/ˈæk.tʃu.eɪ.tər/", engineeringDomain: "mechatronics", examples: [{ english: "The actuator moves the robotic arm.", arabic: "يحرك المشغّل الذراع الروبوتية." }, { english: "This actuator needs a control signal.", arabic: "يحتاج هذا المشغّل إلى إشارة تحكم." }, { english: "We replaced the faulty actuator.", arabic: "استبدلنا المشغّل المعطل." }, { english: "The actuator responded slowly.", arabic: "استجاب المشغّل ببطء." }, { english: "Check the actuator before starting the machine.", arabic: "افحص المشغّل قبل تشغيل الآلة." }] },
+  { term: "feedback", arabicMeaning: "تغذية راجعة أو إشارة تعود لضبط النظام", partOfSpeech: "noun", ipa: "/ˈfiːd.bæk/", engineeringDomain: "control systems", examples: [{ english: "The controller uses feedback from the sensor.", arabic: "تستخدم وحدة التحكم تغذية راجعة من المستشعر." }, { english: "Please give feedback on the design.", arabic: "يرجى تقديم تغذية راجعة عن التصميم." }, { english: "Negative feedback can stabilize a system.", arabic: "يمكن للتغذية الراجعة السالبة أن تثبت النظام." }, { english: "We received useful feedback from the client.", arabic: "تلقينا تغذية راجعة مفيدة من العميل." }, { english: "Feedback helps us improve the prototype.", arabic: "تساعدنا التغذية الراجعة في تحسين النموذج الأولي." }] },
 ];
 
 function dateKeyFor(date = new Date()) {
@@ -94,10 +100,14 @@ function dateKeyFor(date = new Date()) {
 }
 
 async function ensureCards(db: NonNullable<Awaited<ReturnType<typeof getDb>>>, userId: number) {
-  const existing = await db.select({ id: vocabularyCards.id }).from(vocabularyCards).where(eq(vocabularyCards.userId, userId)).limit(1);
-  if (existing.length) return;
+  const existing = await db.select({ id: vocabularyCards.id, term: vocabularyCards.term }).from(vocabularyCards).where(eq(vocabularyCards.userId, userId));
   const now = new Date();
-  await db.insert(vocabularyCards).values(starterCards.map(card => ({ ...card, userId, nextReviewAt: now })));
+  const existingByTerm = new Map(existing.map(card => [card.term, card.id]));
+  for (const card of starterCards) {
+    const existingId = existingByTerm.get(card.term);
+    if (existingId) await db.update(vocabularyCards).set({ examples: card.examples }).where(eq(vocabularyCards.id, existingId));
+    else await db.insert(vocabularyCards).values({ ...card, userId, nextReviewAt: now });
+  }
 }
 
 async function ensureTasks(db: NonNullable<Awaited<ReturnType<typeof getDb>>>, userId: number, profile: LearnerProfile, dateKey: string) {
@@ -288,4 +298,34 @@ export async function getRecentActivity(userId: number) {
   if (!db) throw new Error("قاعدة البيانات غير متاحة حاليًا");
   const from = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
   return db.select().from(skillSnapshots).where(and(eq(skillSnapshots.userId, userId), gte(skillSnapshots.createdAt, from))).orderBy(desc(skillSnapshots.createdAt));
+}
+
+export async function getProgressReports(userId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("قاعدة البيانات غير متاحة حاليًا");
+  await ensureLearnerWorkspace(userId);
+  const now = new Date();
+  const weekFrom = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+  const monthFrom = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+  const [snapshots, attempts, tasks, cards] = await Promise.all([
+    db.select().from(skillSnapshots).where(and(eq(skillSnapshots.userId, userId), gte(skillSnapshots.createdAt, monthFrom))).orderBy(skillSnapshots.createdAt),
+    db.select().from(diagnosticAttempts).where(and(eq(diagnosticAttempts.userId, userId), gte(diagnosticAttempts.createdAt, monthFrom))),
+    db.select().from(dailyTasks).where(and(eq(dailyTasks.userId, userId), eq(dailyTasks.status, "completed"), gte(dailyTasks.completedAt, monthFrom))),
+    db.select().from(vocabularyCards).where(eq(vocabularyCards.userId, userId)),
+  ]);
+  const skills = ["vocabulary", "grammar", "listening", "speaking", "writing"] as const;
+  function summarize(from: Date) {
+    const inPeriodSnapshots = snapshots.filter(snapshot => snapshot.createdAt >= from);
+    const inPeriodAttempts = attempts.filter(attempt => attempt.createdAt >= from);
+    const inPeriodTasks = tasks.filter(task => task.completedAt && task.completedAt >= from);
+    const scoreHistory = skills.reduce((result, skill) => {
+      const column = `${skill}Score` as keyof typeof inPeriodSnapshots[number];
+      result[skill] = inPeriodSnapshots.map(snapshot => Number(snapshot[column]));
+      return result;
+    }, {} as Record<SkillKey, number[]>);
+    const evidenceCounts = skills.reduce((result, skill) => { result[skill] = inPeriodAttempts.filter(attempt => attempt.skill === skill).length; return result; }, {} as Record<SkillKey, number>);
+    const completedTasks = skills.reduce((result, skill) => { result[skill] = inPeriodTasks.filter(task => task.skill === skill).length; return result; }, {} as Record<SkillKey, number>);
+    return { from: from.getTime(), snapshotCount: inPeriodSnapshots.length, skills: buildPeriodSkillMetrics({ scoreHistory, evidenceCounts, completedTasks, strongCards: cards.filter(card => card.reviewStrength >= 3).length }) };
+  }
+  return { weekly: summarize(weekFrom), monthly: summarize(monthFrom) };
 }

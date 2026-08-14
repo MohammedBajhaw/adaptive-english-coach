@@ -6,6 +6,7 @@ const dbMocks = vi.hoisted(() => ({
   ensureLearnerWorkspace: vi.fn(),
   getDueCards: vi.fn(),
   getLearningDashboard: vi.fn(),
+  getProgressReports: vi.fn(),
   getRecentActivity: vi.fn(),
   rateVocabularyCard: vi.fn(),
   submitConversationEvaluation: vi.fn(),
@@ -40,6 +41,7 @@ describe("learning protected routes", () => {
     vi.clearAllMocks();
     dbMocks.submitConversationEvaluation.mockResolvedValue(78);
     dbMocks.rateVocabularyCard.mockResolvedValue({ nextStrength: 2, nextReviewAt: new Date() });
+    dbMocks.getProgressReports.mockResolvedValue({ weekly: { snapshotCount: 2, skills: [] }, monthly: { snapshotCount: 4, skills: [] } });
   });
 
   it("passes a conversation evaluation through the authenticated server route", async () => {
@@ -55,5 +57,13 @@ describe("learning protected routes", () => {
     await caller.learning.cards.rate({ cardId: 9, rating: "good" });
 
     expect(dbMocks.rateVocabularyCard).toHaveBeenCalledWith(42, 9, "good");
+  });
+
+  it("returns the authenticated learner’s aggregated reports through the reports route", async () => {
+    const caller = appRouter.createCaller(createContext());
+    const result = await caller.learning.reports();
+
+    expect(dbMocks.getProgressReports).toHaveBeenCalledWith(42);
+    expect(result).toEqual({ weekly: { snapshotCount: 2, skills: [] }, monthly: { snapshotCount: 4, skills: [] } });
   });
 });

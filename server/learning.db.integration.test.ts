@@ -1,7 +1,9 @@
 import { afterEach, beforeAll, describe, expect, it } from "vitest";
 import { and, desc, eq } from "drizzle-orm";
 import { dailyTasks, diagnosticAttempts, skillSnapshots, users, vocabularyCards } from "../drizzle/schema";
-import { ensureLearnerWorkspace, getDb, getLearningDashboard, rateVocabularyCard, submitConversationEvaluation } from "./db";
+import { ensureLearnerWorkspace, getDb, getLearningDashboard, getProgressReports, rateVocabularyCard, submitConversationEvaluation } from "./db";
+import { appRouter } from "./routers";
+import type { TrpcContext } from "./_core/context";
 
 const integrationDescribe = process.env.DATABASE_URL ? describe : describe.skip;
 let createdUserIds: number[] = [];
@@ -40,8 +42,10 @@ integrationDescribe("learning database integration", () => {
     const before = await db.select().from(skillSnapshots).where(eq(skillSnapshots.userId, userId));
     const dueCards = await db.select().from(vocabularyCards).where(eq(vocabularyCards.userId, userId));
     expect(dueCards.length).toBeGreaterThan(0);
-
-    for (const card of dueCards) await rateVocabularyCard(userId, card.id, "good");
+    for (const card of dueCards.slice(1)) {
+      await db.update(vocabularyCards).set({ nextReviewAt: new Date(Date.now() + 24 * 60 * 60 * 1000) }).where(eq(vocabularyCards.id, card.id));
+    }
+    await rateVocabularyCard(userId, dueCards[0]!.id, "good");
 
     const task = (await db.select().from(dailyTasks).where(and(eq(dailyTasks.userId, userId), eq(dailyTasks.dateKey, dateKeyFor()), eq(dailyTasks.taskKey, "vocabulary"))).limit(1))[0];
     const dashboard = await getLearningDashboard(userId);
@@ -66,5 +70,33 @@ integrationDescribe("learning database integration", () => {
     expect(task?.status).toBe("completed");
     expect(dashboard.tasks.find(item => item.taskKey === "speaking")?.status).toBe("completed");
     expect(after.length).toBeGreaterThan(before.length);
+  }, 20_000);
+
+  it("aggregates weekly and monthly per-skill report metrics from real evidence, tasks, snapshots, and cards", async () => {
+    const { userId } = await createWorkspace();
+    await submitConversationEvaluation(userId, { scoreOutOfTen: 8, prompt: "weekly report evidence" });
+
+    const report = await getProgressReports(userId);
+    const weeklySpeaking = report.weekly.skills.find(item => item.skill === "speaking");
+    const monthlySpeaking = report.monthly.skills.find(item => item.skill === "speaking");
+    const weeklyVocabulary = report.weekly.skills.find(item => item.skill === "vocabulary");
+    expect(weeklySpeaking).toMatchObject({ evidenceCount: 1, completedTasks: 1 });
+    expect(monthlySpeaking).toMatchObject({ evidenceCount: 1, completedTasks: 1 });
+    expect(weeklyVocabulary?.strongCards).toBe(0);
+    expect(report.weekly.snapshotCount).toBeGreaterThan(0);
+    expect(report.monthly.snapshotCount).toBeGreaterThan(0);
+  }, 20_000);
+
+  it("returns the database-calculated report through learning.reports for the authenticated user", async () => {
+    const { userId } = await createWorkspace();
+    await submitConversationEvaluation(userId, { scoreOutOfTen: 7, prompt: "router report evidence" });
+    const caller = appRouter.createCaller({
+      user: { id: userId, openId: `integration-open-${userId}`, email: null, name: "Integration Test User", loginMethod: "manus", role: "user", createdAt: new Date(), updatedAt: new Date(), lastSignedIn: new Date() },
+      req: { protocol: "https", headers: {} } as TrpcContext["req"],
+      res: { clearCookie: () => undefined } as TrpcContext["res"],
+    });
+    const report = await caller.learning.reports();
+    expect(report.weekly.skills.find(item => item.skill === "speaking")).toMatchObject({ evidenceCount: 1, completedTasks: 1 });
+    expect(report.monthly.snapshotCount).toBeGreaterThan(0);
   }, 20_000);
 });
