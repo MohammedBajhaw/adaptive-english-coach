@@ -329,3 +329,36 @@ export async function getProgressReports(userId: number) {
   }
   return { weekly: summarize(weekFrom), monthly: summarize(monthFrom) };
 }
+
+export async function updateReminderPreferences(userId: number, input: { enabled: boolean; hourUtc: number; taskUid?: string | null }) {
+  const db = await getDb();
+  if (!db) throw new Error("قاعدة البيانات غير متاحة حاليًا");
+  const profile = await ensureLearnerWorkspace(userId);
+  await db.update(learnerProfiles).set({ reminderEnabled: input.enabled ? 1 : 0, reminderHourUtc: input.hourUtc, ...(input.taskUid !== undefined ? { reminderScheduleTaskUid: input.taskUid } : {}) }).where(eq(learnerProfiles.id, profile.id));
+  return (await db.select().from(learnerProfiles).where(eq(learnerProfiles.id, profile.id)).limit(1))[0]!;
+}
+
+export async function getReminderProfile(userId: number) {
+  return ensureLearnerWorkspace(userId);
+}
+
+export async function getScheduledReminder(taskUid: string) {
+  const db = await getDb();
+  if (!db) throw new Error("قاعدة البيانات غير متاحة حاليًا");
+  const profile = (await db.select().from(learnerProfiles).where(eq(learnerProfiles.reminderScheduleTaskUid, taskUid)).limit(1))[0];
+  if (!profile) return null;
+  const dateKey = dateKeyFor();
+  const [dueCards, pendingTasks] = await Promise.all([
+    db.select({ id: vocabularyCards.id }).from(vocabularyCards).where(and(eq(vocabularyCards.userId, profile.userId), lte(vocabularyCards.nextReviewAt, new Date()))),
+    db.select({ id: dailyTasks.id }).from(dailyTasks).where(and(eq(dailyTasks.userId, profile.userId), eq(dailyTasks.dateKey, dateKey), eq(dailyTasks.status, "pending"))),
+  ]);
+  const { reminderMessage, shouldDispatchReminder } = await import("./reminder-engine");
+  if (!shouldDispatchReminder({ enabled: Boolean(profile.reminderEnabled), lastReminderDateKey: profile.lastReminderDateKey, dateKey, dueCards: dueCards.length, pendingTasks: pendingTasks.length })) return null;
+  return { dateKey, message: reminderMessage({ dueCards: dueCards.length, pendingTasks: pendingTasks.length }) };
+}
+
+export async function markScheduledReminderDispatched(taskUid: string, dateKey: string) {
+  const db = await getDb();
+  if (!db) throw new Error("قاعدة البيانات غير متاحة حاليًا");
+  await db.update(learnerProfiles).set({ lastReminderDateKey: dateKey }).where(eq(learnerProfiles.reminderScheduleTaskUid, taskUid));
+}

@@ -10,7 +10,14 @@ import {
   submitConversationEvaluation,
   submitDiagnosticAttempt,
   updateLearnerProfile,
+  getReminderProfile,
+  updateReminderPreferences,
 } from "../db";
+import { correctWritingWithConfiguredProvider, getCorrectionProviderStatus } from "../ai-correction";
+import { createHeartbeatJob, updateHeartbeatJob } from "../_core/heartbeat";
+import { reminderCron } from "../reminder-engine";
+import { parse as parseCookie } from "cookie";
+import { COOKIE_NAME } from "@shared/const";
 import { protectedProcedure, router } from "../_core/trpc";
 
 const skillSchema = z.enum(["vocabulary", "grammar", "listening", "speaking", "writing"]);
@@ -56,4 +63,24 @@ export const learningRouter = router({
   }),
   activity: protectedProcedure.query(({ ctx }) => getRecentActivity(ctx.user.id)),
   reports: protectedProcedure.query(({ ctx }) => getProgressReports(ctx.user.id)),
+  writing: router({
+    providerStatus: protectedProcedure.query(() => getCorrectionProviderStatus()),
+    correct: protectedProcedure.input(z.object({ text: z.string().min(8).max(5000), context: z.string().min(2).max(1200) }))
+      .mutation(({ input }) => correctWritingWithConfiguredProvider(input)),
+  }),
+  reminders: router({
+    get: protectedProcedure.query(({ ctx }) => getReminderProfile(ctx.user.id)),
+    update: protectedProcedure.input(z.object({ enabled: z.boolean(), hourUtc: z.number().int().min(0).max(23) })).mutation(async ({ ctx, input }) => {
+      const sessionToken = parseCookie(ctx.req.headers.cookie ?? "")[COOKIE_NAME] ?? "";
+      const current = await getReminderProfile(ctx.user.id);
+      const cron = reminderCron(input.hourUtc);
+      if (current.reminderScheduleTaskUid) {
+        await updateHeartbeatJob(current.reminderScheduleTaskUid, { cron, path: "/api/scheduled/learning-reminder", description: "Daily learning reminder", enable: input.enabled }, sessionToken);
+        return updateReminderPreferences(ctx.user.id, input);
+      }
+      if (!input.enabled) return updateReminderPreferences(ctx.user.id, input);
+      const job = await createHeartbeatJob({ name: `learning-reminder-${ctx.user.id}`, cron, path: "/api/scheduled/learning-reminder", description: "Daily learning reminder" }, sessionToken);
+      return updateReminderPreferences(ctx.user.id, { ...input, taskUid: job.taskUid });
+    }),
+  }),
 });

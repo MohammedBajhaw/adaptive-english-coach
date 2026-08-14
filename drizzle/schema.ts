@@ -37,10 +37,14 @@ export const learnerProfiles = mysqlTable(
     speakingWeight: int("speakingWeight").notNull().default(25),
     writingWeight: int("writingWeight").notNull().default(15),
     calibrationConfidence: int("calibrationConfidence").notNull().default(15),
+    reminderEnabled: int("reminderEnabled").notNull().default(1),
+    reminderHourUtc: int("reminderHourUtc").notNull().default(17),
+    reminderScheduleTaskUid: varchar("reminderScheduleTaskUid", { length: 65 }),
+    lastReminderDateKey: varchar("lastReminderDateKey", { length: 10 }),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
     updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   },
-  table => [uniqueIndex("learner_profiles_user_unique").on(table.userId)],
+  table => [uniqueIndex("learner_profiles_user_unique").on(table.userId), index("learner_profiles_reminder_task_idx").on(table.reminderScheduleTaskUid)],
 );
 
 export const skillSnapshots = mysqlTable(
