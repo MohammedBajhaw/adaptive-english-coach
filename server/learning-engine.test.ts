@@ -31,11 +31,13 @@ describe("محرك خطة التعلم", () => {
   it("يختار محتوى محليًا جديدًا ثم يعيد المحتوى المستحق للمراجعة دون تكرار عنصر اليوم", () => {
     const now = new Date("2026-08-17T08:00:00Z");
     const first = selectNextLocalContent({ skill: "grammar", progress: [], now });
-    expect(first?.item.id).toBe("grammar.w01.present-simple");
+    expect(first?.item.id).toBe("grammar.w01.d01");
+    const active = selectNextLocalContent({ skill: "grammar", progress: [{ contentId: first!.item.id, status: "introduced", lastSeenAt: now, nextReviewAt: null }], now });
+    expect(active).toMatchObject({ mode: "continue", item: { id: "grammar.w01.d01" } });
     const review = selectNextLocalContent({ skill: "grammar", progress: [{ contentId: first!.item.id, status: "completed", lastSeenAt: new Date("2026-08-10T08:00:00Z"), nextReviewAt: new Date("2026-08-16T08:00:00Z") }], now });
-    expect(review).toMatchObject({ mode: "review", item: { id: "grammar.w01.present-simple" } });
+    expect(review).toMatchObject({ mode: "review", item: { id: "grammar.w01.d01" } });
     const excluded = selectNextLocalContent({ skill: "grammar", progress: [], excludeContentIds: [first!.item.id], now });
-    expect(excluded?.item.id).toBe("grammar.w02.present-continuous");
+    expect(excluded?.item.id).toBe("grammar.w01.d02");
   });
 
   it("يعيد البطاقة الضعيفة في اليوم نفسه ويرفع البطاقات القوية بفاصل أطول", () => {

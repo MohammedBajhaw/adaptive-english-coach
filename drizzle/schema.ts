@@ -88,6 +88,7 @@ export const vocabularyCards = mysqlTable(
   {
     id: int("id").autoincrement().primaryKey(),
     userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+    contentId: varchar("contentId", { length: 140 }),
     term: varchar("term", { length: 160 }).notNull(),
     arabicMeaning: text("arabicMeaning").notNull(),
     partOfSpeech: varchar("partOfSpeech", { length: 48 }).notNull(),
@@ -100,7 +101,10 @@ export const vocabularyCards = mysqlTable(
     createdAt: timestamp("createdAt").defaultNow().notNull(),
     updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   },
-  table => [index("vocabulary_cards_user_due_idx").on(table.userId, table.nextReviewAt)],
+  table => [
+    index("vocabulary_cards_user_due_idx").on(table.userId, table.nextReviewAt),
+    index("vocabulary_cards_user_content_idx").on(table.userId, table.contentId),
+  ],
 );
 
 export const cardReviews = mysqlTable(

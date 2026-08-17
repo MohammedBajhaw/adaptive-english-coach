@@ -50,7 +50,7 @@ export default function Home() {
 
   function toggleTask(task: typeof tasks[number]) {
     if (!isAuthenticated) { toast.info("سجّل دخولك لتتحول المعاينة إلى خطتك الحقيقية."); return; }
-    const taskRoutes: Record<string, string> = { vocabulary: "/cards", grammar: "/grammar", listening: "/listening", speaking: "/conversation" };
+    const taskRoutes: Record<string, string> = { vocabulary: "/cards", grammar: "/grammar", listening: "/listening", speaking: "/conversation", writing: "/writing" };
     if (taskRoutes[task.skill]) { setLocation(taskRoutes[task.skill]); return; }
     mutation.mutate({ taskId: task.id, completed: task.status !== "completed" });
   }

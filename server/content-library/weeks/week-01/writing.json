@@ -1,0 +1,62 @@
+{
+  "week": 1,
+  "skill": "writing",
+  "items": [
+    {
+      "id": "writing.w01.d01",
+      "titleArabic": "مقدمة شخصية في الميكاترونكس",
+      "titleEnglish": "Personal introduction in mechatronics",
+      "promptTemplateId": "prompt.w01.d01",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nاكتب مقدمة قصيرة مهنية عن نفسك كخريج ميكاترونكس. صِف خلفيتك، مهاراتك الأساسية، ونوع العمل الذي تبحث عنه. استخدم لغة واضحة ومهذبة.\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 12–20 words\n- 3 sentences: 25–45 words\n- 5 sentences: 40–80 words\n\nTarget vocabulary:\n- mechatronics, graduate, robotics, sensors, actuators, controller, internship, testing\n\nModel answer (English):\nI am a mechatronics graduate with hands-on experience in sensors and actuators. I can program microcontrollers and perform basic system tests. I seek an entry-level role in robotics or automation where I can learn and contribute.\n\nالترجمة العربية للنموذج:\nأنا خريج ميكاترونكس لدي خبرة عملية مع المستشعرات والمحركات. أستطيع برمجة المتحكمات الصغيرة وإجراء اختبارات نظامية أساسية. أبحث عن وظيفة مبتدئة في الروبوتات أو الأتمتة لأتعلم وأساهم.\n\nSelf-check rubric:\n- Clarity: Is the message easy to understand? (Yes/No)\n- Vocabulary: Did you use at least two target words? (Yes/No)\n- Length: Does your text match the requested sentence mode and word range? (Yes/No)\n- Tone: Is it professional and polite? (Yes/No)\n- Accuracy: No major grammar or spelling errors? (Yes/No) "
+    },
+    {
+      "id": "writing.w01.d02",
+      "titleArabic": "وصف محرك سيرفو",
+      "titleEnglish": "Describe a servo motor",
+      "promptTemplateId": "prompt.w01.d02",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nصف محرك سيرفو بسيط لمذكرة فنية. اذكر وظيفته، استخداماته الشائعة، وواحدة من مواصفاته الفنية الأساسية (مثل عزم الدوران أو زاوية الحركة).\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 10–18 words\n- 3 sentences: 25–45 words\n- 5 sentences: 40–80 words\n\nTarget vocabulary:\n- servo, torque, shaft, position, PWM, gear, precise\n\nModel answer (English):\nA servo motor is a compact actuator that controls shaft position precisely. It receives PWM signals from a controller to move to a set angle. Servos are common in robotics and small automation systems for accurate motion.\n\nالترجمة العربية للنموذج:\nمحرك السيرفو هو مشغل مدمج يتحكم بدقة في موضع العمود. يتلقى إشارات PWM من المتحكم للتحرك إلى زاوية محددة. تُستخدم محركات السيرفو عادة في الروبوتات وأنظمة الأتمتة الصغيرة للحركة الدقيقة.\n\nSelf-check rubric:\n- Technical clarity: Did you name the component and its main function? (Yes/No)\n- Specification: Did you include at least one technical spec or example? (Yes/No)\n- Vocabulary use: Are 2+ target words used correctly? (Yes/No)\n- Conciseness: Is the description short and focused? (Yes/No)\n- Spelling/grammar: No major errors? (Yes/No) "
+    },
+    {
+      "id": "writing.w01.d03",
+      "titleArabic": "تقرير قصير عن حساس المسافة",
+      "titleEnglish": "Short report on an ultrasonic sensor",
+      "promptTemplateId": "prompt.w01.d03",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nاكتب تقريرًا قصيرًا عن قراءة حساس المسافة بالموجات فوق الصوتية أثناء تجربة. اذكر القيمة المقاسة، الوحدة، وحالة الاختبار (مثال: ثابت، متحرك، هامش خطأ).\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 8–16 words\n- 3 sentences: 20–40 words\n- 5 sentences: 35–70 words\n\nTarget vocabulary:\n- ultrasonic sensor, distance, cm (centimeters), accuracy, reading, echo, stable\n\nModel answer (English):\nThe ultrasonic sensor measured 45 cm to the test object. The reading was stable with small variation of ±1 cm. The sensor showed good accuracy for the static test.\n\nالترجمة العربية للنموذج:\nقاس حساس الموجات فوق الصوتية 45 سم إلى الجسم المختبر. كانت القراءة مستقرة مع انحراف صغير ±1 سم. أظهر الحساس دقة جيدة في الاختبار الثابت.\n\nSelf-check rubric:\n- Measurement: Is the value and unit present? (Yes/No)\n- Condition: Did you state test condition (static/moving)? (Yes/No)\n- Precision: Did you note variation or accuracy? (Yes/No)\n- Language: Are numbers clear and formatted correctly? (Yes/No)\n- Grammar: No major mistakes? (Yes/No) "
+    },
+    {
+      "id": "writing.w01.d04",
+      "titleArabic": "ملاحظات اختبار محرك تيار مستمر",
+      "titleEnglish": "DC motor test notes",
+      "promptTemplateId": "prompt.w01.d04",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nدوّن ملاحظات اختبار سريعة لمحرك DC على طاولة الاختبار. اذكر الجهد المطبق، الدوران التقريبي (rpm) إن وُجد، وأي ضوضاء أو اهتزاز ملحوظ.\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 10–18 words\n- 3 sentences: 25–45 words\n- 5 sentences: 40–80 words\n\nTarget vocabulary:\n- DC motor, voltage, rpm, noise, vibration, load, bench test\n\nModel answer (English):\nApplied 12 V to the DC motor and observed about 3200 rpm with no load. Noise level was low but slight vibration appeared at startup. Motor run was stable after 5 seconds under no load.\n\nالترجمة العربية للنموذج:\nطبقت 12 فولت على محرك التيار المستمر ولاحظت حوالي 3200 دورة في الدقيقة بدون حمل. كان مستوى الضوضاء منخفضًا لكن ظهر اهتزاز طفيف عند البدء. كان تشغيل المحرك مستقرًا بعد 5 ثوانٍ بدون حمل.\n\nSelf-check rubric:\n- Values: Are voltage and rpm recorded? (Yes/No)\n- Observations: Are noise and vibration noted? (Yes/No)\n- Timing: Is any timing information included? (Yes/No)\n- Completeness: Are key test points covered? (Yes/No)\n- Language: Clear technical words and no serious errors? (Yes/No) "
+    },
+    {
+      "id": "writing.w01.d05",
+      "titleArabic": "مذكرة ملاحظات قياس كهربائي",
+      "titleEnglish": "Electrical measurement observation note",
+      "promptTemplateId": "prompt.w01.d05",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nسجل ملاحظة قصيرة عن قياس جهد وتيار في لوحة تجريب. اذكر القيم مع الوحدات، ما إذا كانت القيم ضمن التوقعات، وأي إجراء تصحيحي مقترح.\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 12–20 words\n- 3 sentences: 25–45 words\n- 5 sentences: 40–80 words\n\nTarget vocabulary:\n- voltage, current, mA (milliamps), V (volts), expected, fault, reset\n\nModel answer (English):\nMeasured 5.0 V and 120 mA on the sensor line; values match expected ranges. No fault detected. If current rises above 200 mA, check wiring and reset the power supply.\n\nالترجمة العربية للنموذج:\nقست 5.0 فولت و120 ملي أمبير على خط الحساس؛ القيم تطابق النطاقات المتوقعة. لم يتم اكتشاف عطل. إذا ارتفع التيار فوق 200 ملي أمبير، فافحص التوصيلات وأعد تشغيل مصدر الطاقة.\n\nSelf-check rubric:\n- Numeric clarity: Are units included with numbers? (Yes/No)\n- Comparison: Did you state if values are expected? (Yes/No)\n- Action: Is a clear corrective action suggested? (Yes/No)\n- Conciseness: Is the note short and actionable? (Yes/No)\n- Accuracy: No major language errors? (Yes/No) "
+    },
+    {
+      "id": "writing.w01.d06",
+      "titleArabic": "بريد إلكتروني موجز للمشرف: جدول الاختبار",
+      "titleEnglish": "Concise email to supervisor: test schedule",
+      "promptTemplateId": "prompt.w01.d06",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nاكتب بريدًا إلكترونيًا موجزًا إلى المشرف يشرح جدول الاختبار ليوم الغد. اذكر الوقت، الأجهزة التي ستُختبر، والنتيجة المتوقعة أو طلب مساعدة قصيرة.\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 12–18 words\n- 3 sentences: 25–40 words\n- 5 sentences: 40–80 words\n\nTarget vocabulary:\n- schedule, test, tomorrow, bench, sensor, motor, assist, confirm\n\nModel answer (English):\nSubject: Test schedule for tomorrow\nI will test the ultrasonic sensor and DC motor at 10:00 AM on the bench. I expect basic readings and will report results by 1:00 PM. Please confirm if you can assist with motor load testing.\n\nالترجمة العربية للنموذج:\nالموضوع: جدول الاختبار ليوم الغد\nسأختبر حساس الموجات فوق الصوتية ومحرك التيار المستمر الساعة 10:00 صباحًا على الطاولة. أتوقع قراءات أساسية وسأبلغ بالنتائج بحلول الساعة 1:00 ظهرًا. يرجى تأكيد إذا كنت تستطيع المساعدة في اختبار حمل المحرك.\n\nSelf-check rubric:\n- Subject: Is there a clear subject line? (Yes/No)\n- Schedule: Is time and equipment stated? (Yes/No)\n- Request: Is any request or confirmation clear? (Yes/No)\n- Tone: Is the email polite and professional? (Yes/No)\n- Length: Is it concise and within sentence target? (Yes/No) "
+    },
+    {
+      "id": "writing.w01.d07",
+      "titleArabic": "مقارنة قصيرة: متحكم صغير أم PLC؟",
+      "titleEnglish": "Short comparison: microcontroller vs PLC",
+      "promptTemplateId": "prompt.w01.d07",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nاكتب مقارنة قصيرة بين متحكم مصغر (microcontroller) وPLC لاستخدامها في مشروع أتمتة صغير. اذكر ميزة واحدة لكل منهما وتوصية بسيطة.\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 12–20 words\n- 3 sentences: 25–45 words\n- 5 sentences: 40–80 words\n\nTarget vocabulary:\n- microcontroller, PLC, reliability, cost, programming, real-time, industrial\n\nModel answer (English):\nA microcontroller is low-cost and ideal for compact custom projects. A PLC offers higher reliability and easy maintenance for industrial systems. For a small lab robot, use a microcontroller; for factory automation, choose a PLC.\n\nالترجمة العربية للنموذج:\nالمتحكم المصغر منخفض التكلفة ومناسب للمشاريع المدمجة المخصصة. يوفر PLC موثوقية أعلى وصيانة أسهل للأنظمة الصناعية. للمركبة المختبرية الصغيرة، استخدم متحكمًا مصغرًا؛ ولأتمتة المصنع، اختر PLC.\n\nSelf-check rubric:\n- Comparison: Are both devices named and compared? (Yes/No)\n- Advantage: Is one clear advantage given for each? (Yes/No)\n- Recommendation: Is there a clear recommendation based on scenario? (Yes/No)\n- Language: Is vocabulary appropriate and clear? (Yes/No)\n- Length: Meets the chosen sentence mode and is concise? (Yes/No) "
+    }
+  ]
+}

@@ -2,6 +2,7 @@ import { z } from "zod";
 import {
   completeDailyTask,
   ensureLearnerWorkspace,
+  getTodayLocalContent,
   getDueCards,
   getLearningDashboard,
   getProgressReports,
@@ -27,6 +28,9 @@ const skillSchema = z.enum(["vocabulary", "grammar", "listening", "speaking", "w
 export const learningRouter = router({
   dashboard: router({
     get: protectedProcedure.query(({ ctx }) => getLearningDashboard(ctx.user.id)),
+  }),
+  content: router({
+    today: protectedProcedure.query(({ ctx }) => getTodayLocalContent(ctx.user.id)),
   }),
   profile: router({
     get: protectedProcedure.query(({ ctx }) => ensureLearnerWorkspace(ctx.user.id)),

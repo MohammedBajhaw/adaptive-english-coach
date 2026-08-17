@@ -1,5 +1,6 @@
 import type { SkillKey } from "../learning-engine";
 import { eightWeekContentRoadmap } from "./manifest";
+import { localContentPayloads } from "./library";
 import type { ContentProgressState, LocalContentItem } from "./types";
 
 const skillNames: Record<SkillKey, string> = {
@@ -14,23 +15,25 @@ const sourceUrls: Record<SkillKey, string[]> = {
   writing: ["https://moduldb.htwsaar.de/cgi-bin/moduldb-c?bkeys=mst4&ckeys=m3MST2.EN2&lang=en"],
 };
 
-export const localContentCatalog: LocalContentItem[] = eightWeekContentRoadmap.flatMap(week => week.itemIds.map(id => {
-  const [skillToken, , unit] = id.split(".");
-  const skill = skillToken as SkillKey;
+const roadmapByWeek = new Map(eightWeekContentRoadmap.map(week => [week.week, week]));
+
+export const localContentCatalog: LocalContentItem[] = localContentPayloads.map(item => {
+  const roadmap = roadmapByWeek.get(item.week);
+  const [, , unit] = item.id.split(".");
   return {
-    id,
-    skill,
-    week: week.week,
-    unit,
-    bodyFile: `content-library/weeks/week-${String(week.week).padStart(2, "0")}/${skill}.json`,
-    titleArabic: `${skillNames[skill]} · ${week.themeArabic}`,
-    objectiveArabic: week.outcomesArabic.join(" · "),
-    promptTemplateId: `prompt.${skill}.v1`,
-    sourceUrls: sourceUrls[skill],
-    prerequisiteIds: week.week === 1 ? [] : [`${skill}.w${String(week.week - 1).padStart(2, "0")}`],
+    id: item.id,
+    skill: item.skill,
+    week: item.week,
+    unit: unit ?? "d01",
+    bodyFile: `content-library/weeks/week-${String(item.week).padStart(2, "0")}/${item.sourceSkill}.json`,
+    titleArabic: item.titleArabic || `${skillNames[item.skill]} · ${roadmap?.themeArabic ?? "محتوى محلي"}`,
+    objectiveArabic: roadmap?.outcomesArabic.join(" · ") ?? "تدريب عملي موجّه لمهندس ميكاترونيك.",
+    promptTemplateId: item.promptTemplateId,
+    sourceUrls: item.sourceUrls.length ? item.sourceUrls : sourceUrls[item.skill],
+    prerequisiteIds: [],
     reviewAfterDays: [1, 4, 10, 24],
   };
-}));
+});
 
 export function selectNextLocalContent(input: {
   skill: SkillKey;
@@ -49,6 +52,11 @@ export function selectNextLocalContent(input: {
     })
     .sort((left, right) => (progressById.get(left.id)?.nextReviewAt?.getTime() ?? 0) - (progressById.get(right.id)?.nextReviewAt?.getTime() ?? 0));
   if (dueReview[0]) return { item: dueReview[0], mode: "review" as const };
+  const active = eligible.find(item => {
+    const state = progressById.get(item.id);
+    return state?.status === "introduced" && !state.nextReviewAt;
+  });
+  if (active) return { item: active, mode: "continue" as const };
   const unseen = eligible.find(item => !progressById.has(item.id));
   if (unseen) return { item: unseen, mode: "new" as const };
   const oldest = eligible.sort((left, right) => (progressById.get(left.id)?.lastSeenAt.getTime() ?? 0) - (progressById.get(right.id)?.lastSeenAt.getTime() ?? 0))[0];

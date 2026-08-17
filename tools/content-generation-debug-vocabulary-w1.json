@@ -1,0 +1,92 @@
+{
+  "payload": {
+    "id": "chatcmpl-llm-router-openai",
+    "object": "chat.completion",
+    "created": 1786955605,
+    "model": "gpt-5-mini",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n  \"week\": 1,\n  \"skill\": \"Introducing mechatronics and core components\",\n  \"items\": [\n    {\n      \"id\": \"vocabulary.w01.d01\",\n      \"titleArabic\": \"مستشعر\",\n      \"titleEnglish\": \"sensor\",\n      \"promptTemplateId\": \"vocab_card_template_v1\",\n      \"sourceUrls\": [],\n      \"contentMarkdown\": \"Term: sensor\\nIPA: /ˈsɛnsər/\\nArabic meaning: مستشعر\\nPart of speech: noun\\nMechatronics domain: sensing\\nExamples:\\n1. The sensor measures distance.\\n   المستشعر يقيس المسافة.\\n2. The sensor reads the temperature.\\n   المستشعر يقرأ درجة الحرارة.\\n3. The sensor sends data to the controller.\\n   يرسل المستشعر بيانات إلى وحدة التحكم.\\n4. Check the sensor before you run the test.\\n   افحص المستشعر قبل أن تشغّل الاختبار.\\n5. A dirty sensor gives wrong values.\\n   المستشعر المتسخ يعطي قيماً خاطئة.\"\n    },\n    {\n      \"id\": \"vocabulary.w01.d02\",\n      \"titleArabic\": \"مشغل (أكتيويتر)\",\n      \"titleEnglish\": \"actuator\",\n      \"promptTemplateId\": \"vocab_card_template_v1\",\n      \"sourceUrls\": [],\n      \"contentMarkdown\": \"Term: actuator\\nIPA: /ˈæktjueɪtər/\\nArabic meaning: مشغل (محرك تنفيذ الحركة)\\nPart of speech: noun\\nMechatronics domain: actuation\\nExamples:\\n1. The actuator moves the robot arm.\\n   المشغل يحرك ذراع الروبوت.\\n2. An actuator opens and closes the valve.\\n   المشغل يفتح ويغلق الصمام.\\n3. The system uses a linear actuator.\\n   يستخدم النظام مشغلًا خطيًا.\\n4. Replace the faulty actuator today.\\n   استبدل المشغل التالف اليوم.\\n5. The actuator responds to the controller signal.\\n   يستجيب المشغل لإشارة وحدة التحكم.\"\n    },\n    {\n      \"id\": \"vocabulary.w01.d03\",\n      \"titleArabic\": \"الميكروكنترولر\",\n      \"titleEnglish\": \"microcontroller\",\n      \"promptTemplateId\": \"vocab_card_template_v1\",\n      \"sourceUrls\": [],\n      \"contentMarkdown\": \"Term: microcontroller\\nIPA: /ˌmaɪkroʊkənˈtroʊlər/\\nArabic meaning: ميكروكنترولر (وحدة التحكم الدقيقة)\\nPart of speech: noun\\nMechatronics domain: embedded systems\\nExamples:\\n1. The microcontroller runs the main program.\\n   الميكروكنترولر يشغّل البرنامج الرئيسي.\\n2. Upload the code to the microcontroller.\\n   حمّل الكود إلى الميكروكنترولر.\\n3. The microcontroller reads sensor data.\\n   يقرأ الميكروكنترولر بيانات المستشعر.\\n4. Use a small battery for the microcontroller.\\n   استخدم بطارية صغيرة للميكروكنترولر.\\n5. The microcontroller controls the motors.\\n   يتحكم الميكروكنترولر في المحركات.\"\n    },\n    {\n      \"id\": \"vocabulary.w01.d04\",\n      \"titleArabic\": \"لوحة الدارات المطبوعة (PCB)\",\n      \"titleEnglish\": \"printed circuit board (PCB)\",\n      \"promptTemplateId\": \"vocab_card_template_v1\",\n      \"sourceUrls\": [],\n      \"contentMarkdown\": \"Term: printed circuit board (PCB)\\nIPA: /ˌprɪntɪd ˈsɜːrkɪt bɔːrd/\\nArabic meaning: لوحة الدارات المطبوعة (PCB)\\nPart of speech: noun\\nMechatronics domain: electronics\\nExamples:\\n1. The PCB holds resistors and chips.\\n   لوحة الدارات المطبوعة تحمل المقاومات والرقائق.\\n2. Solder the parts onto the PCB.\\n   لحِم الأجزاء على لوحة الدارات المطبوعة.\\n3. The PCB connects all electronic components.\\n   توصل لوحة الدارات المطبوعة كل المكونات الإلكترونية.\\n4. Check the PCB for broken traces.\\n   افحص لوحة الدارات المطبوعة عن مسارات مكسورة.\\n5. Use a clean PCB to avoid short circuits.\\n   استخدم لوحة دارات مطبوعة نظيفة لتجنب الدوائر القصيرة.\"\n    },\n    {\n      \"id\": \"vocabulary.w01.d05\",\n      \"titleArabic\": \"محرك\",\n      \"titleEnglish\": \"motor\",\n      \"promptTemplateId\": \"vocab_card_template_v1\",\n      \"sourceUrls\": [],\n      \"contentMarkdown\": \"Term: motor\\nIPA: /ˈmoʊtər/\\nArabic meaning: محرك\\nPart of speech: noun\\nMechatronics domain: motion / power\\nExamples:\\n1. The motor spins the wheel.\\n   المحرك يدير العجلة.\\n2. This motor is small and quiet.\\n   هذا المحرك صغير وهادئ.\\n3. Check the motor wiring for damage.\\n   افحص توصيلات المحرك عن تلف.\\n4. The motor stops when overloaded.\\n   يتوقف المحرك عند التحميل الزائد.\\n5. Use the correct voltage for the motor.\\n   استخدم الجهد الصحيح للمحرك.\"\n    },\n    {\n      \"id\": \"vocabulary.w01.d06\",\n      \"titleArabic\": \"محرك سيرفو\",\n      \"titleEnglish\": \"servo\",\n      \"promptTemplateId\": \"vocab_card_template_v1\",\n      \"sourceUrls\": [],\n      \"contentMarkdown\": \"Term: servo\\nIPA: /ˈsɜːrvoʊ/\\nArabic meaning: محرك سيرفو (جهاز تحكم بالموقع)\\nPart of speech: noun\\nMechatronics domain: precision motion / actuation\\nExamples:\\n1. The servo controls the steering angle.\\n   محرك السيرفو يتحكم بزواية التوجيه.\\n2. A servo holds its position well.\\n   محرك السيرفو يحافظ على موضعه جيدًا.\\n3. Connect the servo to the controller.\\n   وصل محرك السيرفو بوحدة التحكم.\\n4. The robot uses three small servos.\\n   يستخدم الروبوت ثلاثة محركات سيرفو صغيرة.\\n5. Calibrate the servo before use.\\n   معاير محرك السيرفو قبل الاستخدام.\"\n    },\n    {\n      \"id\": \"vocabulary.w01.d07\",\n      \"titleArabic\": \"حلقة التغذية الراجعة\",\n      \"titleEnglish\": \"feedback loop\",\n      \"promptTemplateId\": \"vocab_card_template_v1\",\n      \"sourceUrls\": [],\n      \"contentMarkdown\": \"Term: feedback loop\\nIPA: /ˈfiːdbæk luːp/\\nArabic meaning: حلقة التغذية الراجعة\\nPart of speech: noun\\nMechatronics domain: control systems\\nExamples:\\n1. The feedback loop keeps the robot stable.\\n   حلقة التغذية الراجعة تحافظ على ثبات الروبوت.\\n2. Sensors provide signals to the feedback loop.\\n   تعطي المستشعرات إشارات إلى حلقة التغذية الراجعة.\\n3. Adjust the loop to reduce error.\\n   عدّل الحلقة لتقليل الخطأ.\\n4. The feedback loop changes motor speed.\\n   تغيير حلقة التغذية الراجعة لسرعة المحرك.\\n5. A slow loop can cause poor control.\\n   الحلقة البطيئة قد تسبب تحكمًا ضعيفًا.\"\n    }\n  ]\n}"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 271,
+      "completion_tokens": 3524,
+      "total_tokens": 3795,
+      "prompt_tokens_details": {},
+      "completion_tokens_details": {
+        "reasoning_tokens": 1856,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "system_fingerprint": ""
+  },
+  "data": {
+    "week": 1,
+    "skill": "Introducing mechatronics and core components",
+    "items": [
+      {
+        "id": "vocabulary.w01.d01",
+        "titleArabic": "مستشعر",
+        "titleEnglish": "sensor",
+        "promptTemplateId": "vocab_card_template_v1",
+        "sourceUrls": [],
+        "contentMarkdown": "Term: sensor\nIPA: /ˈsɛnsər/\nArabic meaning: مستشعر\nPart of speech: noun\nMechatronics domain: sensing\nExamples:\n1. The sensor measures distance.\n   المستشعر يقيس المسافة.\n2. The sensor reads the temperature.\n   المستشعر يقرأ درجة الحرارة.\n3. The sensor sends data to the controller.\n   يرسل المستشعر بيانات إلى وحدة التحكم.\n4. Check the sensor before you run the test.\n   افحص المستشعر قبل أن تشغّل الاختبار.\n5. A dirty sensor gives wrong values.\n   المستشعر المتسخ يعطي قيماً خاطئة."
+      },
+      {
+        "id": "vocabulary.w01.d02",
+        "titleArabic": "مشغل (أكتيويتر)",
+        "titleEnglish": "actuator",
+        "promptTemplateId": "vocab_card_template_v1",
+        "sourceUrls": [],
+        "contentMarkdown": "Term: actuator\nIPA: /ˈæktjueɪtər/\nArabic meaning: مشغل (محرك تنفيذ الحركة)\nPart of speech: noun\nMechatronics domain: actuation\nExamples:\n1. The actuator moves the robot arm.\n   المشغل يحرك ذراع الروبوت.\n2. An actuator opens and closes the valve.\n   المشغل يفتح ويغلق الصمام.\n3. The system uses a linear actuator.\n   يستخدم النظام مشغلًا خطيًا.\n4. Replace the faulty actuator today.\n   استبدل المشغل التالف اليوم.\n5. The actuator responds to the controller signal.\n   يستجيب المشغل لإشارة وحدة التحكم."
+      },
+      {
+        "id": "vocabulary.w01.d03",
+        "titleArabic": "الميكروكنترولر",
+        "titleEnglish": "microcontroller",
+        "promptTemplateId": "vocab_card_template_v1",
+        "sourceUrls": [],
+        "contentMarkdown": "Term: microcontroller\nIPA: /ˌmaɪkroʊkənˈtroʊlər/\nArabic meaning: ميكروكنترولر (وحدة التحكم الدقيقة)\nPart of speech: noun\nMechatronics domain: embedded systems\nExamples:\n1. The microcontroller runs the main program.\n   الميكروكنترولر يشغّل البرنامج الرئيسي.\n2. Upload the code to the microcontroller.\n   حمّل الكود إلى الميكروكنترولر.\n3. The microcontroller reads sensor data.\n   يقرأ الميكروكنترولر بيانات المستشعر.\n4. Use a small battery for the microcontroller.\n   استخدم بطارية صغيرة للميكروكنترولر.\n5. The microcontroller controls the motors.\n   يتحكم الميكروكنترولر في المحركات."
+      },
+      {
+        "id": "vocabulary.w01.d04",
+        "titleArabic": "لوحة الدارات المطبوعة (PCB)",
+        "titleEnglish": "printed circuit board (PCB)",
+        "promptTemplateId": "vocab_card_template_v1",
+        "sourceUrls": [],
+        "contentMarkdown": "Term: printed circuit board (PCB)\nIPA: /ˌprɪntɪd ˈsɜːrkɪt bɔːrd/\nArabic meaning: لوحة الدارات المطبوعة (PCB)\nPart of speech: noun\nMechatronics domain: electronics\nExamples:\n1. The PCB holds resistors and chips.\n   لوحة الدارات المطبوعة تحمل المقاومات والرقائق.\n2. Solder the parts onto the PCB.\n   لحِم الأجزاء على لوحة الدارات المطبوعة.\n3. The PCB connects all electronic components.\n   توصل لوحة الدارات المطبوعة كل المكونات الإلكترونية.\n4. Check the PCB for broken traces.\n   افحص لوحة الدارات المطبوعة عن مسارات مكسورة.\n5. Use a clean PCB to avoid short circuits.\n   استخدم لوحة دارات مطبوعة نظيفة لتجنب الدوائر القصيرة."
+      },
+      {
+        "id": "vocabulary.w01.d05",
+        "titleArabic": "محرك",
+        "titleEnglish": "motor",
+        "promptTemplateId": "vocab_card_template_v1",
+        "sourceUrls": [],
+        "contentMarkdown": "Term: motor\nIPA: /ˈmoʊtər/\nArabic meaning: محرك\nPart of speech: noun\nMechatronics domain: motion / power\nExamples:\n1. The motor spins the wheel.\n   المحرك يدير العجلة.\n2. This motor is small and quiet.\n   هذا المحرك صغير وهادئ.\n3. Check the motor wiring for damage.\n   افحص توصيلات المحرك عن تلف.\n4. The motor stops when overloaded.\n   يتوقف المحرك عند التحميل الزائد.\n5. Use the correct voltage for the motor.\n   استخدم الجهد الصحيح للمحرك."
+      },
+      {
+        "id": "vocabulary.w01.d06",
+        "titleArabic": "محرك سيرفو",
+        "titleEnglish": "servo",
+        "promptTemplateId": "vocab_card_template_v1",
+        "sourceUrls": [],
+        "contentMarkdown": "Term: servo\nIPA: /ˈsɜːrvoʊ/\nArabic meaning: محرك سيرفو (جهاز تحكم بالموقع)\nPart of speech: noun\nMechatronics domain: precision motion / actuation\nExamples:\n1. The servo controls the steering angle.\n   محرك السيرفو يتحكم بزواية التوجيه.\n2. A servo holds its position well.\n   محرك السيرفو يحافظ على موضعه جيدًا.\n3. Connect the servo to the controller.\n   وصل محرك السيرفو بوحدة التحكم.\n4. The robot uses three small servos.\n   يستخدم الروبوت ثلاثة محركات سيرفو صغيرة.\n5. Calibrate the servo before use.\n   معاير محرك السيرفو قبل الاستخدام."
+      },
+      {
+        "id": "vocabulary.w01.d07",
+        "titleArabic": "حلقة التغذية الراجعة",
+        "titleEnglish": "feedback loop",
+        "promptTemplateId": "vocab_card_template_v1",
+        "sourceUrls": [],
+        "contentMarkdown": "Term: feedback loop\nIPA: /ˈfiːdbæk luːp/\nArabic meaning: حلقة التغذية الراجعة\nPart of speech: noun\nMechatronics domain: control systems\nExamples:\n1. The feedback loop keeps the robot stable.\n   حلقة التغذية الراجعة تحافظ على ثبات الروبوت.\n2. Sensors provide signals to the feedback loop.\n   تعطي المستشعرات إشارات إلى حلقة التغذية الراجعة.\n3. Adjust the loop to reduce error.\n   عدّل الحلقة لتقليل الخطأ.\n4. The feedback loop changes motor speed.\n   تغيير حلقة التغذية الراجعة لسرعة المحرك.\n5. A slow loop can cause poor control.\n   الحلقة البطيئة قد تسبب تحكمًا ضعيفًا."
+      }
+    ]
+  }
+}

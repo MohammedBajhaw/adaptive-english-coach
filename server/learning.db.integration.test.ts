@@ -1,7 +1,7 @@
 import { afterEach, beforeAll, describe, expect, it } from "vitest";
 import { and, desc, eq } from "drizzle-orm";
-import { dailyTasks, diagnosticAttempts, learnerProfiles, skillSnapshots, users, vocabularyCards } from "../drizzle/schema";
-import { createScheduledReminder, ensureLearnerWorkspace, getDb, getLearnerNotifications, getLearningDashboard, getProgressReports, getScheduledReminder, rateVocabularyCard, submitConversationEvaluation, updateLearnerProfile } from "./db";
+import { dailyTasks, diagnosticAttempts, learnerContentProgress, learnerProfiles, skillSnapshots, users, vocabularyCards } from "../drizzle/schema";
+import { createScheduledReminder, ensureLearnerWorkspace, getDb, getLearnerNotifications, getLearningDashboard, getProgressReports, getScheduledReminder, getTodayLocalContent, rateVocabularyCard, submitConversationEvaluation, updateLearnerProfile } from "./db";
 import { appRouter } from "./routers";
 import type { TrpcContext } from "./_core/context";
 
@@ -37,6 +37,29 @@ beforeAll(async () => {
 });
 
 integrationDescribe("learning database integration", () => {
+  it("attaches one stable local content item to every daily skill without duplicating learner progress", async () => {
+    const { db, userId } = await createWorkspace();
+    const first = await getTodayLocalContent(userId);
+    const second = await getTodayLocalContent(userId);
+    const dashboard = await getLearningDashboard(userId);
+    const firstIds = first.items.map(item => item.content.id).sort();
+    const secondIds = second.items.map(item => item.content.id).sort();
+    const progress = await db.select().from(learnerContentProgress).where(eq(learnerContentProgress.userId, userId));
+    expect(first.items).toHaveLength(5);
+    expect(first.items.map(item => item.task.skill).sort()).toEqual(["grammar", "listening", "speaking", "vocabulary", "writing"]);
+    expect(firstIds).toEqual(secondIds);
+    expect(firstIds.every(id => /\.(w01|w02)\.d0[1-7]$/.test(id))).toBe(true);
+    expect(dashboard.dailyContent).toMatchObject({
+      vocabulary: { id: expect.stringMatching(/^vocabulary\.w0[12]\.d0[1-7]$/) },
+      grammar: { id: expect.stringMatching(/^grammar\.w0[12]\.d0[1-7]$/) },
+      listening: { id: expect.stringMatching(/^listening\.w0[12]\.d0[1-7]$/) },
+      conversation: { id: expect.stringMatching(/^conversation\.w0[12]\.d0[1-7]$/) },
+      writing: { id: expect.stringMatching(/^writing\.w0[12]\.d0[1-7]$/) },
+    });
+    expect(progress).toHaveLength(5);
+    expect(progress.every(item => item.status === "introduced")).toBe(true);
+  }, 30_000);
+
   it("marks vocabulary complete and refreshes the dashboard after the final due card is rated", async () => {
     const { db, userId } = await createWorkspace();
     const before = await db.select().from(skillSnapshots).where(eq(skillSnapshots.userId, userId));

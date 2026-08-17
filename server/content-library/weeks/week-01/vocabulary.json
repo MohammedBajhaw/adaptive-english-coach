@@ -1,0 +1,62 @@
+{
+  "week": 1,
+  "skill": "vocabulary",
+  "items": [
+    {
+      "id": "vocabulary.w01.d01",
+      "titleArabic": "جهاز الاستشعار",
+      "titleEnglish": "Sensor",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: sensor\nIPA: /ˈsɛn.sər/\nArabic meaning: جهاز استشعار\nPart of speech: noun\nMechatronics domain: sensing and measurement\n\nExample sentences:\n1. The sensor reads the temperature.\n   يقرأ جهاز الاستشعار درجة الحرارة.\n2. The robot uses a sensor to avoid walls.\n   يستخدم الروبوت جهاز استشعار لتجنب الجدران.\n3. Replace the faulty sensor today.\n   استبدل جهاز الاستشعار المعطّل اليوم.\n4. The sensor sends data to the controller.\n   يرسل جهاز الاستشعار بيانات إلى المتحكم.\n5. A small sensor can be very accurate.\n   يمكن أن يكون الجهاز الاستشعاري الصغير دقيقًا جدًا.\n"
+    },
+    {
+      "id": "vocabulary.w01.d02",
+      "titleArabic": "المُشغّل (المِشغّل)",
+      "titleEnglish": "Actuator",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: actuator\nIPA: /ˈæk.tʃu.eɪ.tər/\nArabic meaning: مُشغّل (جهاز يحرك جزءًا ما)\nPart of speech: noun\nMechatronics domain: actuators and motion\n\nExample sentences:\n1. The actuator moves the robot arm.\n   يحرك المشغل ذراع الروبوت.\n2. A pneumatic actuator uses air pressure.\n   يستخدم المشغل الهوائي ضغط الهواء.\n3. Test the actuator before assembly.\n   اختبر المشغل قبل التجميع.\n4. The actuator responds to an electrical signal.\n   يستجيب المشغل لإشارة كهربائية.\n5. Replace the worn actuator part.\n   استبدل جزء المشغل البالي.\n"
+    },
+    {
+      "id": "vocabulary.w01.d03",
+      "titleArabic": "المتحكم الدقيق",
+      "titleEnglish": "Microcontroller",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: microcontroller\nIPA: /ˌmaɪ.kroʊ.kənˈtroʊ.lər/\nArabic meaning: متحكم دقيق\nPart of speech: noun\nMechatronics domain: control and computing\n\nExample sentences:\n1. The microcontroller runs the program.\n   يعمل المتحكم الدقيق على تشغيل البرنامج.\n2. Connect the sensors to the microcontroller.\n   وصل أجهزة الاستشعار بالمتحكم الدقيق.\n3. Upload the code to the microcontroller.\n   حمّل الكود إلى المتحكم الدقيق.\n4. The microcontroller reads input and controls output.\n   يقرأ المتحكم الدقيق المدخلات ويتحكم في المخرجات.\n5. Use a small microcontroller for this board.\n   استخدم متحكمًا دقيقًا صغيرًا لهذه اللوحة.\n"
+    },
+    {
+      "id": "vocabulary.w01.d04",
+      "titleArabic": "محرك سيرفو",
+      "titleEnglish": "Servo motor",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: servo motor\nIPA: /ˈsɜr.voʊ ˈmoʊ.tər/\nArabic meaning: محرك سيرفو\nPart of speech: noun\nMechatronics domain: precision motion control\n\nExample sentences:\n1. The servo motor turns exactly 90 degrees.\n   يدير محرك السيرفو بدقة 90 درجة.\n2. Attach the horn to the servo motor.\n   ثبت الذراع في محرك السيرفو.\n3. The controller adjusts the servo motor speed.\n   يعدّل المتحكم سرعة محرك السيرفو.\n4. A servo motor holds its position tightly.\n   يحافظ محرك السيرفو على موضعه بقوة.\n5. Test the servo motor with a simple signal.\n   اختبر محرك السيرفو بإشارة بسيطة.\n"
+    },
+    {
+      "id": "vocabulary.w01.d05",
+      "titleArabic": "المرمّز (المشفّر)",
+      "titleEnglish": "Encoder",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: encoder\nIPA: /ɛnˈkoʊ.dər/\nArabic meaning: مرمّز / مشفّر الحركة\nPart of speech: noun\nMechatronics domain: position and speed sensing\n\nExample sentences:\n1. The encoder counts the wheel rotations.\n   يحصي المرمّز دوران العجلة.\n2. Attach the encoder to the motor shaft.\n   ثبت المرمّز على عمود المحرك.\n3. The encoder gives a digital pulse for each step.\n   يعطي المرمّز نبضة رقمية لكل خطوة.\n4. Use the encoder to measure speed.\n   استخدم المرمّز لقياس السرعة.\n5. Clean the encoder disk if it is dirty.\n   نظف قرص المرمّز إن كان متسخًا.\n"
+    },
+    {
+      "id": "vocabulary.w01.d06",
+      "titleArabic": "لوحة الدائرة المطبوعة (PCB)",
+      "titleEnglish": "PCB (Printed Circuit Board)",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: PCB (printed circuit board)\nIPA: /ˌpiː.siːˈbiː/ (printed circuit board /ˈprɪn.tɪd ˈsɜr.kɪt bɔrd/)\nArabic meaning: لوحة الدائرة المطبوعة\nPart of speech: noun\nMechatronics domain: electronics and assembly\n\nExample sentences:\n1. Solder the components on the PCB.\n   قم بلحام المكونات على لوحة الدائرة المطبوعة.\n2. The PCB has many copper traces.\n   تحتوي لوحة الدائرة المطبوعة على مسارات نحاسية عديدة.\n3. Design the PCB before ordering parts.\n   صمّم لوحة الدائرة المطبوعة قبل طلب المكونات.\n4. The PCB fits inside the robot frame.\n   تناسب لوحة الدائرة المطبوعة داخل هيكل الروبوت.\n5. Check the PCB for short circuits.\n   افحص لوحة الدائرة المطبوعة بحثًا عن دوائر قصر.\n"
+    },
+    {
+      "id": "vocabulary.w01.d07",
+      "titleArabic": "مزود الطاقة",
+      "titleEnglish": "Power supply",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: power supply\nIPA: /ˈpaʊər səˈplaɪ/\nArabic meaning: مزود الطاقة\nPart of speech: noun\nMechatronics domain: power and electronics\n\nExample sentences:\n1. The power supply gives 12 volts to the board.\n   يزود مزود الطاقة اللوحة بجهد 12 فولت.\n2. Turn off the power supply before wiring.\n   أطفئ مزود الطاقة قبل التوصيل.\n3. A stable power supply prevents errors.\n   يمنع مزود الطاقة المستقر حدوث أخطاء.\n4. Check the power supply current rating.\n   افحص تصنيف تيار مزود الطاقة.\n5. Use a backup power supply for safety.\n   استخدم مزود طاقة احتياطيًا للسلامة.\n"
+    }
+  ]
+}

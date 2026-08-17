@@ -12,9 +12,10 @@ import Home from "./pages/Home";
 import Listening from "./pages/Listening";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
+import Writing from "./pages/Writing";
 
 function App() {
-  return <ErrorBoundary><ThemeProvider defaultTheme="light"><TooltipProvider><DashboardLayout><Switch><Route path="/" component={Home} /><Route path="/diagnostic" component={Diagnostic} /><Route path="/grammar" component={Grammar} /><Route path="/conversation" component={Conversation} /><Route path="/listening" component={Listening} /><Route path="/cards" component={Cards} /><Route path="/reports" component={Reports} /><Route path="/settings" component={Settings} /><Route component={Home} /></Switch></DashboardLayout><Toaster richColors position="top-center" /></TooltipProvider></ThemeProvider></ErrorBoundary>;
+  return <ErrorBoundary><ThemeProvider defaultTheme="light"><TooltipProvider><DashboardLayout><Switch><Route path="/" component={Home} /><Route path="/diagnostic" component={Diagnostic} /><Route path="/grammar" component={Grammar} /><Route path="/conversation" component={Conversation} /><Route path="/listening" component={Listening} /><Route path="/writing" component={Writing} /><Route path="/cards" component={Cards} /><Route path="/reports" component={Reports} /><Route path="/settings" component={Settings} /><Route component={Home} /></Switch></DashboardLayout><Toaster richColors position="top-center" /></TooltipProvider></ThemeProvider></ErrorBoundary>;
 }
 
 export default App;

@@ -1,0 +1,76 @@
+{
+  "week": 1,
+  "skill": "listening",
+  "items": [
+    {
+      "id": "listening.w01.d01",
+      "titleArabic": "6 دقيقة إنجليزية — حسّاسات (مكونات ميكاترونيكس)",
+      "titleEnglish": "6 Minute English — Sensors (mechatronics components)",
+      "promptTemplateId": "pt_listening_001",
+      "sourceUrls": [
+        "https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-211007"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — 6 Minute English (selected episode)\nURL: https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-211007\n\nListening focus (choose one):\n- 1-minute focus: Listen to identify the single sentence that defines what a sensor does.\n- 2-minute focus: Listen for two examples of sensors mentioned and the signals they measure (e.g., light, position).\n- 4-minute focus: Listen for how sensors help a mechatronics system make decisions and one advantage given.\n\nComprehension & reflection questions (use first 2 for very short activities; first 4 for standard; all 6 for extended):\n1) What is the main purpose of a sensor in a machine? (simple factual)\n2) Name one example of a sensor mentioned and what it detects. (simple factual)\n3) How does a sensor send information to other parts of a system? (short inference)\n4) Why is reliable sensor data important for a robot or automated machine? (short explanation)\n5) Think of one sensor a recent mechatronics project might need. How would it improve the system? (application)\n6) Reflect: In your future work, how would you test sensor accuracy before assembly? Describe two checks. (planning/reflection)\n\nPhrase-capture instruction:\nWhile listening, write down one short phrase (3–5 words) that describes what a sensor measures or does in the recording (do not use a transcript). Try to copy the phrase exactly as you hear it."
+    },
+    {
+      "id": "listening.w01.d02",
+      "titleArabic": "6 دقيقة إنجليزية — المشغلات/المحركات الصغيرة (Actuators)",
+      "titleEnglish": "6 Minute English — Actuators (small motors and actuators)",
+      "promptTemplateId": "pt_listening_002",
+      "sourceUrls": [
+        "https://www.bbc.co.uk/learningenglish/features/6-minute-english_2025/ep-250918"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — 6 Minute English (selected episode)\nURL: https://www.bbc.co.uk/learningenglish/features/6-minute-english_2025/ep-250918\n\nListening focus (choose one):\n- 1-minute focus: Listen for a clear phrase that explains what an actuator does.\n- 2-minute focus: Listen for two types of actuators or motors mentioned and one example use for each.\n- 4-minute focus: Listen for advantages and limitations of a small actuator in precision tasks.\n\nComprehension & reflection questions (use first 2 for very short activities; first 4 for standard; all 6 for extended):\n1) What does an actuator do in a machine? (simple factual)\n2) Give one example of where a small actuator might be used. (simple factual)\n3) How is an actuator different from a sensor? (comparison)\n4) What is one limitation of using a small actuator in heavy tasks? (short inference)\n5) Suggest a mechatronics design where choosing the right actuator changes performance. Explain briefly. (application)\n6) Reflect: Describe a test you would run to check an actuator's response time and repeatability. (planning/reflection)\n\nPhrase-capture instruction:\nListen and write one short phrase (2–4 words) that describes an action an actuator performs in the audio. Do not use a transcript."
+    },
+    {
+      "id": "listening.w01.d03",
+      "titleArabic": "6 دقيقة إنجليزية — المتحكم الدقيق (Microcontroller)",
+      "titleEnglish": "6 Minute English — Microcontrollers (controllers and logic)",
+      "promptTemplateId": "pt_listening_003",
+      "sourceUrls": [
+        "https://www.bbc.co.uk/learningenglish/features/6-minute-english_2022/ep-220609"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — 6 Minute English (selected episode)\nURL: https://www.bbc.co.uk/learningenglish/features/6-minute-english_2022/ep-220609\n\nListening focus (choose one):\n- 1-minute focus: Listen for the phrase that says what a microcontroller controls in simple terms.\n- 2-minute focus: Listen for two roles a controller performs (e.g., reading sensors, sending signals to actuators).\n- 4-minute focus: Listen for how software and hardware work together in a controller, and one example given.\n\nComprehension & reflection questions (use first 2 for very short activities; first 4 for standard; all 6 for extended):\n1) What is one main job of a microcontroller? (simple factual)\n2) Name one device or part a microcontroller communicates with. (simple factual)\n3) How does embedded software affect controller behaviour? (short inference)\n4) Why might a developer choose a more powerful microcontroller for a system? (short explanation)\n5) Apply: For a line-following robot, what controller inputs and outputs are essential? List two of each. (application)\n6) Reflect: How would you plan an update to controller code without disrupting a running system in a lab test? (planning/reflection)\n\nPhrase-capture instruction:\nWhile listening, note one short technical phrase (2–5 words) that describes a controller’s role. Copy it exactly as heard."
+    },
+    {
+      "id": "listening.w01.d04",
+      "titleArabic": "6 دقيقة إنجليزية — محركات التيار المستمر وخيارات الحركة (DC motors)",
+      "titleEnglish": "6 Minute English — DC motors and motion options",
+      "promptTemplateId": "pt_listening_004",
+      "sourceUrls": [
+        "https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-210916"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — 6 Minute English (selected episode)\nURL: https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-210916\n\nListening focus (choose one):\n- 1-minute focus: Listen for the sentence that states a common use for DC motors.\n- 2-minute focus: Listen for two characteristics of DC motors mentioned (e.g., speed, torque).\n- 4-minute focus: Listen for one example where motor choice affects system reliability and why.\n\nComprehension & reflection questions (use first 2 for very short activities; first 4 for standard; all 6 for extended):\n1) What is one common application of a DC motor mentioned? (simple factual)\n2) Name one characteristic of a DC motor discussed. (simple factual)\n3) How does torque differ from speed, according to the listening? (conceptual)\n4) Why is matching motor size to load important? (short explanation)\n5) Apply: For a small conveyor in a lab, which motor characteristic will you prioritise and why? (application)\n6) Reflect: Describe how you would record motor performance data during a prototype test. Which two measurements matter most? (planning/reflection)\n\nPhrase-capture instruction:\nListen and write down one short phrase (2–4 words) that describes a motor property or use from the recording."
+    },
+    {
+      "id": "listening.w01.d05",
+      "titleArabic": "6 دقيقة إنجليزية — مصادر الطاقة والبطاريات",
+      "titleEnglish": "6 Minute English — Power supplies and batteries",
+      "promptTemplateId": "pt_listening_005",
+      "sourceUrls": [
+        "https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-150611"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — 6 Minute English (selected episode)\nURL: https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-150611\n\nListening focus (choose one):\n- 1-minute focus: Listen for the short phrase that names a common power source for small robots.\n- 2-minute focus: Listen for two pros or cons of battery power mentioned.\n- 4-minute focus: Listen for how power supply choice affects system weight and runtime; note one example.\n\nComprehension & reflection questions (use first 2 for very short activities; first 4 for standard; all 6 for extended):\n1) What power source is mentioned for small devices? (simple factual)\n2) Give one advantage or disadvantage of battery power from the audio. (simple factual)\n3) How does battery capacity affect device runtime? (short explanation)\n4) Why might a designer prefer a lightweight power option in a mobile robot? (short inference)\n5) Apply: Choose a battery type for a drone prototype and give one reason for your choice. (application)\n6) Reflect: How would you monitor battery health in a long-term experiment? List two indicators. (planning/reflection)\n\nPhrase-capture instruction:\nAs you listen, write one short phrase (2–5 words) that describes a power issue or benefit mentioned in the recording."
+    },
+    {
+      "id": "listening.w01.d06",
+      "titleArabic": "6 دقيقة إنجليزية — التروس والروابط الميكانيكية",
+      "titleEnglish": "6 Minute English — Gears and mechanical linkages",
+      "promptTemplateId": "pt_listening_006",
+      "sourceUrls": [
+        "https://www.youtube.com/watch?v=NVgpf-SFs0g"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — 6 Minute English (selected episode)\nURL: https://www.youtube.com/watch?v=NVgpf-SFs0g\n\nListening focus (choose one):\n- 1-minute focus: Listen for the short explanation of why gears are useful.\n- 2-minute focus: Listen for two examples of how linkages change motion (e.g., speed, direction).\n- 4-minute focus: Listen for a specific example where a gear ratio improves performance and how.\n\nComprehension & reflection questions (use first 2 for very short activities; first 4 for standard; all 6 for extended):\n1) What is one purpose of gears mentioned? (simple factual)\n2) Name one way a linkage can change motion. (simple factual)\n3) How does gear ratio affect speed and torque? (conceptual)\n4) Why might a designer add a gearbox to a motor? (short explanation)\n5) Apply: For a robotic arm lifting small parts, which gear choice helps precision and why? (application)\n6) Reflect: Describe two checks you would do on a mechanical linkage after assembly. (planning/reflection)\n\nPhrase-capture instruction:\nWrite one short phrase (2–4 words) you hear that describes what gears or linkages change in a system."
+    },
+    {
+      "id": "listening.w01.d07",
+      "titleArabic": "6 دقيقة إنجليزية — تكامل النظام والاتصالات بين المكونات",
+      "titleEnglish": "6 Minute English — System integration and component communication",
+      "promptTemplateId": "pt_listening_007",
+      "sourceUrls": [
+        "https://www.youtube.com/watch?v=rnBQXmO_StE"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — 6 Minute English (selected episode)\nURL: https://www.youtube.com/watch?v=rnBQXmO_StE\n\nListening focus (choose one):\n- 1-minute focus: Listen for the sentence that explains why components must 'talk' to each other.\n- 2-minute focus: Listen for two communication methods or protocols mentioned (e.g., wired, wireless, serial).\n- 4-minute focus: Listen for one challenge in system integration and a suggested way to test communication reliability.\n\nComprehension & reflection questions (use first 2 for very short activities; first 4 for standard; all 6 for extended):\n1) Why is communication between components important? (simple factual)\n2) Name one method devices use to communicate mentioned in the audio. (simple factual)\n3) What is one common problem when parts do not communicate properly? (short inference)\n4) How can testing help find communication errors before full deployment? (short explanation)\n5) Apply: For a distributed sensor network, which test would you run first to check data flow? Explain briefly. (application)\n6) Reflect: Describe how you would document interface requirements when you hand over a module to another engineer. (planning/reflection)\n\nPhrase-capture instruction:\nDuring the listening, write down one short phrase (3–6 words) that describes how components communicate or a testing method mentioned."
+    }
+  ]
+}

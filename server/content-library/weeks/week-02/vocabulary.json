@@ -1,0 +1,76 @@
+{
+  "week": 2,
+  "skill": "vocabulary",
+  "items": [
+    {
+      "id": "vocabulary.w02.d01",
+      "titleArabic": "مستشعر",
+      "titleEnglish": "Sensor",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Sensor"
+      ],
+      "contentMarkdown": "Term: sensor\nIPA: /ˈsɛnsər/\nArabic meaning: مستشعر\nPart of speech: noun\nMechatronics domain: sensing and measurement\n\nExamples:\n1. This sensor measures temperature.\n   يقيس هذا المستشعر درجة الحرارة.\n2. The sensor is on the robot arm.\n   المستشعر على ذراع الروبوت.\n3. Replace the faulty sensor today.\n   استبدل المستشعر المعطل اليوم.\n4. The sensor sends a small electrical signal.\n   يرسل المستشعر إشارة كهربائية صغيرة.\n5. The sensor must be clean for good data.\n   يجب أن يكون المستشعر نظيفًا للحصول على بيانات جيدة."
+    },
+    {
+      "id": "vocabulary.w02.d02",
+      "titleArabic": "محول الإشارة",
+      "titleEnglish": "Transducer",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Transducer"
+      ],
+      "contentMarkdown": "Term: transducer\nIPA: /trænzˈduːsər/\nArabic meaning: محول الإشارة\nPart of speech: noun\nMechatronics domain: signal conversion / sensors\n\nExamples:\n1. The transducer converts pressure to voltage.\n   يحول محول الإشارة الضغط إلى جهد كهربائي.\n2. We tested the transducer in the lab.\n   اختبرنا محول الإشارة في المختبر.\n3. A good transducer is accurate and fast.\n   محول الإشارة الجيد دقيق وسريع.\n4. Connect the transducer to the data logger.\n   وصِل محول الإشارة إلى مسجل البيانات.\n5. The transducer needs a power supply.\n   يحتاج محول الإشارة إلى مصدر طاقة."
+    },
+    {
+      "id": "vocabulary.w02.d03",
+      "titleArabic": "معايرة",
+      "titleEnglish": "Calibration",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Calibration"
+      ],
+      "contentMarkdown": "Term: calibration\nIPA: /ˌkælɪˈbreɪʃən/\nArabic meaning: معايرة\nPart of speech: noun\nMechatronics domain: measurement accuracy / maintenance\n\nExamples:\n1. Calibration keeps measurements correct.\n   تحافظ المعايرة على صحة القياسات.\n2. We perform calibration every month.\n   نجري المعايرة كل شهر.\n3. The device failed calibration tests.\n   فشل الجهاز في اختبارات المعايرة.\n4. Use a standard weight for calibration.\n   استخدم وزنًا معياريًا للمعايرة.\n5. Calibration reduces systematic error.\n   تقلل المعايرة من الخطأ المنهجي."
+    },
+    {
+      "id": "vocabulary.w02.d04",
+      "titleArabic": "دقة",
+      "titleEnglish": "Accuracy",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Accuracy_and_precision"
+      ],
+      "contentMarkdown": "Term: accuracy\nIPA: /ˈækjʊrəsi/\nArabic meaning: دقة\nPart of speech: noun\nMechatronics domain: measurement quality\n\nExamples:\n1. High accuracy is important for sensors.\n   الدقة العالية مهمة للمستشعرات.\n2. Check the accuracy of the scale.\n   افحص دقة المِيزان.\n3. The accuracy dropped after shock.\n   انخفضت الدقة بعد الصدمة.\n4. We use calibration to improve accuracy.\n   نستخدم المعايرة لتحسين الدقة.\n5. The user manual shows the accuracy value.\n   يبيّن دليل المستخدم قيمة الدقة."
+    },
+    {
+      "id": "vocabulary.w02.d05",
+      "titleArabic": "دقة القياس",
+      "titleEnglish": "Resolution",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Resolution_(device)"
+      ],
+      "contentMarkdown": "Term: resolution\nIPA: /ˌrɛzəˈluːʃən/\nArabic meaning: دقة القياس (القرار)\nPart of speech: noun\nMechatronics domain: sensor specification / data quality\n\nExamples:\n1. The sensor has a high resolution.\n   للمستشعر دقة قياس عالية.\n2. Better resolution shows small changes.\n   تُظهر دقة القياس الأفضل تغيّرات صغيرة.\n3. Increase the resolution in the settings.\n   زد دقة القياس في الإعدادات.\n4. The display shows the resolution value.\n   تعرض الشاشة قيمة دقة القياس.\n5. Low resolution can hide errors.\n   قد تُخفي دقة القياس المنخفضة الأخطاء."
+    },
+    {
+      "id": "vocabulary.w02.d06",
+      "titleArabic": "نطاق القياس",
+      "titleEnglish": "Range",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Range_(mathematics)"
+      ],
+      "contentMarkdown": "Term: range\nIPA: /reɪndʒ/\nArabic meaning: نطاق القياس\nPart of speech: noun\nMechatronics domain: sensor specification / limits\n\nExamples:\n1. The sensor range is 0 to 100 °C.\n   نطاق قياس المستشعر من 0 إلى 100 درجة مئوية.\n2. Do not exceed the device range.\n   لا تتجاوز نطاق الجهاز.\n3. The range changes with temperature.\n   يتغير النطاق مع درجة الحرارة.\n4. Choose a sensor with the right range.\n   اختر مستشعرًا بنطاق مناسب.\n5. The instrument has a wide measurement range.\n   للأداة نطاق قياس واسع."
+    },
+    {
+      "id": "vocabulary.w02.d07",
+      "titleArabic": "معدل العينة",
+      "titleEnglish": "Sampling rate",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Sampling_(signal_processing)"
+      ],
+      "contentMarkdown": "Term: sampling rate\nIPA: /ˈsæmplɪŋ reɪt/\nArabic meaning: معدل العينة\nPart of speech: noun\nMechatronics domain: data acquisition / signal processing\n\nExamples:\n1. Increase the sampling rate for faster events.\n   زد معدل العينة للأحداث السريعة.\n2. The sampling rate is 1 kHz.\n   معدل العينة هو 1 كيلو هرتز.\n3. Low sampling rate misses details.\n   يفوت معدل العينة المنخفض التفاصيل.\n4. Set the sampling rate in the recorder.\n   اضبط معدل العينة في المسجل.\n5. The computer stores sampled data.\n   يخزن الحاسوب البيانات المأخوذة كعينات."
+    }
+  ]
+}

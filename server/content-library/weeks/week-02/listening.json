@@ -1,0 +1,76 @@
+{
+  "week": 2,
+  "skill": "listening",
+  "items": [
+    {
+      "id": "listening.w02.d01",
+      "titleArabic": "BBC Learning English — 6 Minute English (تكنولوجيا)",
+      "titleEnglish": "BBC Learning English — 6 Minute English (technology)",
+      "promptTemplateId": "listening.sensor.v1",
+      "sourceUrls": [
+        "https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-211007"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — 6 Minute English (selected episode)\nURL: https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-211007\n\nListening focus: 2-minute focused listen. Choose a short 6 Minute English episode about technology or devices; listen to the first two minutes to get the main idea and examples related to measurement, sensors or data.\n\nComprehension and reflection questions (use progressively):\n1) What is the main topic the speakers introduce in the first two minutes? (easy)\n2) Name one example or device the speakers mention. (easy)\n3) What is one simple fact or number given about the device or technology? (intermediate)\n4) Which word did the speaker use to describe how measurements are sent or read? (intermediate)\n5) Why could this technology be useful in mechatronics? Give one practical example. (advanced)\n6) Do you agree with the speakers' view? Explain briefly and suggest one improvement to the device or measurement method. (advanced)\n\nPhrase-capture instruction: During the two-minute listen, write the exact short phrase (2–6 words) from the audio that describes what the device measures or detects. Write it verbatim.\n\nNo transcript provided on this sheet. Use the BBC audio player on the linked page to listen."
+    },
+    {
+      "id": "listening.w02.d02",
+      "titleArabic": "BBC Learning English — Lingohack (أخبار وعلوم قصيرة)",
+      "titleEnglish": "BBC Learning English — Lingohack (news & short science stories)",
+      "promptTemplateId": "listening.sensor.v1",
+      "sourceUrls": [
+        "https://www.bbc.co.uk/learningenglish/features/6-minute-english_2025/ep-250918"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — 6 Minute English (selected episode)\nURL: https://www.bbc.co.uk/learningenglish/features/6-minute-english_2025/ep-250918\n\nListening focus: 4-minute deep listen. Select a Lingohack item about science, technology or measurement and listen for four minutes to understand context, new vocabulary and speaker opinions.\n\nComprehension and reflection questions (use progressively):\n1) What is the headline topic or story in the clip? (easy)\n2) Who is the main person or organisation mentioned? (easy)\n3) What measurement or instrument appears in the story? (intermediate)\n4) Which two adjectives do the speakers use to describe the reliability or speed of the measurement? (intermediate)\n5) How might this measurement be used in a mechatronics project? Give a short plan (2–3 sentences). (advanced)\n6) Identify one possible limitation or risk the speakers mention and suggest a technical change to reduce that risk. (advanced)\n\nPhrase-capture instruction: While you listen, write the exact phrase (3–5 words) used in the audio that talks about accuracy, speed, or reliability of measurement.\n\nNo transcript provided here. Play the Lingohack clip on the linked page to complete the task."
+    },
+    {
+      "id": "listening.w02.d03",
+      "titleArabic": "BBC Learning English — The English We Speak (عبارات مفيدة للتكنولوجيا)",
+      "titleEnglish": "BBC Learning English — The English We Speak (useful phrases for technology)",
+      "promptTemplateId": "listening.sensor.v1",
+      "sourceUrls": [
+        "https://www.bbc.co.uk/learningenglish/features/6-minute-english_2022/ep-220609"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — 6 Minute English (selected episode)\nURL: https://www.bbc.co.uk/learningenglish/features/6-minute-english_2022/ep-220609\n\nListening focus: 1-minute phrase listen. Choose one short episode that includes a technical or measurement-related phrase. Listen once for the target phrase, then listen again to hear how it is used in context.\n\nComprehension and reflection questions (use progressively):\n1) What is the key phrase or idiom introduced in the episode? (easy)\n2) In one sentence, how do the hosts explain the phrase? (easy)\n3) Give one example from the episode where the phrase relates to measurement or devices. (intermediate)\n4) Replace one word in the example with a technical word from mechatronics; how does the meaning change? (intermediate)\n5) Write two short sentences using the phrase to describe a sensor reading or an experiment. (advanced)\n6) Reflect: why is learning short phrases helpful for understanding technical spoken English? Give two reasons. (advanced)\n\nPhrase-capture instruction: Listen for the exact phrase introduced and write it down (1–4 words). Try to copy spelling and punctuation as in the audio.\n\nNo transcript provided with this worksheet. Use the BBC audio on the linked page."
+    },
+    {
+      "id": "listening.w02.d04",
+      "titleArabic": "BBC Learning English — News Review (مراجعة لغة الأخبار)",
+      "titleEnglish": "BBC Learning English — News Review (language in news about science/technology)",
+      "promptTemplateId": "listening.sensor.v1",
+      "sourceUrls": [
+        "https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-210916"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — 6 Minute English (selected episode)\nURL: https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-210916\n\nListening focus: 4-minute analytic listen. Select a News Review episode that covers a story about science, technology or measurement. Listen for four minutes and note language used to explain technical ideas.\n\nComprehension and reflection questions (use progressively):\n1) What news story is being discussed? (easy)\n2) List one technical term mentioned in the discussion. (easy)\n3) How do the presenters explain the technical term in simple words? (intermediate)\n4) Which phrase shows the speakers' attitude (positive/negative/neutral) toward the technology? Quote approximately. (intermediate)\n5) How would you explain the same technical idea to a colleague in simple English? Write two sentences. (advanced)\n6) Suggest one real measurement test you could run in a lab to check the claim in the story. Briefly outline steps. (advanced)\n\nPhrase-capture instruction: During your listen, capture the exact short phrase (2–6 words) that summarises the news claim about measurement or sensors.\n\nNo transcript provided on this sheet. Use the BBC audio player on the News Review page."
+    },
+    {
+      "id": "listening.w02.d05",
+      "titleArabic": "British Council — Listening (تقوية مهارات الاستماع)",
+      "titleEnglish": "British Council — Listening (skills practice)",
+      "promptTemplateId": "listening.sensor.v1",
+      "sourceUrls": [
+        "https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-150611"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — 6 Minute English (selected episode)\nURL: https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-150611\n\nListening focus: 2-minute focused listen. From the British Council listening exercises, choose a short A2–B1 audio about technology, gadgets or measurements. Listen for two minutes to identify the main idea and key words.\n\nComprehension and reflection questions (use progressively):\n1) What is the main idea of the clip? (easy)\n2) Who is speaking or who are the people in the audio? (easy)\n3) Which measurement unit or instrument is mentioned? (intermediate)\n4) What problem or question are the speakers trying to solve? (intermediate)\n5) How could you use the information from the clip in a practical mechatronics task? Describe one simple application. (advanced)\n6) Choose one technical word from the audio and explain it in your own words for a beginner. (advanced)\n\nPhrase-capture instruction: While listening, write the exact phrase (2–5 words) that explains what is being measured or how the device is used.\n\nNo transcript provided here. Use the British Council audio player on the linked listening page."
+    },
+    {
+      "id": "listening.w02.d06",
+      "titleArabic": "British Council — Podcasts (قصص وقصيرة ومحادثات)",
+      "titleEnglish": "British Council — Podcasts (short talks and conversations)",
+      "promptTemplateId": "listening.sensor.v1",
+      "sourceUrls": [
+        "https://www.youtube.com/watch?v=NVgpf-SFs0g"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — 6 Minute English (selected episode)\nURL: https://www.youtube.com/watch?v=NVgpf-SFs0g\n\nListening focus: 4-minute extended listen. Pick a British Council podcast episode linked to technology or science. Listen for four minutes to follow explanations, examples and speaker opinions about measurements or devices.\n\nComprehension and reflection questions (use progressively):\n1) What is the topic of the podcast segment you chose? (easy)\n2) Name one speaker and one role they have (e.g., engineer, researcher). (easy)\n3) What measurement or sensor did the speaker describe? (intermediate)\n4) Which word or phrase did the speaker use to explain how the sensor works? (intermediate)\n5) Imagine you must present the same idea to a non-technical audience. Write a short 3-sentence summary. (advanced)\n6) Propose one experiment (materials and steps) to test the sensor or measurement that the podcast describes. (advanced)\n\nPhrase-capture instruction: Listen for and write down the exact phrase (3–6 words) the speaker uses to describe how data is collected or measured.\n\nNo transcript provided here. Use the British Council podcast player on the linked page."
+    },
+    {
+      "id": "listening.w02.d07",
+      "titleArabic": "British Council — A1 Listening (تمارين سمعية مبسطة)",
+      "titleEnglish": "British Council — A1 Listening (graded short listening practice)",
+      "promptTemplateId": "listening.sensor.v1",
+      "sourceUrls": [
+        "https://www.youtube.com/watch?v=rnBQXmO_StE"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — 6 Minute English (selected episode)\nURL: https://www.youtube.com/watch?v=rnBQXmO_StE\n\nListening focus: 1-minute quick listen. Choose a short A1 listening activity about everyday technology or simple measurements. Listen for one minute and pick out the most important fact.\n\nComprehension and reflection questions (use progressively):\n1) What is the single main fact or idea you heard? (easy)\n2) Who or what is being described? (easy)\n3) Is any number, time or measurement mentioned? If yes, write it. (intermediate)\n4) Which word helped you understand the idea best? (intermediate)\n5) How could this simple information help you when working with sensors in a basic project? Give one idea. (advanced)\n6) Make one simple sentence using a technical word from the audio to explain the idea to a teammate. (advanced)\n\nPhrase-capture instruction: In the one-minute listen, write the exact short phrase (1–4 words) that gives the main fact or number.\n\nNo transcript provided here. Use the British Council A1 listening player on the linked page."
+    }
+  ]
+}

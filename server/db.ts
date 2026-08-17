@@ -5,6 +5,7 @@ import {
   dailyTasks,
   diagnosticAttempts,
   learnerProfiles,
+  learnerContentProgress,
   learnerNotifications,
   skillSnapshots,
   users,
@@ -24,13 +25,14 @@ import {
   persistConversationEvaluationWorkflow,
   practicalBand,
   reviewSchedule,
-  selectDailyConversationPlan,
-  selectDailyListeningPlan,
+  skillTaskContent,
   summarizeDailySkills,
   type CardRating,
   type SkillKey,
   type StudyMode,
 } from "./learning-engine";
+import { localContentCatalog, contentCoverage, selectNextLocalContent } from "./content-library/catalog";
+import { getLocalContentPayload } from "./content-library/library";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -102,20 +104,66 @@ function dateKeyFor(date = new Date()) {
   return date.toISOString().slice(0, 10);
 }
 
-async function ensureCards(db: NonNullable<Awaited<ReturnType<typeof getDb>>>, userId: number) {
-  const existing = await db.select({ id: vocabularyCards.id, term: vocabularyCards.term }).from(vocabularyCards).where(eq(vocabularyCards.userId, userId));
+function parseVocabularyCard(contentId: string) {
+  const payload = getLocalContentPayload(contentId);
+  if (!payload || payload.skill !== "vocabulary") return null;
+  const value = (label: string) => payload.contentMarkdown.match(new RegExp(`^${label}:\\s*(.+)$`, "mi"))?.[1]?.trim();
+  const examples = Array.from(payload.contentMarkdown.matchAll(/\d+\.\s*(.+)\n\s+(.+)/g)).map(([, english, arabic]) => ({ english: english.trim(), arabic: arabic.trim() }));
+  const term = value("Term");
+  const arabicMeaning = value("Arabic meaning");
+  const ipa = value("IPA");
+  const partOfSpeech = value("Part of speech");
+  const engineeringDomain = value("Mechatronics domain");
+  if (!term || !arabicMeaning || !ipa || !partOfSpeech || !engineeringDomain || examples.length < 3) return null;
+  return { contentId, term, arabicMeaning, ipa, partOfSpeech, engineeringDomain, examples };
+}
+
+async function ensureCards(db: NonNullable<Awaited<ReturnType<typeof getDb>>>, userId: number, vocabularyContentId?: string | null) {
+  const existing = await db.select({ id: vocabularyCards.id, term: vocabularyCards.term, contentId: vocabularyCards.contentId }).from(vocabularyCards).where(eq(vocabularyCards.userId, userId));
   const now = new Date();
   const existingByTerm = new Map(existing.map(card => [card.term, card.id]));
-  for (const card of starterCards) {
-    const existingId = existingByTerm.get(card.term);
-    if (existingId) await db.update(vocabularyCards).set({ examples: card.examples }).where(eq(vocabularyCards.id, existingId));
-    else await db.insert(vocabularyCards).values({ ...card, userId, nextReviewAt: now });
+  if (existing.length === 0 && !vocabularyContentId) {
+    for (const card of starterCards) {
+      await db.insert(vocabularyCards).values({ ...card, userId, nextReviewAt: now });
+    }
+  }
+  const localCard = vocabularyContentId ? parseVocabularyCard(vocabularyContentId) : null;
+  if (!localCard) return;
+  const matchingCardId = existingByTerm.get(localCard.term);
+  if (matchingCardId) {
+    const current = existing.find(card => card.id === matchingCardId);
+    if (current?.contentId !== localCard.contentId) {
+      await db.update(vocabularyCards).set(localCard).where(eq(vocabularyCards.id, matchingCardId));
+    }
+  } else {
+    await db.insert(vocabularyCards).values({ ...localCard, userId, nextReviewAt: now });
   }
 }
 
 async function ensureTasks(db: NonNullable<Awaited<ReturnType<typeof getDb>>>, userId: number, profile: LearnerProfile, dateKey: string) {
-  const existing = await db.select({ id: dailyTasks.id }).from(dailyTasks).where(and(eq(dailyTasks.userId, userId), eq(dailyTasks.dateKey, dateKey))).limit(1);
-  if (existing.length) return;
+  const existing = await db.select().from(dailyTasks).where(and(eq(dailyTasks.userId, userId), eq(dailyTasks.dateKey, dateKey)));
+  if (existing.length) {
+    const progress = await db.select().from(learnerContentProgress).where(eq(learnerContentProgress.userId, userId));
+    const introduced: Array<NonNullable<ReturnType<typeof selectNextLocalContent>>> = [];
+    for (const task of existing.filter(task => !task.contentId && task.status === "pending")) {
+      const choice = selectNextLocalContent({ skill: task.skill as SkillKey, progress });
+      if (!choice) continue;
+      await db.update(dailyTasks).set({ contentId: choice.item.id, title: `${choice.item.titleArabic} · ${getStudyModeProfile(profile.studyMode as StudyMode).label}`, instructions: `${choice.item.objectiveArabic} ${task.instructions}` }).where(eq(dailyTasks.id, task.id));
+      if (choice.mode === "new") introduced.push(choice);
+    }
+    for (const choice of introduced) {
+      await db.insert(learnerContentProgress).values({ userId, contentId: choice.item.id, skill: choice.item.skill, status: "introduced", lastSeenAt: new Date() })
+        .onDuplicateKeyUpdate({ set: { lastSeenAt: new Date() } });
+    }
+    const vocabularyTask = (await db.select({ contentId: dailyTasks.contentId }).from(dailyTasks)
+      .where(and(eq(dailyTasks.userId, userId), eq(dailyTasks.dateKey, dateKey), eq(dailyTasks.taskKey, "vocabulary"))).limit(1))[0];
+    return vocabularyTask?.contentId ?? null;
+  }
+  const progress = await db.select().from(learnerContentProgress).where(eq(learnerContentProgress.userId, userId));
+  const choices = (Object.keys(skillTaskContent) as SkillKey[]).reduce((result, skill) => {
+    result[skill] = selectNextLocalContent({ skill, progress });
+    return result;
+  }, {} as Record<SkillKey, ReturnType<typeof selectNextLocalContent>>);
   const tasks = buildDailyTaskPlan(profile.dailyMinutes, {
     vocabulary: profile.vocabularyWeight,
     grammar: profile.grammarWeight,
@@ -123,7 +171,23 @@ async function ensureTasks(db: NonNullable<Awaited<ReturnType<typeof getDb>>>, u
     speaking: profile.speakingWeight,
     writing: profile.writingWeight,
   }, profile.studyMode as StudyMode);
-  await db.insert(dailyTasks).values(tasks.map(task => ({ ...task, userId, dateKey })));
+  await db.insert(dailyTasks).values(tasks.map(task => {
+    const choice = choices[task.skill];
+    return {
+      ...task,
+      userId,
+      dateKey,
+      contentId: choice?.item.id ?? null,
+      title: choice ? `${choice.item.titleArabic} · ${getStudyModeProfile(profile.studyMode as StudyMode).label}` : task.title,
+      instructions: choice ? `${choice.item.objectiveArabic} ${task.instructions}` : task.instructions,
+    };
+  }));
+  const introduced = (Object.values(choices).filter((choice): choice is NonNullable<typeof choice> => Boolean(choice && choice.mode === "new")));
+  for (const choice of introduced) {
+    await db.insert(learnerContentProgress).values({ userId, contentId: choice.item.id, skill: choice.item.skill, status: "introduced", lastSeenAt: new Date() })
+      .onDuplicateKeyUpdate({ set: { lastSeenAt: new Date() } });
+  }
+  return choices.vocabulary?.item.id ?? null;
 }
 
 export async function ensureLearnerWorkspace(userId: number) {
@@ -134,8 +198,8 @@ export async function ensureLearnerWorkspace(userId: number) {
     await db.insert(learnerProfiles).values({ userId });
     profile = (await db.select().from(learnerProfiles).where(eq(learnerProfiles.userId, userId)).limit(1))[0]!;
   }
-  await ensureCards(db, userId);
-  await ensureTasks(db, userId, profile, dateKeyFor());
+  const vocabularyContentId = await ensureTasks(db, userId, profile, dateKeyFor());
+  await ensureCards(db, userId, vocabularyContentId);
   return profile;
 }
 
@@ -185,7 +249,13 @@ export async function getLearningDashboard(userId: number) {
   const snapshots = await db.select().from(skillSnapshots).where(eq(skillSnapshots.userId, userId)).orderBy(desc(skillSnapshots.createdAt)).limit(1);
   const snapshot = snapshots[0] ?? await recomputeSnapshot(userId);
   const cards = await db.select().from(vocabularyCards).where(eq(vocabularyCards.userId, userId));
+  const contentProgress = await db.select().from(learnerContentProgress).where(eq(learnerContentProgress.userId, userId));
   const attempts = await db.select().from(diagnosticAttempts).where(eq(diagnosticAttempts.userId, userId));
+  const localContentBySkill = new Map(tasks.flatMap(task => {
+    if (!task.contentId) return [];
+    const content = getLocalContentPayload(task.contentId);
+    return content ? [[task.skill, content] as const] : [];
+  }));
   const skillProgress = summarizeDailySkills(tasks.map(task => ({ skill: task.skill, status: task.status })));
   const scores: Record<SkillKey, number> = {
     vocabulary: snapshot.vocabularyScore,
@@ -210,8 +280,11 @@ export async function getLearningDashboard(userId: number) {
     skillProgress,
     dailyReport,
     dailyContent: {
-      conversation: selectDailyConversationPlan(dateKey, profile.engineeringSpecialty, profile.goalTrack, profile.studyMode as StudyMode),
-      listening: selectDailyListeningPlan(dateKey, snapshot.practicalBand),
+      vocabulary: localContentBySkill.get("vocabulary") ?? null,
+      grammar: localContentBySkill.get("grammar") ?? null,
+      listening: localContentBySkill.get("listening") ?? null,
+      conversation: localContentBySkill.get("speaking") ?? null,
+      writing: localContentBySkill.get("writing") ?? null,
     },
     stats: {
       totalCards: cards.length,
@@ -219,7 +292,45 @@ export async function getLearningDashboard(userId: number) {
       completedToday: tasks.filter(task => task.status === "completed").length,
       totalToday: tasks.length,
     },
+    contentCoverage: contentCoverage(contentProgress),
   };
+}
+
+export async function getTodayLocalContent(userId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("قاعدة البيانات غير متاحة حاليًا");
+  const profile = await ensureLearnerWorkspace(userId);
+  const tasks = await db.select().from(dailyTasks).where(and(eq(dailyTasks.userId, userId), eq(dailyTasks.dateKey, dateKeyFor())));
+  const progress = await db.select().from(learnerContentProgress).where(eq(learnerContentProgress.userId, userId));
+  return {
+    profile,
+    coverage: contentCoverage(progress),
+    items: tasks.flatMap(task => {
+      if (!task.contentId) return [];
+      const content = getLocalContentPayload(task.contentId);
+      return content ? [{ task, content }] : [];
+    }),
+  };
+}
+
+async function recordContentCompletion(db: NonNullable<Awaited<ReturnType<typeof getDb>>>, userId: number, contentId: string, skill: SkillKey, completed: boolean) {
+  const now = new Date();
+  const existing = (await db.select().from(learnerContentProgress)
+    .where(and(eq(learnerContentProgress.userId, userId), eq(learnerContentProgress.contentId, contentId))).limit(1))[0];
+  if (!completed) {
+    await db.update(learnerContentProgress).set({ status: "introduced", lastSeenAt: now, nextReviewAt: null }).where(and(eq(learnerContentProgress.userId, userId), eq(learnerContentProgress.contentId, contentId)));
+    return;
+  }
+  const schedule = localContentCatalog.find(item => item.id === contentId)?.reviewAfterDays ?? [1, 4, 10, 24];
+  const completionCount = (existing?.completionCount ?? 0) + 1;
+  const reviewAfterDays = schedule[completionCount - 1];
+  const nextReviewAt = reviewAfterDays ? new Date(now.getTime() + reviewAfterDays * 24 * 60 * 60 * 1000) : null;
+  const status = nextReviewAt ? "completed" as const : "mastered" as const;
+  if (existing) {
+    await db.update(learnerContentProgress).set({ status, lastSeenAt: now, completedAt: now, nextReviewAt, completionCount }).where(eq(learnerContentProgress.id, existing.id));
+  } else {
+    await db.insert(learnerContentProgress).values({ userId, contentId, skill, status, lastSeenAt: now, completedAt: now, nextReviewAt, completionCount });
+  }
 }
 
 export async function updateLearnerProfile(userId: number, input: Omit<Pick<LearnerProfile, "dailyMinutes" | "studyMode" | "engineeringSpecialty" | "goalTrack" | "vocabularyWeight" | "grammarWeight" | "listeningWeight" | "speakingWeight" | "writingWeight">, "id">) {
@@ -260,6 +371,7 @@ export async function completeDailyTask(userId: number, taskId: number, complete
   const task = (await db.select().from(dailyTasks).where(and(eq(dailyTasks.id, taskId), eq(dailyTasks.userId, userId))).limit(1))[0];
   if (!task) throw new Error("المهمة غير موجودة");
   await db.update(dailyTasks).set({ status: completed ? "completed" : "pending", completedAt: completed ? new Date() : null }).where(eq(dailyTasks.id, taskId));
+  if (task.contentId) await recordContentCompletion(db, userId, task.contentId, task.skill as SkillKey, completed);
   await recomputeSnapshot(userId);
 }
 
@@ -267,7 +379,7 @@ export async function submitConversationEvaluation(userId: number, input: { scor
   const db = await getDb();
   if (!db) throw new Error("قاعدة البيانات غير متاحة حاليًا");
   await ensureLearnerWorkspace(userId);
-  const speakingTask = (await db.select({ id: dailyTasks.id }).from(dailyTasks)
+  const speakingTask = (await db.select({ id: dailyTasks.id, contentId: dailyTasks.contentId }).from(dailyTasks)
     .where(and(eq(dailyTasks.userId, userId), eq(dailyTasks.dateKey, dateKeyFor()), eq(dailyTasks.taskKey, "speaking"))).limit(1))[0];
   return persistConversationEvaluationWorkflow({
     scoreOutOfTen: input.scoreOutOfTen,
@@ -278,6 +390,7 @@ export async function submitConversationEvaluation(userId: number, input: { scor
     markSpeakingTaskComplete: async () => {
       if (!speakingTask) return;
       await db.update(dailyTasks).set({ status: "completed", completedAt: new Date() }).where(eq(dailyTasks.id, speakingTask.id));
+      if (speakingTask.contentId) await recordContentCompletion(db, userId, speakingTask.contentId, "speaking", true);
     },
     refreshCalibration: async () => { await recomputeSnapshot(userId); },
   });
@@ -306,6 +419,9 @@ export async function rateVocabularyCard(userId: number, cardId: number, rating:
     markVocabularyTaskComplete: async () => {
       await db.update(dailyTasks).set({ status: "completed", completedAt: new Date() })
         .where(and(eq(dailyTasks.userId, userId), eq(dailyTasks.dateKey, dateKeyFor()), eq(dailyTasks.taskKey, "vocabulary")));
+      const vocabularyTask = (await db.select({ contentId: dailyTasks.contentId }).from(dailyTasks)
+        .where(and(eq(dailyTasks.userId, userId), eq(dailyTasks.dateKey, dateKeyFor()), eq(dailyTasks.taskKey, "vocabulary"))).limit(1))[0];
+      if (vocabularyTask?.contentId) await recordContentCompletion(db, userId, vocabularyTask.contentId, "vocabulary", true);
     },
     refreshCalibration: async () => { await recomputeSnapshot(userId); },
   });
