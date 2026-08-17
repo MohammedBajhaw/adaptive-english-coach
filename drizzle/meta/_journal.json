@@ -36,6 +36,13 @@
       "when": 1786690751149,
       "tag": "0004_normal_spencer_smythe",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1786951294602,
+      "tag": "0005_striped_ser_duncan",
+      "breakpoints": true
     }
   ]
 }

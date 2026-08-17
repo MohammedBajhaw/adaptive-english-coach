@@ -122,6 +122,7 @@ export const dailyTasks = mysqlTable(
     userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
     dateKey: varchar("dateKey", { length: 10 }).notNull(),
     taskKey: varchar("taskKey", { length: 48 }).notNull(),
+    contentId: varchar("contentId", { length: 140 }),
     skill: mysqlEnum("skill", ["vocabulary", "grammar", "listening", "speaking", "writing"]).notNull(),
     title: varchar("title", { length: 180 }).notNull(),
     instructions: text("instructions").notNull(),
@@ -133,6 +134,26 @@ export const dailyTasks = mysqlTable(
   table => [
     uniqueIndex("daily_tasks_user_date_task_unique").on(table.userId, table.dateKey, table.taskKey),
     index("daily_tasks_user_date_idx").on(table.userId, table.dateKey),
+  ],
+);
+
+export const learnerContentProgress = mysqlTable(
+  "learner_content_progress",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+    contentId: varchar("contentId", { length: 140 }).notNull(),
+    skill: mysqlEnum("skill", ["vocabulary", "grammar", "listening", "speaking", "writing"]).notNull(),
+    status: mysqlEnum("status", ["introduced", "completed", "mastered"]).notNull().default("introduced"),
+    firstSeenAt: timestamp("firstSeenAt").defaultNow().notNull(),
+    lastSeenAt: timestamp("lastSeenAt").defaultNow().notNull(),
+    completedAt: timestamp("completedAt"),
+    nextReviewAt: timestamp("nextReviewAt"),
+    completionCount: int("completionCount").notNull().default(0),
+  },
+  table => [
+    uniqueIndex("learner_content_progress_user_content_unique").on(table.userId, table.contentId),
+    index("learner_content_progress_user_skill_review_idx").on(table.userId, table.skill, table.nextReviewAt),
   ],
 );
 
@@ -157,5 +178,6 @@ export const learnerNotifications = mysqlTable(
 export type LearnerProfile = typeof learnerProfiles.$inferSelect;
 export type VocabularyCard = typeof vocabularyCards.$inferSelect;
 export type DailyTask = typeof dailyTasks.$inferSelect;
+export type LearnerContentProgress = typeof learnerContentProgress.$inferSelect;
 export type LearnerNotification = typeof learnerNotifications.$inferSelect;
 export type User = typeof users.$inferSelect;

@@ -39,24 +39,63 @@ export const skillTaskContent: Record<SkillKey, { title: string; instructions: s
   },
 };
 
+type TaskIntensity = "quick" | "core" | "deep";
+
+const taskIntensityText: Record<TaskIntensity, { label: string; suffix: string; minimum: number; multiplier: number }> = {
+  quick: { label: "لمسة سريعة", suffix: "أنجز خطوة واحدة مركزة ولا تنتقل قبل إنهائها.", minimum: 3, multiplier: 0.8 },
+  core: { label: "جلسة أساسية", suffix: "أنجز النشاط الرئيسي وسجل دليلًا قصيرًا على المحاولة.", minimum: 4, multiplier: 1 },
+  deep: { label: "جلسة معمقة", suffix: "أضف تطبيقًا ثانيًا أو إنتاجًا أطول؛ هذه المهارة أخذت أولوية أعلى اليوم.", minimum: 10, multiplier: 1.45 },
+};
+
+const skillPriority: SkillKey[] = ["speaking", "vocabulary", "grammar", "listening", "writing"];
+
+function rankedSkills(weights: Record<SkillKey, number>) {
+  return (Object.keys(weights) as SkillKey[]).sort((left, right) => {
+    const difference = weights[right] - weights[left];
+    return difference || skillPriority.indexOf(left) - skillPriority.indexOf(right);
+  });
+}
+
+export function describeDailyPlan(dailyMinutes: number) {
+  const safeMinutes = Math.min(Math.max(Math.round(dailyMinutes), 10), 180);
+  if (safeMinutes <= 14) return { mode: "quick", label: "حد أدنى ذكي", taskCount: 2, explanation: "مراجعة مفردات قصيرة مع مهارة واحدة ذات أولوية؛ الهدف الاستمرار لا إنهاء كل شيء." };
+  if (safeMinutes <= 24) return { mode: "light", label: "جلسة خفيفة", taskCount: 3, explanation: "مفردات ومهارتان بالأولوية؛ تبقى المهمة قصيرة لكن فيها إنتاج فعلي." };
+  if (safeMinutes <= 44) return { mode: "focused", label: "جلسة مركزة", taskCount: 4, explanation: "أربع مهام مختارة بحسب الأوزان، مع قاعدة أو مهارة تحتاج دعمًا." };
+  if (safeMinutes <= 69) return { mode: "balanced", label: "جلسة متوازنة", taskCount: 5, explanation: "مهمة أساسية لكل مهارة، وتزيد الدقائق داخل المهارة ذات الوزن الأعلى." };
+  return { mode: "deep", label: "جلسة موسعة", taskCount: 6, explanation: "كل المهارات الأساسية مع مهمة إضافية معمقة للمهارة الأعلى وزنًا." };
+}
+
 export function buildDailyTaskPlan(dailyMinutes: number, weights: Record<SkillKey, number>) {
-  const safeMinutes = Math.min(Math.max(Math.round(dailyMinutes), 30), 180);
-  const baseMinutes = 5;
-  const remaining = safeMinutes - baseMinutes * 5;
-  const totalWeight = Object.values(weights).reduce((sum, value) => sum + Math.max(value, 1), 0);
-  const keys = Object.keys(weights) as SkillKey[];
+  const safeMinutes = Math.min(Math.max(Math.round(dailyMinutes), 10), 180);
+  const summary = describeDailyPlan(safeMinutes);
+  const ranked = rankedSkills(weights);
+  const nonVocabulary = ranked.filter(skill => skill !== "vocabulary");
+  const slots: Array<{ skill: SkillKey; intensity: TaskIntensity }> = safeMinutes <= 14
+    ? [{ skill: "vocabulary", intensity: "quick" }, { skill: nonVocabulary[0]!, intensity: "quick" }]
+    : safeMinutes <= 24
+      ? [{ skill: "vocabulary", intensity: "quick" }, ...nonVocabulary.slice(0, 2).map(skill => ({ skill, intensity: "quick" as const }))]
+      : safeMinutes <= 44
+        ? [{ skill: "vocabulary", intensity: "core" }, { skill: "grammar", intensity: "core" }, ...ranked.filter(skill => skill !== "vocabulary" && skill !== "grammar").slice(0, 2).map(skill => ({ skill, intensity: "core" as const }))]
+        : safeMinutes <= 69
+          ? (Object.keys(weights) as SkillKey[]).map(skill => ({ skill, intensity: "core" as const }))
+          : [...(Object.keys(weights) as SkillKey[]).map(skill => ({ skill, intensity: "core" as const })), { skill: ranked[0]!, intensity: "deep" }];
+  const minimumTotal = slots.reduce((sum, slot) => sum + taskIntensityText[slot.intensity].minimum, 0);
+  const remaining = Math.max(0, safeMinutes - minimumTotal);
+  const weightedTotal = slots.reduce((sum, slot) => sum + Math.max(weights[slot.skill], 1) * taskIntensityText[slot.intensity].multiplier, 0);
   let assigned = 0;
 
-  return keys.map((skill, index) => {
-    const proportional = index === keys.length - 1
-      ? remaining - assigned
-      : Math.round((remaining * Math.max(weights[skill], 1)) / totalWeight);
-    assigned += proportional;
+  return slots.map((slot, index) => {
+    const weighted = Math.max(weights[slot.skill], 1) * taskIntensityText[slot.intensity].multiplier;
+    const extra = index === slots.length - 1 ? remaining - assigned : Math.round((remaining * weighted) / weightedTotal);
+    assigned += extra;
+    const base = skillTaskContent[slot.skill];
+    const duplicate = slots.slice(0, index).some(previous => previous.skill === slot.skill);
     return {
-      taskKey: skill,
-      skill,
-      minutes: baseMinutes + proportional,
-      ...skillTaskContent[skill],
+      taskKey: duplicate ? `${slot.skill}-${slot.intensity}` : slot.skill,
+      skill: slot.skill,
+      minutes: taskIntensityText[slot.intensity].minimum + extra,
+      title: `${base.title} · ${taskIntensityText[slot.intensity].label}`,
+      instructions: `${base.instructions} ${taskIntensityText[slot.intensity].suffix}`,
     };
   });
 }

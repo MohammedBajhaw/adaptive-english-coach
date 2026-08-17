@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { aggregateScore, buildCalibrationGaps, buildDailyTaskPlan, buildPeriodSkillMetrics, completeVocabularyReviewWorkflow, conversationScoreToEvidence, gradeGrammarChoices, isVocabularyReviewComplete, parseGoalTracks, persistConversationEvaluationWorkflow, practicalBand, reviewSchedule, selectDailyConversationPlan, selectDailyListeningPlan, selectListeningTrack, summarizeDailySkills } from "./learning-engine";
+import { aggregateScore, buildCalibrationGaps, buildDailyTaskPlan, buildPeriodSkillMetrics, completeVocabularyReviewWorkflow, conversationScoreToEvidence, describeDailyPlan, gradeGrammarChoices, isVocabularyReviewComplete, parseGoalTracks, persistConversationEvaluationWorkflow, practicalBand, reviewSchedule, selectDailyConversationPlan, selectDailyListeningPlan, selectListeningTrack, summarizeDailySkills } from "./learning-engine";
+import { selectNextLocalContent } from "./content-library/catalog";
 
 describe("محرك خطة التعلم", () => {
   it("يوزع الدقائق اليومية كاملة بين المهارات مع الحفاظ على حد أدنى", () => {
@@ -7,6 +8,30 @@ describe("محرك خطة التعلم", () => {
     expect(plan).toHaveLength(5);
     expect(plan.reduce((sum, task) => sum + task.minutes, 0)).toBe(50);
     expect(plan.every(task => task.minutes >= 5)).toBe(true);
+  });
+
+  it("يغير عدد المهام وعمقها وفق الوقت ويعطي المهارة الأعلى وزنًا حصة أكبر", () => {
+    const weights = { vocabulary: 10, grammar: 15, listening: 10, speaking: 60, writing: 5 };
+    const quick = buildDailyTaskPlan(10, weights);
+    const balanced = buildDailyTaskPlan(50, weights);
+    const deep = buildDailyTaskPlan(80, weights);
+    expect(quick).toHaveLength(2);
+    expect(balanced).toHaveLength(5);
+    expect(deep).toHaveLength(6);
+    expect(quick.reduce((sum, task) => sum + task.minutes, 0)).toBe(10);
+    expect(deep.filter(task => task.skill === "speaking")).toHaveLength(2);
+    expect(describeDailyPlan(10).label).toBe("حد أدنى ذكي");
+    expect(describeDailyPlan(60).label).toBe("جلسة متوازنة");
+  });
+
+  it("يختار محتوى محليًا جديدًا ثم يعيد المحتوى المستحق للمراجعة دون تكرار عنصر اليوم", () => {
+    const now = new Date("2026-08-17T08:00:00Z");
+    const first = selectNextLocalContent({ skill: "grammar", progress: [], now });
+    expect(first?.item.id).toBe("grammar.w01.present-simple");
+    const review = selectNextLocalContent({ skill: "grammar", progress: [{ contentId: first!.item.id, status: "completed", lastSeenAt: new Date("2026-08-10T08:00:00Z"), nextReviewAt: new Date("2026-08-16T08:00:00Z") }], now });
+    expect(review).toMatchObject({ mode: "review", item: { id: "grammar.w01.present-simple" } });
+    const excluded = selectNextLocalContent({ skill: "grammar", progress: [], excludeContentIds: [first!.item.id], now });
+    expect(excluded?.item.id).toBe("grammar.w02.present-continuous");
   });
 
   it("يعيد البطاقة الضعيفة في اليوم نفسه ويرفع البطاقات القوية بفاصل أطول", () => {
