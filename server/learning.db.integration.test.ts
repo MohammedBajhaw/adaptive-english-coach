@@ -1,7 +1,7 @@
 import { afterEach, beforeAll, describe, expect, it } from "vitest";
 import { and, desc, eq } from "drizzle-orm";
 import { dailyTasks, diagnosticAttempts, learnerProfiles, skillSnapshots, users, vocabularyCards } from "../drizzle/schema";
-import { createScheduledReminder, ensureLearnerWorkspace, getDb, getLearnerNotifications, getLearningDashboard, getProgressReports, getScheduledReminder, rateVocabularyCard, submitConversationEvaluation } from "./db";
+import { createScheduledReminder, ensureLearnerWorkspace, getDb, getLearnerNotifications, getLearningDashboard, getProgressReports, getScheduledReminder, rateVocabularyCard, submitConversationEvaluation, updateLearnerProfile } from "./db";
 import { appRouter } from "./routers";
 import type { TrpcContext } from "./_core/context";
 
@@ -70,6 +70,16 @@ integrationDescribe("learning database integration", () => {
     expect(task?.status).toBe("completed");
     expect(dashboard.tasks.find(item => item.taskKey === "speaking")?.status).toBe("completed");
     expect(after.length).toBeGreaterThan(before.length);
+  }, 20_000);
+
+  it("refreshes an all-pending daily plan when the learner selects a different study mode", async () => {
+    const { db, userId } = await createWorkspace();
+    await updateLearnerProfile(userId, { dailyMinutes: 45, studyMode: "intensive", engineeringSpecialty: "mechatronics", goalTrack: "job_interviews", vocabularyWeight: 25, grammarWeight: 20, listeningWeight: 15, speakingWeight: 25, writingWeight: 15 });
+    const tasks = await db.select().from(dailyTasks).where(and(eq(dailyTasks.userId, userId), eq(dailyTasks.dateKey, dateKeyFor())));
+    expect(tasks).toHaveLength(5);
+    expect(tasks.map(task => task.skill).sort()).toEqual(["grammar", "listening", "speaking", "vocabulary", "writing"]);
+    expect(tasks.find(task => task.skill === "speaking")?.minutes).toBe(13);
+    expect(tasks.find(task => task.skill === "grammar")?.instructions).toContain("20 أسئلة");
   }, 20_000);
 
   it("aggregates weekly and monthly per-skill report metrics from real evidence, tasks, snapshots, and cards", async () => {

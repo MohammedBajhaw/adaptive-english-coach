@@ -19,6 +19,7 @@ import {
   buildPeriodSkillMetrics,
   clampScore,
   completeVocabularyReviewWorkflow,
+  getStudyModeProfile,
   isVocabularyReviewComplete,
   persistConversationEvaluationWorkflow,
   practicalBand,
@@ -28,6 +29,7 @@ import {
   summarizeDailySkills,
   type CardRating,
   type SkillKey,
+  type StudyMode,
 } from "./learning-engine";
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -120,7 +122,7 @@ async function ensureTasks(db: NonNullable<Awaited<ReturnType<typeof getDb>>>, u
     listening: profile.listeningWeight,
     speaking: profile.speakingWeight,
     writing: profile.writingWeight,
-  });
+  }, profile.studyMode as StudyMode);
   await db.insert(dailyTasks).values(tasks.map(task => ({ ...task, userId, dateKey })));
 }
 
@@ -208,7 +210,7 @@ export async function getLearningDashboard(userId: number) {
     skillProgress,
     dailyReport,
     dailyContent: {
-      conversation: selectDailyConversationPlan(dateKey, profile.engineeringSpecialty, profile.goalTrack),
+      conversation: selectDailyConversationPlan(dateKey, profile.engineeringSpecialty, profile.goalTrack, profile.studyMode as StudyMode),
       listening: selectDailyListeningPlan(dateKey, snapshot.practicalBand),
     },
     stats: {
@@ -220,12 +222,27 @@ export async function getLearningDashboard(userId: number) {
   };
 }
 
-export async function updateLearnerProfile(userId: number, input: Omit<Pick<LearnerProfile, "dailyMinutes" | "engineeringSpecialty" | "goalTrack" | "vocabularyWeight" | "grammarWeight" | "listeningWeight" | "speakingWeight" | "writingWeight">, "id">) {
+export async function updateLearnerProfile(userId: number, input: Omit<Pick<LearnerProfile, "dailyMinutes" | "studyMode" | "engineeringSpecialty" | "goalTrack" | "vocabularyWeight" | "grammarWeight" | "listeningWeight" | "speakingWeight" | "writingWeight">, "id">) {
   const db = await getDb();
   if (!db) throw new Error("قاعدة البيانات غير متاحة حاليًا");
   const profile = await ensureLearnerWorkspace(userId);
   await db.update(learnerProfiles).set(input).where(eq(learnerProfiles.id, profile.id));
   const updated = (await db.select().from(learnerProfiles).where(eq(learnerProfiles.id, profile.id)).limit(1))[0]!;
+  const today = dateKeyFor();
+  const existingTasks = await db.select().from(dailyTasks).where(and(eq(dailyTasks.userId, userId), eq(dailyTasks.dateKey, today)));
+  if (existingTasks.length === 5 && existingTasks.every(task => task.status === "pending")) {
+    const refreshedPlan = buildDailyTaskPlan(updated.dailyMinutes, {
+      vocabulary: updated.vocabularyWeight,
+      grammar: updated.grammarWeight,
+      listening: updated.listeningWeight,
+      speaking: updated.speakingWeight,
+      writing: updated.writingWeight,
+    }, updated.studyMode as StudyMode);
+    for (const task of refreshedPlan) {
+      const existing = existingTasks.find(item => item.skill === task.skill);
+      if (existing) await db.update(dailyTasks).set({ title: task.title, instructions: task.instructions, minutes: task.minutes }).where(eq(dailyTasks.id, existing.id));
+    }
+  }
   return updated;
 }
 
@@ -269,8 +286,9 @@ export async function submitConversationEvaluation(userId: number, input: { scor
 export async function getDueCards(userId: number) {
   const db = await getDb();
   if (!db) throw new Error("قاعدة البيانات غير متاحة حاليًا");
-  await ensureLearnerWorkspace(userId);
-  return db.select().from(vocabularyCards).where(and(eq(vocabularyCards.userId, userId), lte(vocabularyCards.nextReviewAt, new Date()))).orderBy(vocabularyCards.nextReviewAt).limit(20);
+  const profile = await ensureLearnerWorkspace(userId);
+  const limit = getStudyModeProfile(profile.studyMode as StudyMode).vocabularyWords;
+  return db.select().from(vocabularyCards).where(and(eq(vocabularyCards.userId, userId), lte(vocabularyCards.nextReviewAt, new Date()))).orderBy(vocabularyCards.nextReviewAt).limit(limit);
 }
 
 export async function rateVocabularyCard(userId: number, cardId: number, rating: CardRating) {

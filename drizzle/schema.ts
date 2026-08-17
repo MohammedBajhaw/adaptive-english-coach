@@ -28,6 +28,7 @@ export const learnerProfiles = mysqlTable(
     id: int("id").autoincrement().primaryKey(),
     userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
     dailyMinutes: int("dailyMinutes").notNull().default(50),
+    studyMode: varchar("studyMode", { length: 24 }).notNull().default("balanced"),
     engineeringSpecialty: varchar("engineeringSpecialty", { length: 80 }).notNull().default("general"),
     goalTrack: varchar("goalTrack", { length: 40 }).notNull().default("job_interviews"),
     startingBand: varchar("startingBand", { length: 16 }).notNull().default("A2/B1"),

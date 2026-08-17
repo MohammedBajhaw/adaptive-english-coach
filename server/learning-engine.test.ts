@@ -1,27 +1,31 @@
 import { describe, expect, it } from "vitest";
-import { aggregateScore, buildCalibrationGaps, buildDailyTaskPlan, buildPeriodSkillMetrics, completeVocabularyReviewWorkflow, conversationScoreToEvidence, describeDailyPlan, gradeGrammarChoices, isVocabularyReviewComplete, parseGoalTracks, persistConversationEvaluationWorkflow, practicalBand, reviewSchedule, selectDailyConversationPlan, selectDailyListeningPlan, selectListeningTrack, summarizeDailySkills } from "./learning-engine";
+import { aggregateScore, buildCalibrationGaps, buildDailyTaskPlan, buildPeriodSkillMetrics, completeVocabularyReviewWorkflow, conversationScoreToEvidence, describeDailyPlan, getStudyModeProfile, gradeGrammarChoices, isVocabularyReviewComplete, parseGoalTracks, persistConversationEvaluationWorkflow, practicalBand, reviewSchedule, selectDailyConversationPlan, selectDailyListeningPlan, selectListeningTrack, summarizeDailySkills } from "./learning-engine";
 import { selectNextLocalContent } from "./content-library/catalog";
 
 describe("محرك خطة التعلم", () => {
-  it("يوزع الدقائق اليومية كاملة بين المهارات مع الحفاظ على حد أدنى", () => {
-    const plan = buildDailyTaskPlan(50, { vocabulary: 25, grammar: 20, listening: 15, speaking: 25, writing: 15 });
+  it("يبني خمس مهارات بمجموع حمل نمط التقدم المتوازن", () => {
+    const plan = buildDailyTaskPlan(30, { vocabulary: 25, grammar: 20, listening: 15, speaking: 25, writing: 15 }, "balanced");
     expect(plan).toHaveLength(5);
-    expect(plan.reduce((sum, task) => sum + task.minutes, 0)).toBe(50);
-    expect(plan.every(task => task.minutes >= 5)).toBe(true);
+    expect(plan.reduce((sum, task) => sum + task.minutes, 0)).toBe(30);
+    expect(plan.every(task => task.minutes >= 3)).toBe(true);
   });
 
-  it("يغير عدد المهام وعمقها وفق الوقت ويعطي المهارة الأعلى وزنًا حصة أكبر", () => {
+  it("يبني الأنماط الثلاثة بتغطية كل المهارات ويعطي المهارة الأعلى وزنًا تطبيقًا إضافيًا", () => {
     const weights = { vocabulary: 10, grammar: 15, listening: 10, speaking: 60, writing: 5 };
-    const quick = buildDailyTaskPlan(10, weights);
-    const balanced = buildDailyTaskPlan(50, weights);
-    const deep = buildDailyTaskPlan(80, weights);
-    expect(quick).toHaveLength(2);
+    const steady = buildDailyTaskPlan(15, weights, "steady");
+    const balanced = buildDailyTaskPlan(30, weights, "balanced");
+    const intensive = buildDailyTaskPlan(45, weights, "intensive");
+    expect(steady).toHaveLength(5);
     expect(balanced).toHaveLength(5);
-    expect(deep).toHaveLength(6);
-    expect(quick.reduce((sum, task) => sum + task.minutes, 0)).toBe(10);
-    expect(deep.filter(task => task.skill === "speaking")).toHaveLength(2);
-    expect(describeDailyPlan(10).label).toBe("حد أدنى ذكي");
-    expect(describeDailyPlan(60).label).toBe("جلسة متوازنة");
+    expect(intensive).toHaveLength(5);
+    expect(steady.map(task => task.skill)).toEqual(["vocabulary", "grammar", "listening", "speaking", "writing"]);
+    expect(steady.find(task => task.skill === "speaking")?.instructions).toContain("أولوية");
+    expect(getStudyModeProfile("steady")).toMatchObject({ vocabularyWords: 5, conversationMinutes: 5, listeningQuestions: 2, grammarChoiceQuestions: 5 });
+    expect(getStudyModeProfile("balanced")).toMatchObject({ vocabularyWords: 7, conversationMinutes: 10, listeningQuestions: 4, grammarChoiceQuestions: 10 });
+    expect(getStudyModeProfile("intensive")).toMatchObject({ vocabularyWords: 10, conversationMinutes: 13, listeningQuestions: 6, grammarChoiceQuestions: 20 });
+    expect(describeDailyPlan(15).label).toBe("ثبات يومي");
+    expect(describeDailyPlan(30).label).toBe("تقدم متوازن");
+    expect(describeDailyPlan(45).label).toBe("تحدٍّ مكثف");
   });
 
   it("يختار محتوى محليًا جديدًا ثم يعيد المحتوى المستحق للمراجعة دون تكرار عنصر اليوم", () => {
@@ -65,10 +69,12 @@ describe("محرك خطة التعلم", () => {
   });
 
   it("يدور محتوى المحادثة والاستماع يوميًا ويكيّفه مع التخصص ومسارات الهدف المتعددة", () => {
-    const firstConversation = selectDailyConversationPlan("2026-08-14", "mechatronics", "job_interviews");
-    const nextConversation = selectDailyConversationPlan("2026-08-15", "mechatronics", "job_interviews");
+    const firstConversation = selectDailyConversationPlan("2026-08-14", "mechatronics", "job_interviews", "steady");
+    const nextConversation = selectDailyConversationPlan("2026-08-15", "mechatronics", "job_interviews", "balanced");
     expect(firstConversation.id).not.toBe(nextConversation.id);
     expect(firstConversation.prompt).toContain("Mechatronics Engineering");
+    expect(firstConversation.targetMinutes).toBe(5);
+    expect(nextConversation.targetMinutes).toBe(10);
     expect(firstConversation.words[0]?.arabic).toBeTruthy();
     const multiGoal = selectDailyConversationPlan("2026-08-14", "mechatronics", "job_interviews,daily_work,general_communication");
     expect(multiGoal.goalTracks).toHaveLength(3);

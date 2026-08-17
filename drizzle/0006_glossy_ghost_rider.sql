@@ -1,0 +1,1 @@
+ALTER TABLE `learner_profiles` ADD `studyMode` varchar(24) DEFAULT 'balanced' NOT NULL;

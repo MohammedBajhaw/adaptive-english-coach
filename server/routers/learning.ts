@@ -32,6 +32,7 @@ export const learningRouter = router({
     get: protectedProcedure.query(({ ctx }) => ensureLearnerWorkspace(ctx.user.id)),
     update: protectedProcedure.input(z.object({
       dailyMinutes: z.number().int().min(10).max(180),
+      studyMode: z.enum(["steady", "balanced", "intensive"]),
       engineeringSpecialty: z.string().min(2).max(80),
       goalTracks: z.array(z.enum(["job_interviews", "daily_work", "general_communication"])).min(1).max(3),
       vocabularyWeight: z.number().int().min(5).max(70),

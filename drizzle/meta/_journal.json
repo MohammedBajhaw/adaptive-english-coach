@@ -43,6 +43,13 @@
       "when": 1786951294602,
       "tag": "0005_striped_ser_duncan",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1786954023889,
+      "tag": "0006_glossy_ghost_rider",
+      "breakpoints": true
     }
   ]
 }

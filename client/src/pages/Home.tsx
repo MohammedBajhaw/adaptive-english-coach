@@ -6,7 +6,7 @@ import { useLocation } from "wouter";
 import { toast } from "sonner";
 
 const preview = {
-  profile: { dailyMinutes: 50, engineeringSpecialty: "هندسة عامة", calibrationConfidence: 31 },
+  profile: { dailyMinutes: 30, studyMode: "balanced", engineeringSpecialty: "هندسة عامة", calibrationConfidence: 31 },
   snapshot: { practicalBand: "قيد المعايرة · A2/B1", aggregateScore: 46, vocabularyScore: 39, grammarScore: 51, listeningScore: 43, speakingScore: 35, writingScore: 48, evidenceCount: 2, summary: "نبدأ من أدلة قصيرة بدل حكم نهائي." },
   stats: { totalCards: 10, strongCards: 0, completedToday: 1, totalToday: 5 },
   skillProgress: [
@@ -58,7 +58,7 @@ export default function Home() {
   return <div className="space-y-7" dir="rtl">
     <section className="enter overflow-hidden rounded-[28px] bg-primary px-6 py-7 text-white soft-shadow sm:px-9 sm:py-9">
       <div className="relative z-10 grid gap-8 lg:grid-cols-[1.4fr_.8fr] lg:items-end">
-        <div><div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs text-emerald-50"><Sparkles className="h-3.5 w-3.5 text-[#e3bc62]" />المرحلة الأولى · تشخيص متدرج</div><h1 className="max-w-xl text-3xl font-extrabold leading-[1.35] tracking-tight sm:text-4xl">اليوم لا نختبرك فقط،<br /><span className="text-[#e3bc62]">نبدأ بفهم طريقتك في التعلم.</span></h1><p className="mt-4 max-w-xl text-sm leading-7 text-emerald-50/78 sm:text-base">كل إجابة، بطاقة، ومهمة مكتملة تضيف دليلًا جديدًا. لا مستوى نهائي في اليوم الأول.</p></div>
+        <div><div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs text-emerald-50"><Sparkles className="h-3.5 w-3.5 text-[#e3bc62]" />نمط اليوم: {data.profile.studyMode === "steady" ? "ثبات يومي" : data.profile.studyMode === "intensive" ? "تحدٍّ مكثف" : "تقدم متوازن"}</div><h1 className="max-w-xl text-3xl font-extrabold leading-[1.35] tracking-tight sm:text-4xl">اليوم لا نختبرك فقط،<br /><span className="text-[#e3bc62]">نبدأ بفهم طريقتك في التعلم.</span></h1><p className="mt-4 max-w-xl text-sm leading-7 text-emerald-50/78 sm:text-base">كل إجابة، بطاقة، ومهمة مكتملة تضيف دليلًا جديدًا. لا مستوى نهائي في اليوم الأول.</p></div>
         <div className="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur"><div className="flex items-start justify-between"><div><p className="text-xs text-emerald-50/70">مستواك العملي الحالي</p><p className="mt-1 text-xl font-bold">{snapshot.practicalBand}</p></div><div className="grid h-12 w-12 place-items-center rounded-2xl bg-[#e3bc62] text-xl font-extrabold text-primary">{snapshot.aggregateScore}</div></div><div className="mt-5"><div className="mb-2 flex justify-between text-xs text-emerald-50/70"><span>ثقة المعايرة</span><span>{data.profile.calibrationConfidence}%</span></div><div className="h-2 overflow-hidden rounded-full bg-white/10"><div className="h-full rounded-full bg-[#e3bc62]" style={{ width: `${data.profile.calibrationConfidence}%` }} /></div></div></div>
       </div><div className="pointer-events-none absolute -left-16 -top-12 h-52 w-52 rounded-full bg-[#55a578]/20 blur-3xl" /></section>
 

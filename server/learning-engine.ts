@@ -1,6 +1,7 @@
 export type SkillKey = "vocabulary" | "grammar" | "listening" | "speaking" | "writing";
 export type CardRating = "again" | "hard" | "good" | "easy";
 export type GoalTrack = "job_interviews" | "daily_work" | "general_communication";
+export type StudyMode = "steady" | "balanced" | "intensive";
 
 export const goalTrackLabels: Record<GoalTrack, string> = {
   job_interviews: "مقابلات العمل",
@@ -39,64 +40,55 @@ export const skillTaskContent: Record<SkillKey, { title: string; instructions: s
   },
 };
 
-type TaskIntensity = "quick" | "core" | "deep";
-
-const taskIntensityText: Record<TaskIntensity, { label: string; suffix: string; minimum: number; multiplier: number }> = {
-  quick: { label: "لمسة سريعة", suffix: "أنجز خطوة واحدة مركزة ولا تنتقل قبل إنهائها.", minimum: 3, multiplier: 0.8 },
-  core: { label: "جلسة أساسية", suffix: "أنجز النشاط الرئيسي وسجل دليلًا قصيرًا على المحاولة.", minimum: 4, multiplier: 1 },
-  deep: { label: "جلسة معمقة", suffix: "أضف تطبيقًا ثانيًا أو إنتاجًا أطول؛ هذه المهارة أخذت أولوية أعلى اليوم.", minimum: 10, multiplier: 1.45 },
+export const studyModeProfiles: Record<StudyMode, {
+  label: string;
+  description: string;
+  estimatedMinutes: number;
+  vocabularyWords: number;
+  conversationMinutes: number;
+  listeningMinutes: number;
+  listeningQuestions: number;
+  grammarChoiceQuestions: number;
+  grammarWritingPrompts: number;
+  writingSentences: number;
+  taskMinutes: Record<SkillKey, number>;
+}> = {
+  steady: { label: "ثبات يومي", description: "أخف حمل يحافظ على جميع المهارات دون إرهاق.", estimatedMinutes: 15, vocabularyWords: 5, conversationMinutes: 5, listeningMinutes: 1, listeningQuestions: 2, grammarChoiceQuestions: 5, grammarWritingPrompts: 1, writingSentences: 1, taskMinutes: { vocabulary: 3, grammar: 3, listening: 2, speaking: 5, writing: 2 } },
+  balanced: { label: "تقدم متوازن", description: "الاختيار اليومي الافتراضي لبناء تقدم ثابت في كل المهارات.", estimatedMinutes: 30, vocabularyWords: 7, conversationMinutes: 10, listeningMinutes: 2, listeningQuestions: 4, grammarChoiceQuestions: 10, grammarWritingPrompts: 1, writingSentences: 3, taskMinutes: { vocabulary: 5, grammar: 7, listening: 5, speaking: 10, writing: 3 } },
+  intensive: { label: "تحدٍّ مكثف", description: "جلسة أعمق لكل المهارات عند توفر طاقة ووقت أكبر.", estimatedMinutes: 45, vocabularyWords: 10, conversationMinutes: 13, listeningMinutes: 4, listeningQuestions: 6, grammarChoiceQuestions: 20, grammarWritingPrompts: 2, writingSentences: 5, taskMinutes: { vocabulary: 7, grammar: 12, listening: 8, speaking: 13, writing: 5 } },
 };
 
-const skillPriority: SkillKey[] = ["speaking", "vocabulary", "grammar", "listening", "writing"];
+export function getStudyModeProfile(mode: StudyMode) {
+  return studyModeProfiles[mode] ?? studyModeProfiles.balanced;
+}
 
-function rankedSkills(weights: Record<SkillKey, number>) {
-  return (Object.keys(weights) as SkillKey[]).sort((left, right) => {
-    const difference = weights[right] - weights[left];
-    return difference || skillPriority.indexOf(left) - skillPriority.indexOf(right);
-  });
+export function modeFromDailyMinutes(minutes: number): StudyMode {
+  if (minutes <= 20) return "steady";
+  if (minutes <= 37) return "balanced";
+  return "intensive";
 }
 
 export function describeDailyPlan(dailyMinutes: number) {
-  const safeMinutes = Math.min(Math.max(Math.round(dailyMinutes), 10), 180);
-  if (safeMinutes <= 14) return { mode: "quick", label: "حد أدنى ذكي", taskCount: 2, explanation: "مراجعة مفردات قصيرة مع مهارة واحدة ذات أولوية؛ الهدف الاستمرار لا إنهاء كل شيء." };
-  if (safeMinutes <= 24) return { mode: "light", label: "جلسة خفيفة", taskCount: 3, explanation: "مفردات ومهارتان بالأولوية؛ تبقى المهمة قصيرة لكن فيها إنتاج فعلي." };
-  if (safeMinutes <= 44) return { mode: "focused", label: "جلسة مركزة", taskCount: 4, explanation: "أربع مهام مختارة بحسب الأوزان، مع قاعدة أو مهارة تحتاج دعمًا." };
-  if (safeMinutes <= 69) return { mode: "balanced", label: "جلسة متوازنة", taskCount: 5, explanation: "مهمة أساسية لكل مهارة، وتزيد الدقائق داخل المهارة ذات الوزن الأعلى." };
-  return { mode: "deep", label: "جلسة موسعة", taskCount: 6, explanation: "كل المهارات الأساسية مع مهمة إضافية معمقة للمهارة الأعلى وزنًا." };
+  const mode = modeFromDailyMinutes(dailyMinutes);
+  const profile = getStudyModeProfile(mode);
+  return { mode, label: profile.label, taskCount: 5, explanation: profile.description, estimatedMinutes: profile.estimatedMinutes };
 }
 
-export function buildDailyTaskPlan(dailyMinutes: number, weights: Record<SkillKey, number>) {
-  const safeMinutes = Math.min(Math.max(Math.round(dailyMinutes), 10), 180);
-  const summary = describeDailyPlan(safeMinutes);
-  const ranked = rankedSkills(weights);
-  const nonVocabulary = ranked.filter(skill => skill !== "vocabulary");
-  const slots: Array<{ skill: SkillKey; intensity: TaskIntensity }> = safeMinutes <= 14
-    ? [{ skill: "vocabulary", intensity: "quick" }, { skill: nonVocabulary[0]!, intensity: "quick" }]
-    : safeMinutes <= 24
-      ? [{ skill: "vocabulary", intensity: "quick" }, ...nonVocabulary.slice(0, 2).map(skill => ({ skill, intensity: "quick" as const }))]
-      : safeMinutes <= 44
-        ? [{ skill: "vocabulary", intensity: "core" }, { skill: "grammar", intensity: "core" }, ...ranked.filter(skill => skill !== "vocabulary" && skill !== "grammar").slice(0, 2).map(skill => ({ skill, intensity: "core" as const }))]
-        : safeMinutes <= 69
-          ? (Object.keys(weights) as SkillKey[]).map(skill => ({ skill, intensity: "core" as const }))
-          : [...(Object.keys(weights) as SkillKey[]).map(skill => ({ skill, intensity: "core" as const })), { skill: ranked[0]!, intensity: "deep" }];
-  const minimumTotal = slots.reduce((sum, slot) => sum + taskIntensityText[slot.intensity].minimum, 0);
-  const remaining = Math.max(0, safeMinutes - minimumTotal);
-  const weightedTotal = slots.reduce((sum, slot) => sum + Math.max(weights[slot.skill], 1) * taskIntensityText[slot.intensity].multiplier, 0);
-  let assigned = 0;
-
-  return slots.map((slot, index) => {
-    const weighted = Math.max(weights[slot.skill], 1) * taskIntensityText[slot.intensity].multiplier;
-    const extra = index === slots.length - 1 ? remaining - assigned : Math.round((remaining * weighted) / weightedTotal);
-    assigned += extra;
-    const base = skillTaskContent[slot.skill];
-    const duplicate = slots.slice(0, index).some(previous => previous.skill === slot.skill);
-    return {
-      taskKey: duplicate ? `${slot.skill}-${slot.intensity}` : slot.skill,
-      skill: slot.skill,
-      minutes: taskIntensityText[slot.intensity].minimum + extra,
-      title: `${base.title} · ${taskIntensityText[slot.intensity].label}`,
-      instructions: `${base.instructions} ${taskIntensityText[slot.intensity].suffix}`,
-    };
+export function buildDailyTaskPlan(dailyMinutes: number, weights: Record<SkillKey, number>, selectedMode?: StudyMode) {
+  const mode = selectedMode ?? modeFromDailyMinutes(dailyMinutes);
+  const profile = getStudyModeProfile(mode);
+  const highestWeight = Math.max(...Object.values(weights));
+  return (Object.keys(skillTaskContent) as SkillKey[]).map(skill => {
+    const base = skillTaskContent[skill];
+    const prioritySuffix = weights[skill] === highestWeight
+      ? "هذه مهارة ذات أولوية: أضف تطبيقًا قصيرًا إضافيًا بعد النشاط الأساسي."
+      : "هذه المهارة موجودة اليوم لضمان التوازن؛ سيزداد عمقها عند رفع وزنها.";
+    const detail = skill === "vocabulary" ? `${profile.vocabularyWords} كلمات جديدة أو مستحقة.`
+      : skill === "grammar" ? `${profile.grammarChoiceQuestions} أسئلة اختيارية و${profile.grammarWritingPrompts} تطبيق كتابي.`
+      : skill === "listening" ? `مقطع يقارب ${profile.listeningMinutes} دقيقة و${profile.listeningQuestions} أسئلة فهم.`
+      : skill === "speaking" ? `محادثة موجهة لمدة ${profile.conversationMinutes} دقائق.`
+      : `${profile.writingSentences} جمل مهنية قصيرة.`;
+    return { taskKey: skill, skill, minutes: profile.taskMinutes[skill], title: `${base.title} · ${profile.label}`, instructions: `${base.instructions} ${detail} ${prioritySuffix}` };
   });
 }
 
@@ -251,18 +243,19 @@ export function parseGoalTracks(value = "job_interviews"): GoalTrack[] {
   return tracks.length ? tracks : ["job_interviews"];
 }
 
-export function selectDailyConversationPlan(dateKey: string, specialty: string, serializedGoalTracks = "job_interviews") {
+export function selectDailyConversationPlan(dateKey: string, specialty: string, serializedGoalTracks = "job_interviews", studyMode: StudyMode = "balanced") {
   const goalTracks = parseGoalTracks(serializedGoalTracks);
   const themes = goalTracks.flatMap(track => themeSets[track]);
   const theme = themes[dayIndex(dateKey, themes.length)]!;
   const field = specialtyName(specialty);
+  const targetMinutes = getStudyModeProfile(studyMode).conversationMinutes;
   return {
     ...theme,
     goalTracks,
     goalLabel: goalTracks.map(track => goalTrackLabels[track]).join(" + "),
     words: theme.words.map(english => ({ english, arabic: wordTranslations[english] ?? english })),
-    targetMinutes: 8,
-    prompt: `Act as a supportive English interviewer for a recent ${field} graduate at A2/B1 level. Have an 8-minute conversation about ${theme.topic}. Ask one question at a time and wait for my answer. Encourage me to use these words naturally: ${theme.words.join(", ")}. Correct only important errors after every 2–3 answers so the conversation remains natural. At the end, give a complete evaluation with: 1) fluency, 2) vocabulary, 3) grammar, 4) clarity, 5) three corrected sentences from my answers, and 6) one overall score out of 10. State the final score clearly as: Overall score: X/10.`,
+    targetMinutes,
+    prompt: `Act as a supportive English interviewer for a recent ${field} graduate at A2/B1 level. Have a ${targetMinutes}-minute conversation about ${theme.topic}. Ask one question at a time and wait for my answer. Encourage me to use these words naturally: ${theme.words.join(", ")}. Correct only important errors after every 2–3 answers so the conversation remains natural. At the end, give a complete evaluation with: 1) fluency, 2) vocabulary, 3) grammar, 4) clarity, 5) three corrected sentences from my answers, and 6) one overall score out of 10. State the final score clearly as: Overall score: X/10.`,
   };
 }
 
