@@ -1,0 +1,83 @@
+{
+  "week": 4,
+  "skill": "conversation",
+  "items": [
+    {
+      "id": "conversation.w04.d01",
+      "titleArabic": "تحديد الأعراض الأولية في الاختبار الميداني",
+      "titleEnglish": "Identifying initial symptoms during field testing",
+      "promptTemplateId": "conversation_template.w04.d01",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Troubleshooting",
+        "https://www.engineering.com/Testing.aspx"
+      ],
+      "contentMarkdown": "موضوع اليوم (بالعربية): تدريب عملي على وصف الأعراض الأولية عند فحص نظام كهربائي ميداني، وتسجيل ما رأيته باستخدم الماضي البسيط، وعبارات التسلسل، وعبارات السبب والنتيجة.\n\nTarget words (exactly five) with Arabic translations:\n- symptom — عَرَض\n- inspection — فَحْص\n- voltage — فُولْتِيّ/فولتاج\n- sequence — تَتَابُع\n- recorded — مُسَجَّل (الماضي)\n\nPractice modes (simple English prompts):\n- 5-minute mode: Roleplay a quick field check. You are the engineer. Say two short sentences describing one symptom and one immediate check you did. Use past simple once.\n- 10-minute mode: Roleplay a short handover to your colleague. Describe three steps you performed in sequence, report one measurement (voltage), and one result. Use past simple and sequence markers (first, then, finally).\n- 13-minute mode: Full roleplay plus short written log. Describe symptoms, list three checks you performed with results, give a short cause-and-effect conclusion, and write a one-paragraph test log in past simple.\n\nAsk one question at a time.\n\n10-point rubric (scale for fluency, vocabulary, grammar, clarity):\n1–2: Very poor — halting, wrong words, many grammar errors, unclear.\n3–4: Poor — slow, limited vocabulary, frequent grammar mistakes, message often unclear.\n5–6: Fair — understandable, limited vocabulary, some past-simple errors, basic clarity.\n7–8: Good — generally fluent, correct past simple, appropriate sequence words, clear conclusions.\n9–10: Excellent — smooth, precise technical words, correct cause-effect language, concise clear report.\n\nCorrective examples:\n1) Incorrect: \"I check the voltage and it show low.\" Correct: \"I checked the voltage and it showed low.\" (السبب: استخدام الماضي البسيط للملاحظات المسجلة.)\n2) Incorrect: \"First I tested, then I was measure current.\" Correct: \"First I tested the supply, then I measured the current.\" (السبب: ترتيب الأحداث واستخدام الماضي البسيط.)\n3) Incorrect: \"Because the cable broken, the panel not start.\" Correct: \"The cable was broken, so the panel did not start.\" (السبب: صياغة السبب والنتيجة وشكل الماضي.)"
+    },
+    {
+      "id": "conversation.w04.d02",
+      "titleArabic": "فحوصات الطاقة واستمرارية الأسلاك",
+      "titleEnglish": "Power checks and wiring continuity",
+      "promptTemplateId": "conversation_template.w04.d02",
+      "sourceUrls": [
+        "https://www.electrical4u.com/how-to-use-a-multimeter/",
+        "https://en.wikipedia.org/wiki/Continuity_test"
+      ],
+      "contentMarkdown": "موضوع اليوم (بالعربية): تعلم وصف خطوات فحص الطاقة واختبار استمرارية الأسلاك وتوثيق النتائج بصيغة الماضي البسيط، مع استخدام عبارات تسلسل وشرط عملي بسيط.\n\nTarget words (exactly five) with Arabic translations:\n- continuity — استمرارية\n- probe — مسبار/مشبك الاختبار\n- reading — قِرَاءَة (قِيَمَة)\n- isolated — مُعْزول\n- clamp — مِقْبَض/مِلاقط\n\nPractice modes (simple English prompts):\n- 5-minute mode: Describe one continuity check you performed: what you touched with the probe and the reading you saw. Use past simple.\n- 10-minute mode: Explain two power checks in order (first..., then...), mention instruments (probe, clamp) and the readings. State if you isolated the circuit.\n- 13-minute mode: Roleplay a short safety report. Say what you isolated, how you tested continuity, give numeric readings, and end with a conditional sentence describing what you would do if a wire had no continuity.\n\nAsk one question at a time.\n\n10-point rubric (scale for fluency, vocabulary, grammar, clarity):\n1–2: Very poor — cannot describe checks, wrong terms, grammar breaks meaning.\n3–4: Poor — limited steps, incorrect past forms, unclear results.\n5–6: Fair — basic steps correct, some past simple errors, readings included but brief.\n7–8: Good — clear sequence, correct readings, correct conditional for action.\n9–10: Excellent — accurate technical words, correct past simple and conditionals, clear safety action.\n\nCorrective examples:\n1) Incorrect: \"I isolate the circuit then I test continuity.\" Correct: \"I isolated the circuit, then I tested continuity.\" (السبب: استخدام الماضي عند وصف إجراءات مكتملة.)\n2) Incorrect: \"The probe show zero ohm so it good.\" Correct: \"The probe showed zero ohms, so it was good.\" (السبب: زمن الماضي و agreement وplural for units.)\n3) Incorrect: \"If wire not continuous, I shut it off.\" Correct: \"If the wire was not continuous, I would shut it off.\" (السبب: شرط عملي مع نتيجة محتملة وصيغة صحيحة.)"
+    },
+    {
+      "id": "conversation.w04.d03",
+      "titleArabic": "قراءة رموز الخطأ وصياغة ملخص مختصر",
+      "titleEnglish": "Reading error codes and writing a concise summary",
+      "promptTemplateId": "conversation_template.w04.d03",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Error_message",
+        "https://www.maintenance.org/reading_error_codes"
+      ],
+      "contentMarkdown": "موضوع اليوم (بالعربية): فهم وقراءة رمز/رموز الخطأ، وصف الأعراض المرتبطة، وتلخيص الإجراء التصحيحي في جمل بسيطة بالماضي البسيط مع توضيح السبب والنتيجة.\n\nTarget words (exactly five) with Arabic translations:\n- error code — رمز خطأ\n- logged — مُسَجَّل\n- cleared — مُسْتَأْنَف/مُسْتَخْلَص (الماضي: تم مسحه)\n- indicator — مُؤَشِّر\n- cause — سَبَب\n\nPractice modes (simple English prompts):\n- 5-minute mode: Say the error code you saw and one symptom that matched. Use past simple.\n- 10-minute mode: Explain how you read the code, where it was logged, what indicator lit, and one corrective action you took. Use past simple and cause-effect language.\n- 13-minute mode: Roleplay reporting to a supervisor: list codes, describe tests you did, state the likely cause, and write a two-sentence corrective action plan in past simple and a practical conditional for follow-up.\n\nAsk one question at a time.\n\n10-point rubric (scale for fluency, vocabulary, grammar, clarity):\n1–2: Very poor — cannot report codes or actions clearly.\n3–4: Poor — codes mentioned but grammar prevents clear meaning.\n5–6: Fair — codes and actions present, some past tense errors.\n7–8: Good — clear code reading, proper past simple, logical cause-effect.\n9–10: Excellent — precise reporting, concise corrective plan, clear conditional follow-up.\n\nCorrective examples:\n1) Incorrect: \"The error code was 404 and I clear it.\" Correct: \"The error code was 404 and I cleared it.\" (السبب: استخدام الماضي للأفعال المسجلة.)\n2) Incorrect: \"The indicator blink, then the machine stop.\" Correct: \"The indicator blinked, then the machine stopped.\" (السبب: الأفعال في الماضي والتتابع.)\n3) Incorrect: \"Because fuse blown, machine had no power.\" Correct: \"Because the fuse had blown, the machine had no power.\" (السبب: زمن الماضي التام للسبب قبل النتيجة، حيث يلزم للتسلسل.)"
+    },
+    {
+      "id": "conversation.w04.d04",
+      "titleArabic": "عزل النظام وإجراءات السلامة للوقاية",
+      "titleEnglish": "System isolation and safety procedures",
+      "promptTemplateId": "conversation_template.w04.d04",
+      "sourceUrls": [
+        "https://www.osha.gov/safety-management",
+        "https://www.hse.gov.uk/work-equipment-machinery/isolations.htm"
+      ],
+      "contentMarkdown": "موضوع اليوم (بالعربية): شرح إجراءات العزل الآمن لموقع العمل، وصف ما عزلته ولماذا، وتوثيق الإجراءات باستخدام الماضي البسيط وعبارات السبب والنتيجة.\n\nTarget words (exactly five) with Arabic translations:\n- isolate — يعزل/عَزَلَ (فعل)\n- locked — مُقْفَل/مُقَفَّل (الماضي)\n- tag — وَسْم/تَاغ\n- verification — تَحَقُّق\n- procedure — إِجْرَاء/إِرْشَاد\n\nPractice modes (simple English prompts):\n- 5-minute mode: Say one sentence: what you isolated and why. Use past simple.\n- 10-minute mode: Describe the isolation procedure you followed in three steps and how you verified the isolation.\n- 13-minute mode: Roleplay a short safety briefing to a new technician: explain the lock/tag steps, what you recorded, and a conditional sentence about what to do if verification failed.\n\nAsk one question at a time.\n\n10-point rubric (scale for fluency, vocabulary, grammar, clarity):\n1–2: Very poor — unsafe wording, wrong tenses, unclear procedure.\n3–4: Poor — steps incomplete, grammar errors obscure meaning.\n5–6: Fair — basic procedure present, some past-simple mistakes.\n7–8: Good — clear lock/tag steps, correct past simple, clear verification.\n9–10: Excellent — concise safety language, correct conditionals, very clear instructions.\n\nCorrective examples:\n1) Incorrect: \"I isolate the panel and left it.\" Correct: \"I isolated the panel and locked it.\" (السبب: زمن الماضي وصياغة الإجراء الأمني.)\n2) Incorrect: \"We tag it then we verify.\" Correct: \"We tagged it, then we verified.\" (السبب: تتابع الأحداث في الماضي.)\n3) Incorrect: \"If verification fail, we continue.\" Correct: \"If verification failed, we would stop work.\" (السبب: صياغة شرط عملي لرد فعل آمن.)"
+    },
+    {
+      "id": "conversation.w04.d05",
+      "titleArabic": "تحليل السبب الجذري وخطة الإجراء التصحيحي",
+      "titleEnglish": "Root-cause analysis and corrective action plan",
+      "promptTemplateId": "conversation_template.w04.d05",
+      "sourceUrls": [
+        "https://asq.org/quality-resources/root-cause-analysis",
+        "https://www.lean.org/WhoWeAre/NewsArticleDocuments/5-whys.pdf"
+      ],
+      "contentMarkdown": "موضوع اليوم (بالعربية): كتابة وصف واضح للسبب الجذري لمشكلة فنية وما فعلته لتصحيحها، مع توثيق سجل الاختبار بالماضي البسيط، وشرح السبب والنتيجة وشرط عملي للوقاية المستقبلية.\n\nTarget words (exactly five) with Arabic translations:\n- root cause — السبب الجذري\n- corrective action — إجراء تصحيحي\n- implemented — نَفَّذْتُ/تَمَّ تَنْفِيذُه (الماضي)\n- prevented — مَمْنُوع/مَانَع (الماضي)\n- follow-up — مُتابَعَة\n\nPractice modes (simple English prompts):\n- 5-minute mode: State the root cause and one corrective action you implemented. Use past simple.\n- 10-minute mode: Describe the analysis steps you used (for example, five whys), what you implemented, and one result you recorded.\n- 13-minute mode: Write a short corrective action plan: list the root cause, steps implemented, test results in past simple, and a conditional statement about follow-up checks.\n\nAsk one question at a time.\n\n10-point rubric (scale for fluency, vocabulary, grammar, clarity):\n1–2: Very poor — cannot identify cause or action clearly.\n3–4: Poor — weak link between cause and action, grammar errors.\n5–6: Fair — cause and action present, past simple errors, limited clarity.\n7–8: Good — clear root-cause language, correct past simple, logical corrective steps.\n9–10: Excellent — concise analysis, precise corrective actions, clear follow-up conditional.\n\nCorrective examples:\n1) Incorrect: \"The cause was loose wire, we fix it.\" Correct: \"The cause was a loose wire; we fixed it.\" (السبب: فصل الجمل وتوحيد الزمن الماضي.)\n2) Incorrect: \"I implement new bracket and it prevent future failure.\" Correct: \"I implemented a new bracket and it prevented future failure.\" (السبب: الماضي لكل الأداء المسجل.)\n3) Incorrect: \"If we do check, we find problem.\" Correct: \"If we checked, we would find the problem.\" (السبب: شرط عملي لصياغة نتيجة محتملة.)"
+    },
+    {
+      "id": "conversation.w04.d06",
+      "titleArabic": "كتابة سجلات الاختبار المختصرة",
+      "titleEnglish": "Writing concise test logs",
+      "promptTemplateId": "conversation_template.w04.d06",
+      "sourceUrls": [
+        "https://www.researchgate.net/publication/Best_Practices_for_Test_Logs",
+        "https://en.wikipedia.org/wiki/Log_book"
+      ],
+      "contentMarkdown": "موضوع اليوم (بالعربية): كيفية كتابة سجل اختبار مهني ومختصر بعد إجراء فحوصات، استخدام الماضي البسيط لملخص الأفعال، وعبارات التسلسل والتوضيح المختصر للنتائج والإجراءات.\n\nTarget words (exactly five) with Arabictranslations:\n- test log — سجل اختبار\n- timestamp — طابع زمني/تاريخ ووقت\n- result — نَتِيجَة\n- concise — مُختَصَر\n- signed — وَقَّعْتُ/مُوَقَع (الماضي)\n\nPractice modes (simple English prompts):\n- 5-minute mode: Say one short test-log sentence: time, test, and result in past simple.\n- 10-minute mode: Produce three short log lines: timestamp, action, numeric result, and signature line in past simple.\n- 13-minute mode: Create a complete short test log for a fault finding: list steps in sequence, measurements, conclusion, and a follow-up instruction using a practical conditional.\n\nAsk one question at a time.\n\n10-point rubric (scale for fluency, vocabulary, grammar, clarity):\n1–2: Very poor — log unreadable or missing key elements.\n3–4: Poor — missing timestamps or incorrect tenses.\n5–6: Fair — basic log present, some grammar/timing errors.\n7–8: Good — clear concise log, correct past simple, proper timestamps.\n9–10: Excellent — professional concise log, precise numbers, clear follow-up conditional.\n\nCorrective examples:\n1) Incorrect: \"09:00 I test supply and ok.\" Correct: \"09:00 I tested the supply and it was OK.\" (السبب: زمن الماضي والتفاصيل.)\n2) Incorrect: \"Result 5 amp, sign.\" Correct: \"Result: 5 A; signed: A. Khan.\" (السبب: تنسيق المعلومة واستخدام الماضي للوقائع.)\n3) Incorrect: \"If problem appear again, call us.\" Correct: \"If the problem appears again, call us immediately.\" (السبب: تصحيح الزمن ووضوح الإجراء.)"
+    },
+    {
+      "id": "conversation.w04.d07",
+      "titleArabic": "الاتصال الاحترافي أثناء استكشاف الأعطال",
+      "titleEnglish": "Professional communication during fault diagnosis",
+      "promptTemplateId": "conversation_template.w04.d07",
+      "sourceUrls": [
+        "https://www.mindtools.com/communication-skills",
+        "https://www.coursera.org/lecture/communication_skills"
+      ],
+      "contentMarkdown": "موضوع اليوم (بالعربية): ممارسة الحوار المهني مع الفريق أو المورد أثناء استكشاف الأعطال: وصف الأعراض، ما اختبرته، السبب المحتمل، والإجراء المُتَّخَذ بصيغة الماضي البسيط، مع استخدام شروط عملية للتصرف.\n\nTarget words (exactly five) with Arabic translations:\n- reported — أُبْلِغَ/أَخْبَرْتُ (الماضي)\n- diagnosis — تَشْخِيص\n- escalate — صَعَّدَ/رَفَعَ المَسْأَلَة\n- confirmation — تَأْكِيد\n- actioned — نُفّذ (الماضي)\n\nPractice modes (simple English prompts):\n- 5-minute mode: Roleplay a short call: say one sentence about what was reported and one test result in past simple.\n- 10-minute mode: Simulate a conversation with a supplier: describe diagnosis steps, what you actioned, and ask for confirmation in sequence.\n- 13-minute mode: Full roleplay of a team meeting: present the fault, what you tested (past simple), your root cause, the corrective action you actioned, and a conditional plan if the fault returns.\n\nAsk one question at a time.\n\n10-point rubric (scale for fluency, vocabulary, grammar, clarity):\n1–2: Very poor — unclear communication, wrong tenses, no clear request.\n3–4: Poor — basic message but grammar and vocabulary limit clarity.\n5–6: Fair — message delivered, some past-simple or conditional errors.\n7–8: Good — professional tone, correct past simple and conditional, clear requests.\n9–10: Excellent — concise, polite, correct technical language, clear follow-up actions.\n\nCorrective examples:\n1) Incorrect: \"The operator reported alarm, I check and fix.\" Correct: \"The operator reported an alarm; I checked and fixed it.\" (السبب: استخدام الماضي البسيط وتوضيح الأفعال.)\n2) Incorrect: \"I escalated to vendor and he not reply.\" Correct: \"I escalated to the vendor, and he did not reply.\" (السبب: الماضي والتركيب الصحيح.)\n3) Incorrect: \"If it fail again, we escalate.\" Correct: \"If it fails again, we will escalate to the vendor immediately.\" (السبب: شرط عملي وصيغة مستقبلية مناسبة للقرار.)"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "week": 4,
+  "skill": "vocabulary",
+  "items": [
+    {
+      "id": "vocabulary.w04.d01",
+      "titleArabic": "فحص الطاقة",
+      "titleEnglish": "Power check",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Voltage",
+        "https://www.fluke.com/en-us/learn/blog/electrical/what-is-a-continuity-test"
+      ],
+      "contentMarkdown": "Term: power check\nIPA: /ˈpaʊər tʃɛk/\nArabic meaning: فحص الطاقة\nPart of speech: noun\nMechatronics domain: electrical diagnostics and maintenance\nExample sentences:\n1. First, I checked the power supply.\n   أولاً، فحصت مصدر الطاقة.\n2. Then I measured the voltage and recorded the reading.\n   ثم قست الجهد وسجلت القراءة.\n3. The system failed because the main breaker tripped.\n   فشل النظام لأن قاطع الدائرة الرئيسي قفل.\n4. If the voltage dropped, the control unit shut down.\n   إذا انخفض الجهد، أوقف وحدة التحكم العمل.\n5. I tested the battery and logged the result.\n   اختبرت البطارية وسجلت النتيجة."
+    },
+    {
+      "id": "vocabulary.w04.d02",
+      "titleArabic": "استمرارية الأسلاك",
+      "titleEnglish": "Wiring continuity",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Electrical_connectivity",
+        "https://www.fluke.com/en-us/learn/blog/electrical/what-is-a-continuity-test"
+      ],
+      "contentMarkdown": "Term: continuity\nIPA: /kənˈtɪnjuəti/\nArabic meaning: استمرارية التوصيل الكهربائي\nPart of speech: noun\nMechatronics domain: wiring diagnostics\nExample sentences:\n1. First, I checked continuity along the cable.\n   أولاً، فحصت استمرارية السلك.\n2. After that, I found an open circuit and marked the fault.\n   بعد ذلك، وجدت دارة مفتوحة وعَلَّمت العطل.\n3. The connection failed because the conductor was broken.\n   فشل الاتصال لأن الموصل كان مكسورًا.\n4. If the probe contacted both ends, the meter showed continuity.\n   إذا لامس المجس الطرفين، أظهر المقياس الاستمرارية.\n5. I measured resistance and wrote the values in the log.\n   قست المقاومة وكتبت القيم في السجل."
+    },
+    {
+      "id": "vocabulary.w04.d03",
+      "titleArabic": "رمز الخطأ",
+      "titleEnglish": "Error code",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Error_message",
+        "https://en.wikipedia.org/wiki/Diagnostic_trouble_code"
+      ],
+      "contentMarkdown": "Term: error code\nIPA: /ˈɛrər koʊd/\nArabic meaning: رمز الخطأ\nPart of speech: noun\nMechatronics domain: fault reporting and diagnostics\nExample sentences:\n1. The panel displayed an error code 402.\n   عرضت اللوحة رمز خطأ 402.\n2. First, I logged the code and then I checked the manual.\n   أولاً، سجلت الرمز ثم راجعت الدليل.\n3. The machine stopped because the code flagged overheating.\n   توقف الجهاز لأن الرمز أشار إلى ارتفاع الحرارة.\n4. If the code repeated, we replaced the sensor cable.\n   إذا تكرر الرمز، استبدلنا سلك الحساس.\n5. I recorded the timestamp and the error code in the report.\n   سجلت الطابع الزمني ورمز الخطأ في التقرير."
+    },
+    {
+      "id": "vocabulary.w04.d04",
+      "titleArabic": "العزل",
+      "titleEnglish": "Isolation",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Electrical_insulation",
+        "https://www.osha.gov/safety-management"
+      ],
+      "contentMarkdown": "Term: isolation\nIPA: /ˌaɪsəˈleɪʃən/\nArabic meaning: عزل\nPart of speech: noun\nMechatronics domain: safety procedures and maintenance\nExample sentences:\n1. First, I isolated the circuit before I started work.\n   أولاً، عزلت الدارة قبل أن أبدأ العمل.\n2. Then I locked out the panel and posted the tag.\n   ثم قفلْت اللوحة وثبتت البطاقة التحذيرية.\n3. The test stopped because isolation was incomplete.\n   توقف الاختبار لأن العزل لم يكن كاملاً.\n4. If you isolated the power, you could work safely.\n   إذا عزلت الطاقة، يمكنك العمل بأمان.\n5. I confirmed isolation and signed the safety form.\n   أكدت العزل ووقعت نموذج السلامة."
+    },
+    {
+      "id": "vocabulary.w04.d05",
+      "titleArabic": "السبب الجذري",
+      "titleEnglish": "Root cause",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Root_cause_analysis",
+        "https://asq.org/quality-resources/root-cause-analysis"
+      ],
+      "contentMarkdown": "Term: root cause\nIPA: /ˈruːt kɔːz/\nArabic meaning: السبب الجذري\nPart of speech: noun\nMechatronics domain: failure analysis and troubleshooting\nExample sentences:\n1. First, we listed symptoms and then we searched for the root cause.\n   أولاً، سردنا الأعراض ثم بحثنا عن السبب الجذري.\n2. The investigation found the root cause was a loose terminal.\n   وجدت التحقيقات أن السبب الجذري كان طرفًا مرتخيًا.\n3. The failure repeated because the clamp was corroded.\n   تكرر العطل لأن المشبك كان متآكلاً.\n4. If we fixed the root cause, the fault would not return.\n   إذا أصلحنا السبب الجذري، لن يعود العطل.\n5. I documented the analysis and noted the root cause.\n   وثقت التحليل وسجلت السبب الجذري."
+    },
+    {
+      "id": "vocabulary.w04.d06",
+      "titleArabic": "إجراء تصحيحي",
+      "titleEnglish": "Corrective action",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Corrective_and_preventive_action",
+        "https://www.iso.org/iso-9001-quality-management.html"
+      ],
+      "contentMarkdown": "Term: corrective action\nIPA: /kəˈrɛktɪv ˈækʃən/\nArabic meaning: إجراء تصحيحي\nPart of speech: noun\nMechatronics domain: maintenance and repair planning\nExample sentences:\n1. First, the team proposed a corrective action plan.\n   أولاً، اقترحت الفريق خطة إجراء تصحيحي.\n2. Then we replaced the damaged cable and tightened terminals.\n   ثم استبدلنا السلك التالف وشدّدنا الأطراف.\n3. The fault stopped because we applied the corrective action.\n   توقف العطل لأننا طبقنا الإجراء التصحيحي.\n4. If the repair failed, we would escalate to engineering.\n   إذا فشل التصليح، سنصعّد الموضوع إلى الهندسة.\n5. I wrote the corrective action and the completion date in the file.\n   كتبت الإجراء التصحيحي وتاريخ الإنجاز في الملف."
+    },
+    {
+      "id": "vocabulary.w04.d07",
+      "titleArabic": "سجل الاختبارات",
+      "titleEnglish": "Test log",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Logbook",
+        "https://www.iso.org/standard/62085.html"
+      ],
+      "contentMarkdown": "Term: test log\nIPA: /tɛst lɔːɡ/\nArabic meaning: سجل الاختبارات\nPart of speech: noun\nMechatronics domain: test documentation and traceability\nExample sentences:\n1. First, I opened a new test log for the device.\n   أولاً، فتحت سجل اختبارات جديد للجهاز.\n2. Then I entered the measurements and the technician name.\n   ثم أدخلت القياسات واسم الفني.\n3. I wrote the result and the time because traceability was required.\n   كتبت النتيجة والوقت لأن إمكانية التتبع كانت مطلوبة.\n4. If the reading was out of range, I noted the deviation.\n   إذا كانت القيمة خارج النطاق، سجلت الانحراف.\n5. I closed the test log and filed it in the cabinet.\n   أغلقت سجل الاختبارات وأرشفته في الخزانة."
+    }
+  ]
+}

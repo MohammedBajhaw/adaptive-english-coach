@@ -1,0 +1,76 @@
+{
+  "week": 3,
+  "skill": "listening",
+  "items": [
+    {
+      "id": "listening.w03.d01",
+      "titleArabic": "الريليهات والتحكم الآمن",
+      "titleEnglish": "Relays and safe switching",
+      "promptTemplateId": "listening.prompt.v3",
+      "sourceUrls": [
+        "https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-211007"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — selected episode\nURL: https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-211007\n\n1/2/4-minute focus:\n- 1-minute: Quick skim — listen once to get general tone and any words about electrical switching and safety.\n- 2-minute: Focused listen — note short instructional phrases and any conditional sentences (If X, then Y).\n- 4-minute: Intensive listen — write down technical phrases you hear and convert them into safe instructions using modals.\n\nGrammar focus: modals for safe instructions (must / should / can / may / must not) and zero/first conditional for technical rules (If the circuit is live, then do X; If X happens, Y will occur).\n\nPrompts (first 2 = Steady; first 4 = Balanced; all 6 = Intensive):\n1) Steady: What is one simple safety instruction you heard or inferred about switching electrical devices? Write it using a modal (e.g., You should ...).\n2) Steady: Identify one If-then sentence you can remember or create about switching (zero or first conditional).\n3) Balanced: List two short technical phrases from the audio that relate to switching contacts or coil operation (write them, or if you did not hear any, write two that would fit).\n4) Balanced: Explain in one sentence how you would use a relay safely on a workbench, using a modal for advice.\n5) Intensive: Compare two different safe actions: one using must and one using should. When would you use each in a control task?\n6) Intensive: Write a short conditional procedure (3–4 steps) for isolating a live circuit, using zero/first conditional and at least one modal.\n\nPhrase-capture instruction: While you listen, try to capture any short phrase (2–6 words) that sounds like a safety command or a conditional instruction. If you do not hear such a phrase, write your own concise phrase from memory using a modal or an If-then structure."
+    },
+    {
+      "id": "listening.w03.d02",
+      "titleArabic": "الملفات المغناطيسية والتشغيل",
+      "titleEnglish": "Solenoids and magnetic actuation",
+      "promptTemplateId": "listening.prompt.v3",
+      "sourceUrls": [
+        "https://www.bbc.co.uk/learningenglish/features/6-minute-english_2025/ep-250918"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — selected episode\nURL: https://www.bbc.co.uk/learningenglish/features/6-minute-english_2025/ep-250918\n\n1/2/4-minute focus:\n- 1-minute: Listen once to notice any discussion of moving parts or magnetic coils.\n- 2-minute: Listen again to catch verbs that describe motion or control (e.g., pull, push, move) and modal advice.\n- 4-minute: Intensive listen to form accurate short safety sentences about operating a solenoid, using modals and conditionals.\n\nGrammar focus: Use must/should/can to form safety steps; practice zero and first conditional patterns for cause and effect in operation.\n\nPrompts (first 2 = Steady; first 4 = Balanced; all 6 = Intensive):\n1) Steady: Name one verb you noticed that describes what a solenoid does. Use it in a short sentence with can or may.\n2) Steady: Make one If-then statement about what happens if the coil is powered or unpowered.\n3) Balanced: Write two safety tips about testing a magnetic actuator, each starting with must or should.\n4) Balanced: Describe how you would check a moving plunger safely, using a conditional sentence.\n5) Intensive: Draft a short checklist (4 items) to follow before you power a solenoid on, using modals and one If-then rule.\n6) Intensive: Create an alternative phrasing of a safety advisory you heard or imagined, changing must to should and explain the difference in urgency.\n\nPhrase-capture instruction: Listen for any brief phrase (2–5 words) that advises an action for moving parts. If none is present, write one short phrase you would use and keep its exact wording for practice."
+    },
+    {
+      "id": "listening.w03.d03",
+      "titleArabic": "موضع الصمام وقياسه",
+      "titleEnglish": "Valve position and process value",
+      "promptTemplateId": "listening.prompt.v3",
+      "sourceUrls": [
+        "https://www.bbc.co.uk/learningenglish/features/6-minute-english_2022/ep-220609"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — selected episode\nURL: https://www.bbc.co.uk/learningenglish/features/6-minute-english_2022/ep-220609\n\n1/2/4-minute focus:\n- 1-minute: Listen for mentions of position, opening, closing or percentage open.\n- 2-minute: Focus on phrases that describe the relationship between set point and actual position (process value).\n- 4-minute: Intensive: note language you can reuse to report valve position and to give safe adjustment instructions with modals and conditionals.\n\nGrammar focus: Practice making safety instructions with should/must and describing cause-effect with zero/first conditional sentences.\n\nPrompts (first 2 = Steady; first 4 = Balanced; all 6 = Intensive):\n1) Steady: Write one short sentence describing a valve position using simple language (e.g., The valve is 50% open).\n2) Steady: Make one first-conditional sentence about adjusting the valve (If the valve is too open, then ...).\n3) Balanced: Identify two useful verbs to describe valve movement and use each in a short modal instruction.\n4) Balanced: Explain how you would report a mismatch between desired set point and process value in one sentence.\n5) Intensive: Create a short spoken report (2–3 sentences) that includes set point, process value and a recommended action using must or should.\n6) Intensive: Draft an If-then troubleshooting step for when the valve does not respond, using a modal in the consequence clause.\n\nPhrase-capture instruction: During listening, note any short phrase (2–6 words) that reports position or a recommended action. If none appears, write the exact phrase you would speak to a colleague to report the problem."
+    },
+    {
+      "id": "listening.w03.d04",
+      "titleArabic": "نقطة الضبط وقيمة العملية",
+      "titleEnglish": "Set point and process value reporting",
+      "promptTemplateId": "listening.prompt.v3",
+      "sourceUrls": [
+        "https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-210916"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — selected episode\nURL: https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-210916\n\n1/2/4-minute focus:\n- 1-minute: Listen once to capture general words related to targets, aims or readings.\n- 2-minute: Listen for short expressions that could be used to state a set point or a measured process value.\n- 4-minute: Intensive: practise converting a spoken measurement into a concise report and a conditional action.\n\nGrammar focus: Use modals to give safe instructions (must/should) and use zero/first conditional to describe automatic reactions or planned responses.\n\nPrompts (first 2 = Steady; first 4 = Balanced; all 6 = Intensive):\n1) Steady: Say or write one clear sentence stating a set point (e.g., The set point is 75%).\n2) Steady: Produce one If sentence describing what will happen if the process value exceeds the set point.\n3) Balanced: List two polite instructions using should or must that ask a colleague to check a reading.\n4) Balanced: Describe how you would log a process value and include one conditional about when to repeat the check.\n5) Intensive: Write a brief incident note (3 sentences) describing a deviation and the immediate modal action required.\n6) Intensive: Convert your incident note into a spoken instruction for a technician, using one zero conditional and one modal.\n\nPhrase-capture instruction: Try to capture any concise phrase that states a set point or reading. If you do not hear one, write the exact short phrase you would use to log the value."
+    },
+    {
+      "id": "listening.w03.d05",
+      "titleArabic": "التحكم الحلقة المغلقة والسلامة",
+      "titleEnglish": "Closed-loop control and safe adjustments",
+      "promptTemplateId": "listening.prompt.v3",
+      "sourceUrls": [
+        "https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-150611"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — selected episode\nURL: https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-150611\n\n1/2/4-minute focus:\n- 1-minute: Listen to get the idea of continuous control versus manual action.\n- 2-minute: Focus on language that shows cause and effect between a set point and a measured value.\n- 4-minute: Intensive: practice giving safe corrective instructions using modals and conditional sentences in a closed-loop context.\n\nGrammar focus: Modals for safety (must/should/ought to) and zero/first conditional to state automatic responses or planned corrective steps.\n\nPrompts (first 2 = Steady; first 4 = Balanced; all 6 = Intensive):\n1) Steady: Write a simple sentence that explains what 'closed-loop' control would do in one phrase (use plain English).\n2) Steady: Make one If-then sentence describing an automatic correction when a value deviates.\n3) Balanced: Give two short safety rules (must/should) for making manual adjustments while a system is running.\n4) Balanced: Describe a 2-step conditional action to restore a set point, using first conditional.\n5) Intensive: Compose a short procedure (4 steps) for safe calibration, using modals and at least one conditional.\n6) Intensive: Draft a spoken announcement to the team that explains an automatic correction and the manual override procedure, using clear modals and one If-then.\n\nPhrase-capture instruction: Listen for any brief phrase that explains an automatic change or a safety rule; if none is clear, write the exact phrase you would announce to your team using a modal and an If-then clause."
+    },
+    {
+      "id": "listening.w03.d06",
+      "titleArabic": "إرشادات الأمان باستخدام الأفعال العاطفية",
+      "titleEnglish": "Safe control instructions with modals",
+      "promptTemplateId": "listening.prompt.v3",
+      "sourceUrls": [
+        "https://www.youtube.com/watch?v=NVgpf-SFs0g"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — selected episode\nURL: https://www.youtube.com/watch?v=NVgpf-SFs0g\n\n1/2/4-minute focus:\n- 1-minute: Quick listen to note tone and any direct advice language.\n- 2-minute: Focus on sentences that use modal verbs or give instructions.\n- 4-minute: Intensive: practise repeating short modal instructions and converting them into conditional procedures.\n\nGrammar focus: Modals for obligations and permissions (must / must not / should / can) and zero/first conditional to show what happens when rules are followed or broken.\n\nPrompts (first 2 = Steady; first 4 = Balanced; all 6 = Intensive):\n1) Steady: Identify or create one short instruction that uses must or must not for safe operation.\n2) Steady: Make one If-then statement that links a safety check to a consequence.\n3) Balanced: Write two polite safety instructions using should and can for team members.\n4) Balanced: Explain when you would use must instead of should in a control-room instruction.\n5) Intensive: Role-play a 3-line dialogue where a technician asks permission and a supervisor replies using modals and a conditional.\n6) Intensive: Rewrite one of your modal instructions as a zero conditional rule for automatic checks.\n\nPhrase-capture instruction: While you listen, try to capture any direct modal instruction (2–6 words). If you cannot find one, write one you would give now and practise saying it aloud."
+    },
+    {
+      "id": "listening.w03.d07",
+      "titleArabic": "الشرط الصفري والأول في أنظمة التحكم",
+      "titleEnglish": "Zero and first conditional in control systems",
+      "promptTemplateId": "listening.prompt.v3",
+      "sourceUrls": [
+        "https://www.youtube.com/watch?v=rnBQXmO_StE"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — selected episode\nURL: https://www.youtube.com/watch?v=rnBQXmO_StE\n\n1/2/4-minute focus:\n- 1-minute: Listen once to notice any If or When sentences describing cause and effect.\n- 2-minute: Focus on distinguishing zero conditional (general truths) from first conditional (specific future actions).\n- 4-minute: Intensive: practise rewriting technical If sentences as safe instructions with modals.\n\nGrammar focus: Zero conditional for general rules (If X, Y) and first conditional for planned actions or warnings (If X happens, Y will / must / should happen).\n\nPrompts (first 2 = Steady; first 4 = Balanced; all 6 = Intensive):\n1) Steady: Give one zero conditional sentence that states a general rule in a plant or lab.\n2) Steady: Make one first conditional sentence that warns of a likely consequence and uses will or must.\n3) Balanced: Convert a general zero conditional rule into a first conditional instruction for an operator.\n4) Balanced: Explain the difference in form and use between your two sentences in one short line.\n5) Intensive: Create a 3-step alarm response using first conditional sentences with modals for required actions.\n6) Intensive: Draft a short training note that lists two zero conditional rules and two first conditional emergency steps.\n\nPhrase-capture instruction: While listening, note any If- or When- phrase you hear. If none is obvious, write one clear conditional sentence you would use during an incident, using either zero or first conditional."
+    }
+  ]
+}

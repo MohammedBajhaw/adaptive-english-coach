@@ -16,11 +16,11 @@ type ParsedQuestion = { prompt: string; choices: string[]; answer: number };
 
 function parseGrammarLesson(markdown: string) {
   const explanation = markdown.split(/20 أسئلة اختيار|أسئلة اختيار من ثلاثة خيارات/)[0]?.trim() ?? markdown;
-  const questions = Array.from(markdown.matchAll(/\d+\)\s*(.+?)\nA\)\s*(.+?)\nB\)\s*(.+?)\nC\)\s*(.+?)\nAnswer:\s*([ABC])/g)).map(([, prompt, a, b, c, answer]) => ({
+  const questions = Array.from(markdown.matchAll(/\d+[.)]\s*(.+?)\nA\)\s*(.+?)\nB\)\s*(.+?)\nC\)\s*(.+?)\nAnswer:\s*([ABC])/g)).map(([, prompt, a, b, c, answer]) => ({
     prompt: prompt.trim(), choices: [a.trim(), b.trim(), c.trim()], answer: "ABC".indexOf(answer),
   } satisfies ParsedQuestion));
-  const writingSection = markdown.split(/سؤالان للكتابة(?: الهندسية)?(?: \(قصيرة\))?:/)[1] ?? "";
-  const writingPrompts = Array.from(writingSection.matchAll(/(?:^|\n)\d+\)\s*(.+)/g)).map(([, prompt]) => prompt.trim()).slice(0, 2);
+  const writingSection = markdown.split(/(?:سؤالان للكتابة(?: الهندسية)?(?: \(قصيرة\))?|مطالعات كتابية قصيرة|مهمات كتابة قصيرة)[^:]*:/)[1] ?? "";
+  const writingPrompts = Array.from(writingSection.matchAll(/(?:^|\n)\d+[.)]\s*(.+)/g)).map(([, prompt]) => prompt.trim()).slice(0, 2);
   return { explanation, questions, writingPrompts };
 }
 

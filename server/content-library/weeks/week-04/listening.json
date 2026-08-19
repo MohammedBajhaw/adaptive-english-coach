@@ -1,0 +1,76 @@
+{
+  "week": 4,
+  "skill": "listening",
+  "items": [
+    {
+      "id": "listening.w04.d01",
+      "titleArabic": "الأعراض: وصف ما حدث",
+      "titleEnglish": "Symptoms: describing what happened",
+      "promptTemplateId": "listening.template.v1",
+      "sourceUrls": [
+        "https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-211007"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — selected episode\nURL: https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-211007\n\nActivity type: listening practice for on-site fault description.\nGrammar focus: past simple for test records; sequence markers (first, next, then); cause and effect; practical conditionals (If I had tested the power, ...).\n\n1-minute focus: Listen once. Note two short symptom phrases the speaker uses that could describe an electrical fault (e.g., \"no power\", \"intermittent light\") — do not invent phrases; write only what you hear.\n\n2-minute focus: Listen twice. Add one sentence in the past simple that records the first symptom you heard, using a sequence marker (e.g., \"First, the panel showed...\").\n\n4-minute focus: Listen three times. Write a short test note (two sentences) in the past simple that states the sequence of observed symptoms and a likely cause using a cause-and-effect phrase (e.g., \"...so the ...\") and a conditional sentence about a next test.\n\nComprehension and reflection prompts (steady: 1–2; balanced: 1–4; intensive: 1–6):\n1) Which two symptom words or short phrases did you capture from the audio? Write them exactly as you heard them.\n2) Which sequence marker did the speaker use first (e.g., \"first\", \"then\", \"after that\")? Copy it and make a short past-simple sentence with it.\n3) What cause-and-effect connector did you notice (e.g., \"because\", \"so\")? Write a past-simple sentence showing cause and effect about the symptom.\n4) Make one practical conditional sentence (If ... then ...) that describes a next diagnostic step.\n5) Compare your two-sentence test note with the recording: did you miss any detail? List one difference and rewrite to correct it using past simple.\n6) Create a one-line technician note that records the symptom, the implied root cause, and one corrective action, all in past simple where appropriate.\n\nPhrase-capture instruction: while you listen, pause after each phrase you think matches a symptom or sequence marker and write it down exactly. Aim for 4–6 short phrases. Underline any verbs in past simple and circle sequence words. Keep your captures literal — do not paraphrase until after you finish listening."
+    },
+    {
+      "id": "listening.w04.d02",
+      "titleArabic": "فحص الطاقة: خطوات سريعة وآمنة",
+      "titleEnglish": "Power checks: quick and safe steps",
+      "promptTemplateId": "listening.template.v1",
+      "sourceUrls": [
+        "https://www.bbc.co.uk/learningenglish/features/6-minute-english_2025/ep-250918"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — selected episode\nURL: https://www.bbc.co.uk/learningenglish/features/6-minute-english_2025/ep-250918\n\nActivity type: focused listening for power-check language and safety phrases.\nGrammar focus: past simple for test records; sequence markers (first/then/after); cause and effect; practical conditionals for safe steps.\n\n1-minute focus: Listen once. Pick out one safety phrase and one power-check action phrase you hear.\n\n2-minute focus: Listen twice. Write two past-simple sentences that describe power checks a technician did, using sequence markers.\n\n4-minute focus: Listen three times. Draft a short safety log entry (3–4 lines) in past simple that records the power checks, one observed result, and one conditional instruction for the next test.\n\nComprehension and reflection prompts (steady: 1–2; balanced: 1–4; intensive: 1–6):\n1) Which safety phrase did you notice? Write it exactly.\n2) List one power-check action as spoken; then write it in past simple as a log entry sentence.\n3) Identify a sequence marker used and rewrite the two power-check sentences to show clear order.\n4) Write a cause-and-effect sentence connecting a power-check result to the next action (past simple + so/because).\n5) Propose one conditional instruction (If you saw X, then you should Y) based on the audio and write it in full.\n6) Convert your notes into a concise 3-line test log entry, using past simple and sequence markers.\n\nPhrase-capture instruction: while listening, capture short verb phrases that describe actions (e.g., tested the fuse). Write them verbatim and mark the tense. Later, turn them into past-simple log sentences."
+    },
+    {
+      "id": "listening.w04.d03",
+      "titleArabic": "استمرارية الأسلاك: لغات الاختبار",
+      "titleEnglish": "Wiring continuity: test language",
+      "promptTemplateId": "listening.template.v1",
+      "sourceUrls": [
+        "https://www.bbc.co.uk/learningenglish/features/6-minute-english_2022/ep-220609"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — selected episode\nURL: https://www.bbc.co.uk/learningenglish/features/6-minute-english_2022/ep-220609\n\nActivity type: listening for phrases and verbs used when checking continuity and connections.\nGrammar focus: past simple for recording tests; sequence markers; cause and effect; practical conditionals for isolating faults.\n\n1-minute focus: Listen once. Note one verb phrase that describes checking a connection.\n\n2-minute focus: Listen twice. Write two short past-simple record lines: one about a continuity test result, one about the next step.\n\n4-minute focus: Listen three times. Produce a mini fault record (4–5 lines) in past simple that lists tests performed, results in order, and an instruction using a conditional.\n\nComprehension and reflection prompts (steady: 1–2; balanced: 1–4; intensive: 1–6):\n1) Which verb phrase for testing did you hear? Write it exactly.\n2) What result phrase did the speaker use for a failed or good connection? Copy it and make a past-simple sentence.\n3) Use a sequence marker to rewrite your two lines as an ordered test log.\n4) Write a cause-and-effect sentence explaining why a failed continuity test led to isolation.\n5) Propose a conditional troubleshooting step (If continuity failed, then ...). Write it in full and in past simple where required.\n6) Convert your findings into an action plan entry: tests done, last result, recommended corrective action (3–4 short sentences).\n\nPhrase-capture instruction: pause the audio when you hear a short testing phrase and write it down. Focus on verbs and result words. Aim for 5 captures, then build past-simple log sentences from them."
+    },
+    {
+      "id": "listening.w04.d04",
+      "titleArabic": "رموز الأخطاء وقراءة الكود",
+      "titleEnglish": "Error codes and reading the code",
+      "promptTemplateId": "listening.template.v1",
+      "sourceUrls": [
+        "https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-210916"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — selected episode\nURL: https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-210916\n\nActivity type: listen for how speakers refer to codes, numbers, and diagnostic labels.\nGrammar focus: past simple for recorded code sightings, sequence markers, cause and effect, practical conditionals for code interpretation.\n\n1-minute focus: Listen once. Identify one code-related word or short phrase you hear.\n\n2-minute focus: Listen twice. Write a past-simple sentence that reports seeing or reading a code (e.g., \"I saw code 23 on the panel\").\n\n4-minute focus: Listen three times. Create a concise code log entry: time, code seen, immediate action taken, and a conditional next step.\n\nComprehension and reflection prompts (steady: 1–2; balanced: 1–4; intensive: 1–6):\n1) Which word or phrase about codes did you capture? Write it exactly.\n2) Which past-tense verb did the speaker use when they reported a code? Copy it and make your own past-simple report sentence.\n3) Note a sequence marker and make a two-line timeline: when the code appeared and what was done next.\n4) Form a cause-and-effect sentence linking the code to a likely system response.\n5) Draft a conditional troubleshooting note: If code X appeared again, then we would ... Write it as an instruction.\n6) Produce a one-paragraph diagnostic log (4–5 lines) using past simple, sequence markers, and a conditional next-action.\n\nPhrase-capture instruction: listen for any spoken code identifiers or short labels; write them verbatim in a list. Then convert the list into past-simple log lines, keeping the original wording for codes."
+    },
+    {
+      "id": "listening.w04.d05",
+      "titleArabic": "العزل: فصل الدائرة لتحديد السبب",
+      "titleEnglish": "Isolation: isolating a circuit to find the cause",
+      "promptTemplateId": "listening.template.v1",
+      "sourceUrls": [
+        "https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-150611"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — selected episode\nURL: https://www.bbc.co.uk/learningenglish/features/6-minute-english/ep-150611\n\nActivity type: listening to practice language for circuit isolation and stepwise narrowing of faults.\nGrammar focus: past simple for recorded isolation steps; sequence markers; cause and effect; practical conditionals for isolation decisions.\n\n1-minute focus: Listen once. Note one short phrase that indicates an isolation step (e.g., \"we disconnected...\").\n\n2-minute focus: Listen twice. Write two past-simple sentences that record the isolation steps in order.\n\n4-minute focus: Listen three times. Prepare a short isolation log (4 lines) that lists each isolate/test action, its result, and a conditional decision for the next isolate.\n\nComprehension and reflection prompts (steady: 1–2; balanced: 1–4; intensive: 1–6):\n1) Which isolation phrase did you hear? Copy it exactly.\n2) What was the immediate test result after isolation? Write it in past simple.\n3) Use sequence markers to order three isolation actions into a clear log.\n4) Create a cause-and-effect sentence that explains why isolation led to a changed result.\n5) Write a conditional instruction that would guide the next isolation step (If this section remained faulty, then ...).\n6) Convert your answers into a tidy test log entry that a colleague could read: actions, results, and recommended corrective action.\n\nPhrase-capture instruction: while you listen, capture exact isolation verbs and short noun phrases (e.g., \"isolated the feed\"). Write them down and then reorder them into past-simple log sentences."
+    },
+    {
+      "id": "listening.w04.d06",
+      "titleArabic": "تحليل السبب الجذري: كيف قرأنا الدلائل",
+      "titleEnglish": "Root cause analysis: reading the clues",
+      "promptTemplateId": "listening.template.v1",
+      "sourceUrls": [
+        "https://www.youtube.com/watch?v=NVgpf-SFs0g"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — selected episode\nURL: https://www.youtube.com/watch?v=NVgpf-SFs0g\n\nActivity type: listening for language used in explaining root causes and linking evidence.\nGrammar focus: past simple for describing tests and findings; sequence markers; cause and effect connectors; practical conditionals for alternative explanations.\n\n1-minute focus: Listen once. Note one phrase that links evidence to a conclusion (e.g., a cause connector).\n\n2-minute focus: Listen twice. Write two past-simple sentences: one stating the evidence, one stating the inferred root cause using a cause-effect word.\n\n4-minute focus: Listen three times. Draft a short root-cause statement (3–4 lines) that lists evidence, conclusion, and one conditional note for verification.\n\nComprehension and reflection prompts (steady: 1–2; balanced: 1–4; intensive: 1–6):\n1) Which linking word (because/so/therefore) did you hear? Write it exactly.\n2) Capture one short past-tense phrase that reported an observation from the recording.\n3) Combine your captures into two sentences showing evidence and inferred root cause with a sequence marker.\n4) Write a conditional verification step (If we had repeated test X, we would have confirmed Y).\n5) Produce a concise root-cause entry: observation, inference, verification step (3–4 lines, past simple where appropriate).\n6) Suggest one corrective action based on the inferred root cause and write it as an instruction in the past simple or conditional form.\n\nPhrase-capture instruction: pause and record any short evidence phrases and linking words. Keep each capture to 2–4 words. Then reorder them into past-simple statements that show cause and effect."
+    },
+    {
+      "id": "listening.w04.d07",
+      "titleArabic": "إجراءات التصحيح وسجل الاختبار",
+      "titleEnglish": "Corrective action and test logs",
+      "promptTemplateId": "listening.template.v1",
+      "sourceUrls": [
+        "https://www.youtube.com/watch?v=rnBQXmO_StE"
+      ],
+      "contentMarkdown": "Source: BBC Learning English — selected episode\nURL: https://www.youtube.com/watch?v=rnBQXmO_StE\n\nActivity type: listen for how speakers describe corrective steps and record test logs concisely.\nGrammar focus: past simple for test records; sequence markers to show steps; cause and effect to justify actions; practical conditionals for follow-up tests.\n\n1-minute focus: Listen once. Pick out one corrective verb phrase you hear (e.g., \"replaced the...\").\n\n2-minute focus: Listen twice. Write three short past-simple log lines: what was done, why it was done, and the observed result.\n\n4-minute focus: Listen three times. Create a full test-log entry (5–6 lines) that includes the corrective action, result, and a conditional follow-up instruction.\n\nComprehension and reflection prompts (steady: 1–2; balanced: 1–4; intensive: 1–6):\n1) Which corrective phrase did you capture? Write it exactly.\n2) Which past-tense verb described the result? Copy it and use it in a short log sentence.\n3) Order three actions using sequence markers to form a clear repair timeline.\n4) Write a cause-and-effect sentence justifying the corrective action that was taken.\n5) Create a conditional follow-up instruction (If the same symptom returned, then ...). Write it fully.\n6) Final task: produce a complete test log entry for a colleague (time, actions in order, result, and recommended next step) using past simple and clear sequence markers.\n\nPhrase-capture instruction: while listening, jot down short corrective phrases and result words exactly as spoken. Later, turn them into past-simple log sentences and check that sequence markers clearly show the repair order."
+    }
+  ]
+}

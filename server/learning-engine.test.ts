@@ -40,6 +40,18 @@ describe("محرك خطة التعلم", () => {
     expect(excluded?.item.id).toBe("grammar.w01.d02");
   });
 
+  it("ينتقل إلى الأسبوع الثالث بعد اكتمال محتوى الأسبوعين الأولين من دون تقديم درس جديد مكرر", () => {
+    const now = new Date("2026-08-19T08:00:00Z");
+    const progress = Array.from({ length: 14 }, (_, index) => ({
+      contentId: `grammar.w${index < 7 ? "01" : "02"}.d${String((index % 7) + 1).padStart(2, "0")}`,
+      status: "completed" as const,
+      lastSeenAt: now,
+      nextReviewAt: null,
+    }));
+    const next = selectNextLocalContent({ skill: "grammar", progress, now });
+    expect(next).toMatchObject({ mode: "new", item: { id: "grammar.w03.d01" } });
+  });
+
   it("يعيد البطاقة الضعيفة في اليوم نفسه ويرفع البطاقات القوية بفاصل أطول", () => {
     const now = new Date("2026-08-14T08:00:00Z");
     const weak = reviewSchedule("again", 2, now);

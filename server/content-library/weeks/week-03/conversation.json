@@ -1,0 +1,83 @@
+{
+  "week": 3,
+  "skill": "conversation",
+  "items": [
+    {
+      "id": "conversation.w03.d01",
+      "titleArabic": "الدرس 1: الريليه في مقابلة عمل تقنية",
+      "titleEnglish": "Day 1: Relays in a Technical Interview",
+      "promptTemplateId": "template.w03.d01",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Relay_(electrical)",
+        "https://en.wikipedia.org/wiki/Contact_(electricity)"
+      ],
+      "contentMarkdown": "موضوع اليوم (بالعربية): تمرّن على شرح الريليه في مقابلة عمل. ركّز على كلمات تقنية بسيطة واستخدم أفعال القدرة والنصيحة للحديث عن الأمان.\n\nTarget words (English — Arabic translation):\n1. relay — ريليه\n2. contactor — قاطع/كونتاكتور\n3. coil — لفة\n4. isolation — عزل\n5. latch — مزلاج\n\n5-minute mode:\n- Roleplay: You are a candidate. I am the interviewer. Give a 2-sentence explanation of how a relay works using 1 or 2 target words and one safety modal (must/should/could).\n\n10-minute mode:\n- Roleplay: Extended interview. Answer three short technical questions about relay selection and safe handling. Use at least two target words and use a zero or first conditional once (e.g., \"If the coil overheats, the relay will...\" ). Keep each answer 2-3 sentences.\n\n13-minute mode:\n- Roleplay: Full interview scenario. First, summarize a relay's role in a control panel (3–4 sentences). Second, explain one safety rule using a modal (must/should/can't). Third, describe what you would do if a contactor failed using a first conditional. Practice clear, short sentences.\n\nAsk one question at a time.\n\nRubric (total 10 points): Fluency 0-3, Vocabulary 0-3, Grammar 0-2, Clarity 0-2. Use these bands: 3 = confident and natural, 2 = understandable with minor hesitation, 1 = many pauses, 0 = not fluent. Vocabulary 3 = uses target words correctly, Grammar 2 = correct use of modals and conditionals, Clarity 2 = clear structure and purpose.\n\nThree corrective examples:\n1) Wrong: \"You must to isolate the coil.\"  Correct: \"You must isolate the coil.\" (drop extra 'to').\n2) Wrong: \"If the contact fails, you would lose control.\"  Correct: \"If the contact fails, you will lose control.\" (use first conditional for likely result).\n3) Wrong: \"You should not touch it when it is energizeded.\"  Correct: \"You should not touch it when it is energized.\" (correct past participle).\n"
+    },
+    {
+      "id": "conversation.w03.d02",
+      "titleArabic": "الدرس 2: السولونويد وإجراءات الأمان اليومية",
+      "titleEnglish": "Day 2: Solenoids and Daily Safety Procedures",
+      "promptTemplateId": "template.w03.d02",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Solenoid",
+        "https://www.osha.gov/engineering/controls"
+      ],
+      "contentMarkdown": "موضوع اليوم (بالعربية): تدرب على وصف سولونويد وإجراءات الأمان اليومية أثناء الصيانة. استخدم أدوات اللغة للتعبير عن الإرشادات بأمان.\n\nTarget words (English — Arabic translation):\n1. solenoid — سولونويد\n2. plunger — مكبس/مِدوَر\n3. energize — تنشيط/تغذية بالتيار\n4. de-energize — قطع التيار\n5. stroke — شوط/حركة المكبس\n\n5-minute mode:\n- Quick task: Explain in 2 sentences what a solenoid plunger does. Include one safety modal (must/should) and one target word.\n\n10-minute mode:\n- Maintenance scenario: You explain to a junior technician how to safely de-energize a solenoid before inspection. Use at least three target words and a first conditional sentence (If ... , then ...).\n\n13-minute mode:\n- Deep practice: Describe a short checklist (4–6 steps) for replacing a solenoid. Use modals for safety (must/should/can't). Then roleplay answering one follow-up question from the junior tech.\n\nAsk one question at a time.\n\nRubric (total 10 points): Fluency 0-3, Vocabulary 0-3, Grammar 0-2, Clarity 0-2. Expect clear safety language: modals used correctly for obligations and permissions. Use first conditional for actions and outcomes.\n\nThree corrective examples:\n1) Wrong: \"You must to de-energize before open.\"  Correct: \"You must de-energize before you open it.\" (remove extra 'to' and add subject).\n2) Wrong: \"If you energize the plunger, it would move.\"  Correct: \"If you energize the plunger, it will move.\" (use first conditional for likely result).\n3) Wrong: \"You should checked the stroke.\"  Correct: \"You should check the stroke.\" (base form after 'should').\n"
+    },
+    {
+      "id": "conversation.w03.d03",
+      "titleArabic": "الدرس 3: موضع الصمام في تقرير فريق العمل",
+      "titleEnglish": "Day 3: Valve Position in a Team Report",
+      "promptTemplateId": "template.w03.d03",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Control_valve",
+        "https://www.instrumentationtools.com/control-valve-basics/"
+      ],
+      "contentMarkdown": "موضوع اليوم (بالعربية): كتابة أو شرح حالة موضع الصمام لزميل في الفريق. ركّز على الوضوح والقيم الرقمية البسيطة.\n\nTarget words (English — Arabic translation):\n1. valve position — موضع الصمام\n2. open — مفتوح\n3. closed — مغلق\n4. travel — سفر/مدى الحركة\n5. positioner — موجّه الموضع\n\n5-minute mode:\n- Short report: Say two sentences reporting a valve position (e.g., \"The valve position is 40% open\"). Use one modal for a recommendation (should/must).\n\n10-minute mode:\n- Team update: Describe current valve travel, why it moved, and one action you recommend. Use at least three target words and a zero or first conditional (e.g., \"If the positioner fails, the valve will...\" ).\n\n13-minute mode:\n- Full task: Write aloud a short email to operations explaining a sudden change in valve position, include a suggested immediate action using a modal, and answer one question from your manager.\n\nAsk one question at a time.\n\nRubric (total 10 points): Fluency 0-3, Vocabulary 0-3, Grammar 0-2, Clarity 0-2. Clarity focuses on numeric reporting and clear recommendation language. Grammar checks conditional or modal use for actions.\n\nThree corrective examples:\n1) Wrong: \"The valve is 40 percents open.\"  Correct: \"The valve is 40% open.\" (use % and correct noun form).\n2) Wrong: \"If the positioner fail, we lose control.\"  Correct: \"If the positioner fails, we will lose control.\" (subject-verb agreement and first conditional).\n3) Wrong: \"You must to close the valve.\"  Correct: \"You must close the valve.\" (no 'to' after 'must').\n"
+    },
+    {
+      "id": "conversation.w03.d04",
+      "titleArabic": "الدرس 4: تعيين نقطة الضبط (Set Point) أثناء التشغيل",
+      "titleEnglish": "Day 4: Setting a Set Point during Operation",
+      "promptTemplateId": "template.w03.d04",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Setpoint",
+        "https://www.controleng.com/articles/how-to-select-setpoints/"
+      ],
+      "contentMarkdown": "موضوع اليوم (بالعربية): تحدث عن تغيير نقطة الضبط (set point) أثناء التشغيل بأمان وكيف تشرح القرار لزميل تقني.\n\nTarget words (English — Arabic translation):\n1. set point — نقطة الضبط\n2. adjustment — تعديل\n3. offset — انحراف\n4. target — الهدف\n5. hysteresis — التحمّل/الهيستريزس\n\n5-minute mode:\n- Quick roleplay: Tell a colleague in two sentences why you will change the set point. Include one modal (should/must) and one target word.\n\n10-minute mode:\n- Procedure explanation: Describe a short adjustment plan (3 steps) for changing a set point and how to observe offset. Use at least three target words and a zero or first conditional.\n\n13-minute mode:\n- Scenario: You must justify a set point change to a supervisor. Present pros/cons (2–3 sentences each), state a safety step using a modal, and answer one follow-up question.\n\nAsk one question at a time.\n\nRubric (total 10 points): Fluency 0-3, Vocabulary 0-3, Grammar 0-2, Clarity 0-2. Grammar focus on correct modal forms and conditionals when justifying changes.\n\nThree corrective examples:\n1) Wrong: \"We should to increase the set point.\"  Correct: \"We should increase the set point.\" (no 'to' after 'should').\n2) Wrong: \"If you change the target, the process would be unstable.\"  Correct: \"If you change the target, the process may become unstable.\" (use modal for possibility or use first conditional properly).\n3) Wrong: \"There is an offsets after adjustment.\"  Correct: \"There is an offset after the adjustment.\" (singular form and article).\n"
+    },
+    {
+      "id": "conversation.w03.d05",
+      "titleArabic": "الدرس 5: قيمة العملية (Process Value) ومراقبتها",
+      "titleEnglish": "Day 5: Process Value and Monitoring",
+      "promptTemplateId": "template.w03.d05",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Process_control",
+        "https://www.icheme.org/knowledge/chemical-engineering/technical-topic-guides/process-control/"
+      ],
+      "contentMarkdown": "موضوع اليوم (بالعربية): تحدث عن قراءة قيمة العملية وماذا تفعل عندما تختلف عن نقطة الضبط. هدفك هو أن تشرح الإجراءات بسرعة وبوضوح.\n\nTarget words (English — Arabic translation):\n1. process value — قيمة العملية\n2. reading — قراءة\n3. deviation — انحراف\n4. trend — اتجاه/تَرشُّح\n5. measurement — قياس\n\n5-minute mode:\n- Quick explanation: Report a single reading and say if there is a deviation. Use one target word and one modal for an action.\n\n10-minute mode:\n- Monitoring task: Describe how you would check measurements and trends for the last hour and one immediate action if deviation is large. Use at least three target words and a first conditional.\n\n13-minute mode:\n- Deep monitoring: Explain how you would log readings, identify a trend, and recommend a corrective action. Use modals for safety and a first conditional to describe consequences.\n\nAsk one question at a time.\n\nRubric (total 10 points): Fluency 0-3, Vocabulary 0-3, Grammar 0-2, Clarity 0-2. Vocabulary should include numeric reporting; grammar should include correct conditional sentences about actions and outcomes.\n\nThree corrective examples:\n1) Wrong: \"The process value are high.\"  Correct: \"The process value is high.\" (singular agreement for term 'value').\n2) Wrong: \"If the reading exceed the limit, stop the pump.\"  Correct: \"If the reading exceeds the limit, stop the pump.\" (subject-verb agreement in conditional).\n3) Wrong: \"You must to record the measurement every minute.\"  Correct: \"You must record the measurement every minute.\" (no 'to' after 'must').\n"
+    },
+    {
+      "id": "conversation.w03.d06",
+      "titleArabic": "الدرس 6: التحكم المغلق (Closed-loop) وشرح للإدارة",
+      "titleEnglish": "Day 6: Closed-loop Control Explained to Management",
+      "promptTemplateId": "template.w03.d06",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Feedback_control_system",
+        "https://www.controleng.com/articles/closed-loop-control/"
+      ],
+      "contentMarkdown": "موضوع اليوم (بالعربية): اشرح مبادئ التحكم المغلق لمدير غير تقني. ركّز على النتيجة، الاستقرار، ولماذا يجب اتخاذ خطوات أمان.\n\nTarget words (English — Arabic translation):\n1. closed-loop — تحكم مغلق\n2. controller — مُتحكّم\n3. stability — استقرار\n4. tuning — ضبط/تحسين\n5. response — استجابة\n\n5-minute mode:\n- Elevator pitch: In 2–3 short sentences, explain what closed-loop control does and one reason tuning matters. Use one modal to recommend an action.\n\n10-minute mode:\n- Manager briefing: Explain how the controller helps maintain stability and what tuning will improve. Use at least three target words and one first conditional (If we do X, then Y).\n\n13-minute mode:\n- Full explanation: Present a short example of a closed-loop control correcting a deviation. Describe tuning steps, safety checks with modals, and answer one management question.\n\nAsk one question at a time.\n\nRubric (total 10 points): Fluency 0-3, Vocabulary 0-3, Grammar 0-2, Clarity 0-2. Assess ability to explain technical ideas simply, use correct conditionals for cause/effect, and recommend actions with modals.\n\nThree corrective examples:\n1) Wrong: \"If we tune the controller, it would improve stability.\"  Correct: \"If we tune the controller, it will improve stability.\" (use first conditional for likely outcome).\n2) Wrong: \"You must to check the response time.\"  Correct: \"You must check the response time.\" (no 'to' after 'must').\n3) Wrong: \"The controller are slow.\"  Correct: \"The controller is slow.\" (subject-verb agreement).\n"
+    },
+    {
+      "id": "conversation.w03.d07",
+      "titleArabic": "الدرس 7: وحدات التشغيل (Drives) وإجراءات الإيقاف الآمن",
+      "titleEnglish": "Day 7: Drives and Safe Shutdown Procedures",
+      "promptTemplateId": "template.w03.d07",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Variable-frequency_drive",
+        "https://www.iea.org/reports/electric-motors-and-drives"
+      ],
+      "contentMarkdown": "موضوع اليوم (بالعربية): ناقش وحدة التشغيل (drive) وإجراءات الإيقاف الآمن للطاقة والموثوقية. ركّز على عبارات الأمان باستخدام الأفعال المساعدة والشرطية.\n\nTarget words (English — Arabic translation):\n1. variable drive — وحدة تشغيل متغيرة\n2. torque — عزم الدوران\n3. overload — حمل زائد\n4. enable — تفعيل\n5. emergency stop — إيقاف طارئ\n\n5-minute mode:\n- Short practice: Say one sentence instructing a technician to enable or disable a drive safely. Use one modal (must/can't) and one target word.\n\n10-minute mode:\n- Workshop task: Explain the steps to perform an emergency stop and a restart check. Use at least three target words and a first conditional about what will happen if overload persists.\n\n13-minute mode:\n- Safety drill: Create a short spoken checklist for safe shutdown and restart. Use modals for mandatory steps and a first conditional to describe the result of skipping a step. Then answer one follow-up question.\n\nAsk one question at a time.\n\nRubric (total 10 points): Fluency 0-3, Vocabulary 0-3, Grammar 0-2, Clarity 0-2. Safety language must use correct modals for obligations and prohibitions; conditionals must describe outcomes.\n\nThree corrective examples:\n1) Wrong: \"You mustn't to enable the drive when overload.\"  Correct: \"You must not enable the drive during overload.\" (correct modal negative form and preposition).\n2) Wrong: \"If overload continue, the drive will trip.\"  Correct: \"If the overload continues, the drive will trip.\" (subject-verb agreement).\n3) Wrong: \"You should to perform emergency stop immediately.\"  Correct: \"You should perform the emergency stop immediately.\" (no 'to' after 'should').\n"
+    }
+  ]
+}

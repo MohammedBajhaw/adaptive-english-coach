@@ -1,0 +1,80 @@
+{
+  "week": 4,
+  "skill": "writing",
+  "items": [
+    {
+      "id": "writing.w04.d01",
+      "titleArabic": "تعليمات تشغيل آمنة وفحص الطاقة",
+      "titleEnglish": "Safe operating instructions and power checks",
+      "promptTemplateId": "prompt.w04.d01",
+      "sourceUrls": [
+        "https://www.osha.gov/lockout-tagout",
+        "https://www.cdc.gov/niosh/topics/electrical/"
+      ],
+      "contentMarkdown": "موجز بالعربية:\nقبل البدء بفحوصات الطاقة، افصل مصدر الطاقة وطبق إجراءات القفل/الوسم. لا تعمل على أجزاء مكشوفة أثناء التيار. دوّن قراءات الفولتية والنتائج في سجل الاختبار.\n\nTarget lengths (English answers):\n- 1 sentence: 15-25 words.\n- 3 sentences: 35-55 words.\n- 5 sentences: 70-110 words.\n\nTarget vocabulary:\n- isolate, de-energize, energize, voltage reading, fuse, PPE, lockout, test log, mains\n\nTask (English):\nWrite safe operating instructions and the power-check summary you performed on a control panel. Use past simple, sequence markers (first, then, next), cause and effect words (because, therefore), and a practical conditional.\n\nModel answer (concise, accurate English):\nI isolated the control panel and de-energized the mains before I began work. First I checked the main fuse, then I measured line-to-neutral voltage with a calibrated meter. The reading was 230 V, so I recorded the value in the test log and rechecked the protective earth because I found a loose clamp. If the earth reading had remained low, I would have locked the panel out for repair.\n\nArabic translation of model answer:\nقمت بعزل لوحة التحكم وإيقاف تشغيل مصدر التيار قبل أن أبدأ العمل. أولاً فحصت الفيوز الرئيسي، ثم قست جهد الخط إلى الصفر باستخدام جهاز معاير. كانت القراءة 230 فولت، لذا سجلت القيمة في سجل الاختبار وأعدت فحص التأريض لأنني وجدت مشبكاً مرتخياً. إذا بقيت قراءة التأريض منخفضة، لكنت قمت بعزل اللوحة للصيانة.\n\nSelf-check rubric (tick if true):\n- I used past simple verbs to describe actions taken.\n- I used sequence markers (first, then, next) to show order.\n- I included cause-effect language (because/so/therefore).\n- I wrote at the requested target length.\n- I included at least one practical conditional describing the next step if a test failed.\n- I listed the measured voltage and noted safety steps (isolate/lockout/PPE)."
+    },
+    {
+      "id": "writing.w04.d02",
+      "titleArabic": "ملاحظة أداء الحلقة المراقبة وتفسير رموز الخطأ",
+      "titleEnglish": "Control-loop observation and error-code summary",
+      "promptTemplateId": "prompt.w04.d02",
+      "sourceUrls": [
+        "https://www.iso.org/standard/70414.html",
+        "https://www.edwardsvacuum.com/en/technical-support"
+      ],
+      "contentMarkdown": "موجز بالعربية:\nراقب سلوك نظام التحكم أثناء اختبار التشغيل وسجل أي أعراض ورموز خطأ ظهرت. لا تلمس الوصلات الحية؛ استخدم أدوات غير تلامسية عند الحاجة.\n\nTarget lengths (English answers):\n- 1 sentence: 12-20 words.\n- 3 sentences: 30-50 words.\n- 5 sentences: 60-100 words.\n\nTarget vocabulary:\n- control loop, symptom, error code, alarm, observed, logged, scope, baseline\n\nTask (English):\nWrite observational notes that describe the control-loop behavior, list observed symptoms, and report any error codes. Use past simple, sequence markers, cause and effect, and one conditional.\n\nModel answer (concise, accurate English):\nDuring the test I observed oscillation in the control loop and intermittent alarms were logged. First the system lost setpoint tracking, then error code E42 appeared on the display. I recorded the baseline waveforms with a scope, and I concluded that a loose connection caused intermittent signal loss. If the connection was not secured, the error returned during the next cycle.\n\nArabic translation of model answer:\nأثناء الاختبار لاحظت تذبذباً في حلقة التحكم وسجلت إنذارات متقطعة. أولاً فقد النظام تتبع نقطة الضبط، ثم ظهر رمز الخطأ E42 على الشاشة. سجلت أشكال الموجة الأساسية باستخدام راسم إشارة، واستنتجت أن وصلة مرتخية سببت فقدان الإشارة المتقطع. إذا لم تُثبت الوصلة، عاد الخطأ في الدورة التالية.\n\nSelf-check rubric (tick if true):\n- I described observable symptoms clearly (what I saw/heard). \n- I listed any error codes and where they appeared.\n- I used past simple for observations.\n- I used sequence markers (first, then) and cause-effect words.\n- I included one conditional about the next step if the issue recurred."
+    },
+    {
+      "id": "writing.w04.d03",
+      "titleArabic": "ملاحظات اختبار التوصيل السلكي واستمرارية الدارة",
+      "titleEnglish": "Wiring continuity test notes",
+      "promptTemplateId": "prompt.w04.d03",
+      "sourceUrls": [
+        "https://www.fluke.com/en-us/learn/blog/electrical/continuity-testing-guide",
+        "https://www.nfpa.org/"
+      ],
+      "contentMarkdown": "موجز بالعربية:\nسجل اختبار الاستمرارية لكل مسار سلكي، أذكر قياسات المقاومة، حالة الموصلات، وخطوات العزل. ضع ملاحظات عن أي دائرة مفتوحة أو قصر.\n\nTarget lengths (English answers):\n- 1 sentence: 10-18 words.\n- 3 sentences: 25-45 words.\n- 5 sentences: 60-90 words.\n\nTarget vocabulary:\n- continuity, open circuit, short, resistance (Ω), clamp, pinout, connector, insulation\n\nTask (English):\nWrite detailed test notes for wiring continuity. State which wires you tested, measurements, actions taken, and a conditional statement for follow-up. Use past simple and sequence markers.\n\nModel answer (concise, accurate English):\nI tested continuity on cable A between terminal 1 and terminal 4 and measured 0.5 Ω. First I inspected the connector pins, then I cleaned contacts and retested to confirm the reading. The line was continuous, but wire 3 was open so I isolated the run and replaced the damaged section. If the section had still failed, I would have escalated the repair to the workshop.\n\nArabic translation of model answer:\nقمت باختبار الاستمرارية في الكابل A بين الطرف 1 والطرف 4 وقيست 0.5 Ω. أولاً فتشت دبابيس الموصل، ثم نظفت الاتصالات وأعدت الاختبار لتأكيد القراءة. كانت الدارة مستمرة، لكن السلك 3 كان مفتوحاً لذا عزلت المسار واستبدلت الجزء التالف. إذا بقي الجزء معطلاً، لكنت رفعت الإصلاح إلى الورشة.\n\nSelf-check rubric (tick if true):\n- I recorded exact resistance or continuity results.\n- I named the tested wires/terminals and actions taken.\n- I used past simple and sequence markers.\n- I stated the corrective action and a conditional next step if the repair failed.\n- I noted safety/isolation steps taken before repairs."
+    },
+    {
+      "id": "writing.w04.d04",
+      "titleArabic": "تقرير عطل مختصر: سبب الجذري والإجراء التصحيحي",
+      "titleEnglish": "Concise fault report: root cause and corrective action",
+      "promptTemplateId": "prompt.w04.d04",
+      "sourceUrls": [
+        "https://www.engineeringtoolbox.com/fault-tree-analysis-d_1255.html"
+      ],
+      "contentMarkdown": "موجز بالعربية:\nاكتب تقرير عطل مختصر يحدد العرض، السبب الجذري، والإجراء التصحيحي. اجعله قابلاً للتسليم إلى فريق الصيانة.\n\nTarget lengths (English answers):\n- 1 sentence: 12-22 words.\n- 3 sentences: 30-50 words.\n- 5 sentences: 60-100 words.\n\nTarget vocabulary:\n- symptom, root cause, corrective action, replaced, cleared, verified, recurrence, isolate\n\nTask (English):\nProduce a concise fault report that states the symptom, root cause, corrective action, and verification results. Use past simple, cause and effect, and a conditional about recurrence.\n\nModel answer (concise, accurate English):\nSymptom: repeated trip of breaker B2 and error code C17 during startup. Root cause: a shorted cable in the distribution harness caused overload and breaker trips. Corrective action: I isolated the circuit, replaced the damaged cable, and cleared the error codes. I verified normal startup and logged the successful test. If the breaker tripped again, I would perform a full insulation test and review the upstream supply.\n\nArabic translation of model answer:\nالعرض: تعطل القاطع B2 المتكرر ورمز الخطأ C17 أثناء بدء التشغيل. السبب الجذري: كان هناك كابل مقصر في حزمة التوزيع مما سبب زيادة حمل وتعطل القاطع. الإجراء التصحيحي: عزلت الدائرة، استبدلت الكابل التالف ومسحت رموز الخطأ. تحققت من بدء التشغيل الطبيعي وسجلت الاختبار الناجح. إذا تعطل القاطع مرة أخرى، سأجري اختبار عزلة كامل وأراجع مصدر التغذية للأعلى.\n\nSelf-check rubric (tick if true):\n- I named the symptom and any error codes.\n- I stated a clear root cause and linked it to the symptom (cause-effect).\n- I described corrective actions taken and verification steps.\n- I included a conditional action if the fault recurred.\n- The report is concise and suitable for handover to maintenance."
+    },
+    {
+      "id": "writing.w04.d05",
+      "titleArabic": "ملاحظات تسليم العمل (handover) لما بعد الاختبار",
+      "titleEnglish": "Handover notes after testing",
+      "promptTemplateId": "prompt.w04.d05",
+      "sourceUrls": [
+        "https://www.iso.org/iso-45001-occupational-health-and-safety.html"
+      ],
+      "contentMarkdown": "موجز بالعربية:\nجهز ملاحظات تسليم واضحة للمشغل أو الفريق التالي. اذكر حالة العزل، القراءات الأساسية، الأخطاء المعلقة، والإجراءات الموصى بها.\n\nTarget lengths (English answers):\n- 1 sentence: 10-18 words.\n- 3 sentences: 30-50 words.\n- 5 sentences: 60-100 words.\n\nTarget vocabulary:\n- handover, status, isolated, log entry, pending, completed, recommend, next shift\n\nTask (English):\nWrite handover notes for the next shift describing system status, what you did, and recommended next actions. Use past simple, sequence markers, and a conditional for pending tasks.\n\nModel answer (concise, accurate English):\nI completed continuity and power checks and I isolated panel P3 after tests. First I recorded all readings in the log, then I cleared transient alarms and left one pending error code C05 for investigation. I recommended that the next shift verify the earth clamp and confirm the repaired cable after the overnight run. If the next shift could not confirm stable readings, they should escalate to electrical maintenance.\n\nArabic translation of model answer:\nأنهيت اختبارات الاستمرارية والطاقة وعزلت اللوحة P3 بعد الاختبارات. أولاً سجلت كل القراءات في السجل، ثم مسحت الإنذارات العارضة وتركت رمز خطأ واحد C05 معلقاً للتحقيق. أوصيت بأن يتحقق الوردية التالية من مشبك التأريض ويؤكد الكابل المصحح بعد تشغيل الليل. إذا لم تتمكن الوردية التالية من تأكيد قراءات مستقرة، فيجب أن تصعد المسألة إلى صيانة الكهرباء.\n\nSelf-check rubric (tick if true):\n- I stated what I completed and the current system status.\n- I listed any pending issues and recommended next actions.\n- I used past simple and sequence markers.\n- I included a conditional step for the next shift if verification failed.\n- The notes are concise and ready to handover."
+    },
+    {
+      "id": "writing.w04.d06",
+      "titleArabic": "بريد إلكتروني مهني مختصر لعرض نتائج الاختبار",
+      "titleEnglish": "Concise professional email reporting test results",
+      "promptTemplateId": "prompt.w04.d06",
+      "sourceUrls": [
+        "https://www.gov.uk/government/publications/email-etiquette-guidance"
+      ],
+      "contentMarkdown": "موجز بالعربية:\nاكتب بريدًا إلكترونيًا موجزًا للمشرف يحتوي على ملخص الاختبارات، النتائج الحرجة، والحاجة لأي إجراء فورَي. ضمّ سجل الاختبار كمرفق أو حدد مكانه.\n\nTarget lengths (English answers):\n- 1 sentence (subject line): 6-12 words.\n- 3 sentences (short email body): 25-45 words.\n- 5 sentences (slightly longer body): 50-90 words.\n\nTarget vocabulary:\n- subject, summary, attached log, critical, recommend, escalate, verified\n\nTask (English):\nDraft a short professional email to your supervisor summarizing test findings, error codes, and recommended corrective steps. Use past simple, sequence markers, cause-effect, and one conditional.\n\nModel answer (concise, accurate English):\nSubject: Test results and recommended action for panel P3\n\nI completed the power and continuity tests on P3 and I logged all readings. First I isolated the panel, then I replaced a shorted cable and cleared error code C17. The system started normally, so I verified stable operation for two cycles. If you approve, I recommend scheduling a full insulation test tomorrow and I attached the test log.\n\nArabic translation of model answer:\nالموضوع: نتائج الاختبار والإجراء الموصى به للوحة P3\n\nأكملت اختبارات الطاقة والاستمرارية على P3 وسجلت كل القراءات. أولاً عزلت اللوحة، ثم استبدلت كابلًا مقصراً ومسحت رمز الخطأ C17. بدأ النظام بشكل طبيعي، لذا تحققت من تشغيل مستقر لدورتين. إذا وافقت، أوصي بجدولة اختبار عزلة كامل غداً وقد أرفقت سجل الاختبار.\n\nSelf-check rubric (tick if true):\n- I included a clear subject line.\n- I summarized what was done and the result in past simple.\n- I used sequence markers and cause-effect words.\n- I made one clear recommendation and included a conditional for approval.\n- I mentioned the test log location or attachment."
+    },
+    {
+      "id": "writing.w04.d07",
+      "titleArabic": "إدخال سجل اختبار مختصر يتضمن رموز الخطأ والإجراء التصحيحي",
+      "titleEnglish": "Test log entry with error codes, root cause and corrective action",
+      "promptTemplateId": "prompt.w04.d07",
+      "sourceUrls": [
+        "https://www.nist.gov/",
+        "https://www.iso.org/standard/72004.html"
+      ],
+      "contentMarkdown": "موجز بالعربية:\nاكتب إدخال سجل اختبار رسمي يسجل الخطوات، القراءات، رموز الأخطاء، السبب الجذري، والإجراء التصحيحي. استخدم صياغة واضحة مختصرة قابلة للأرشفة.\n\nTarget lengths (English answers):\n- 1 sentence (very brief log): 10-18 words.\n- 3 sentences (brief log): 30-50 words.\n- 5 sentences (full log entry): 60-110 words.\n\nTarget vocabulary:\n- test log, step, measured, error code, root cause, corrective action, verified, closed\n\nTask (English):\nCompose a formal test log entry that documents test steps, measurements, error codes, isolation actions, root cause, corrective action, and verification. Use past simple, sequence markers, cause and effect, and include a conditional for recurrence.\n\nModel answer (concise, accurate English):\nTest log: 2026-08-19, P3 panel\nStep 1: I isolated the panel and de-energized the mains. Step 2: I measured supply voltage (230 V) and continuity on distribution cables. Observed symptom: breaker B2 tripped, error C17 logged during startup. Root cause: shorted conductor in cable bundle caused overload. Corrective action: I isolated the circuit, replaced the damaged cable, cleared error codes, and verified normal startup for three consecutive cycles. If the fault recurred, I planned a complete insulation resistance test and upstream supply review.\n\nArabic translation of model answer:\nسجل الاختبار: 2026-08-19، لوحة P3\nالخطوة 1: عزلت اللوحة وأوقفت التيار. الخطوة 2: قست جهد الإمداد (230 فولت) والاستمرارية على كابلات التوزيع. العرض الملحوظ: تعطل القاطع B2 وسجل رمز الخطأ C17 أثناء بدء التشغيل. السبب الجذري: موصل مقصر في حزمة الكابلات تسبب في زيادة حمل. الإجراء التصحيحي: عزلت الدائرة، استبدلت الكابل التالف، مسحت رموز الخطأ، وتحققت من بدء تشغيل طبيعي لثلاث دورات متتالية. إذا تكرر العطل، أخطط لإجراء اختبار مقاومة عزلة كامل ومراجعة مصدر التغذية للأعلى.\n\nSelf-check rubric (tick if true):\n- I logged date, location, and steps in clear order.\n- I recorded measured values and any error codes.\n- I stated root cause and corrective action and linked them logically.\n- I verified and recorded the outcome of the corrective action.\n- I included a conditional plan if the fault recurred."
+    }
+  ]
+}

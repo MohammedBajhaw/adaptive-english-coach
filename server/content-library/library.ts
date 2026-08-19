@@ -9,6 +9,16 @@ import week02Grammar from "./weeks/week-02/grammar.json";
 import week02Listening from "./weeks/week-02/listening.json";
 import week02Vocabulary from "./weeks/week-02/vocabulary.json";
 import week02Writing from "./weeks/week-02/writing.json";
+import week03Conversation from "./weeks/week-03/conversation.json";
+import week03Grammar from "./weeks/week-03/grammar.json";
+import week03Listening from "./weeks/week-03/listening.json";
+import week03Vocabulary from "./weeks/week-03/vocabulary.json";
+import week03Writing from "./weeks/week-03/writing.json";
+import week04Conversation from "./weeks/week-04/conversation.json";
+import week04Grammar from "./weeks/week-04/grammar.json";
+import week04Listening from "./weeks/week-04/listening.json";
+import week04Vocabulary from "./weeks/week-04/vocabulary.json";
+import week04Writing from "./weeks/week-04/writing.json";
 
 type ContentSourceSkill = "vocabulary" | "grammar" | "conversation" | "listening" | "writing";
 
@@ -36,6 +46,8 @@ export type LocalContentPayload = ContentPackItem & {
 const packs = [
   week01Vocabulary, week01Grammar, week01Conversation, week01Listening, week01Writing,
   week02Vocabulary, week02Grammar, week02Conversation, week02Listening, week02Writing,
+  week03Vocabulary, week03Grammar, week03Conversation, week03Listening, week03Writing,
+  week04Vocabulary, week04Grammar, week04Conversation, week04Listening, week04Writing,
 ] as unknown as ContentPack[];
 
 function normalizedSkill(skill: ContentSourceSkill): SkillKey {

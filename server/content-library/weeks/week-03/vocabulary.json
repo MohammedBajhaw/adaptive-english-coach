@@ -1,0 +1,76 @@
+{
+  "week": 3,
+  "skill": "vocabulary",
+  "items": [
+    {
+      "id": "vocabulary.w03.d01",
+      "titleArabic": "مرحّل",
+      "titleEnglish": "Relay",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Relay_(electrical)"
+      ],
+      "contentMarkdown": "Term: relay\nIPA: /ˈriːleɪ/\nArabic meaning: مرحّل\nPart of speech: noun\nMechatronics domain: electrical switching and control\n\nExample sentences:\n1. You must test the relay before power-up.\n   يجب أن تختبر المرحّل قبل تشغيل الطاقة.\n2. If the coil heats, the relay may stick.\n   إذا سخن الملف، قد يعلق المرحّل.\n3. A relay can switch high currents.\n   يمكن للمرحّل أن يبدّل تيارات عالية.\n4. If the contact wears, you should replace the relay.\n   إذا تآكل الملامس، ينبغي أن تستبدل المرحّل.\n5. The technician should inspect the relay monthly.\n   ينبغي على الفني فحص المرحّل شهريًا."
+    },
+    {
+      "id": "vocabulary.w03.d02",
+      "titleArabic": "ملف لولبي",
+      "titleEnglish": "Solenoid",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Solenoid"
+      ],
+      "contentMarkdown": "Term: solenoid\nIPA: /ˈsoʊlənɔɪd/\nArabic meaning: ملف لولبي (سولونويد)\nPart of speech: noun\nMechatronics domain: linear actuation and valve control\n\nExample sentences:\n1. You must secure the solenoid before testing.\n   يجب أن تثبت الملف اللولبي قبل الاختبار.\n2. If power is steady, the solenoid will move the plunger.\n   إذا كانت الطاقة مستقرة، سيحرك الملف اللولبي الدبوس.\n3. A solenoid can open or close a small valve.\n   يمكن للملف اللولبي أن يفتح أو يغلق صمامًا صغيرًا.\n4. If the coil burns, the solenoid may fail.\n   إذا احترق الملف، قد يتعطل الملّف اللولبي.\n5. Technicians should check the solenoid wiring weekly.\n   ينبغي على الفنيين فحص أسلاك الملف اللولبي أسبوعيًا."
+    },
+    {
+      "id": "vocabulary.w03.d03",
+      "titleArabic": "موضع الصمام",
+      "titleEnglish": "Valve position",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Control_valve"
+      ],
+      "contentMarkdown": "Term: valve position\nIPA: /ˈvælv pəˈzɪʃən/\nArabic meaning: موضع الصمام\nPart of speech: noun phrase\nMechatronics domain: fluid control and valves\n\nExample sentences:\n1. You must set the valve position before start-up.\n   يجب أن تضبط موضع الصمام قبل التشغيل.\n2. If the valve position is wrong, the flow will increase.\n   إذا كان موضع الصمام خاطئًا، سيزداد التدفق.\n3. The controller can read the valve position.\n   يمكن لوحدة التحكم قراءة موضع الصمام.\n4. If the actuator fails, the valve position may drift.\n   إذا فشل المحرك، قد ينزلق موضع الصمام.\n5. Operators should monitor the valve position continuously.\n   ينبغي للمشغلين مراقبة موضع الصمام باستمرار."
+    },
+    {
+      "id": "vocabulary.w03.d04",
+      "titleArabic": "نقطة الضبط",
+      "titleEnglish": "Set point",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Setpoint"
+      ],
+      "contentMarkdown": "Term: set point\nIPA: /ˈsɛt pɔɪnt/\nArabic meaning: نقطة الضبط\nPart of speech: noun\nMechatronics domain: control systems and process control\n\nExample sentences:\n1. You must set the set point correctly.\n   يجب أن تضبط نقطة الضبط بشكل صحيح.\n2. If the set point changes, the system will adapt.\n   إذا تغيرت نقطة الضبط، سيتكيف النظام.\n3. The operator can adjust the set point from the panel.\n   يمكن للمشغل تعديل نقطة الضبط من اللوحة.\n4. If alarms trigger, you should return the set point.\n   إذا أطلقت الإنذارات، ينبغي أن تعيد نقطة الضبط.\n5. A wrong set point may cause unsafe operation.\n   قد تتسبب نقطة ضبط خاطئة في تشغيل غير آمن."
+    },
+    {
+      "id": "vocabulary.w03.d05",
+      "titleArabic": "قيمة العملية",
+      "titleEnglish": "Process value",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Process_control"
+      ],
+      "contentMarkdown": "Term: process value\nIPA: /ˈprɒsɛs ˈvæljuː/\nArabic meaning: قيمة العملية\nPart of speech: noun phrase\nMechatronics domain: process measurement and control\n\nExample sentences:\n1. You must read the process value before changes.\n   يجب أن تقرأ قيمة العملية قبل إجراء التغييرات.\n2. If the process value rises, the controller will cool the system.\n   إذا ارتفعت قيمة العملية، سيقوم المتحكم بتبريد النظام.\n3. The display can show the process value in real time.\n   يمكن للشاشة عرض قيمة العملية في الوقت الحقيقي.\n4. If the process value is stable, you should log it.\n   إذا كانت قيمة العملية مستقرة، ينبغي أن تسجلها.\n5. A wrong process value may hide a fault.\n   قد تُخفي قيمة عملية خاطئة وجود عطل."
+    },
+    {
+      "id": "vocabulary.w03.d06",
+      "titleArabic": "التحكم ذو الحلقة المغلقة",
+      "titleEnglish": "Closed-loop control",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Feedback_control_system"
+      ],
+      "contentMarkdown": "Term: closed-loop control\nIPA: /kloʊzd-luːp kənˈtroʊl/\nArabic meaning: التحكم ذو الحلقة المغلقة\nPart of speech: noun phrase\nMechatronics domain: automatic control systems\n\nExample sentences:\n1. Closed-loop control must compare set point and measurement.\n   يجب أن يقارن التحكم ذو الحلقة المغلقة نقطة الضبط والقياس.\n2. If the error is large, the controller will increase output.\n   إذا كان الخطأ كبيرًا، سيزيد المتحكم الإشارة.\n3. The system can stabilize with closed-loop control.\n   يمكن للنظام أن يستقر باستخدام التحكم ذو الحلقة المغلقة.\n4. If you tune gains poorly, the loop may oscillate.\n   إذا ضبطت المعاملات بشكل سيئ، قد تتذبذب الحلقة.\n5. Operators should verify the loop response after changes.\n   ينبغي للمشغلين التحقق من استجابة الحلقة بعد التغييرات."
+    },
+    {
+      "id": "vocabulary.w03.d07",
+      "titleArabic": "زر إيقاف الطوارئ",
+      "titleEnglish": "Emergency stop",
+      "promptTemplateId": "vocab_card_v1",
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Emergency_stop"
+      ],
+      "contentMarkdown": "Term: emergency stop\nIPA: /ɪˈmɜːrdʒənsi stɒp/\nArabic meaning: زر إيقاف الطوارئ\nPart of speech: noun phrase\nMechatronics domain: safety controls and interlocks\n\nExample sentences:\n1. You must press the emergency stop in a hazard.\n   يجب أن تضغط زر إيقاف الطوارئ عند وجود خطر.\n2. If the machine moves unexpectedly, you should hit the emergency stop.\n   إذا تحركت الآلة بشكل غير متوقع، ينبغي أن تضغط زر إيقاف الطوارئ.\n3. The emergency stop can cut power within milliseconds.\n   يمكن لزر إيقاف الطوارئ قطع الطاقة في غضون ميلي ثانية.\n4. If the stop is pressed, the system will stay disabled until reset.\n   إذا تم الضغط على الزر، سيظل النظام معطلًا حتى إعادة الضبط.\n5. Technicians may test the emergency stop weekly.\n   قد يختبر الفنيون زر إيقاف الطوارئ أسبوعيًا."
+    }
+  ]
+}
