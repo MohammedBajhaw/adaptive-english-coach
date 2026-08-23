@@ -10,6 +10,10 @@ import listeningWeek01 from "../../../server/content-library/weeks/week-01/liste
 import listeningWeek02 from "../../../server/content-library/weeks/week-02/listening.json";
 import listeningWeek03 from "../../../server/content-library/weeks/week-03/listening.json";
 import listeningWeek04 from "../../../server/content-library/weeks/week-04/listening.json";
+import writingWeek01 from "../../../server/content-library/weeks/week-01/writing.json";
+import writingWeek02 from "../../../server/content-library/weeks/week-02/writing.json";
+import writingWeek03 from "../../../server/content-library/weeks/week-03/writing.json";
+import writingWeek04 from "../../../server/content-library/weeks/week-04/writing.json";
 
 type GrammarItem = {
   id: string;
@@ -43,6 +47,14 @@ export function getTodayConversationLesson() {
 
 export function getTodayListeningLesson() {
   const items = [...listeningWeek01.items, ...listeningWeek02.items, ...listeningWeek03.items, ...listeningWeek04.items];
+  const base = new Date(Date.UTC(2026, 0, 1));
+  const today = new Date();
+  const dayIndex = Math.max(0, Math.floor((Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()) - base.getTime()) / 86_400_000));
+  return items[dayIndex % items.length] ?? items[0];
+}
+
+export function getTodayWritingLesson() {
+  const items = [...writingWeek01.items, ...writingWeek02.items, ...writingWeek03.items, ...writingWeek04.items];
   const base = new Date(Date.UTC(2026, 0, 1));
   const today = new Date();
   const dayIndex = Math.max(0, Math.floor((Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()) - base.getTime()) / 86_400_000));
