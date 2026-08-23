@@ -1,9 +1,10 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { trpc } from "@/lib/trpc";
+import { loadSupabaseDashboard, markSupabaseNotificationRead, setSupabaseTaskStatus, type DashboardData } from "@/lib/supabaseLearning";
 import { Bell, BookOpen, BrainCircuit, Check, ChevronLeft, Clock3, Ear, FilePenLine, MessageCircle, Sparkles, Target, TriangleAlert } from "lucide-react";
 import { useLocation } from "wouter";
 import { toast } from "sonner";
+import { useEffect, useState } from "react";
 
 const preview = {
   profile: { dailyMinutes: 30, studyMode: "balanced", engineeringSpecialty: "هندسة عامة", calibrationConfidence: 31 },
@@ -32,18 +33,23 @@ const skillMeta = {
 } as const;
 
 export default function Home() {
-  const { isAuthenticated } = useAuth();
-  const utils = trpc.useUtils();
+  const { isAuthenticated, user } = useAuth();
   const [_, setLocation] = useLocation();
-  const query = trpc.learning.dashboard.get.useQuery(undefined, { enabled: isAuthenticated });
-  const mutation = trpc.learning.tasks.complete.useMutation({ onSuccess: () => { utils.learning.dashboard.get.invalidate(); toast.success("تم تسجيل الإنجاز، وسيؤثر في معايرة المستوى."); } });
-  const notificationQuery = trpc.learning.notifications.list.useQuery(undefined, { enabled: isAuthenticated });
-  const notificationMutation = trpc.learning.notifications.markRead.useMutation({ onSuccess: () => { utils.learning.notifications.list.invalidate(); } });
-  const data = (isAuthenticated ? query.data : preview) ?? preview;
+  const [cloudData, setCloudData] = useState<DashboardData | null>(null);
+  const [loadingCloud, setLoadingCloud] = useState(false);
+  async function refreshDashboard() {
+    if (!user?.id) return;
+    setLoadingCloud(true);
+    try { setCloudData(await loadSupabaseDashboard(user.id, user.name)); }
+    catch (error) { toast.error(error instanceof Error ? error.message : "تعذر تحميل تقدمك السحابي."); }
+    finally { setLoadingCloud(false); }
+  }
+  useEffect(() => { if (isAuthenticated) void refreshDashboard(); else setCloudData(null); }, [isAuthenticated, user?.id]);
+  const data = (isAuthenticated ? cloudData : null) ?? preview;
   const completedPercent = Math.round((data.stats.completedToday / data.stats.totalToday) * 100);
   const tasks = data.tasks as typeof preview.tasks;
   const snapshot = data.snapshot;
-  const notifications = notificationQuery.data ?? [];
+  const notifications = cloudData?.notifications ?? [];
   const skillRows = [
     ["vocabulary", snapshot.vocabularyScore], ["grammar", snapshot.grammarScore], ["speaking", snapshot.speakingScore], ["listening", snapshot.listeningScore], ["writing", snapshot.writingScore],
   ] as const;
@@ -52,7 +58,7 @@ export default function Home() {
     if (!isAuthenticated) { toast.info("سجّل دخولك لتتحول المعاينة إلى خطتك الحقيقية."); return; }
     const taskRoutes: Record<string, string> = { vocabulary: "/cards", grammar: "/grammar", listening: "/listening", speaking: "/conversation", writing: "/writing" };
     if (taskRoutes[task.skill]) { setLocation(taskRoutes[task.skill]); return; }
-    mutation.mutate({ taskId: task.id, completed: task.status !== "completed" });
+    void setSupabaseTaskStatus(String(task.id), task.status !== "completed").then(() => { toast.success("تم تسجيل الإنجاز."); return refreshDashboard(); }).catch(() => toast.error("تعذر تحديث المهمة."));
   }
 
   return <div className="space-y-7" dir="rtl">
@@ -72,7 +78,7 @@ export default function Home() {
       <div className="rounded-[24px] bg-[#fff9eb] p-5 sm:p-6"><div className="flex items-center gap-2 text-[#9b6816]"><TriangleAlert className="h-5 w-5" /><p className="text-sm font-bold">تقرير اليوم: ما الذي يحتاج دعمًا؟</p></div><div className="mt-4 space-y-3">{data.dailyReport.gaps.map((gap, index) => { const meta = skillMeta[gap.skill as keyof typeof skillMeta]; return <div key={`${gap.skill}-${index}`} className="rounded-2xl border border-[#f0e1bc] bg-white/70 p-3"><p className="text-sm font-bold" style={{ color: meta.color }}>{gap.title}</p><p className="mt-1 text-xs leading-6 text-[#73582a]">{gap.message}</p></div>; })}</div></div>
     </section>
 
-    {notifications.length > 0 && <section className="rounded-[24px] border border-[#eeddb7] bg-[#fff9eb] p-5 soft-shadow sm:p-6"><div className="flex items-center justify-between"><div className="flex items-center gap-2 text-[#9b6816]"><Bell className="h-5 w-5" /><p className="text-sm font-bold">تذكيراتك</p></div><span className="rounded-lg bg-white px-2 py-1 text-xs font-bold text-[#9b6816]">{notifications.filter(item => !item.readAt).length} جديدة</span></div><div className="mt-4 space-y-3">{notifications.map(item => <button key={item.id} onClick={() => { if (!item.readAt) notificationMutation.mutate({ notificationId: item.id }); }} className={`w-full rounded-2xl border p-4 text-right transition-colors ${item.readAt ? "border-[#efe9da] bg-white/50" : "border-[#ecd79f] bg-white hover:bg-[#fffdf8]"}`}><div className="flex items-start justify-between gap-3"><div><p className="text-sm font-bold text-[#5d4519]">{item.title}</p><p className="mt-1 text-xs leading-6 text-[#73582a]">{item.content}</p></div>{!item.readAt && <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[#d79b28]" />}</div></button>)}</div></section>}
+    {notifications.length > 0 && <section className="rounded-[24px] border border-[#eeddb7] bg-[#fff9eb] p-5 soft-shadow sm:p-6"><div className="flex items-center justify-between"><div className="flex items-center gap-2 text-[#9b6816]"><Bell className="h-5 w-5" /><p className="text-sm font-bold">تذكيراتك</p></div><span className="rounded-lg bg-white px-2 py-1 text-xs font-bold text-[#9b6816]">{notifications.filter(item => !item.readAt).length} جديدة</span></div><div className="mt-4 space-y-3">{notifications.map(item => <button key={item.id} onClick={() => { if (!item.readAt) void markSupabaseNotificationRead(String(item.id)).then(refreshDashboard); }} className={`w-full rounded-2xl border p-4 text-right transition-colors ${item.readAt ? "border-[#efe9da] bg-white/50" : "border-[#ecd79f] bg-white hover:bg-[#fffdf8]"}`}><div className="flex items-start justify-between gap-3"><div><p className="text-sm font-bold text-[#5d4519]">{item.title}</p><p className="mt-1 text-xs leading-6 text-[#73582a]">{item.content}</p></div>{!item.readAt && <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[#d79b28]" />}</div></button>)}</div></section>}
 
     <section className="grid gap-5 md:grid-cols-2"><div className="rounded-[24px] border border-border bg-card p-5 soft-shadow"><div className="flex items-start justify-between"><div><p className="text-xs font-semibold text-[#8b65c2]">بطاقات مستحقة</p><h2 className="mt-1 text-xl font-extrabold">استرجاع، لا قراءة فقط</h2></div><span className="rounded-xl bg-[#f2eff9] px-3 py-1.5 text-xs font-bold text-[#7652ad]">{data.dueCards.length} الآن</span></div>{data.dueCards[0] ? <><div className="mt-5 rounded-2xl bg-[#f7f8f5] p-4"><p className="font-['DM_Sans'] text-2xl font-bold text-primary" dir="ltr">{data.dueCards[0].term}</p><p className="mt-1 text-sm text-muted-foreground">{data.dueCards[0].arabicMeaning}</p><p className="mt-3 text-xs text-[#0d7a6e]">{data.dueCards[0].engineeringDomain}</p></div><p className="mt-3 rounded-xl bg-[#fff9eb] px-3 py-2 text-xs leading-6 text-[#73582a]">تذكير داخل التطبيق: لديك {data.dueCards.length} بطاقة مستحقة. أكملها الآن لتتحدث مهمة المفردات تلقائيًا.</p></> : <div className="mt-5 rounded-2xl bg-[#f7f8f5] p-4 text-sm text-muted-foreground">ممتاز، لا توجد بطاقات مستحقة الآن.</div>}<Button onClick={() => setLocation("/cards")} className="mt-4 w-full bg-primary">ابدأ مراجعة مركزة</Button></div>
       <div className="rounded-[24px] bg-[#f5ebd3] p-5 soft-shadow"><div className="flex items-center gap-2 text-[#9b6816]"><Clock3 className="h-5 w-5" /><p className="text-sm font-bold">إيقاع قابل للاستمرار</p></div><h2 className="mt-3 text-xl font-extrabold text-[#573f16]">{data.profile.dailyMinutes} دقيقة اليوم، لا أكثر.</h2><p className="mt-2 text-sm leading-7 text-[#73582a]">الخطة توزع الوقت وفق ما تختاره أنت. في الأيام المزدحمة تبقى المراجعة الأساسية خفيفة بدل أن تنقطع السلسلة.</p><button onClick={() => setLocation("/settings")} className="mt-5 flex items-center gap-2 text-sm font-bold text-[#573f16] underline decoration-[#cba762] underline-offset-4">عدّل الوقت والأولوية<ChevronLeft className="h-4 w-4" /></button></div></section>

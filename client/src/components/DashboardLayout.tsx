@@ -1,5 +1,4 @@
 import { useAuth } from "@/_core/hooks/useAuth";
-import { startLogin } from "@/const";
 import { Button } from "@/components/ui/button";
 import {
   BookOpenCheck,
@@ -15,6 +14,7 @@ import {
   Settings2,
 } from "lucide-react";
 import { useLocation } from "wouter";
+import { toast } from "sonner";
 
 const menuItems = [
   { icon: LayoutDashboard, label: "نظرة اليوم", path: "/" },
@@ -29,8 +29,23 @@ const menuItems = [
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, logout, signInWithEmail, isConfigured } = useAuth();
   const [location, setLocation] = useLocation();
+
+  async function requestSignIn() {
+    if (!isConfigured) {
+      toast.error("لم تُضبط بيانات Supabase بعد في بيئة النشر.");
+      return;
+    }
+    const email = window.prompt("أدخل بريدك الإلكتروني لإرسال رابط دخول آمن:");
+    if (!email) return;
+    const { error } = await signInWithEmail(email.trim());
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    toast.success("أُرسل رابط الدخول إلى بريدك الإلكتروني.");
+  }
 
   return (
     <div className="app-grid min-h-screen bg-background text-foreground">
@@ -52,7 +67,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <div className="grid h-9 w-9 place-items-center rounded-xl bg-white/12"><CircleUserRound className="h-5 w-5" /></div>
             <div className="min-w-0 text-right"><p className="truncate text-sm font-semibold">{isAuthenticated ? user?.name || "متعلم" : "وضع المعاينة"}</p><p className="mt-0.5 text-xs text-emerald-50/65">{isAuthenticated ? "ملفك الشخصي نشط" : "سجل الدخول لحفظ تقدمك"}</p></div>
           </div>
-          {isAuthenticated ? <button onClick={logout} className="mt-4 text-xs text-emerald-100 underline underline-offset-4">تسجيل الخروج</button> : <Button onClick={() => startLogin()} className="mt-4 w-full bg-[#d8ad4d] text-[#123b3b] hover:bg-[#e8bf62]"><LogIn className="ml-2 h-4 w-4" />تسجيل الدخول</Button>}
+          {isAuthenticated ? <button onClick={logout} className="mt-4 text-xs text-emerald-100 underline underline-offset-4">تسجيل الخروج</button> : <Button onClick={requestSignIn} className="mt-4 w-full bg-[#d8ad4d] text-[#123b3b] hover:bg-[#e8bf62]"><LogIn className="ml-2 h-4 w-4" />تسجيل الدخول</Button>}
         </div>
       </aside>
       <div className="min-h-screen lg:mr-[278px]">
@@ -60,7 +75,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-3">
             <button onClick={() => setLocation("/")} className="flex items-center gap-2 text-right lg:hidden"><div className="grid h-9 w-9 place-items-center rounded-xl bg-primary text-[#d8ad4d]"><Flame className="h-4 w-4" /></div><span className="text-sm font-bold">مهندس الإنجليزية</span></button>
             <div className="hidden items-center gap-2 text-sm text-muted-foreground sm:flex"><span className="h-2 w-2 rounded-full bg-[#55a578]" />نظامك يتعلم معك، لا يحكم عليك من البداية.</div>
-            {!isAuthenticated && <Button size="sm" onClick={() => startLogin()} className="bg-primary text-primary-foreground"><LogIn className="ml-1.5 h-4 w-4" />حفظ تقدمي</Button>}
+            {!isAuthenticated && <Button size="sm" onClick={requestSignIn} className="bg-primary text-primary-foreground"><LogIn className="ml-1.5 h-4 w-4" />حفظ تقدمي</Button>}
           </div>
         </header>
         <main className="mx-auto max-w-[1440px] px-4 py-6 pb-24 lg:px-10 lg:py-10">{children}</main>
