@@ -1,7 +1,7 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { trpc } from "@/lib/trpc";
+import { getSupabase } from "@/lib/supabase";
 import { Bell, Check, Gauge, Save, SlidersHorizontal, Sparkles, Wrench } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
@@ -42,28 +42,25 @@ const rows = [
 const initial: FormState = { studyMode: "balanced", engineeringSpecialty: "mechatronics", goalTracks: ["job_interviews"], vocabularyWeight: 25, grammarWeight: 20, listeningWeight: 15, speakingWeight: 25, writingWeight: 15 };
 
 export default function Settings() {
-  const { isAuthenticated } = useAuth();
-  const utils = trpc.useUtils();
-  const query = trpc.learning.profile.get.useQuery(undefined, { enabled: isAuthenticated });
+  const { isAuthenticated, user } = useAuth();
   const [form, setForm] = useState<FormState>(initial);
   const [reminderEnabled, setReminderEnabled] = useState(true);
   const [reminderHourUtc, setReminderHourUtc] = useState(17);
+  const [isSaving, setIsSaving] = useState(false);
   const activeMode = modes.find(mode => mode.key === form.studyMode) ?? modes[1]!;
   const weightsTotal = rows.reduce((sum, row) => sum + form[row.key], 0);
 
   useEffect(() => {
-    if (!query.data) return;
-    const savedMode = modes.some(mode => mode.key === query.data.studyMode) ? query.data.studyMode as StudyMode : "balanced";
-    const savedTracks = query.data.goalTrack.split(",").filter(track => tracks.some(item => item.key === track)) as GoalTrack[];
-    setForm({ studyMode: savedMode, engineeringSpecialty: query.data.engineeringSpecialty, goalTracks: savedTracks.length ? savedTracks : ["job_interviews"], vocabularyWeight: query.data.vocabularyWeight, grammarWeight: query.data.grammarWeight, listeningWeight: query.data.listeningWeight, speakingWeight: query.data.speakingWeight, writingWeight: query.data.writingWeight });
-    setReminderEnabled(Boolean(query.data.reminderEnabled));
-    setReminderHourUtc(query.data.reminderHourUtc);
-  }, [query.data]);
-
-  const mutation = trpc.learning.profile.update.useMutation({
-    onSuccess: () => { utils.learning.dashboard.get.invalidate(); utils.learning.profile.get.invalidate(); toast.success("تم حفظ النمط والأولويات لخطة اليوم القادمة."); },
-  });
-  const reminderMutation = trpc.learning.reminders.update.useMutation({ onSuccess: () => { utils.learning.profile.get.invalidate(); toast.success("تم حفظ تفضيل التذكير."); } });
+    if (!isAuthenticated || !user?.id) return;
+    void (getSupabase() as any).from("learner_profiles").select("*").eq("user_id", user.id).maybeSingle().then(({ data, error }: { data: any; error: any }) => {
+      if (error || !data) return;
+      const savedMode = modes.some(mode => mode.key === data.study_mode) ? data.study_mode as StudyMode : "balanced";
+      const savedTracks = String(data.goal_track).split(",").filter(track => tracks.some(item => item.key === track)) as GoalTrack[];
+      setForm({ studyMode: savedMode, engineeringSpecialty: data.engineering_specialty, goalTracks: savedTracks.length ? savedTracks : ["job_interviews"], vocabularyWeight: data.vocabulary_weight, grammarWeight: data.grammar_weight, listeningWeight: data.listening_weight, speakingWeight: data.speaking_weight, writingWeight: data.writing_weight });
+      setReminderEnabled(Boolean(data.reminder_enabled));
+      setReminderHourUtc(data.reminder_hour_utc);
+    });
+  }, [isAuthenticated, user?.id]);
   const allocation = useMemo(() => rows.map(row => ({ ...row, percentage: Math.round(form[row.key] / weightsTotal * 100) })), [form, weightsTotal]);
 
   function toggleTrack(track: GoalTrack) {
@@ -74,14 +71,24 @@ export default function Settings() {
     setForm(current => ({ ...current, [key]: Number(value) }));
   }
 
-  function save() {
+  async function save() {
     if (!isAuthenticated) return toast.info("سجل دخولك لحفظ خطتك الشخصية.");
-    mutation.mutate({ ...form, dailyMinutes: activeMode.minutes });
+    if (!user?.id) return;
+    setIsSaving(true);
+    const { error } = await (getSupabase() as any).from("learner_profiles").update({ study_mode: form.studyMode, daily_minutes: activeMode.minutes, engineering_specialty: form.engineeringSpecialty, goal_track: form.goalTracks.join(","), vocabulary_weight: form.vocabularyWeight, grammar_weight: form.grammarWeight, listening_weight: form.listeningWeight, speaking_weight: form.speakingWeight, writing_weight: form.writingWeight }).eq("user_id", user.id);
+    setIsSaving(false);
+    if (error) return toast.error(error.message);
+    toast.success("تم حفظ النمط والأولويات لخطة اليوم القادمة.");
   }
 
-  function saveReminder() {
+  async function saveReminder() {
     if (!isAuthenticated) return toast.info("سجل دخولك لتفعيل تذكيرك الشخصي.");
-    reminderMutation.mutate({ enabled: reminderEnabled, hourUtc: reminderHourUtc });
+    if (!user?.id) return;
+    setIsSaving(true);
+    const { error } = await (getSupabase() as any).from("learner_profiles").update({ reminder_enabled: reminderEnabled, reminder_hour_utc: reminderHourUtc }).eq("user_id", user.id);
+    setIsSaving(false);
+    if (error) return toast.error(error.message);
+    toast.success("تم حفظ تفضيل التذكير.");
   }
 
   return <div className="mx-auto max-w-4xl space-y-6" dir="rtl">
@@ -95,7 +102,7 @@ export default function Settings() {
 
     <section className="rounded-[24px] bg-white p-5 soft-shadow sm:p-7"><div className="flex items-center gap-3"><div className="grid h-10 w-10 place-items-center rounded-2xl bg-[#f2eff9] text-[#7652ad]"><Gauge className="h-5 w-5" /></div><div><h2 className="font-bold">أوزان المهارات</h2><p className="text-xs text-muted-foreground">لن تلغي أي مهارة؛ تمنح المهارة الأعلى أولوية في كلماتها وأسئلتها وتطبيقها داخل النمط المختار.</p></div></div><div className="mt-5 rounded-2xl bg-[#f8f7fc] p-4 text-xs leading-6 text-[#5c5572]">النمط يضمن الخمس مهارات يوميًا. الأوزان تحدد أين تتوسع الأمثلة أو الصعوبة أو التطبيق الإضافي: {allocation.map(item => `${item.label} ${item.percentage}%`).join("، ")}.</div><div className="mt-4 divide-y divide-border">{rows.map(row => <div key={row.key} className="grid gap-3 py-4 sm:grid-cols-[180px_1fr_52px] sm:items-center"><div><p className="text-sm font-bold">{row.label}</p><p className="text-xs text-muted-foreground">{row.description}</p></div><input aria-label={`أولوية ${row.label}`} type="range" min="5" max="70" value={form[row.key]} onChange={event => updateWeight(row.key, event.target.value)} className="h-2 accent-[#7652ad]" /><span className="rounded-xl bg-[#f6f4fb] py-1.5 text-center text-sm font-bold text-[#7652ad]">{form[row.key]}%</span></div>)}</div></section>
 
-    <section className="rounded-[24px] bg-[#fff9eb] p-5 soft-shadow sm:p-7"><div className="flex items-center gap-3"><div className="grid h-10 w-10 place-items-center rounded-2xl bg-[#f5e3ae] text-[#9b6816]"><Bell className="h-5 w-5" /></div><div><h2 className="font-bold text-[#5d4519]">تذكير المراجعة</h2><p className="text-xs text-[#73582a]">يظهر مرة يوميًا داخل التطبيق عند وجود بطاقات أو مهام معلقة. الوقت بتوقيت UTC.</p></div></div><label className="mt-5 flex items-center justify-between rounded-2xl border border-[#eeddb7] bg-white/70 p-4"><span><span className="block text-sm font-bold text-[#5d4519]">فعّل التذكير اليومي</span><span className="mt-1 block text-xs text-[#8b6c38]">يمكن إيقافه مؤقتًا في أي وقت.</span></span><Checkbox checked={reminderEnabled} onCheckedChange={value => setReminderEnabled(Boolean(value))} /></label><div className="mt-4 grid gap-3 sm:grid-cols-[1fr_90px]"><input aria-label="ساعة التذكير بتوقيت UTC" type="range" min="0" max="23" value={reminderHourUtc} onChange={event => setReminderHourUtc(Number(event.target.value))} className="h-2 accent-[#9b6816]" /><span className="rounded-xl bg-white py-2 text-center font-['DM_Sans'] text-sm font-bold text-[#5d4519]">{String(reminderHourUtc).padStart(2, "0")}:00 UTC</span></div><Button variant="outline" onClick={saveReminder} disabled={reminderMutation.isPending} className="mt-5 w-full border-[#cda95c] bg-white text-[#765116] hover:bg-[#fffdf8]">{reminderMutation.isPending ? "جارٍ الحفظ..." : "حفظ تفضيل التذكير"}</Button></section>
-    <Button onClick={save} disabled={mutation.isPending} className="w-full bg-primary py-6 text-base"><Save className="ml-2 h-5 w-5" />{mutation.isPending ? "جارٍ حفظ النمط..." : "حفظ نمطي وخطتي الشخصية"}</Button>
+    <section className="rounded-[24px] bg-[#fff9eb] p-5 soft-shadow sm:p-7"><div className="flex items-center gap-3"><div className="grid h-10 w-10 place-items-center rounded-2xl bg-[#f5e3ae] text-[#9b6816]"><Bell className="h-5 w-5" /></div><div><h2 className="font-bold text-[#5d4519]">تذكير المراجعة</h2><p className="text-xs text-[#73582a]">يظهر مرة يوميًا داخل التطبيق عند وجود بطاقات أو مهام معلقة. الوقت بتوقيت UTC.</p></div></div><label className="mt-5 flex items-center justify-between rounded-2xl border border-[#eeddb7] bg-white/70 p-4"><span><span className="block text-sm font-bold text-[#5d4519]">فعّل التذكير اليومي</span><span className="mt-1 block text-xs text-[#8b6c38]">يمكن إيقافه مؤقتًا في أي وقت.</span></span><Checkbox checked={reminderEnabled} onCheckedChange={value => setReminderEnabled(Boolean(value))} /></label><div className="mt-4 grid gap-3 sm:grid-cols-[1fr_90px]"><input aria-label="ساعة التذكير بتوقيت UTC" type="range" min="0" max="23" value={reminderHourUtc} onChange={event => setReminderHourUtc(Number(event.target.value))} className="h-2 accent-[#9b6816]" /><span className="rounded-xl bg-white py-2 text-center font-['DM_Sans'] text-sm font-bold text-[#5d4519]">{String(reminderHourUtc).padStart(2, "0")}:00 UTC</span></div><Button variant="outline" onClick={saveReminder} disabled={isSaving} className="mt-5 w-full border-[#cda95c] bg-white text-[#765116] hover:bg-[#fffdf8]">{isSaving ? "جارٍ الحفظ..." : "حفظ تفضيل التذكير"}</Button></section>
+    <Button onClick={save} disabled={isSaving} className="w-full bg-primary py-6 text-base"><Save className="ml-2 h-5 w-5" />{isSaving ? "جارٍ حفظ النمط..." : "حفظ نمطي وخطتي الشخصية"}</Button>
   </div>;
 }
