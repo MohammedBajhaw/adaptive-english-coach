@@ -51,4 +51,13 @@ describe("حزمة المحتوى المحلي للأسابيع الأربعة �
       expect(examples.every(([, translation]) => /[\u0600-\u06FF]/.test(translation)), item.id).toBe(true);
     }
   });
+
+  it("يحتوي كل درس قواعد على مهمة كتابة قصيرة قابلة للاستخراج للواجهة", () => {
+    const grammarItems = localContentPayloads.filter(item => item.skill === "grammar");
+    for (const item of grammarItems) {
+      const writingSection = item.contentMarkdown.match(/(?:سؤالان للكتابة الهندسية(?: \(قصيرة\))?|مهمتان قصيرتان للكتابة الهندسية|(?:مهام?|مهمات) كتابة قصيرة|كتابة قصيرة(?: \([^)]*\))?)\s*:?\s*\n([\s\S]*?)(?:\n\n(?:مراجع|ملاحظة|تلميح|تذكير)|$)/)?.[1] ?? "";
+      const prompts = Array.from(writingSection.matchAll(/(?:^|\n)\d+[.)]\s*(.+)/g));
+      expect(prompts.length, item.id).toBeGreaterThan(0);
+    }
+  });
 });

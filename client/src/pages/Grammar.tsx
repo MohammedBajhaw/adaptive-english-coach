@@ -21,8 +21,9 @@ function parseGrammarLesson(markdown: string) {
   const questions = Array.from(markdown.matchAll(/\d+[.)]\s*(.+?)\nA\)\s*(.+?)\nB\)\s*(.+?)\nC\)\s*(.+?)\nAnswer:\s*([ABC])/g)).map(([, prompt, a, b, c, answer]) => ({
     prompt: prompt.trim(), choices: [a.trim(), b.trim(), c.trim()], answer: "ABC".indexOf(answer),
   } satisfies ParsedQuestion));
-  const writingSection = markdown.split(/(?:سؤالان للكتابة(?: الهندسية)?(?: \(قصيرة\))?|مطالعات كتابية قصيرة|مهمات كتابة قصيرة)[^:]*:/)[1] ?? "";
-  const writingPrompts = Array.from(writingSection.matchAll(/(?:^|\n)\d+[.)]\s*(.+)/g)).map(([, prompt]) => prompt.trim()).slice(0, 2);
+  const writingSection = markdown.match(/(?:سؤالان للكتابة الهندسية(?: \(قصيرة\))?|مهمتان قصيرتان للكتابة الهندسية|(?:مهام?|مهمات) كتابة قصيرة|كتابة قصيرة(?: \([^)]*\))?)\s*:?\s*\n([\s\S]*?)(?:\n\n(?:مراجع|ملاحظة|تلميح|تذكير)|$)/)?.[1] ?? "";
+  const extractedPrompts = Array.from(writingSection.matchAll(/(?:^|\n)\d+[.)]\s*(.+)/g)).map(([, prompt]) => prompt.trim()).filter(Boolean);
+  const writingPrompts = extractedPrompts.length ? extractedPrompts.slice(0, 2) : ["Write one short engineering sentence that applies today's grammar lesson."];
   return { explanation, questions, writingPrompts };
 }
 
@@ -59,7 +60,7 @@ export default function Grammar() {
 
   async function finishLesson() {
     const combined = productions.filter(Boolean).join("\n\n");
-    if (!taskId || questions.length === 0 || prompts.length === 0) return toast.error("يتم تجهيز درس اليوم المحلي؛ أعد المحاولة بعد لحظة.");
+    if (!taskId || questions.length === 0) return toast.error("يتم تجهيز درس اليوم المحلي؛ أعد المحاولة بعد لحظة.");
     if (answers.some(answer => answer === null) || productions.some(item => item.trim().split(/\s+/).length < 8)) return toast.error(`أجب عن ${questions.length} سؤالًا واكتب ${prompts.length} تطبيقًا هندسيًا من 8 كلمات على الأقل.`);
     const objectiveScore = Math.round((result.correct / result.total) * 70);
     const score = objectiveScore + (feedback ? Math.round(feedback.score * .3) : 30);
