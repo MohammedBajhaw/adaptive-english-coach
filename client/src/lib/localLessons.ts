@@ -2,6 +2,10 @@ import grammarWeek01 from "../../../server/content-library/weeks/week-01/grammar
 import grammarWeek02 from "../../../server/content-library/weeks/week-02/grammar.json";
 import grammarWeek03 from "../../../server/content-library/weeks/week-03/grammar.json";
 import grammarWeek04 from "../../../server/content-library/weeks/week-04/grammar.json";
+import conversationWeek01 from "../../../server/content-library/weeks/week-01/conversation.json";
+import conversationWeek02 from "../../../server/content-library/weeks/week-02/conversation.json";
+import conversationWeek03 from "../../../server/content-library/weeks/week-03/conversation.json";
+import conversationWeek04 from "../../../server/content-library/weeks/week-04/conversation.json";
 
 type GrammarItem = {
   id: string;
@@ -23,4 +27,12 @@ export function getTodayGrammarLesson() {
   const today = new Date();
   const dayIndex = Math.max(0, Math.floor((Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()) - base.getTime()) / 86_400_000));
   return grammarItems[dayIndex % grammarItems.length] ?? grammarItems[0];
+}
+
+export function getTodayConversationLesson() {
+  const items = [...conversationWeek01.items, ...conversationWeek02.items, ...conversationWeek03.items, ...conversationWeek04.items];
+  const base = new Date(Date.UTC(2026, 0, 1));
+  const today = new Date();
+  const dayIndex = Math.max(0, Math.floor((Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()) - base.getTime()) / 86_400_000));
+  return items[dayIndex % items.length] ?? items[0];
 }
