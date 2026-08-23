@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { getTodayListeningLesson } from "@/lib/localLessons";
 import { getSupabase } from "@/lib/supabase";
+import { completeSupabaseTaskByKey } from "@/lib/supabaseLearning";
 import { CheckCircle2, ExternalLink, Headphones, Lightbulb, ListChecks } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
@@ -44,7 +45,7 @@ export default function Listening() {
     const supabase: any = getSupabase();
     const [attempt, task] = await Promise.all([
       supabase.from("diagnostic_attempts").insert({ user_id: user.id, skill: "listening", evidence_type: "local-listening", prompt: `${lesson.source}: ${listeningItem.content.titleEnglish} · ${limits.label}`, response, score }),
-      supabase.from("daily_tasks").update({ status: "completed", completed_at: new Date().toISOString() }).eq("user_id", user.id).eq("task_key", "listening").eq("date_key", new Date().toISOString().slice(0, 10)),
+      completeSupabaseTaskByKey(user.id, "listening").then(() => ({ error: null })).catch(error => ({ error })),
     ]);
     setIsSaving(false);
     if (attempt.error || task.error) return toast.error(attempt.error?.message ?? task.error?.message ?? "تعذر حفظ نتيجة الاستماع.");

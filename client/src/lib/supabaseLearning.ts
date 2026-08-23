@@ -1,4 +1,5 @@
 import { getSupabase } from "@/lib/supabase";
+import { getTodayContentIds } from "@/lib/localLessons";
 
 const todayKey = () => new Date().toISOString().slice(0, 10);
 
@@ -41,10 +42,19 @@ export async function loadSupabaseDashboard(userId: string, displayName?: string
   const tasksResult = await supabase.from("daily_tasks").select("*").eq("user_id", userId).eq("date_key", dateKey).order("created_at");
   if (tasksResult.error) throw tasksResult.error;
   let tasks: any[] = tasksResult.data ?? [];
+  const contentIds = getTodayContentIds();
   if (!tasks.length) {
-    const inserted = await supabase.from("daily_tasks").insert(taskTemplates.map(task => ({ user_id: userId, date_key: dateKey, ...task }))).select("*");
+    const inserted = await supabase.from("daily_tasks").insert(taskTemplates.map(task => ({ user_id: userId, date_key: dateKey, ...task, content_id: contentIds[task.task_key as keyof typeof contentIds] }))).select("*");
     if (inserted.error) throw inserted.error;
     tasks = inserted.data ?? [];
+  } else {
+    await Promise.all(tasks.filter(task => !task.content_id).map(task => supabase.from("daily_tasks").update({ content_id: contentIds[task.task_key as keyof typeof contentIds] }).eq("id", task.id)));
+    tasks = tasks.map(task => ({ ...task, content_id: task.content_id ?? contentIds[task.task_key as keyof typeof contentIds] }));
+  }
+  const introducedItems = tasks.filter(task => task.content_id).map(task => ({ user_id: userId, content_id: task.content_id, skill: task.skill, status: "introduced", last_seen_at: new Date().toISOString() }));
+  if (introducedItems.length) {
+    const progress = await supabase.from("learner_content_progress").upsert(introducedItems, { onConflict: "user_id,content_id", ignoreDuplicates: true });
+    if (progress.error) throw progress.error;
   }
   const [snapshotResult, cardsResult, notificationsResult] = await Promise.all([
     supabase.from("skill_snapshots").select("*").eq("user_id", userId).order("created_at", { ascending: false }).limit(1).maybeSingle(),
@@ -86,8 +96,24 @@ export async function loadSupabaseDashboard(userId: string, displayName?: string
 }
 
 export async function setSupabaseTaskStatus(taskId: string, completed: boolean) {
-  const result = await (getSupabase() as any).from("daily_tasks").update({ status: completed ? "completed" : "pending", completed_at: completed ? new Date().toISOString() : null }).eq("id", taskId);
+  const supabase: any = getSupabase();
+  const result = await supabase.from("daily_tasks").update({ status: completed ? "completed" : "pending", completed_at: completed ? new Date().toISOString() : null }).eq("id", taskId).select("user_id,content_id,skill").maybeSingle();
   if (result.error) throw result.error;
+  if (!completed || !result.data?.content_id) return;
+  const task = result.data;
+  const existing = await supabase.from("learner_content_progress").select("completion_count").eq("user_id", task.user_id).eq("content_id", task.content_id).maybeSingle();
+  if (existing.error) throw existing.error;
+  const now = new Date().toISOString();
+  const progress = await supabase.from("learner_content_progress").upsert({ user_id: task.user_id, content_id: task.content_id, skill: task.skill, status: "completed", last_seen_at: now, completed_at: now, completion_count: Number(existing.data?.completion_count ?? 0) + 1 }, { onConflict: "user_id,content_id" });
+  if (progress.error) throw progress.error;
+}
+
+export async function completeSupabaseTaskByKey(userId: string, taskKey: string) {
+  const supabase: any = getSupabase();
+  const task = await supabase.from("daily_tasks").select("id").eq("user_id", userId).eq("task_key", taskKey).eq("date_key", todayKey()).maybeSingle();
+  if (task.error) throw task.error;
+  if (!task.data?.id) throw new Error("لم تُنشأ مهمة اليوم بعد. افتح لوحة اليوم أولًا.");
+  await setSupabaseTaskStatus(task.data.id, true);
 }
 
 export async function markSupabaseNotificationRead(notificationId: string) {

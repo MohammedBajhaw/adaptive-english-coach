@@ -4,6 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 import { getTodayWritingLesson } from "@/lib/localLessons";
 import { getSupabase } from "@/lib/supabase";
+import { completeSupabaseTaskByKey } from "@/lib/supabaseLearning";
 import { Bot, CheckCircle2, FilePenLine, Lightbulb, ListChecks } from "lucide-react";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
@@ -37,7 +38,7 @@ export default function Writing() {
     const supabase: any = getSupabase();
     const [attempt, task] = await Promise.all([
       supabase.from("diagnostic_attempts").insert({ user_id: user.id, skill: "writing", evidence_type: "local-writing-self-review", prompt: writingItem.content.titleEnglish, response: text, score }),
-      supabase.from("daily_tasks").update({ status: "completed", completed_at: new Date().toISOString() }).eq("user_id", user.id).eq("task_key", "writing").eq("date_key", new Date().toISOString().slice(0, 10)),
+      completeSupabaseTaskByKey(user.id, "writing").then(() => ({ error: null })).catch(error => ({ error })),
     ]);
     setIsSaving(false);
     if (attempt.error || task.error) return toast.error(attempt.error?.message ?? task.error?.message ?? "تعذر حفظ مهمة الكتابة.");

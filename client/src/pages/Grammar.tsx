@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { getTodayGrammarLesson } from "@/lib/localLessons";
 import { getSupabase } from "@/lib/supabase";
+import { completeSupabaseTaskByKey } from "@/lib/supabaseLearning";
 import { Bot, BookMarked, CheckCircle2, ExternalLink, FilePenLine, Lightbulb, MessageCircle, ShieldCheck } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
@@ -66,7 +67,7 @@ export default function Grammar() {
     setIsSaving(true);
     const supabase: any = getSupabase();
     const created = await supabase.from("diagnostic_attempts").insert({ user_id: user.id, skill: "grammar", evidence_type: feedback ? "grammar-local-self-review" : "grammar-local-lesson", prompt: questions.map((question, index) => `${index + 1}. ${question.prompt}`).join("\n"), response: combined, score });
-    const completed = await supabase.from("daily_tasks").update({ status: "completed", completed_at: new Date().toISOString() }).eq("user_id", user.id).eq("task_key", taskId).eq("date_key", new Date().toISOString().slice(0, 10));
+    const completed = await completeSupabaseTaskByKey(user.id, taskId).then(() => ({ error: null })).catch(error => ({ error }));
     setIsSaving(false);
     if (created.error || completed.error) return toast.error(created.error?.message ?? completed.error?.message ?? "تعذر حفظ نتيجة القواعد.");
     setSubmitted(true); toast.success("تم تصحيح الاختيارات وحفظ درس القواعد المحلي للمراجعة القادمة.");

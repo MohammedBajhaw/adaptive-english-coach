@@ -60,3 +60,20 @@ export function getTodayWritingLesson() {
   const dayIndex = Math.max(0, Math.floor((Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()) - base.getTime()) / 86_400_000));
   return items[dayIndex % items.length] ?? items[0];
 }
+
+export function getTodayContentIds() {
+  const grammar = getTodayGrammarLesson();
+  const conversation = getTodayConversationLesson();
+  const listening = getTodayListeningLesson();
+  const writing = getTodayWritingLesson();
+  const base = new Date(Date.UTC(2026, 0, 1));
+  const today = new Date();
+  const dayIndex = Math.max(0, Math.floor((Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()) - base.getTime()) / 86_400_000));
+  return {
+    vocabulary: `vocabulary.local.${dayIndex % 28}`,
+    grammar: grammar.id,
+    listening: listening.id,
+    speaking: conversation.id,
+    writing: writing.id,
+  };
+}

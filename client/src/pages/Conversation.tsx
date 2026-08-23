@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { getTodayConversationLesson } from "@/lib/localLessons";
 import { getSupabase } from "@/lib/supabase";
+import { completeSupabaseTaskByKey } from "@/lib/supabaseLearning";
 import { CheckCircle2, Clipboard, Clock3, MessageCircle, Sparkles, Star } from "lucide-react";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
@@ -34,7 +35,7 @@ export default function Conversation() {
     const supabase: any = getSupabase();
     const [attempt, task] = await Promise.all([
       supabase.from("diagnostic_attempts").insert({ user_id: user.id, skill: "speaking", evidence_type: "conversation-score", prompt, response: `Overall score: ${value}/10`, score: Math.round(value * 10) }),
-      supabase.from("daily_tasks").update({ status: "completed", completed_at: new Date().toISOString() }).eq("user_id", user.id).eq("task_key", "speaking").eq("date_key", new Date().toISOString().slice(0, 10)),
+      completeSupabaseTaskByKey(user.id, "speaking").then(() => ({ error: null })).catch(error => ({ error })),
     ]);
     setIsSaving(false);
     if (attempt.error || task.error) return toast.error(attempt.error?.message ?? task.error?.message ?? "تعذر حفظ تقييم المحادثة.");
