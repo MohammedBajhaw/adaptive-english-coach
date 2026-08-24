@@ -17,6 +17,17 @@ const defaultSnapshot = {
   summary: "ابدأ بمهام قصيرة، وسيبني النظام تقديرك من إجاباتك وإنجازاتك الفعلية.",
 };
 
+export function getTodaySupabaseTaskSeed(taskKey: string) {
+  const template = taskTemplates.find(task => task.task_key === taskKey);
+  if (!template) throw new Error("مفتاح المهمة اليومية غير معروف.");
+  const contentIds = getTodayContentIds();
+  return {
+    ...template,
+    date_key: todayKey(),
+    content_id: contentIds[taskKey as keyof typeof contentIds],
+  };
+}
+
 export type DashboardData = {
   profile: { dailyMinutes: number; studyMode: string; engineeringSpecialty: string; calibrationConfidence: number };
   snapshot: typeof defaultSnapshot;
@@ -112,8 +123,14 @@ export async function completeSupabaseTaskByKey(userId: string, taskKey: string)
   const supabase: any = getSupabase();
   const task = await supabase.from("daily_tasks").select("id").eq("user_id", userId).eq("task_key", taskKey).eq("date_key", todayKey()).maybeSingle();
   if (task.error) throw task.error;
-  if (!task.data?.id) throw new Error("لم تُنشأ مهمة اليوم بعد. افتح لوحة اليوم أولًا.");
-  await setSupabaseTaskStatus(task.data.id, true);
+  let taskId = task.data?.id;
+  if (!taskId) {
+    const seeded = await supabase.from("daily_tasks").upsert({ user_id: userId, ...getTodaySupabaseTaskSeed(taskKey) }, { onConflict: "user_id,date_key,task_key" }).select("id").single();
+    if (seeded.error) throw seeded.error;
+    taskId = seeded.data?.id;
+  }
+  if (!taskId) throw new Error("تعذر تجهيز مهمة اليوم.");
+  await setSupabaseTaskStatus(taskId, true);
 }
 
 export async function markSupabaseNotificationRead(notificationId: string) {
