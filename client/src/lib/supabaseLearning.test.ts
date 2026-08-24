@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getTodaySupabaseTaskSeed } from "./supabaseLearning";
+import { getTodaySupabaseTaskSeed, pendingTaskIdsWithTodayEvidence } from "./supabaseLearning";
 import { getTodayContentIds } from "./localLessons";
 
 describe("getTodaySupabaseTaskSeed", () => {
@@ -13,5 +13,14 @@ describe("getTodaySupabaseTaskSeed", () => {
 
   it("يرفض مفتاح مهمة غير معروف بدل إنشاء صف غير صالح", () => {
     expect(() => getTodaySupabaseTaskSeed("unknown")).toThrow("مفتاح المهمة اليومية غير معروف");
+  });
+
+  it("يستعيد إتمام مهمة اليوم عندما كانت المحاولة محفوظة قبل إنشاء المهمة", () => {
+    const tasks = [
+      { id: "grammar-task", skill: "grammar", status: "pending" },
+      { id: "writing-task", skill: "writing", status: "pending" },
+      { id: "done-listening", skill: "listening", status: "completed" },
+    ];
+    expect(pendingTaskIdsWithTodayEvidence(tasks, [{ skill: "grammar" }, { skill: "listening" }])).toEqual(["grammar-task"]);
   });
 });

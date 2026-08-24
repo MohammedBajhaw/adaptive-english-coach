@@ -28,6 +28,11 @@ export function getTodaySupabaseTaskSeed(taskKey: string) {
   };
 }
 
+export function pendingTaskIdsWithTodayEvidence(tasks: Array<{ id: string; skill: string; status: string }>, attempts: Array<{ skill: string }>) {
+  const attemptedSkills = new Set(attempts.map(attempt => attempt.skill));
+  return tasks.filter(task => task.status !== "completed" && attemptedSkills.has(task.skill)).map(task => task.id);
+}
+
 export type DashboardData = {
   profile: { dailyMinutes: number; studyMode: string; engineeringSpecialty: string; calibrationConfidence: number };
   snapshot: typeof defaultSnapshot;
@@ -66,6 +71,15 @@ export async function loadSupabaseDashboard(userId: string, displayName?: string
   if (introducedItems.length) {
     const progress = await supabase.from("learner_content_progress").upsert(introducedItems, { onConflict: "user_id,content_id", ignoreDuplicates: true });
     if (progress.error) throw progress.error;
+  }
+  const dayStart = `${dateKey}T00:00:00.000Z`;
+  const dayEnd = new Date(Date.parse(dayStart) + 86_400_000).toISOString();
+  const attemptsResult = await supabase.from("diagnostic_attempts").select("skill").eq("user_id", userId).gte("created_at", dayStart).lt("created_at", dayEnd);
+  if (attemptsResult.error) throw attemptsResult.error;
+  const recoveredTaskIds = pendingTaskIdsWithTodayEvidence(tasks, attemptsResult.data ?? []);
+  if (recoveredTaskIds.length) {
+    await Promise.all(recoveredTaskIds.map(taskId => setSupabaseTaskStatus(taskId, true)));
+    tasks = tasks.map(task => recoveredTaskIds.includes(task.id) ? { ...task, status: "completed" } : task);
   }
   const [snapshotResult, cardsResult, notificationsResult] = await Promise.all([
     supabase.from("skill_snapshots").select("*").eq("user_id", userId).order("created_at", { ascending: false }).limit(1).maybeSingle(),
