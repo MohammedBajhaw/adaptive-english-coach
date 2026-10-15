@@ -3,16 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { getTodayListeningLesson } from "@/lib/localLessons";
 import { getSupabase } from "@/lib/supabase";
+import { useStudyMode } from "@/lib/studyMode";
 import { completeSupabaseTaskByKey } from "@/lib/supabaseLearning";
 import { CheckCircle2, ExternalLink, Headphones, Lightbulb, ListChecks } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
-
-const modeLimits = {
-  steady: { label: "ثبات يومي", minutes: 1, questions: 2 },
-  balanced: { label: "تقدم متوازن", minutes: 2, questions: 4 },
-  intensive: { label: "تحدٍّ مكثف", minutes: 4, questions: 6 },
-} as const;
 
 function parseListeningLesson(markdown: string) {
   const source = markdown.match(/^Source:\s*(.+)$/mi)?.[1]?.trim() ?? "مصدر الاستماع";
@@ -25,7 +20,8 @@ function parseListeningLesson(markdown: string) {
 
 export default function Listening() {
   const { isAuthenticated, user } = useAuth();
-  const limits = modeLimits.balanced;
+  const { settings: mode } = useStudyMode(user?.id);
+  const limits = { label: mode.label, minutes: mode.listeningMinutes, questions: mode.listeningQuestions };
   const listeningItem = useMemo(() => ({ task: { id: "listening" }, content: getTodayListeningLesson() }), []);
   const lesson = useMemo(() => parseListeningLesson(listeningItem.content.contentMarkdown), [listeningItem]);
   const questions = useMemo(() => lesson.questions.slice(0, limits.questions), [lesson.questions, limits.questions]);

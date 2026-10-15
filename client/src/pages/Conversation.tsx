@@ -3,12 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { getTodayConversationLesson } from "@/lib/localLessons";
 import { getSupabase } from "@/lib/supabase";
+import { useStudyMode } from "@/lib/studyMode";
 import { completeSupabaseTaskByKey } from "@/lib/supabaseLearning";
 import { CheckCircle2, Clipboard, Clock3, MessageCircle, Sparkles, Star } from "lucide-react";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
 
-const minutesByMode = { steady: 5, balanced: 10, intensive: 13 } as const;
 
 function parseConversationLesson(markdown: string) {
   const topicArabic = markdown.match(/موضوع اليوم \(بالعربية\):\s*(.+)/)?.[1]?.trim() ?? "موضوع مهني في الميكاترونكس";
@@ -24,7 +24,7 @@ export default function Conversation() {
   const [isSaving, setIsSaving] = useState(false);
   const conversationItem = useMemo(() => ({ task: { id: "speaking" }, content: getTodayConversationLesson() }), []);
   const lesson = useMemo(() => parseConversationLesson(conversationItem.content.contentMarkdown), [conversationItem]);
-  const targetMinutes = minutesByMode.balanced;
+  const targetMinutes = useStudyMode(user?.id).settings.conversationMinutes;
   const prompt = conversationItem.content.contentMarkdown;
   async function copyPrompt() { try { await navigator.clipboard.writeText(prompt); toast.success("تم نسخ برومبت المحادثة المحلي."); } catch { toast.error("تعذر النسخ تلقائيًا؛ انسخ النص يدويًا."); } }
   async function saveScore() {

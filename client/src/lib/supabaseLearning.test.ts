@@ -24,3 +24,18 @@ describe("getTodaySupabaseTaskSeed", () => {
     expect(pendingTaskIdsWithTodayEvidence(tasks, [{ skill: "grammar" }, { skill: "listening" }])).toEqual(["grammar-task"]);
   });
 });
+
+describe("local vocabulary cards", () => {
+  it("parses every engineering word with IPA, meaning and five translated examples", async () => {
+    const { getLocalVocabularyCards } = await import("./localLessons");
+    const cards = getLocalVocabularyCards();
+    expect(cards).toHaveLength(28);
+    expect(new Set(cards.map(card => card.content_id)).size).toBe(28);
+    for (const card of cards) {
+      expect(card.term && card.arabic_meaning && card.ipa && card.part_of_speech).toBeTruthy();
+      expect(card.examples).toHaveLength(5);
+      expect(card.examples.every(example => example.english && /[؀-ۿ]/.test(example.arabic))).toBe(true);
+    }
+    expect(cards[0]).toMatchObject({ content_id: "vocabulary.w01.d01", term: "sensor", ipa: "/ˈsɛn.sər/" });
+  });
+});

@@ -1,6 +1,7 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { loadSupabaseDueCards, rateSupabaseCard } from "@/lib/supabaseLearning";
+import { loadStudyMode, studyModeSettings } from "@/lib/studyMode";
+import { completeSupabaseTaskByKey, loadSupabaseDueCards, rateSupabaseCard } from "@/lib/supabaseLearning";
 import { ArrowLeft, AudioLines, BookOpenCheck, Check, CircleHelp, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
@@ -17,14 +18,21 @@ export default function Cards() {
   const [isRating, setIsRating] = useState(false);
   useEffect(() => {
     if (!isAuthenticated || !user?.id) { setCards(previewCards); return; }
-    void loadSupabaseDueCards(user.id).then(setCards).catch(error => toast.error(error.message));
+    void loadStudyMode(user.id).then(mode => loadSupabaseDueCards(user.id, studyModeSettings[mode].newWords)).then(setCards).catch(error => toast.error(error.message));
   }, [isAuthenticated, user?.id]);
   const current = cards[0];
   function speak(sentence: string) { if (!("speechSynthesis" in window)) return toast.info("النطق غير متاح في هذا المتصفح."); window.speechSynthesis.cancel(); const utterance = new SpeechSynthesisUtterance(sentence); utterance.lang = "en-US"; utterance.rate = .9; window.speechSynthesis.speak(utterance); }
   async function chooseRating(rating: typeof ratings[number]["key"]) {
     if (!isAuthenticated || !user?.id) return toast.info("سجل دخولك لتُحفظ قوة هذه البطاقة وتظهر في موعدها التالي.");
     setIsRating(true);
-    try { await rateSupabaseCard(user.id, current, rating); setCards(items => items.filter(item => item.id !== current.id)); toast.success("تمت الجدولة حسب قوة تذكرك."); }
+    try {
+      await rateSupabaseCard(user.id, current, rating);
+      const remaining = cards.filter(item => item.id !== current.id);
+      setCards(remaining);
+      // Reviewing the last due card completes today's vocabulary task.
+      if (remaining.length === 0) { await completeSupabaseTaskByKey(user.id, "vocabulary"); toast.success("أنهيت كل البطاقات المستحقة واكتملت مهمة المفردات."); }
+      else toast.success("تمت الجدولة حسب قوة تذكرك.");
+    }
     catch (error) { toast.error(error instanceof Error ? error.message : "تعذر حفظ مراجعة البطاقة."); }
     finally { setIsRating(false); }
   }

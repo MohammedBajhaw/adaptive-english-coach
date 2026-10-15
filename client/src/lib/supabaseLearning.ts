@@ -1,5 +1,5 @@
 import { getSupabase } from "@/lib/supabase";
-import { getTodayContentIds } from "@/lib/localLessons";
+import { getLocalVocabularyCards, getTodayContentIds } from "@/lib/localLessons";
 
 const todayKey = () => new Date().toISOString().slice(0, 10);
 
@@ -152,17 +152,18 @@ export async function markSupabaseNotificationRead(notificationId: string) {
   if (result.error) throw result.error;
 }
 
-const starterCard = {
-  term: "reliable", arabic_meaning: "موثوق؛ يمكن الاعتماد عليه", part_of_speech: "adjective", ipa: "/rɪˈlaɪ.ə.bəl/", engineering_domain: "general engineering",
-  examples: [{ english: "This sensor provides reliable data.", arabic: "يوفر هذا المستشعر بيانات موثوقة." }, { english: "We need a reliable power supply.", arabic: "نحتاج إلى مصدر طاقة موثوق." }, { english: "The test results are reliable.", arabic: "نتائج الاختبار موثوقة." }, { english: "A reliable design reduces risk.", arabic: "التصميم الموثوق يقلل المخاطر." }, { english: "The team chose a reliable material.", arabic: "اختار الفريق مادة موثوقة." }],
-};
-
-export async function loadSupabaseDueCards(userId: string) {
+// Introduces up to `newWordsPerDay` unseen engineering words per UTC day, then returns the due cards.
+export async function loadSupabaseDueCards(userId: string, newWordsPerDay: number) {
   const supabase: any = getSupabase();
-  const existing = await supabase.from("vocabulary_cards").select("*").eq("user_id", userId).limit(1);
+  const existing = await supabase.from("vocabulary_cards").select("content_id, created_at").eq("user_id", userId);
   if (existing.error) throw existing.error;
-  if (!(existing.data ?? []).length) {
-    const seeded = await supabase.from("vocabulary_cards").insert({ user_id: userId, content_id: "vocabulary.starter.reliable", ...starterCard, next_review_at: new Date().toISOString() });
+  const rows: Array<{ content_id: string | null; created_at: string }> = existing.data ?? [];
+  const introducedToday = rows.filter(row => row.created_at.slice(0, 10) === todayKey() && row.content_id?.startsWith("vocabulary.w")).length;
+  const known = new Set(rows.map(row => row.content_id));
+  const fresh = getLocalVocabularyCards().filter(card => !known.has(card.content_id)).slice(0, Math.max(0, newWordsPerDay - introducedToday));
+  if (fresh.length) {
+    const now = new Date().toISOString();
+    const seeded = await supabase.from("vocabulary_cards").upsert(fresh.map(card => ({ user_id: userId, ...card, next_review_at: now })), { onConflict: "user_id,content_id", ignoreDuplicates: true });
     if (seeded.error) throw seeded.error;
   }
   const result = await supabase.from("vocabulary_cards").select("*").eq("user_id", userId).lte("next_review_at", new Date().toISOString()).order("next_review_at");

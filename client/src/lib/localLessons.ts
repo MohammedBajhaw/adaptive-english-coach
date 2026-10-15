@@ -14,6 +14,10 @@ import writingWeek01 from "../../../server/content-library/weeks/week-01/writing
 import writingWeek02 from "../../../server/content-library/weeks/week-02/writing.json";
 import writingWeek03 from "../../../server/content-library/weeks/week-03/writing.json";
 import writingWeek04 from "../../../server/content-library/weeks/week-04/writing.json";
+import vocabularyWeek01 from "../../../server/content-library/weeks/week-01/vocabulary.json";
+import vocabularyWeek02 from "../../../server/content-library/weeks/week-02/vocabulary.json";
+import vocabularyWeek03 from "../../../server/content-library/weeks/week-03/vocabulary.json";
+import vocabularyWeek04 from "../../../server/content-library/weeks/week-04/vocabulary.json";
 
 type GrammarItem = {
   id: string;
@@ -76,4 +80,37 @@ export function getTodayContentIds() {
     speaking: conversation.id,
     writing: writing.id,
   };
+}
+
+export type LocalVocabularyCard = {
+  content_id: string;
+  term: string;
+  arabic_meaning: string;
+  part_of_speech: string;
+  ipa: string;
+  engineering_domain: string;
+  examples: Array<{ english: string; arabic: string }>;
+};
+
+function field(markdown: string, label: string) {
+  return markdown.match(new RegExp(`^${label}:\\s*(.+)$`, "mi"))?.[1]?.trim() ?? "";
+}
+
+export function parseVocabularyItem(item: { id: string; titleEnglish: string; contentMarkdown: string }): LocalVocabularyCard {
+  const markdown = item.contentMarkdown;
+  const examples = Array.from(markdown.matchAll(/^\d+\.\s*(.+)\n\s+(.+)$/gm)).map(([, english, arabic]) => ({ english: english.trim(), arabic: arabic.trim() }));
+  return {
+    content_id: item.id,
+    term: field(markdown, "Term") || item.titleEnglish,
+    arabic_meaning: field(markdown, "Arabic meaning"),
+    part_of_speech: field(markdown, "Part of speech"),
+    ipa: field(markdown, "IPA"),
+    engineering_domain: field(markdown, "Mechatronics domain") || "mechatronics",
+    examples,
+  };
+}
+
+// Engineering vocabulary in curriculum order; new cards are introduced from the front of this list.
+export function getLocalVocabularyCards() {
+  return [...vocabularyWeek01.items, ...vocabularyWeek02.items, ...vocabularyWeek03.items, ...vocabularyWeek04.items].map(parseVocabularyItem);
 }
