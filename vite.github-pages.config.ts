@@ -16,7 +16,8 @@ export default defineConfig({
   },
   envDir: path.resolve(import.meta.dirname),
   root: path.resolve(import.meta.dirname, "client"),
-  publicDir: path.resolve(import.meta.dirname, "client", "public"),
+  // client/public only holds the Manus dev debug collector, which the static site must not ship.
+  publicDir: false,
   base: process.env.GITHUB_PAGES === "true" ? `/${repository}/` : "/",
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/github-pages"),
