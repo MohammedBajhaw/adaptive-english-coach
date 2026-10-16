@@ -1,7 +1,8 @@
 // Supabase Edge Function: AI writing correction through any OpenAI-compatible provider.
 // The provider key lives only in Supabase secrets (AI_CORRECTION_*), never in the browser.
 // Deploy: supabase functions deploy correct-writing
-// Secrets: supabase secrets set AI_CORRECTION_BASE_URL=... AI_CORRECTION_API_KEY=... AI_CORRECTION_MODEL=...
+// Secrets: AI_CORRECTION_BASE_URL, AI_CORRECTION_API_KEY, AI_CORRECTION_MODEL and optionally AI_CORRECTION_FALLBACK_MODEL
+// (used once when the main model answers 429 or 5xx). Set them with `supabase secrets set` or in the dashboard.
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -41,19 +42,33 @@ Deno.serve(async request => {
   if (typeof text !== "string" || text.trim().length === 0 || text.length > 5000) return json({ error: "text is required (max 5000 chars)" }, 400);
 
   const normalized = baseUrl.replace(/\/+$/, "");
-  const response = await fetch(normalized.endsWith("/chat/completions") ? normalized : `${normalized}/chat/completions`, {
-    method: "POST",
-    headers: { "content-type": "application/json", authorization: `Bearer ${apiKey}` },
-    body: JSON.stringify({
-      model,
-      temperature: 0.2,
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: `Context: ${typeof context === "string" ? context.slice(0, 1000) : "Engineering English practice"}\n\nLearner text:\n${text}` },
-      ],
-    }),
-  });
-  if (!response.ok) return json({ error: `Provider error ${response.status}` }, 502);
+  const endpoint = normalized.endsWith("/chat/completions") ? normalized : `${normalized}/chat/completions`;
+  const fallbackModel = Deno.env.get("AI_CORRECTION_FALLBACK_MODEL");
+
+  async function ask(modelName: string) {
+    return await fetch(endpoint, {
+      method: "POST",
+      headers: { "content-type": "application/json", authorization: `Bearer ${apiKey}` },
+      body: JSON.stringify({
+        model: modelName,
+        temperature: 0.2,
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: `Context: ${typeof context === "string" ? context.slice(0, 1000) : "Engineering English practice"}\n\nLearner text:\n${text}` },
+        ],
+      }),
+    });
+  }
+
+  let response = await ask(model);
+  if ((response.status === 429 || response.status >= 500) && fallbackModel && fallbackModel !== model) {
+    console.warn(`Model ${model} answered ${response.status}; retrying with ${fallbackModel}`);
+    response = await ask(fallbackModel);
+  }
+  if (!response.ok) {
+    console.error(`Provider error ${response.status}: ${(await response.text().catch(() => "")).slice(0, 300)}`);
+    return json({ error: `Provider error ${response.status}` }, 502);
+  }
 
   try {
     const payload = await response.json() as { choices?: Array<{ message?: { content?: string | null } }> };

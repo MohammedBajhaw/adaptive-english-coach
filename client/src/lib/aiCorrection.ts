@@ -9,7 +9,8 @@ export async function requestWritingCorrection(text: string, context: string): P
   try {
     const supabase: any = getSupabase();
     const { data, error } = await supabase.functions.invoke("correct-writing", { body: { text, context } });
-    if (error || !data?.available || !data.feedback) return null;
+    if (error) { console.warn("[correct-writing]", error); return null; }
+    if (!data?.available || !data.feedback) return null;
     return data.feedback as WritingFeedback;
   } catch {
     return null;
