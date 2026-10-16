@@ -13,6 +13,8 @@ function publish(next: User | null, setUser: (user: User | null) => void) {
 export function useSupabaseAuth() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(isSupabaseConfigured);
+  // True after the learner opens a password-reset link: the app then asks for a new password.
+  const [recovery, setRecovery] = useState(false);
 
   useEffect(() => {
     if (!isSupabaseConfigured) return;
@@ -21,7 +23,8 @@ export function useSupabaseAuth() {
       publish(data.user ?? null, setUser);
       setLoading(false);
     });
-    const { data: subscription } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: subscription } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "PASSWORD_RECOVERY") setRecovery(true);
       publish(session?.user ?? null, setUser);
       setLoading(false);
     });
@@ -46,10 +49,20 @@ export function useSupabaseAuth() {
     return getSupabase().auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin + import.meta.env.BASE_URL } });
   }, []);
 
+  const requestPasswordReset = useCallback(async (email: string) => {
+    return getSupabase().auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + import.meta.env.BASE_URL });
+  }, []);
+
+  const updatePassword = useCallback(async (password: string) => {
+    const result = await getSupabase().auth.updateUser({ password });
+    if (!result.error) setRecovery(false);
+    return result;
+  }, []);
+
   const logout = useCallback(async () => {
     if (!isSupabaseConfigured) return;
     await getSupabase().auth.signOut();
   }, []);
 
-  return { user, loading, isAuthenticated: Boolean(user), isConfigured: isSupabaseConfigured, signInWithEmail, signInWithPassword, signUpWithPassword, logout };
+  return { user, loading, isAuthenticated: Boolean(user), isConfigured: isSupabaseConfigured, signInWithEmail, signInWithPassword, signUpWithPassword, requestPasswordReset, updatePassword, recovery, dismissRecovery: () => setRecovery(false), logout };
 }

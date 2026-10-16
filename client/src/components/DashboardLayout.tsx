@@ -1,6 +1,7 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import InstallPrompt from "@/components/InstallPrompt";
 import LoginDialog from "@/components/LoginDialog";
+import PasswordDialog from "@/components/PasswordDialog";
 import { Button } from "@/components/ui/button";
 import {
   BookOpenCheck,
@@ -12,6 +13,7 @@ import {
   FilePenLine,
   Flame,
   Headphones,
+  KeyRound,
   Layers,
   LayoutDashboard,
   LogIn,
@@ -20,7 +22,7 @@ import {
   Settings2,
   X,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { toast } from "sonner";
 
@@ -42,10 +44,13 @@ const phoneTabs = menuItems.filter(item => phonePaths.includes(item.path));
 const moreItems = menuItems.filter(item => !phonePaths.includes(item.path));
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const { user, isAuthenticated, logout, signInWithEmail, signInWithPassword, signUpWithPassword, isConfigured } = useAuth();
+  const { user, isAuthenticated, logout, signInWithEmail, signInWithPassword, signUpWithPassword, requestPasswordReset, updatePassword, recovery, dismissRecovery, isConfigured } = useAuth();
   const [location, setLocation] = useLocation();
   const [loginOpen, setLoginOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
+  const [passwordOpen, setPasswordOpen] = useState(false);
+  // Opening a password-reset link signs the learner in and asks for a new password.
+  useEffect(() => { if (recovery) setPasswordOpen(true); }, [recovery]);
   const moreActive = moreItems.some(item => item.path === location);
 
   function requestSignIn() {
@@ -82,7 +87,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <div className="grid h-9 w-9 place-items-center rounded-xl bg-white/12"><CircleUserRound className="h-5 w-5" /></div>
             <div className="min-w-0 text-right"><p className="truncate text-sm font-semibold">{isAuthenticated ? user?.name || "متعلم" : "وضع المعاينة"}</p><p className="mt-0.5 text-xs text-emerald-50/65">{isAuthenticated ? "ملفك الشخصي نشط" : "سجل الدخول لحفظ تقدمك"}</p></div>
           </div>
-          {isAuthenticated ? <button onClick={logout} className="mt-4 text-xs text-emerald-100 underline underline-offset-4">تسجيل الخروج</button> : <Button onClick={requestSignIn} className="mt-4 w-full bg-[#d8ad4d] text-[#123b3b] hover:bg-[#e8bf62]"><LogIn className="ml-2 h-4 w-4" />تسجيل الدخول</Button>}
+          {isAuthenticated ? <div className="mt-4 flex items-center justify-between gap-3 text-xs text-emerald-100"><button onClick={() => setPasswordOpen(true)} className="underline underline-offset-4">كلمة المرور</button><button onClick={logout} className="underline underline-offset-4">تسجيل الخروج</button></div> : <Button onClick={requestSignIn} className="mt-4 w-full bg-[#d8ad4d] text-[#123b3b] hover:bg-[#e8bf62]"><LogIn className="ml-2 h-4 w-4" />تسجيل الدخول</Button>}
         </div>
       </aside>
       <div className="min-h-dvh lg:mr-[278px]">
@@ -112,7 +117,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               {isAuthenticated ? (
                 <div className="flex items-center justify-between gap-3 px-2">
                   <div className="min-w-0 text-right"><p className="truncate text-sm font-semibold text-primary">{user?.name || "متعلم"}</p><p className="text-xs text-muted-foreground">ملفك الشخصي نشط</p></div>
-                  <Button variant="outline" size="sm" onClick={() => { setMoreOpen(false); void logout(); }} className="h-10 shrink-0"><LogOut className="ml-1.5 h-4 w-4" />خروج</Button>
+                  <div className="flex shrink-0 gap-2">
+                    <Button variant="outline" size="sm" onClick={() => { setMoreOpen(false); setPasswordOpen(true); }} className="h-10"><KeyRound className="ml-1.5 h-4 w-4" />كلمة المرور</Button>
+                    <Button variant="outline" size="sm" onClick={() => { setMoreOpen(false); void logout(); }} className="h-10"><LogOut className="ml-1.5 h-4 w-4" />خروج</Button>
+                  </div>
                 </div>
               ) : <Button onClick={requestSignIn} className="h-11 w-full"><LogIn className="ml-2 h-4 w-4" />تسجيل الدخول لحفظ تقدمك</Button>}
             </div>
@@ -127,7 +135,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <button onClick={() => setMoreOpen(open => !open)} aria-expanded={moreOpen} className={`flex min-h-[52px] flex-col items-center justify-center gap-1 rounded-xl text-[11px] font-medium ${moreActive || moreOpen ? "text-primary" : "text-muted-foreground"}`}><Ellipsis className="h-[22px] w-[22px]" /><span>المزيد</span></button>
         </nav>
       </div>
-      <LoginDialog open={loginOpen} onOpenChange={setLoginOpen} signInWithEmail={signInWithEmail} signInWithPassword={signInWithPassword} signUpWithPassword={signUpWithPassword} />
+      <LoginDialog open={loginOpen} onOpenChange={setLoginOpen} signInWithEmail={signInWithEmail} signInWithPassword={signInWithPassword} signUpWithPassword={signUpWithPassword} requestPasswordReset={requestPasswordReset} />
+      <PasswordDialog open={passwordOpen} onOpenChange={open => { setPasswordOpen(open); if (!open) dismissRecovery(); }} updatePassword={updatePassword} recovery={recovery} />
     </div>
   );
 }

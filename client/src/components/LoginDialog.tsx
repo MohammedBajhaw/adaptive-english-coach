@@ -13,6 +13,7 @@ type Props = {
   signInWithEmail: (email: string) => Promise<AuthResult>;
   signInWithPassword: (email: string, password: string) => Promise<AuthResult>;
   signUpWithPassword: (email: string, password: string) => Promise<AuthResult>;
+  requestPasswordReset: (email: string) => Promise<AuthResult>;
 };
 
 type Mode = "password" | "link";
@@ -25,7 +26,7 @@ function friendlyError(message: string) {
   return message;
 }
 
-export default function LoginDialog({ open, onOpenChange, signInWithEmail, signInWithPassword, signUpWithPassword }: Props) {
+export default function LoginDialog({ open, onOpenChange, signInWithEmail, signInWithPassword, signUpWithPassword, requestPasswordReset }: Props) {
   const [mode, setMode] = useState<Mode>("password");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -59,6 +60,17 @@ export default function LoginDialog({ open, onOpenChange, signInWithEmail, signI
     close(false);
   }
 
+  async function forgotPassword() {
+    if (!email.trim()) return toast.info("اكتب بريدك في الخانة أولًا، ثم اضغط «نسيت كلمة المرور؟».");
+    const clean = validEmail();
+    if (!clean) return;
+    setBusy(true);
+    const { error } = await requestPasswordReset(clean);
+    setBusy(false);
+    if (error) return toast.error(friendlyError(error.message));
+    toast.success("أرسلنا إلى بريدك رابطًا لتعيين كلمة مرور جديدة. افتحه من هذا الجهاز.");
+  }
+
   async function sendLink(event: React.FormEvent) {
     event.preventDefault();
     const clean = validEmail();
@@ -89,6 +101,7 @@ export default function LoginDialog({ open, onOpenChange, signInWithEmail, signI
             <Input type="password" autoComplete="current-password" dir="ltr" value={password} onChange={event => setPassword(event.target.value)} placeholder="كلمة المرور (8 أحرف أو أكثر)" className="h-12 text-left" />
             <Button type="submit" disabled={busy} className="h-12 w-full"><KeyRound className="ml-2 h-4 w-4" />{busy ? "لحظة..." : "دخول"}</Button>
             <Button type="button" variant="outline" disabled={busy} onClick={() => void submitPassword("up")} className="h-12 w-full">إنشاء حساب جديد</Button>
+            <button type="button" disabled={busy} onClick={() => void forgotPassword()} className="w-full py-2 text-center text-sm text-muted-foreground underline underline-offset-4">نسيت كلمة المرور؟</button>
           </form>
         )}
 

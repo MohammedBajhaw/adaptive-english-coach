@@ -39,6 +39,10 @@ export function useAuth(options?: UseAuthOptions) {
     signInWithEmail: supabaseAuth.signInWithEmail,
     signInWithPassword: supabaseAuth.signInWithPassword,
     signUpWithPassword: supabaseAuth.signUpWithPassword,
+    requestPasswordReset: supabaseAuth.requestPasswordReset,
+    updatePassword: supabaseAuth.updatePassword,
+    recovery: supabaseAuth.recovery,
+    dismissRecovery: supabaseAuth.dismissRecovery,
     isConfigured: supabaseAuth.isConfigured,
   };
 }
