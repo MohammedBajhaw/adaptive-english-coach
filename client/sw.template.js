@@ -37,3 +37,33 @@ self.addEventListener("fetch", event => {
     })),
   );
 });
+
+// Reminders sent by the server (Web Push). Every push must show a notification.
+self.addEventListener("push", event => {
+  let data = {};
+  try { data = event.data ? event.data.json() : {}; } catch { data = { body: event.data ? event.data.text() : "" }; }
+  event.waitUntil(self.registration.showNotification(data.title || "مهندس الإنجليزية", {
+    body: data.body || "",
+    icon: scopeUrl("icons/icon-192.png"),
+    badge: scopeUrl("icons/icon-192.png"),
+    tag: data.tag || "reminder",
+    renotify: true,
+    lang: "ar",
+    dir: "rtl",
+    data: { url: scopeUrl(data.url || "") },
+  }));
+});
+
+self.addEventListener("notificationclick", event => {
+  event.notification.close();
+  const target = (event.notification.data && event.notification.data.url) || scopeUrl("./");
+  event.waitUntil(self.clients.matchAll({ type: "window", includeUncontrolled: true }).then(windows => {
+    for (const client of windows) {
+      if (client.url.startsWith(self.registration.scope) && "focus" in client) {
+        if ("navigate" in client) client.navigate(target);
+        return client.focus();
+      }
+    }
+    return self.clients.openWindow(target);
+  }));
+});

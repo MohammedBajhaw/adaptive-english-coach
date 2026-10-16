@@ -1,4 +1,5 @@
 import { useAuth } from "@/_core/hooks/useAuth";
+import ReminderSettings from "@/components/ReminderSettings";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { getSupabase } from "@/lib/supabase";
@@ -44,8 +45,6 @@ const initial: FormState = { studyMode: "balanced", engineeringSpecialty: "mecha
 export default function Settings() {
   const { isAuthenticated, user } = useAuth();
   const [form, setForm] = useState<FormState>(initial);
-  const [reminderEnabled, setReminderEnabled] = useState(true);
-  const [reminderHourUtc, setReminderHourUtc] = useState(17);
   const [isSaving, setIsSaving] = useState(false);
   const activeMode = modes.find(mode => mode.key === form.studyMode) ?? modes[1]!;
   const weightsTotal = rows.reduce((sum, row) => sum + form[row.key], 0);
@@ -57,8 +56,6 @@ export default function Settings() {
       const savedMode = modes.some(mode => mode.key === data.study_mode) ? data.study_mode as StudyMode : "balanced";
       const savedTracks = String(data.goal_track).split(",").filter(track => tracks.some(item => item.key === track)) as GoalTrack[];
       setForm({ studyMode: savedMode, engineeringSpecialty: data.engineering_specialty, goalTracks: savedTracks.length ? savedTracks : ["job_interviews"], vocabularyWeight: data.vocabulary_weight, grammarWeight: data.grammar_weight, listeningWeight: data.listening_weight, speakingWeight: data.speaking_weight, writingWeight: data.writing_weight });
-      setReminderEnabled(Boolean(data.reminder_enabled));
-      setReminderHourUtc(data.reminder_hour_utc);
     });
   }, [isAuthenticated, user?.id]);
   const allocation = useMemo(() => rows.map(row => ({ ...row, percentage: Math.round(form[row.key] / weightsTotal * 100) })), [form, weightsTotal]);
@@ -81,16 +78,6 @@ export default function Settings() {
     toast.success("تم حفظ النمط والأولويات لخطة اليوم القادمة.");
   }
 
-  async function saveReminder() {
-    if (!isAuthenticated) return toast.info("سجل دخولك لتفعيل تذكيرك الشخصي.");
-    if (!user?.id) return;
-    setIsSaving(true);
-    const { error } = await (getSupabase() as any).from("learner_profiles").update({ reminder_enabled: reminderEnabled, reminder_hour_utc: reminderHourUtc }).eq("user_id", user.id);
-    setIsSaving(false);
-    if (error) return toast.error(error.message);
-    toast.success("تم حفظ تفضيل التذكير.");
-  }
-
   return <div className="mx-auto max-w-4xl space-y-6" dir="rtl">
     <section className="rounded-[28px] bg-primary px-6 py-7 text-white soft-shadow sm:px-8"><div className="flex items-start gap-4"><div className="grid h-12 w-12 place-items-center rounded-2xl bg-[#d8ad4d] text-primary"><SlidersHorizontal className="h-6 w-6" /></div><div><h1 className="text-3xl font-extrabold tracking-tight">خطتك، بإيقاعك أنت.</h1><p className="mt-2 max-w-2xl text-sm leading-7 text-emerald-50/75">اختر نمطًا يدرّب كل المهارات كل يوم، ثم استخدم الأوزان لتحديد أين يكون التطبيق أعمق.</p></div></div></section>
 
@@ -102,7 +89,7 @@ export default function Settings() {
 
     <section className="rounded-[24px] bg-white p-5 soft-shadow sm:p-7"><div className="flex items-center gap-3"><div className="grid h-10 w-10 place-items-center rounded-2xl bg-[#f2eff9] text-[#7652ad]"><Gauge className="h-5 w-5" /></div><div><h2 className="font-bold">أوزان المهارات</h2><p className="text-xs text-muted-foreground">لن تلغي أي مهارة؛ تمنح المهارة الأعلى أولوية في كلماتها وأسئلتها وتطبيقها داخل النمط المختار.</p></div></div><div className="mt-5 rounded-2xl bg-[#f8f7fc] p-4 text-xs leading-6 text-[#5c5572]">النمط يضمن الخمس مهارات يوميًا. الأوزان تحدد أين تتوسع الأمثلة أو الصعوبة أو التطبيق الإضافي: {allocation.map(item => `${item.label} ${item.percentage}%`).join("، ")}.</div><div className="mt-4 divide-y divide-border">{rows.map(row => <div key={row.key} className="grid gap-3 py-4 sm:grid-cols-[180px_1fr_52px] sm:items-center"><div><p className="text-sm font-bold">{row.label}</p><p className="text-xs text-muted-foreground">{row.description}</p></div><input aria-label={`أولوية ${row.label}`} type="range" min="5" max="70" value={form[row.key]} onChange={event => updateWeight(row.key, event.target.value)} className="h-2 accent-[#7652ad]" /><span className="rounded-xl bg-[#f6f4fb] py-1.5 text-center text-sm font-bold text-[#7652ad]">{form[row.key]}%</span></div>)}</div></section>
 
-    <section className="rounded-[24px] bg-[#fff9eb] p-5 soft-shadow sm:p-7"><div className="flex items-center gap-3"><div className="grid h-10 w-10 place-items-center rounded-2xl bg-[#f5e3ae] text-[#9b6816]"><Bell className="h-5 w-5" /></div><div><h2 className="font-bold text-[#5d4519]">تذكير المراجعة</h2><p className="text-xs text-[#73582a]">يظهر مرة يوميًا داخل التطبيق عند وجود بطاقات أو مهام معلقة. الوقت بتوقيت UTC.</p></div></div><label className="mt-5 flex items-center justify-between rounded-2xl border border-[#eeddb7] bg-white/70 p-4"><span><span className="block text-sm font-bold text-[#5d4519]">فعّل التذكير اليومي</span><span className="mt-1 block text-xs text-[#8b6c38]">يمكن إيقافه مؤقتًا في أي وقت.</span></span><Checkbox checked={reminderEnabled} onCheckedChange={value => setReminderEnabled(Boolean(value))} /></label><div className="mt-4 grid gap-3 sm:grid-cols-[1fr_90px]"><input aria-label="ساعة التذكير بتوقيت UTC" type="range" min="0" max="23" value={reminderHourUtc} onChange={event => setReminderHourUtc(Number(event.target.value))} className="h-2 accent-[#9b6816]" /><span className="rounded-xl bg-white py-2 text-center font-['DM_Sans'] text-sm font-bold text-[#5d4519]">{String(reminderHourUtc).padStart(2, "0")}:00 UTC</span></div><Button variant="outline" onClick={saveReminder} disabled={isSaving} className="mt-5 w-full border-[#cda95c] bg-white text-[#765116] hover:bg-[#fffdf8]">{isSaving ? "جارٍ الحفظ..." : "حفظ تفضيل التذكير"}</Button></section>
+    <ReminderSettings userId={user?.id} isAuthenticated={isAuthenticated} />
     <Button onClick={save} disabled={isSaving} className="w-full bg-primary py-6 text-base"><Save className="ml-2 h-5 w-5" />{isSaving ? "جارٍ حفظ النمط..." : "حفظ نمطي وخطتي الشخصية"}</Button>
   </div>;
 }
