@@ -1,0 +1,398 @@
+{
+  "week": 6,
+  "skill": "vocabulary",
+  "items": [
+    {
+      "id": "vocabulary.w06.d01.01",
+      "titleArabic": "مرحلة رئيسية",
+      "titleEnglish": "Milestone",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: milestone\nIPA: /ˈmaɪlstoʊn/\nArabic meaning: مرحلة رئيسية (محطة في خطة المشروع)\nPart of speech: noun\nMechatronics domain: project management\n\nExample sentences:\n1. The first milestone is the mechanical design.\n   المرحلة الرئيسية الأولى هي التصميم الميكانيكي.\n2. We reached the second milestone on time.\n   وصلنا إلى المرحلة الرئيسية الثانية في الموعد.\n3. Each milestone has a clear date.\n   لكل مرحلة رئيسية تاريخ واضح.\n4. The prototype test is an important milestone.\n   اختبار النموذج الأولي مرحلة رئيسية مهمة.\n5. We are going to review the plan after each milestone.\n   سنراجع الخطة بعد كل مرحلة رئيسية.\n"
+    },
+    {
+      "id": "vocabulary.w06.d01.02",
+      "titleArabic": "موعد نهائي",
+      "titleEnglish": "Deadline",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: deadline\nIPA: /ˈdɛdlaɪn/\nArabic meaning: موعد نهائي\nPart of speech: noun\nMechatronics domain: project management\n\nExample sentences:\n1. The deadline for the report is Friday.\n   الموعد النهائي للتقرير يوم الجمعة.\n2. We will not meet the deadline without more help.\n   لن نلتزم بالموعد النهائي بدون مساعدة إضافية.\n3. The client moved the deadline to June.\n   نقل العميل الموعد النهائي إلى يونيو.\n4. Write the deadline next to each task.\n   اكتب الموعد النهائي بجانب كل مهمة.\n5. A short deadline puts the team under pressure.\n   الموعد النهائي القريب يضع الفريق تحت الضغط.\n"
+    },
+    {
+      "id": "vocabulary.w06.d01.03",
+      "titleArabic": "نطاق",
+      "titleEnglish": "Scope",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: scope\nIPA: /skoʊp/\nArabic meaning: نطاق (المشروع)\nPart of speech: noun\nMechatronics domain: project management\n\nExample sentences:\n1. The scope of the project is a small sorting robot.\n   نطاق المشروع روبوت فرز صغير.\n2. A camera system is outside the scope.\n   نظام الكاميرا خارج النطاق.\n3. The client wants to change the scope.\n   يريد العميل تغيير النطاق.\n4. Define the scope before you start the design.\n   حدّد النطاق قبل أن تبدأ التصميم.\n5. A bigger scope needs a bigger budget.\n   النطاق الأكبر يحتاج إلى ميزانية أكبر.\n"
+    },
+    {
+      "id": "vocabulary.w06.d01.04",
+      "titleArabic": "مُخرَج",
+      "titleEnglish": "Deliverable",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: deliverable\nIPA: /dɪˈlɪvərəbəl/\nArabic meaning: مُخرَج (ناتج يجب تسليمه)\nPart of speech: noun\nMechatronics domain: project management\n\nExample sentences:\n1. The first deliverable is the wiring diagram.\n   المُخرَج الأول هو مخطط التوصيلات.\n2. We have three deliverables this month.\n   لدينا ثلاثة مُخرَجات هذا الشهر.\n3. The test report is a key deliverable.\n   تقرير الاختبار مُخرَج أساسي.\n4. Send each deliverable to the client by email.\n   أرسل كل مُخرَج إلى العميل بالبريد الإلكتروني.\n5. The deliverables are listed in the contract.\n   المُخرَجات مذكورة في العقد.\n"
+    },
+    {
+      "id": "vocabulary.w06.d01.05",
+      "titleArabic": "صاحب مصلحة",
+      "titleEnglish": "Stakeholder",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: stakeholder\nIPA: /ˈsteɪkhoʊldər/\nArabic meaning: صاحب مصلحة؛ طرف معني\nPart of speech: noun\nMechatronics domain: project management\n\nExample sentences:\n1. The client is our main stakeholder.\n   العميل هو صاحب المصلحة الرئيسي لدينا.\n2. We invited all stakeholders to the demo.\n   دعونا جميع الأطراف المعنية إلى العرض التجريبي.\n3. Keep the stakeholders informed every week.\n   أبقِ الأطراف المعنية على اطلاع كل أسبوع.\n4. The safety team is also a stakeholder.\n   فريق السلامة أيضًا طرف معني.\n5. Each stakeholder has different needs.\n   لكل طرف معني احتياجات مختلفة.\n"
+    },
+    {
+      "id": "vocabulary.w06.d01.06",
+      "titleArabic": "اجتماع إطلاق المشروع",
+      "titleEnglish": "Kickoff meeting",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: kickoff meeting\nIPA: /ˈkɪkɔːf ˌmiːtɪŋ/\nArabic meaning: اجتماع إطلاق المشروع\nPart of speech: noun\nMechatronics domain: project management\n\nExample sentences:\n1. The kickoff meeting is on Sunday at 9 a.m.\n   اجتماع إطلاق المشروع يوم الأحد الساعة 9 صباحًا.\n2. We met the whole team at the kickoff meeting.\n   التقينا بالفريق كله في اجتماع الإطلاق.\n3. The manager explained the goals in the kickoff meeting.\n   شرح المدير الأهداف في اجتماع الإطلاق.\n4. Prepare a short plan for the kickoff meeting.\n   جهّز خطة قصيرة لاجتماع الإطلاق.\n5. After the kickoff meeting, everyone knew their tasks.\n   بعد اجتماع الإطلاق عرف الجميع مهامهم.\n"
+    },
+    {
+      "id": "vocabulary.w06.d01.07",
+      "titleArabic": "هدف",
+      "titleEnglish": "Objective",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: objective\nIPA: /əbˈdʒɛktɪv/\nArabic meaning: هدف\nPart of speech: noun\nMechatronics domain: project management\n\nExample sentences:\n1. Our objective is to reduce the cycle time by 20%.\n   هدفنا تقليل زمن الدورة بنسبة 20%.\n2. The project has three main objectives.\n   للمشروع ثلاثة أهداف رئيسية.\n3. Write a clear objective for each task.\n   اكتب هدفًا واضحًا لكل مهمة.\n4. We met all our objectives this quarter.\n   حققنا جميع أهدافنا في هذا الربع.\n5. The objective of the test is to check the speed.\n   هدف الاختبار هو فحص السرعة.\n"
+    },
+    {
+      "id": "vocabulary.w06.d02.01",
+      "titleArabic": "جدول أعمال",
+      "titleEnglish": "Agenda",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: agenda\nIPA: /əˈdʒɛndə/\nArabic meaning: جدول أعمال\nPart of speech: noun\nMechatronics domain: meetings\n\nExample sentences:\n1. Please send the agenda before the meeting.\n   يُرجى إرسال جدول الأعمال قبل الاجتماع.\n2. The budget is the first item on the agenda.\n   الميزانية هي البند الأول في جدول الأعمال.\n3. We have four items on the agenda today.\n   لدينا أربعة بنود في جدول الأعمال اليوم.\n4. Let's follow the agenda to save time.\n   لنتبع جدول الأعمال لنوفّر الوقت.\n5. I added the safety review to the agenda.\n   أضفت مراجعة السلامة إلى جدول الأعمال.\n"
+    },
+    {
+      "id": "vocabulary.w06.d02.02",
+      "titleArabic": "حاضر",
+      "titleEnglish": "Attendee",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: attendee\nIPA: /əˌtɛnˈdiː/\nArabic meaning: حاضر؛ مشارك في الاجتماع\nPart of speech: noun\nMechatronics domain: meetings\n\nExample sentences:\n1. There are six attendees in today's meeting.\n   هناك ستة مشاركين في اجتماع اليوم.\n2. Send the slides to all attendees.\n   أرسل الشرائح إلى جميع المشاركين.\n3. Two attendees are joining online.\n   ينضم مشاركان عبر الإنترنت.\n4. The list of attendees is in the minutes.\n   قائمة الحاضرين موجودة في محضر الاجتماع.\n5. Each attendee has five minutes to speak.\n   لكل مشارك خمس دقائق للتحدث.\n"
+    },
+    {
+      "id": "vocabulary.w06.d02.03",
+      "titleArabic": "يُعيد جدولة",
+      "titleEnglish": "Reschedule",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: reschedule\nIPA: /ˌriːˈskɛdʒuːl/\nArabic meaning: يُعيد جدولة؛ يغيّر الموعد\nPart of speech: verb\nMechatronics domain: meetings\n\nExample sentences:\n1. Can we reschedule the meeting to Thursday?\n   هل يمكننا تغيير موعد الاجتماع إلى الخميس؟\n2. The test was rescheduled because of the storm.\n   أُعيدت جدولة الاختبار بسبب العاصفة.\n3. I'm sorry, I need to reschedule our call.\n   آسف، أحتاج إلى تغيير موعد مكالمتنا.\n4. The supplier rescheduled the delivery twice.\n   غيّر المورّد موعد التسليم مرتين.\n5. Please reschedule the demo for next week.\n   يُرجى إعادة جدولة العرض التجريبي للأسبوع القادم.\n"
+    },
+    {
+      "id": "vocabulary.w06.d02.04",
+      "titleArabic": "التوفّر",
+      "titleEnglish": "Availability",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: availability\nIPA: /əˌveɪləˈbɪləti/\nArabic meaning: التوفّر (وقت الفراغ أو توفر الشيء)\nPart of speech: noun\nMechatronics domain: meetings\n\nExample sentences:\n1. Please confirm your availability for Monday.\n   يُرجى تأكيد مدى توفّرك يوم الإثنين.\n2. I checked the availability of the meeting room.\n   تحقّقت من توفّر قاعة الاجتماعات.\n3. The availability of spare parts is a problem.\n   توفّر قطع الغيار مشكلة.\n4. Send me your availability for next week.\n   أرسل لي أوقات توفّرك للأسبوع القادم.\n5. The calendar shows everyone's availability.\n   يُظهر التقويم أوقات توفّر الجميع.\n"
+    },
+    {
+      "id": "vocabulary.w06.d02.05",
+      "titleArabic": "فترة زمنية محددة",
+      "titleEnglish": "Time slot",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: time slot\nIPA: /ˈtaɪm ˌslɑːt/\nArabic meaning: فترة زمنية محددة\nPart of speech: noun\nMechatronics domain: meetings\n\nExample sentences:\n1. The only free time slot is at 2 p.m.\n   الفترة الزمنية الوحيدة المتاحة الساعة 2 ظهرًا.\n2. Each team has a 15-minute time slot.\n   لكل فريق فترة زمنية مدتها 15 دقيقة.\n3. Can you choose a time slot on Tuesday?\n   هل يمكنك اختيار فترة زمنية يوم الثلاثاء؟\n4. We booked a time slot in the test lab.\n   حجزنا فترة زمنية في مختبر الاختبار.\n5. That time slot is too early for the client.\n   تلك الفترة الزمنية مبكرة جدًا بالنسبة للعميل.\n"
+    },
+    {
+      "id": "vocabulary.w06.d02.06",
+      "titleArabic": "محضر الاجتماع",
+      "titleEnglish": "Minutes",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: minutes\nIPA: /ˈmɪnɪts/\nArabic meaning: محضر الاجتماع\nPart of speech: noun\nMechatronics domain: meetings\n\nExample sentences:\n1. Who is taking the minutes today?\n   من سيكتب محضر الاجتماع اليوم؟\n2. The minutes list all the action items.\n   يسرد المحضر جميع بنود العمل.\n3. I'll send the minutes after the meeting.\n   سأرسل المحضر بعد الاجتماع.\n4. Please read the minutes from last week.\n   يُرجى قراءة محضر الأسبوع الماضي.\n5. The minutes must include the decisions.\n   يجب أن يتضمن المحضر القرارات.\n"
+    },
+    {
+      "id": "vocabulary.w06.d02.07",
+      "titleArabic": "مكالمة فيديو",
+      "titleEnglish": "Video call",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: video call\nIPA: /ˈvɪdioʊ ˌkɔːl/\nArabic meaning: مكالمة فيديو\nPart of speech: noun\nMechatronics domain: meetings\n\nExample sentences:\n1. The supplier joined by video call.\n   انضم المورّد عبر مكالمة فيديو.\n2. We have a video call with the client at 4.\n   لدينا مكالمة فيديو مع العميل الساعة 4.\n3. Turn on your camera in the video call.\n   شغّل الكاميرا في مكالمة الفيديو.\n4. The video call was short and useful.\n   كانت مكالمة الفيديو قصيرة ومفيدة.\n5. Share your screen during the video call.\n   شارك شاشتك أثناء مكالمة الفيديو.\n"
+    },
+    {
+      "id": "vocabulary.w06.d03.01",
+      "titleArabic": "مهمة",
+      "titleEnglish": "Task",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: task\nIPA: /tæsk/\nArabic meaning: مهمة\nPart of speech: noun\nMechatronics domain: project planning\n\nExample sentences:\n1. Each task has an owner and a deadline.\n   لكل مهمة مسؤول وموعد نهائي.\n2. This task takes about two days.\n   تستغرق هذه المهمة يومين تقريبًا.\n3. I finished my task before lunch.\n   أنهيت مهمتي قبل الغداء.\n4. Break the big task into smaller steps.\n   قسّم المهمة الكبيرة إلى خطوات أصغر.\n5. The next task is to test the sensors.\n   المهمة التالية هي اختبار الحساسات.\n"
+    },
+    {
+      "id": "vocabulary.w06.d03.02",
+      "titleArabic": "يُسند",
+      "titleEnglish": "Assign",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: assign\nIPA: /əˈsaɪn/\nArabic meaning: يُسند؛ يكلّف\nPart of speech: verb\nMechatronics domain: project planning\n\nExample sentences:\n1. The manager assigned the wiring to me.\n   أسند المدير مهمة التوصيلات إليّ.\n2. Assign one person to each task.\n   كلّف شخصًا واحدًا بكل مهمة.\n3. Who is assigned to the safety check?\n   من المكلّف بفحص السلامة؟\n4. We will assign the tasks after the meeting.\n   سنُسند المهام بعد الاجتماع.\n5. She was assigned to the testing team.\n   تم تكليفها بفريق الاختبار.\n"
+    },
+    {
+      "id": "vocabulary.w06.d03.03",
+      "titleArabic": "اعتمادية",
+      "titleEnglish": "Dependency",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: dependency\nIPA: /dɪˈpɛndənsi/\nArabic meaning: اعتمادية (ارتباط مهمة بأخرى)\nPart of speech: noun\nMechatronics domain: project planning\n\nExample sentences:\n1. Programming has a dependency on the wiring.\n   تعتمد البرمجة على إنجاز التوصيلات.\n2. Show each dependency on the plan.\n   وضّح كل اعتمادية على الخطة.\n3. This dependency can delay the whole project.\n   قد تؤخر هذه الاعتمادية المشروع كله.\n4. There are no dependencies between these two tasks.\n   لا توجد اعتمادية بين هاتين المهمتين.\n5. Check the dependencies before you change the dates.\n   تحقّق من الاعتماديات قبل أن تغيّر التواريخ.\n"
+    },
+    {
+      "id": "vocabulary.w06.d03.04",
+      "titleArabic": "مدة التوريد",
+      "titleEnglish": "Lead time",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: lead time\nIPA: /ˈliːd ˌtaɪm/\nArabic meaning: مدة التوريد (من الطلب حتى الاستلام)\nPart of speech: noun\nMechatronics domain: purchasing\n\nExample sentences:\n1. The lead time for the motors is six weeks.\n   مدة توريد المحركات ستة أسابيع.\n2. Local suppliers have a shorter lead time.\n   لدى المورّدين المحليين مدة توريد أقصر.\n3. Order early because of the long lead time.\n   اطلب مبكرًا بسبب مدة التوريد الطويلة.\n4. Ask the supplier about the lead time.\n   اسأل المورّد عن مدة التوريد.\n5. The lead time changed from two to five weeks.\n   تغيّرت مدة التوريد من أسبوعين إلى خمسة.\n"
+    },
+    {
+      "id": "vocabulary.w06.d03.05",
+      "titleArabic": "عنق الزجاجة",
+      "titleEnglish": "Bottleneck",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: bottleneck\nIPA: /ˈbɑːtlnɛk/\nArabic meaning: عنق الزجاجة؛ نقطة اختناق\nPart of speech: noun\nMechatronics domain: project planning\n\nExample sentences:\n1. The test lab is our main bottleneck.\n   مختبر الاختبار هو نقطة الاختناق الرئيسية لدينا.\n2. The slow station is a bottleneck on the line.\n   المحطة البطيئة عنق زجاجة في الخط.\n3. We added a second printer to remove the bottleneck.\n   أضفنا طابعة ثانية لإزالة نقطة الاختناق.\n4. Find the bottleneck before you add more workers.\n   اكتشف عنق الزجاجة قبل أن تضيف عمالًا.\n5. The approval process is a bottleneck.\n   عملية الموافقة نقطة اختناق.\n"
+    },
+    {
+      "id": "vocabulary.w06.d03.06",
+      "titleArabic": "نموذج أولي",
+      "titleEnglish": "Prototype",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: prototype\nIPA: /ˈproʊtətaɪp/\nArabic meaning: نموذج أولي\nPart of speech: noun\nMechatronics domain: product development\n\nExample sentences:\n1. We built the first prototype in two weeks.\n   بنينا النموذج الأولي الأول في أسبوعين.\n2. The prototype is made of 3D-printed parts.\n   النموذج الأولي مصنوع من قطع مطبوعة ثلاثيًا.\n3. Test the prototype before you show it to the client.\n   اختبر النموذج الأولي قبل أن تعرضه على العميل.\n4. The second prototype is lighter and faster.\n   النموذج الأولي الثاني أخف وأسرع.\n5. We found three problems in the prototype.\n   وجدنا ثلاث مشكلات في النموذج الأولي.\n"
+    },
+    {
+      "id": "vocabulary.w06.d03.07",
+      "titleArabic": "مخطط جانت",
+      "titleEnglish": "Gantt chart",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: Gantt chart\nIPA: /ˈɡænt ˌtʃɑːrt/\nArabic meaning: مخطط جانت (مخطط زمني للمهام)\nPart of speech: noun\nMechatronics domain: project planning\n\nExample sentences:\n1. The Gantt chart shows all tasks and dates.\n   يُظهر مخطط جانت جميع المهام والتواريخ.\n2. Update the Gantt chart every Friday.\n   حدّث مخطط جانت كل يوم جمعة.\n3. The red bars in the Gantt chart are late tasks.\n   الأشرطة الحمراء في مخطط جانت هي المهام المتأخرة.\n4. I made the Gantt chart in a spreadsheet.\n   صنعت مخطط جانت في جدول بيانات.\n5. Look at the Gantt chart to see the dependencies.\n   انظر إلى مخطط جانت لترى الاعتماديات.\n"
+    },
+    {
+      "id": "vocabulary.w06.d04.01",
+      "titleArabic": "ملاحظات",
+      "titleEnglish": "Feedback",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: feedback\nIPA: /ˈfiːdbæk/\nArabic meaning: ملاحظات؛ تغذية راجعة\nPart of speech: noun\nMechatronics domain: teamwork\n\nExample sentences:\n1. Thank you for your feedback on my design.\n   شكرًا على ملاحظاتك على تصميمي.\n2. Could you give me some feedback before Friday?\n   هل يمكنك إعطائي بعض الملاحظات قبل الجمعة؟\n3. The client's feedback was very positive.\n   كانت ملاحظات العميل إيجابية جدًا.\n4. Good feedback is clear and specific.\n   الملاحظات الجيدة واضحة ومحددة.\n5. We changed the gripper after the feedback.\n   غيّرنا الماسك بعد الملاحظات.\n"
+    },
+    {
+      "id": "vocabulary.w06.d04.02",
+      "titleArabic": "مراجعة التصميم",
+      "titleEnglish": "Design review",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: design review\nIPA: /dɪˈzaɪn rɪˌvjuː/\nArabic meaning: مراجعة التصميم\nPart of speech: noun\nMechatronics domain: product development\n\nExample sentences:\n1. The design review is on Tuesday morning.\n   مراجعة التصميم صباح الثلاثاء.\n2. Three engineers attended the design review.\n   حضر ثلاثة مهندسين مراجعة التصميم.\n3. We found a weak point in the design review.\n   وجدنا نقطة ضعف في مراجعة التصميم.\n4. Prepare your drawings for the design review.\n   جهّز رسوماتك لمراجعة التصميم.\n5. The design was approved after the second design review.\n   اعتُمد التصميم بعد مراجعة التصميم الثانية.\n"
+    },
+    {
+      "id": "vocabulary.w06.d04.03",
+      "titleArabic": "يوضّح",
+      "titleEnglish": "Clarify",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: clarify\nIPA: /ˈklærəfaɪ/\nArabic meaning: يوضّح\nPart of speech: verb\nMechatronics domain: communication\n\nExample sentences:\n1. Could you clarify the second requirement?\n   هل يمكنك توضيح المتطلب الثاني؟\n2. I sent an email to clarify the dimensions.\n   أرسلت بريدًا لتوضيح الأبعاد.\n3. Let me clarify what I mean.\n   دعني أوضّح ما أقصده.\n4. The manager clarified the deadline in the meeting.\n   وضّح المدير الموعد النهائي في الاجتماع.\n5. Please clarify who is responsible for testing.\n   يُرجى توضيح من المسؤول عن الاختبار.\n"
+    },
+    {
+      "id": "vocabulary.w06.d04.04",
+      "titleArabic": "يوافق على",
+      "titleEnglish": "Approve",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: approve\nIPA: /əˈpruːv/\nArabic meaning: يوافق على؛ يعتمد\nPart of speech: verb\nMechatronics domain: project management\n\nExample sentences:\n1. The manager approved the budget.\n   وافق المدير على الميزانية.\n2. We can't order the parts until the client approves the design.\n   لا يمكننا طلب القطع حتى يعتمد العميل التصميم.\n3. Who needs to approve this change?\n   من يجب أن يوافق على هذا التغيير؟\n4. The test plan was approved yesterday.\n   اعتُمدت خطة الاختبار أمس.\n5. Please approve the purchase order today.\n   يُرجى الموافقة على أمر الشراء اليوم.\n"
+    },
+    {
+      "id": "vocabulary.w06.d04.05",
+      "titleArabic": "يراجع",
+      "titleEnglish": "Revise",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: revise\nIPA: /rɪˈvaɪz/\nArabic meaning: يراجع؛ يعدّل\nPart of speech: verb\nMechatronics domain: product development\n\nExample sentences:\n1. I revised the drawing after the meeting.\n   عدّلت الرسم بعد الاجتماع.\n2. Please revise the report and send it again.\n   يُرجى تعديل التقرير وإرساله مرة أخرى.\n3. We need to revise the budget.\n   نحتاج إلى تعديل الميزانية.\n4. The schedule was revised twice.\n   عُدِّل الجدول الزمني مرتين.\n5. Revise the code to fix the timing error.\n   عدّل الشيفرة لإصلاح خطأ التوقيت.\n"
+    },
+    {
+      "id": "vocabulary.w06.d04.06",
+      "titleArabic": "مسودة",
+      "titleEnglish": "Draft",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: draft\nIPA: /dræft/\nArabic meaning: مسودة\nPart of speech: noun\nMechatronics domain: documentation\n\nExample sentences:\n1. This is only the first draft.\n   هذه مجرد المسودة الأولى.\n2. I sent the draft to my supervisor.\n   أرسلت المسودة إلى مشرفي.\n3. The draft has a few mistakes.\n   تحتوي المسودة على بعض الأخطاء.\n4. Please comment on the draft by Thursday.\n   يُرجى التعليق على المسودة بحلول الخميس.\n5. The final version is better than the draft.\n   النسخة النهائية أفضل من المسودة.\n"
+    },
+    {
+      "id": "vocabulary.w06.d04.07",
+      "titleArabic": "اقتراح",
+      "titleEnglish": "Suggestion",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: suggestion\nIPA: /səˈdʒɛstʃən/\nArabic meaning: اقتراح\nPart of speech: noun\nMechatronics domain: teamwork\n\nExample sentences:\n1. Do you have any suggestions?\n   هل لديك أي اقتراحات؟\n2. Thanks for the suggestion. I'll try it.\n   شكرًا على الاقتراح. سأجرّبه.\n3. Her suggestion saved us a lot of time.\n   وفّر علينا اقتراحها وقتًا كثيرًا.\n4. We made three suggestions to the client.\n   قدّمنا ثلاثة اقتراحات للعميل.\n5. My suggestion is to use a stronger motor.\n   اقتراحي هو استخدام محرك أقوى.\n"
+    },
+    {
+      "id": "vocabulary.w06.d05.01",
+      "titleArabic": "مفاضلة",
+      "titleEnglish": "Trade-off",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: trade-off\nIPA: /ˈtreɪdɔːf/\nArabic meaning: مفاضلة؛ مقايضة بين ميزتين\nPart of speech: noun\nMechatronics domain: engineering design\n\nExample sentences:\n1. There is a trade-off between speed and accuracy.\n   هناك مفاضلة بين السرعة والدقة.\n2. A cheaper motor is a trade-off: it has less torque.\n   المحرك الأرخص مفاضلة: عزمه أقل.\n3. Explain the trade-off to the client.\n   اشرح المفاضلة للعميل.\n4. Every design decision has a trade-off.\n   لكل قرار تصميمي مفاضلة.\n5. We accepted the trade-off to save money.\n   قبلنا المفاضلة لتوفير المال.\n"
+    },
+    {
+      "id": "vocabulary.w06.d05.02",
+      "titleArabic": "فعّال من حيث التكلفة",
+      "titleEnglish": "Cost-effective",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: cost-effective\nIPA: /ˌkɔːst ɪˈfɛktɪv/\nArabic meaning: فعّال من حيث التكلفة\nPart of speech: adjective\nMechatronics domain: engineering design\n\nExample sentences:\n1. This is the most cost-effective solution.\n   هذا هو الحل الأكثر فعالية من حيث التكلفة.\n2. 3D printing is cost-effective for small numbers.\n   الطباعة ثلاثية الأبعاد فعّالة من حيث التكلفة للكميات الصغيرة.\n3. We need a cost-effective way to test the sensors.\n   نحتاج إلى طريقة فعّالة من حيث التكلفة لاختبار الحساسات.\n4. A cost-effective design uses standard parts.\n   التصميم الفعّال من حيث التكلفة يستخدم قطعًا قياسية.\n5. Is it cost-effective to repair the old robot?\n   هل إصلاح الروبوت القديم فعّال من حيث التكلفة؟\n"
+    },
+    {
+      "id": "vocabulary.w06.d05.03",
+      "titleArabic": "كفء",
+      "titleEnglish": "Efficient",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: efficient\nIPA: /ɪˈfɪʃənt/\nArabic meaning: كفء؛ عالي الكفاءة\nPart of speech: adjective\nMechatronics domain: energy and performance\n\nExample sentences:\n1. Brushless motors are more efficient than brushed motors.\n   المحركات عديمة الفرش أكفأ من المحركات ذات الفرش.\n2. An efficient design uses less energy.\n   التصميم الكفء يستهلك طاقة أقل.\n3. The new layout is more efficient.\n   التخطيط الجديد أكثر كفاءة.\n4. We need an efficient way to cool the drive.\n   نحتاج إلى طريقة كفؤة لتبريد المشغّل.\n5. This pump is the most efficient model.\n   هذه المضخة هي الطراز الأكثر كفاءة.\n"
+    },
+    {
+      "id": "vocabulary.w06.d05.04",
+      "titleArabic": "متين",
+      "titleEnglish": "Durable",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: durable\nIPA: /ˈdʊrəbəl/\nArabic meaning: متين؛ يدوم طويلًا\nPart of speech: adjective\nMechatronics domain: materials\n\nExample sentences:\n1. Steel gears are more durable than plastic gears.\n   التروس الفولاذية أمتن من التروس البلاستيكية.\n2. We need a durable cable for the robot arm.\n   نحتاج إلى كابل متين لذراع الروبوت.\n3. This coating makes the part more durable.\n   يجعل هذا الطلاء القطعة أكثر متانة.\n4. The housing is light but durable.\n   الغلاف خفيف لكنه متين.\n5. Durable parts reduce maintenance costs.\n   تقلل القطع المتينة تكاليف الصيانة.\n"
+    },
+    {
+      "id": "vocabulary.w06.d05.05",
+      "titleArabic": "خفيف الوزن",
+      "titleEnglish": "Lightweight",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: lightweight\nIPA: /ˈlaɪtweɪt/\nArabic meaning: خفيف الوزن\nPart of speech: adjective\nMechatronics domain: materials\n\nExample sentences:\n1. The drone has a lightweight carbon frame.\n   للطائرة المسيّرة إطار كربوني خفيف الوزن.\n2. Aluminium is lightweight and strong.\n   الألمنيوم خفيف الوزن وقوي.\n3. We need a lightweight gripper for this robot.\n   نحتاج إلى ماسك خفيف الوزن لهذا الروبوت.\n4. The lightweight design saves energy.\n   يوفّر التصميم الخفيف الطاقة.\n5. This model is lighter than the old lightweight model.\n   هذا الطراز أخف من الطراز الخفيف القديم.\n"
+    },
+    {
+      "id": "vocabulary.w06.d05.06",
+      "titleArabic": "مدمج",
+      "titleEnglish": "Compact",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: compact\nIPA: /kəmˈpækt/\nArabic meaning: مدمج؛ صغير الحجم\nPart of speech: adjective\nMechatronics domain: engineering design\n\nExample sentences:\n1. The new controller is very compact.\n   المتحكم الجديد مدمج جدًا.\n2. We need a compact motor for the small space.\n   نحتاج إلى محرك مدمج للمساحة الصغيرة.\n3. A compact design is easier to install.\n   التصميم المدمج أسهل في التركيب.\n4. This sensor is more compact than the old one.\n   هذا الحساس أصغر حجمًا من القديم.\n5. The compact power supply fits inside the panel.\n   يتسع مزوّد الطاقة المدمج داخل اللوحة.\n"
+    },
+    {
+      "id": "vocabulary.w06.d05.07",
+      "titleArabic": "محرك خطوي",
+      "titleEnglish": "Stepper motor",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: stepper motor\nIPA: /ˈstɛpər ˌmoʊtər/\nArabic meaning: محرك خطوي\nPart of speech: noun\nMechatronics domain: motion control\n\nExample sentences:\n1. A stepper motor moves in small fixed steps.\n   يتحرك المحرك الخطوي بخطوات صغيرة ثابتة.\n2. 3D printers usually use stepper motors.\n   تستخدم الطابعات ثلاثية الأبعاد عادةً محركات خطوية.\n3. The stepper motor is cheaper than the servo motor.\n   المحرك الخطوي أرخص من محرك السيرفو.\n4. A stepper motor can lose steps at high speed.\n   قد يفقد المحرك الخطوي خطوات عند السرعة العالية.\n5. We control the stepper motor with a driver board.\n   نتحكم في المحرك الخطوي بلوحة مشغّل.\n"
+    },
+    {
+      "id": "vocabulary.w06.d06.01",
+      "titleArabic": "ميزانية",
+      "titleEnglish": "Budget",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: budget\nIPA: /ˈbʌdʒɪt/\nArabic meaning: ميزانية\nPart of speech: noun\nMechatronics domain: project finance\n\nExample sentences:\n1. The project budget is 20,000 riyals.\n   ميزانية المشروع 20,000 ريال.\n2. We are still within budget.\n   ما زلنا ضمن الميزانية.\n3. The new sensors are not in the budget.\n   الحساسات الجديدة ليست ضمن الميزانية.\n4. The manager approved a bigger budget.\n   وافق المدير على ميزانية أكبر.\n5. Check the budget before you order more parts.\n   راجع الميزانية قبل أن تطلب قطعًا إضافية.\n"
+    },
+    {
+      "id": "vocabulary.w06.d06.02",
+      "titleArabic": "تقدير",
+      "titleEnglish": "Estimate",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: estimate\nIPA: /ˈɛstɪmət/\nArabic meaning: تقدير\nPart of speech: noun\nMechatronics domain: project finance\n\nExample sentences:\n1. My estimate is three weeks of work.\n   تقديري ثلاثة أسابيع من العمل.\n2. The cost estimate was too low.\n   كان تقدير التكلفة منخفضًا جدًا.\n3. Give me a rough estimate by tomorrow.\n   أعطني تقديرًا تقريبيًا بحلول الغد.\n4. The final cost was close to our estimate.\n   كانت التكلفة النهائية قريبة من تقديرنا.\n5. We need an estimate for the spare parts.\n   نحتاج إلى تقدير لقطع الغيار.\n"
+    },
+    {
+      "id": "vocabulary.w06.d06.03",
+      "titleArabic": "عرض سعر",
+      "titleEnglish": "Quotation",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: quotation\nIPA: /kwoʊˈteɪʃən/\nArabic meaning: عرض سعر\nPart of speech: noun\nMechatronics domain: purchasing\n\nExample sentences:\n1. We asked three suppliers for a quotation.\n   طلبنا عرض سعر من ثلاثة مورّدين.\n2. The quotation is valid for 30 days.\n   عرض السعر صالح لمدة 30 يومًا.\n3. The second quotation is cheaper.\n   عرض السعر الثاني أرخص.\n4. Please attach the quotation to the request.\n   يُرجى إرفاق عرض السعر بالطلب.\n5. The quotation includes delivery and installation.\n   يشمل عرض السعر التوصيل والتركيب.\n"
+    },
+    {
+      "id": "vocabulary.w06.d06.04",
+      "titleArabic": "أمر شراء",
+      "titleEnglish": "Purchase order",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: purchase order\nIPA: /ˈpɜːrtʃəs ˌɔːrdər/\nArabic meaning: أمر شراء\nPart of speech: noun\nMechatronics domain: purchasing\n\nExample sentences:\n1. The purchase order was sent to the supplier.\n   أُرسل أمر الشراء إلى المورّد.\n2. We can't buy anything without a purchase order.\n   لا يمكننا شراء أي شيء بدون أمر شراء.\n3. Write the part numbers on the purchase order.\n   اكتب أرقام القطع على أمر الشراء.\n4. The manager signs every purchase order.\n   يوقّع المدير كل أمر شراء.\n5. The purchase order number is PO-2231.\n   رقم أمر الشراء هو PO-2231.\n"
+    },
+    {
+      "id": "vocabulary.w06.d06.05",
+      "titleArabic": "نقص",
+      "titleEnglish": "Shortage",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: shortage\nIPA: /ˈʃɔːrtɪdʒ/\nArabic meaning: نقص\nPart of speech: noun\nMechatronics domain: supply chain\n\nExample sentences:\n1. There is a shortage of microchips this year.\n   هناك نقص في الرقائق الإلكترونية هذا العام.\n2. The shortage of sensors delayed the project.\n   أخّر نقص الحساسات المشروع.\n3. We have a shortage of skilled technicians.\n   لدينا نقص في الفنيين المهرة.\n4. Order early to avoid a shortage.\n   اطلب مبكرًا لتجنب النقص.\n5. The shortage will end next month.\n   سينتهي النقص الشهر القادم.\n"
+    },
+    {
+      "id": "vocabulary.w06.d06.06",
+      "titleArabic": "يخصّص",
+      "titleEnglish": "Allocate",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: allocate\nIPA: /ˈæləkeɪt/\nArabic meaning: يخصّص\nPart of speech: verb\nMechatronics domain: project finance\n\nExample sentences:\n1. The manager allocated two engineers to our project.\n   خصّص المدير مهندسَين لمشروعنا.\n2. We allocated 30% of the budget to testing.\n   خصّصنا 30% من الميزانية للاختبار.\n3. Please allocate one hour for the safety check.\n   يُرجى تخصيص ساعة للفحص الأمني.\n4. More money was allocated to the second prototype.\n   خُصِّص مال أكثر للنموذج الأولي الثاني.\n5. How should we allocate our resources?\n   كيف ينبغي أن نخصّص مواردنا؟\n"
+    },
+    {
+      "id": "vocabulary.w06.d06.07",
+      "titleArabic": "مورد",
+      "titleEnglish": "Resource",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: resource\nIPA: /ˈriːsɔːrs/\nArabic meaning: مورد (موارد)\nPart of speech: noun\nMechatronics domain: project management\n\nExample sentences:\n1. People, time and money are our main resources.\n   الأشخاص والوقت والمال هي مواردنا الرئيسية.\n2. We don't have enough resources for two projects.\n   ليس لدينا موارد كافية لمشروعين.\n3. The lab is a shared resource.\n   المختبر مورد مشترك.\n4. Use your resources carefully.\n   استخدم مواردك بعناية.\n5. The manager will add more resources next month.\n   سيضيف المدير موارد إضافية الشهر القادم.\n"
+    },
+    {
+      "id": "vocabulary.w06.d07.01",
+      "titleArabic": "تحديث الحالة",
+      "titleEnglish": "Status update",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: status update\nIPA: /ˈsteɪtəs ˌʌpdeɪt/\nArabic meaning: تحديث الحالة\nPart of speech: noun\nMechatronics domain: project communication\n\nExample sentences:\n1. I send a status update every Thursday.\n   أرسل تحديث حالة كل يوم خميس.\n2. The status update was short and clear.\n   كان تحديث الحالة قصيرًا وواضحًا.\n3. Give us a quick status update, please.\n   أعطنا تحديث حالة سريعًا من فضلك.\n4. The client wants a weekly status update.\n   يريد العميل تحديث حالة أسبوعيًا.\n5. My status update has three parts: done, next and blockers.\n   لتحديث الحالة الخاص بي ثلاثة أجزاء: ما أُنجز، والتالي، والعوائق.\n"
+    },
+    {
+      "id": "vocabulary.w06.d07.02",
+      "titleArabic": "تقدّم",
+      "titleEnglish": "Progress",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: progress\nIPA: /ˈprɑːɡrɛs/\nArabic meaning: تقدّم\nPart of speech: noun\nMechatronics domain: project communication\n\nExample sentences:\n1. We made good progress this week.\n   حققنا تقدمًا جيدًا هذا الأسبوع.\n2. Show the progress on the Gantt chart.\n   أظهر التقدم على مخطط جانت.\n3. Progress was slow because of the shortage.\n   كان التقدم بطيئًا بسبب النقص.\n4. The manager is happy with our progress.\n   المدير راضٍ عن تقدمنا.\n5. Report your progress at the meeting.\n   قدّم تقريرًا عن تقدمك في الاجتماع.\n"
+    },
+    {
+      "id": "vocabulary.w06.d07.03",
+      "titleArabic": "على المسار الصحيح",
+      "titleEnglish": "On track",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: on track\nIPA: /ɑːn ˈtræk/\nArabic meaning: على المسار الصحيح؛ وفق الخطة\nPart of speech: phrase\nMechatronics domain: project communication\n\nExample sentences:\n1. We are on track to finish by June.\n   نحن على المسار الصحيح للانتهاء بحلول يونيو.\n2. Is the project still on track?\n   هل ما زال المشروع وفق الخطة؟\n3. The testing is on track.\n   يسير الاختبار وفق الخطة.\n4. We need more people to stay on track.\n   نحتاج إلى أشخاص إضافيين لنبقى على المسار الصحيح.\n5. The new plan put the project back on track.\n   أعادت الخطة الجديدة المشروع إلى مساره الصحيح.\n"
+    },
+    {
+      "id": "vocabulary.w06.d07.04",
+      "titleArabic": "متأخر عن الجدول الزمني",
+      "titleEnglish": "Behind schedule",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: behind schedule\nIPA: /bɪˌhaɪnd ˈskɛdʒuːl/\nArabic meaning: متأخر عن الجدول الزمني\nPart of speech: phrase\nMechatronics domain: project communication\n\nExample sentences:\n1. The wiring is two days behind schedule.\n   التوصيلات متأخرة يومين عن الجدول.\n2. We are behind schedule because of the late delivery.\n   نحن متأخرون عن الجدول بسبب التأخر في التسليم.\n3. If we are behind schedule, tell the client early.\n   إذا كنا متأخرين عن الجدول، أخبر العميل مبكرًا.\n4. The project was behind schedule last month.\n   كان المشروع متأخرًا عن الجدول الشهر الماضي.\n5. How far behind schedule are we?\n   كم نحن متأخرون عن الجدول؟\n"
+    },
+    {
+      "id": "vocabulary.w06.d07.05",
+      "titleArabic": "عائق",
+      "titleEnglish": "Blocker",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: blocker\nIPA: /ˈblɑːkər/\nArabic meaning: عائق\nPart of speech: noun\nMechatronics domain: project communication\n\nExample sentences:\n1. The main blocker is the missing motor.\n   العائق الرئيسي هو المحرك المفقود.\n2. Tell the manager about any blocker.\n   أخبر المدير عن أي عائق.\n3. We removed the blocker yesterday.\n   أزلنا العائق أمس.\n4. I have no blockers this week.\n   ليس لدي أي عوائق هذا الأسبوع.\n5. The approval is a blocker for the purchase.\n   الموافقة عائق أمام عملية الشراء.\n"
+    },
+    {
+      "id": "vocabulary.w06.d07.06",
+      "titleArabic": "بند عمل",
+      "titleEnglish": "Action item",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: action item\nIPA: /ˈækʃən ˌaɪtəm/\nArabic meaning: بند عمل (مهمة متابعة)\nPart of speech: noun\nMechatronics domain: meetings\n\nExample sentences:\n1. Each action item has an owner and a date.\n   لكل بند عمل مسؤول وتاريخ.\n2. We have five action items from the meeting.\n   لدينا خمسة بنود عمل من الاجتماع.\n3. Write the action items in the minutes.\n   اكتب بنود العمل في المحضر.\n4. I finished two action items yesterday.\n   أنهيت بندَي عمل أمس.\n5. The first action item is to call the supplier.\n   بند العمل الأول هو الاتصال بالمورّد.\n"
+    },
+    {
+      "id": "vocabulary.w06.d07.07",
+      "titleArabic": "حل وسط",
+      "titleEnglish": "Compromise",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: compromise\nIPA: /ˈkɑːmprəmaɪz/\nArabic meaning: حل وسط\nPart of speech: noun\nMechatronics domain: teamwork\n\nExample sentences:\n1. We reached a compromise on the design.\n   توصلنا إلى حل وسط بشأن التصميم.\n2. A compromise is better than a long argument.\n   الحل الوسط أفضل من جدال طويل.\n3. The compromise saves money and keeps the quality.\n   يوفّر الحل الوسط المال ويحافظ على الجودة.\n4. Both teams accepted the compromise.\n   قبل الفريقان الحل الوسط.\n5. Let's find a compromise that works for everyone.\n   لنجد حلًا وسطًا يناسب الجميع.\n"
+    }
+  ]
+}

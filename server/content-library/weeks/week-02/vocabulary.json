@@ -4,13 +4,13 @@
   "items": [
     {
       "id": "vocabulary.w02.d01",
-      "titleArabic": "مستشعر",
-      "titleEnglish": "Sensor",
+      "titleArabic": "إشارة",
+      "titleEnglish": "Signal",
       "promptTemplateId": "vocab_card_v1",
       "sourceUrls": [
-        "https://en.wikipedia.org/wiki/Sensor"
+        "https://en.wikipedia.org/wiki/Signal_(electrical_engineering)"
       ],
-      "contentMarkdown": "Term: sensor\nIPA: /ˈsɛnsər/\nArabic meaning: مستشعر\nPart of speech: noun\nMechatronics domain: sensing and measurement\n\nExamples:\n1. This sensor measures temperature.\n   يقيس هذا المستشعر درجة الحرارة.\n2. The sensor is on the robot arm.\n   المستشعر على ذراع الروبوت.\n3. Replace the faulty sensor today.\n   استبدل المستشعر المعطل اليوم.\n4. The sensor sends a small electrical signal.\n   يرسل المستشعر إشارة كهربائية صغيرة.\n5. The sensor must be clean for good data.\n   يجب أن يكون المستشعر نظيفًا للحصول على بيانات جيدة."
+      "contentMarkdown": "Term: signal\nIPA: /ˈsɪɡnəl/\nArabic meaning: إشارة\nPart of speech: noun\nMechatronics domain: sensing and measurement\n\nExamples:\n1. The sensor sends an electrical signal to the controller.\n   يرسل المستشعر إشارة كهربائية إلى المتحكم.\n2. The signal is weak because the cable is long.\n   الإشارة ضعيفة لأن الكابل طويل.\n3. Noise can change the signal.\n   قد تغيّر الضوضاء الإشارة.\n4. We measure the signal with an oscilloscope.\n   نقيس الإشارة بجهاز راسم الإشارة.\n5. The robot stops when it receives a stop signal.\n   يتوقف الروبوت عندما يستقبل إشارة إيقاف."
     },
     {
       "id": "vocabulary.w02.d02",

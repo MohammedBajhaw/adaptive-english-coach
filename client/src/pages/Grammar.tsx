@@ -38,7 +38,7 @@ export default function Grammar() {
   const grammarItem = useMemo(() => {
     const item = getTodayGrammarLesson();
     return { task: { id: "grammar" }, content: item };
-  }, []);
+  }, [user?.id]);
   const lesson = useMemo(() => parseGrammarLesson(grammarItem.content.contentMarkdown), [grammarItem]);
   const questions = useMemo(() => lesson.questions.slice(0, limits.questions), [lesson.questions, limits.questions]);
   const prompts = useMemo(() => lesson.writingPrompts.slice(0, limits.writingPrompts), [lesson.writingPrompts, limits.writingPrompts]);

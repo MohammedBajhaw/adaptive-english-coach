@@ -1,0 +1,62 @@
+{
+  "week": 5,
+  "skill": "writing",
+  "items": [
+    {
+      "id": "writing.w05.d01",
+      "titleArabic": "قائمة فحص قبل الوردية لناقل",
+      "titleEnglish": "Pre-shift inspection checklist for a conveyor",
+      "promptTemplateId": "prompt.writing.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nاكتب قائمة تحقق قصيرة لفحص ناقل (belt conveyor) قبل بداية الوردية. استخدم صيغة الأمر وكلمات الترتيب، وابدأ بخطوة سلامة.\nTask: Write a short pre-shift inspection checklist for a belt conveyor.\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 12–20 words\n- 3 sentences: 35–55 words\n- 5 sentences: 60–90 words\n\nTarget vocabulary:\n- inspect, checklist, belt tension, bearing, leak, lubricate\n\nModel answer (English):\nFirst, switch off the conveyor and lock the main switch. Then inspect the belt for cracks and check the belt tension. Next, listen to the bearings and look for oil leaks under the gearbox. Lubricate the chain if it is dry. Finally, sign the checklist and report any problem to your supervisor.\n\nالترجمة العربية للنموذج:\nأولًا، أوقف الناقل واقفل المفتاح الرئيسي. ثم افحص السير بحثًا عن تشققات وتحقق من شدّ السير. بعد ذلك، استمع إلى المحامل وابحث عن تسرّبات الزيت تحت صندوق التروس. زيّت السلسلة إذا كانت جافة. وأخيرًا، وقّع قائمة التحقق وأبلغ مشرفك عن أي مشكلة.\n\nSelf-check rubric:\n- Each sentence starts with a clear verb (Check, Inspect, Do not ...).\n- I used sequence words (first, then, next, finally).\n- I included a safety step before the inspection.\n- I used at least three target words correctly.\n- My text matches the sentence mode I chose.\n"
+    },
+    {
+      "id": "writing.w05.d02",
+      "titleArabic": "إشعار قواعد السلامة على باب الورشة",
+      "titleEnglish": "Safety notice for the workshop door",
+      "promptTemplateId": "prompt.writing.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nاكتب إشعارًا قصيرًا يُعلَّق على باب ورشة الميكاترونيك يوضّح قواعد السلامة للطلاب والزوار: ما هو إلزامي، وما هو ممنوع، وما هو غير ضروري.\nTask: Write a short safety notice for the door of a mechatronics workshop.\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 12–20 words\n- 3 sentences: 35–55 words\n- 5 sentences: 60–90 words\n\nTarget vocabulary:\n- PPE, safety glasses, hazard, machine guard, authorized, warning sign\n\nModel answer (English):\nEveryone must wear safety glasses and closed shoes in this workshop. Visitors have to sign in and stay with an authorized engineer. You mustn't remove a machine guard or touch a robot during operation. You don't have to wear gloves at the computer desks. Read the warning signs and report every hazard immediately.\n\nالترجمة العربية للنموذج:\nيجب على الجميع ارتداء نظارات السلامة وأحذية مغلقة في هذه الورشة. على الزوار تسجيل دخولهم والبقاء مع مهندس مخوّل. يُمنع إزالة واقي الآلة أو لمس الروبوت أثناء التشغيل. لست مضطرًا لارتداء القفازات عند مكاتب الحاسوب. اقرأ لافتات التحذير وأبلغ عن كل خطر فورًا.\n\nSelf-check rubric:\n- I used must or have to for at least one rule.\n- I used mustn't for a prohibition and don't have to for something optional.\n- The rules are short and easy to read on a door.\n- I used at least three target words correctly.\n- I checked my spelling and capital letters.\n"
+    },
+    {
+      "id": "writing.w05.d03",
+      "titleArabic": "رسالة بخطة الصيانة الوقائية الأسبوعية",
+      "titleEnglish": "Email: the preventive maintenance plan",
+      "promptTemplateId": "prompt.writing.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nاكتب رسالة بريد قصيرة لمشرفك توضّح خطة الصيانة الوقائية لآلة تغليف، مع ذكر تكرار كل مهمة.\nTask: Write a short email to your supervisor about the preventive maintenance plan for a packaging machine.\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 12–20 words\n- 3 sentences: 35–55 words\n- 5 sentences: 60–90 words\n\nTarget vocabulary:\n- preventive maintenance, interval, downtime, operating hours, routine, overhaul\n\nModel answer (English):\nDear Mr Ahmed,\nHere is the preventive maintenance plan for the packaging machine. We check the sensors and the air pressure every day before the first shift. We usually lubricate the chains on Monday, and we replace the air filter every 500 operating hours. A full overhaul is planned once a year during the summer shutdown to reduce downtime.\nBest regards,\n[Your name]\n\nالترجمة العربية للنموذج:\nالسيد أحمد المحترم،\nهذه خطة الصيانة الوقائية لآلة التغليف. نفحص الحساسات وضغط الهواء كل يوم قبل الوردية الأولى. عادةً نزيّت السلاسل يوم الإثنين، ونستبدل فلتر الهواء كل 500 ساعة تشغيل. ومن المخطط إجراء عمرة كاملة مرة في السنة خلال توقف الصيف لتقليل وقت التوقف.\nمع التحية،\n[اسمك]\n\nSelf-check rubric:\n- I put frequency adverbs in the correct position (We usually check ...).\n- I used frequency expressions (every day, once a week, every 500 operating hours).\n- The email has a greeting and a closing.\n- Each task has a clear interval.\n- I used at least three target words correctly.\n"
+    },
+    {
+      "id": "writing.w05.d04",
+      "titleArabic": "وصف إجراء استبدال فلتر الهواء",
+      "titleEnglish": "Procedure: replacing a pneumatic air filter",
+      "promptTemplateId": "prompt.writing.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nاكتب وصفًا لإجراء استبدال فلتر الهواء في وحدة تجهيز الهواء (FRL unit) بأسلوب المبني للمجهول كما يُكتب في دليل الصيانة.\nTask: Describe the procedure for replacing the air filter in a pneumatic FRL unit. Use the passive.\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 12–20 words\n- 3 sentences: 35–55 words\n- 5 sentences: 60–90 words\n\nTarget vocabulary:\n- procedure, filter, seal, pressure, tighten, record\n\nModel answer (English):\nFirst, the air supply is closed and the pressure is released. Then the filter bowl is removed and the old filter is taken out. The new filter is installed, and the seal is checked for damage. After that, the bowl is tightened by hand and the air supply is opened slowly. Finally, the change is recorded in the maintenance log.\n\nالترجمة العربية للنموذج:\nأولًا، يُغلق مصدر الهواء ويُفرَّغ الضغط. ثم يُزال وعاء الفلتر ويُخرج الفلتر القديم. يُركَّب الفلتر الجديد وتُفحص الحشوة بحثًا عن تلف. بعد ذلك، يُشدّ الوعاء باليد ويُفتح مصدر الهواء ببطء. وأخيرًا، يُسجَّل التغيير في سجل الصيانة.\n\nSelf-check rubric:\n- I used is/are + past participle in each step.\n- I did not forget is or are before the past participle.\n- The steps are in a logical order with sequence words.\n- I included a safety step (the pressure is released or the power is isolated).\n- I used at least three target words correctly.\n"
+    },
+    {
+      "id": "writing.w05.d05",
+      "titleArabic": "طلب قطع غيار لصندوق تروس",
+      "titleEnglish": "Email: spare parts request for a gearbox",
+      "promptTemplateId": "prompt.writing.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nاكتب رسالة لقسم المشتريات تطلب فيها قطع غيار لصندوق تروس، مع توضيح ما يمكن إصلاحه وما يجب استبداله وموعد التسليم المطلوب.\nTask: Write an email to the purchasing team to request spare parts for a gearbox.\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 12–20 words\n- 3 sentences: 35–55 words\n- 5 sentences: 60–90 words\n\nTarget vocabulary:\n- spare part, worn, replacement, part number, supplier, warranty\n\nModel answer (English):\nHello,\nDuring the inspection of gearbox G-3, we found two worn bearings and a damaged oil seal. The bearings must be replaced, but the shaft can be reused. Please order two bearings (part number 6205-2RS) and one oil seal from our usual supplier. The parts should be delivered before Thursday so that the line can restart on time.\nThank you,\n[Your name]\n\nالترجمة العربية للنموذج:\nمرحبًا،\nأثناء فحص صندوق التروس G-3 وجدنا محملين متآكلين وحشوة زيت تالفة. يجب استبدال المحامل، لكن يمكن إعادة استخدام العمود. يُرجى طلب محملين (رقم القطعة 6205-2RS) وحشوة زيت واحدة من مورّدنا المعتاد. ينبغي تسليم القطع قبل الخميس حتى يتمكن الخط من العودة إلى التشغيل في موعده.\nشكرًا،\n[اسمك]\n\nSelf-check rubric:\n- I used must be, can be or should be + past participle correctly.\n- I gave the part number and the quantity.\n- I gave a clear deadline and a reason for it.\n- The tone is polite (Please ..., Thank you).\n- I used at least three target words correctly.\n"
+    },
+    {
+      "id": "writing.w05.d06",
+      "titleArabic": "ملاحظة تقييم مخاطر لمهمة على ارتفاع",
+      "titleEnglish": "Risk assessment note: work at height",
+      "promptTemplateId": "prompt.writing.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nاكتب ملاحظة تقييم مخاطر قصيرة لمهمة تغيير محرك على ناقل مرتفع، مع الإجراءات الوقائية والغرض من كل منها.\nTask: Write a short risk assessment note for changing a motor on a raised conveyor.\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 12–20 words\n- 3 sentences: 35–55 words\n- 5 sentences: 60–90 words\n\nTarget vocabulary:\n- risk assessment, hazard, likelihood, severity, control measure, precaution\n\nModel answer (English):\nTask: changing the motor on conveyor C-2, 2.5 metres above the floor. The main hazards are falling from height and lifting a heavy motor. The likelihood is medium and the severity is high. We will use a mobile platform with rails to prevent falls, and a hoist so that nobody lifts the motor by hand. The power will be locked off in order to stop the conveyor from starting by accident.\n\nالترجمة العربية للنموذج:\nالمهمة: تغيير محرك الناقل C-2 على ارتفاع 2.5 متر عن الأرض. المخاطر الرئيسية هي السقوط من ارتفاع ورفع محرك ثقيل. الاحتمالية متوسطة والشدة عالية. سنستخدم منصة متحركة بحواجز لمنع السقوط، ورافعة حتى لا يرفع أحد المحرك بيده. وسيُقفل مصدر الطاقة لمنع تشغيل الناقل عن طريق الخطأ.\n\nSelf-check rubric:\n- I named the task and the main hazards.\n- I rated the likelihood and the severity.\n- Each control measure has a purpose (to, in order to, so that).\n- I did not use for + verb.\n- I used at least three target words correctly.\n"
+    },
+    {
+      "id": "writing.w05.d07",
+      "titleArabic": "ملخص إحاطة السلامة قبل صيانة روبوت",
+      "titleEnglish": "Toolbox talk summary before robot maintenance",
+      "promptTemplateId": "prompt.writing.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nاكتب ملخص إحاطة السلامة (toolbox talk) التي قدّمتها لفريقك قبل صيانة ذراع روبوت، ليُحفظ في سجل السلامة.\nTask: Write a summary of the safety briefing you gave before maintenance on a robot arm.\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 12–20 words\n- 3 sentences: 35–55 words\n- 5 sentences: 60–90 words\n\nTarget vocabulary:\n- briefing, hazard, lockout/tagout, PPE, evacuate, assembly point\n\nModel answer (English):\nToday's briefing was about maintenance on robot arm R-4. The main hazard is unexpected movement, so the robot must be locked out before anyone enters the cell. Wear safety glasses and gloves, and never stand under the arm. Spare parts are kept outside the cell so that the area stays clear. If the alarm sounds, stop work, evacuate and go to the assembly point.\n\nالترجمة العربية للنموذج:\nكانت إحاطة اليوم عن صيانة ذراع الروبوت R-4. الخطر الرئيسي هو الحركة غير المتوقعة، لذا يجب عزل طاقة الروبوت وقفله قبل أن يدخل أحد إلى الخلية. ارتدِ نظارات السلامة والقفازات، ولا تقف أبدًا تحت الذراع. تُحفظ قطع الغيار خارج الخلية حتى تبقى المنطقة خالية. إذا رنّ الإنذار، أوقف العمل وأخلِ المكان واذهب إلى نقطة التجمع.\n\nSelf-check rubric:\n- I stated the main hazard.\n- I used imperatives and must or mustn't correctly.\n- I used at least one passive sentence and one purpose phrase.\n- I explained what to do in an emergency.\n- I used at least three target words correctly.\n"
+    }
+  ]
+}

@@ -19,6 +19,16 @@ import week04Grammar from "./weeks/week-04/grammar.json";
 import week04Listening from "./weeks/week-04/listening.json";
 import week04Vocabulary from "./weeks/week-04/vocabulary.json";
 import week04Writing from "./weeks/week-04/writing.json";
+import week05Conversation from "./weeks/week-05/conversation.json";
+import week05Grammar from "./weeks/week-05/grammar.json";
+import week05Listening from "./weeks/week-05/listening.json";
+import week05Vocabulary from "./weeks/week-05/vocabulary.json";
+import week05Writing from "./weeks/week-05/writing.json";
+import week06Conversation from "./weeks/week-06/conversation.json";
+import week06Grammar from "./weeks/week-06/grammar.json";
+import week06Listening from "./weeks/week-06/listening.json";
+import week06Vocabulary from "./weeks/week-06/vocabulary.json";
+import week06Writing from "./weeks/week-06/writing.json";
 
 type ContentSourceSkill = "vocabulary" | "grammar" | "conversation" | "listening" | "writing";
 
@@ -48,6 +58,8 @@ const packs = [
   week02Vocabulary, week02Grammar, week02Conversation, week02Listening, week02Writing,
   week03Vocabulary, week03Grammar, week03Conversation, week03Listening, week03Writing,
   week04Vocabulary, week04Grammar, week04Conversation, week04Listening, week04Writing,
+  week05Vocabulary, week05Grammar, week05Conversation, week05Listening, week05Writing,
+  week06Vocabulary, week06Grammar, week06Conversation, week06Listening, week06Writing,
 ] as unknown as ContentPack[];
 
 function normalizedSkill(skill: ContentSourceSkill): SkillKey {

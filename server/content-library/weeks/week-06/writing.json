@@ -1,0 +1,62 @@
+{
+  "week": 6,
+  "skill": "writing",
+  "items": [
+    {
+      "id": "writing.w06.d01",
+      "titleArabic": "رسالة إلى الفريق بعد اجتماع الإطلاق",
+      "titleEnglish": "Email to the team after the kickoff meeting",
+      "promptTemplateId": "prompt.writing.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nاكتب رسالة بريد إلى فريقك بعد اجتماع إطلاق مشروع روبوت فرز صغير، توضّح فيها الهدف والنطاق والمراحل الرئيسية والموعد النهائي.\nTask: Write an email to your team after the kickoff meeting for a small sorting robot project.\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 12–20 words\n- 3 sentences: 35–55 words\n- 5 sentences: 60–90 words\n\nTarget vocabulary:\n- kickoff meeting, objective, scope, milestone, deadline, deliverable\n\nModel answer (English):\nHi team,\nThank you for joining the kickoff meeting today. Our objective is to build a small robot that sorts boxes by colour. We are going to finish the mechanical design by 15 May, and the first prototype is going to be ready by 30 May. The final deliverables are the robot, the PLC program and a test report, and the deadline is 20 June. I'll share the full plan tomorrow.\nBest regards,\n[Your name]\n\nالترجمة العربية للنموذج:\nمرحبًا يا فريق،\nشكرًا لحضوركم اجتماع إطلاق المشروع اليوم. هدفنا بناء روبوت صغير يفرز الصناديق حسب اللون. سننهي التصميم الميكانيكي بحلول 15 مايو، وسيكون النموذج الأولي الأول جاهزًا بحلول 30 مايو. المُخرَجات النهائية هي الروبوت وبرنامج PLC وتقرير الاختبار، والموعد النهائي هو 20 يونيو. سأشارك الخطة الكاملة غدًا.\nمع التحية،\n[اسمك]\n\nSelf-check rubric:\n- I stated the objective and the scope clearly.\n- I used be going to for plans and will for a promise or decision.\n- I gave dates for the milestones and the deadline.\n- The email has a greeting and a closing.\n- I used at least three target words correctly.\n"
+    },
+    {
+      "id": "writing.w06.d02",
+      "titleArabic": "دعوة إلى اجتماع مراجعة التصميم",
+      "titleEnglish": "Invitation to a design review meeting",
+      "promptTemplateId": "prompt.writing.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nاكتب دعوة قصيرة إلى اجتماع مراجعة التصميم مع الموعد والمكان وجدول الأعمال، واذكر ترتيبًا مستقبليًا واحدًا بالمضارع المستمر.\nTask: Write a short invitation to a design review meeting.\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 12–20 words\n- 3 sentences: 35–55 words\n- 5 sentences: 60–90 words\n\nTarget vocabulary:\n- agenda, attendee, design review, availability, minutes, video call\n\nModel answer (English):\nDear colleagues,\nWe are holding the design review for the sorting robot on Tuesday, 12 May, in Meeting Room 2. The meeting starts at 10:00 and finishes at 11:30. On the agenda: the gripper design, the sensor layout and the budget. Ahmed is joining by video call because he is visiting a supplier that day. Please confirm your availability by Friday.\nThank you,\n[Your name]\n\nالترجمة العربية للنموذج:\nزملائي الأعزاء،\nسنعقد اجتماع مراجعة تصميم روبوت الفرز يوم الثلاثاء 12 مايو في قاعة الاجتماعات 2. يبدأ الاجتماع الساعة 10:00 وينتهي الساعة 11:30. على جدول الأعمال: تصميم الماسك، وتوزيع الحساسات، والميزانية. سينضم أحمد عبر مكالمة فيديو لأنه سيزور أحد المورّدين في ذلك اليوم. يُرجى تأكيد توفّركم بحلول يوم الجمعة.\nشكرًا،\n[اسمك]\n\nSelf-check rubric:\n- I gave the date, the time and the place.\n- I used the present continuous for an arrangement (We are holding ..., He is visiting ...).\n- I used the present simple for the timetable (starts, finishes).\n- I included a short agenda.\n- I used at least three target words correctly.\n"
+    },
+    {
+      "id": "writing.w06.d03",
+      "titleArabic": "خطة تسلسل المهام لنموذج أولي",
+      "titleEnglish": "Task plan for a conveyor prototype",
+      "promptTemplateId": "prompt.writing.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nاكتب فقرة قصيرة تشرح تسلسل المهام في بناء نموذج أولي لناقل يتحكم به PLC، مع توضيح المهام التي تعتمد على غيرها ونقطة الاختناق.\nTask: Write a short plan that explains the order of tasks for building a PLC-controlled conveyor prototype.\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 12–20 words\n- 3 sentences: 35–55 words\n- 5 sentences: 60–90 words\n\nTarget vocabulary:\n- task, dependency, lead time, bottleneck, assign, prototype\n\nModel answer (English):\nThe motors have a lead time of four weeks, so we will order them first. While we wait, Sara will finish the frame design. As soon as the motors arrive, we will assemble the conveyor. After the electrician installs the control panel, I will program the PLC. We can't start testing until the safety guard is ready, so this is our main bottleneck.\n\nالترجمة العربية للنموذج:\nمدة توريد المحركات أربعة أسابيع، لذلك سنطلبها أولًا. وأثناء الانتظار ستنهي سارة تصميم الهيكل. فور وصول المحركات سنجمّع الناقل. وبعد أن يركّب الكهربائي لوحة التحكم سأبرمج الـ PLC. لا يمكننا بدء الاختبار حتى يجهز واقي السلامة، لذا هذا هو عنق الزجاجة الرئيسي لدينا.\n\nSelf-check rubric:\n- The tasks are in a logical order.\n- I used the present simple after when, as soon as, after and until.\n- I explained at least one dependency and one bottleneck.\n- I assigned tasks to people.\n- I used at least three target words correctly.\n"
+    },
+    {
+      "id": "writing.w06.d04",
+      "titleArabic": "رسالة مهذبة لطلب ملاحظات على تصميم",
+      "titleEnglish": "Polite email asking for feedback",
+      "promptTemplateId": "prompt.writing.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nاكتب رسالة مهذبة إلى مهندس أقدم تطلب فيها ملاحظاته على مسودة تصميمك، وحدّد ما تحتاجه، واقترح موعدًا للنقاش.\nTask: Write a polite email to a senior engineer to ask for feedback on your draft design.\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 12–20 words\n- 3 sentences: 35–55 words\n- 5 sentences: 60–90 words\n\nTarget vocabulary:\n- feedback, draft, design review, clarify, revise, suggestion\n\nModel answer (English):\nDear Eng. Khalid,\nI have attached the first draft of the gripper design. Could you give me some feedback on the jaw shape and the motor size? I'm not sure about the clamping force, so would you mind checking my calculation on page 3? I can revise the design before the design review on Tuesday. How about a short meeting on Sunday at 11:00?\nThank you for your time,\n[Your name]\n\nالترجمة العربية للنموذج:\nالمهندس خالد المحترم،\nأرفقت المسودة الأولى لتصميم الماسك. هل يمكنك إعطائي بعض الملاحظات على شكل الفكّين وحجم المحرك؟ لست متأكدًا من قوة الإمساك، فهل تمانع في مراجعة حساباتي في الصفحة 3؟ يمكنني تعديل التصميم قبل اجتماع مراجعة التصميم يوم الثلاثاء. ما رأيك في اجتماع قصير يوم الأحد الساعة 11:00؟\nشكرًا لوقتك،\n[اسمك]\n\nSelf-check rubric:\n- I used at least two polite request forms (Could you ...? Would you mind + -ing?).\n- I was specific about the feedback I need.\n- I suggested a time with How about or Shall we.\n- The tone is polite and professional.\n- I used at least three target words correctly.\n"
+    },
+    {
+      "id": "writing.w06.d05",
+      "titleArabic": "مقارنة خيارين وتوصية",
+      "titleEnglish": "Comparison and recommendation: stepper or servo?",
+      "promptTemplateId": "prompt.writing.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nاكتب فقرة تقارن بين خيارين لمحور حركة في آلة التقاط ووضع (pick-and-place): محرك خطوي ومحرك سيرفو، ثم قدّم توصية واضحة.\nTask: Compare a stepper motor and a servo motor for one axis of a pick-and-place machine, and give a recommendation.\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 12–20 words\n- 3 sentences: 35–55 words\n- 5 sentences: 60–90 words\n\nTarget vocabulary:\n- trade-off, cost-effective, efficient, accurate, compact, durable\n\nModel answer (English):\nA stepper motor is cheaper than a servo motor, and it is easier to control. However, a servo motor with an encoder is more accurate and more efficient at high speeds. The stepper motor is not as fast as the servo motor, but our machine does not need very high speed. The servo motor is the most expensive option. For this axis, we recommend the stepper motor because it is the most cost-effective choice.\n\nالترجمة العربية للنموذج:\nالمحرك الخطوي أرخص من محرك السيرفو وأسهل في التحكم. لكن محرك السيرفو المزوّد بمُرمِّز (encoder) أدق وأكثر كفاءة عند السرعات العالية. المحرك الخطوي ليس بسرعة محرك السيرفو، لكن آلتنا لا تحتاج إلى سرعة عالية جدًا. محرك السيرفو هو الخيار الأغلى. لهذا المحور نوصي بالمحرك الخطوي لأنه الخيار الأكثر فعالية من حيث التكلفة.\n\nSelf-check rubric:\n- I used comparatives with than correctly.\n- I used at least one superlative with the.\n- I used as ... as or not as ... as.\n- I gave a clear recommendation with a reason.\n- I used at least three target words correctly.\n"
+    },
+    {
+      "id": "writing.w06.d06",
+      "titleArabic": "طلب موارد للنموذج الأولي الثاني",
+      "titleEnglish": "Resource request for the second prototype",
+      "promptTemplateId": "prompt.writing.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nاكتب طلب موارد قصيرًا إلى المدير المالي يوضّح ما يحتاجه فريقك لإكمال النموذج الأولي الثاني، مع الكميات والتكلفة التقديرية.\nTask: Write a short resource request to your finance manager for the second prototype.\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 12–20 words\n- 3 sentences: 35–55 words\n- 5 sentences: 60–90 words\n\nTarget vocabulary:\n- budget, estimate, quotation, shortage, allocate, resource\n\nModel answer (English):\nDear Ms Laila,\nWe need a few more resources to finish the second prototype. There is a shortage of sensors: we have only two, but we need six. We also need a little more time on the 3D printer and some new equipment for testing. The supplier's quotation is 4,500 riyals, which is within our estimate. Could you allocate this amount from the project budget?\nBest regards,\n[Your name]\n\nالترجمة العربية للنموذج:\nالسيدة ليلى المحترمة،\nنحتاج إلى بعض الموارد الإضافية لإنهاء النموذج الأولي الثاني. هناك نقص في الحساسات: لدينا اثنان فقط، لكننا نحتاج إلى ستة. ونحتاج أيضًا إلى وقت إضافي قليل على الطابعة ثلاثية الأبعاد وبعض المعدات الجديدة للاختبار. عرض سعر المورّد 4500 ريال، وهو ضمن تقديرنا. هل يمكنك تخصيص هذا المبلغ من ميزانية المشروع؟\nمع التحية،\n[اسمك]\n\nSelf-check rubric:\n- I used many or much, a few or a little, or enough correctly.\n- I did not add -s to uncountable nouns (equipment, time, information).\n- I gave numbers and a cost.\n- I ended with a clear, polite request.\n- I used at least three target words correctly.\n"
+    },
+    {
+      "id": "writing.w06.d07",
+      "titleArabic": "تحديث الحالة الأسبوعي لمدير المشروع",
+      "titleEnglish": "Weekly status update email",
+      "promptTemplateId": "prompt.writing.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "موجز بالعربية:\nاكتب تحديثًا أسبوعيًا لمدير المشروع: ما الذي اكتمل، والخطة للأسبوع القادم، والعائق الرئيسي، وطلبًا واحدًا.\nTask: Write a weekly status update email to your project manager.\n\nTarget length (1 / 3 / 5 sentences):\n- 1 sentence: 12–20 words\n- 3 sentences: 35–55 words\n- 5 sentences: 60–90 words\n\nTarget vocabulary:\n- status update, progress, on track, behind schedule, blocker, action item\n\nModel answer (English):\nHi Omar,\nHere is this week's status update for the sorting robot. Progress is good: the frame is assembled and the conveyor works. We are on track for the first milestone, but the gripper is behind schedule because the supplier delivered the wrong motor. Next week we are going to test the colour sensor, and I'll send the results as soon as the tests finish. Could you contact the supplier about the motor? This is our main blocker.\nThanks,\n[Your name]\n\nالترجمة العربية للنموذج:\nمرحبًا عمر،\nهذا تحديث حالة هذا الأسبوع لروبوت الفرز. التقدم جيد: تم تجميع الهيكل والناقل يعمل. نحن على المسار الصحيح للمرحلة الأولى، لكن الماسك متأخر عن الجدول لأن المورّد سلّم محركًا خاطئًا. في الأسبوع القادم سنختبر حساس الألوان، وسأرسل النتائج فور انتهاء الاختبارات. هل يمكنك التواصل مع المورّد بشأن المحرك؟ هذا هو العائق الرئيسي لدينا.\nشكرًا،\n[اسمك]\n\nSelf-check rubric:\n- I reported progress, the next plan and a blocker.\n- I used going to for the plan and will for a promise.\n- I used the present simple after as soon as.\n- I made one polite request.\n- I used at least three target words correctly.\n"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 import { getSupabase } from "@/lib/supabase";
-import { getLocalVocabularyCards, getTodayContentIds } from "@/lib/localLessons";
+import { getLessonDayIndex, getLocalVocabularyCards, getTodayContentIds, setLearnerStartDate } from "@/lib/localLessons";
 
 const todayKey = () => new Date().toISOString().slice(0, 10);
 
@@ -55,6 +55,8 @@ export async function loadSupabaseDashboard(userId: string, displayName?: string
     if (created.error) throw created.error;
     profile = created.data;
   }
+  // The profile row is created on the learner's first visit, so it marks day 1 of the curriculum.
+  if (profile.created_at) setLearnerStartDate(profile.created_at);
   const tasksResult = await supabase.from("daily_tasks").select("*").eq("user_id", userId).eq("date_key", dateKey).order("created_at");
   if (tasksResult.error) throw tasksResult.error;
   let tasks: any[] = tasksResult.data ?? [];
@@ -152,7 +154,7 @@ export async function markSupabaseNotificationRead(notificationId: string) {
   if (result.error) throw result.error;
 }
 
-// Introduces up to `newWordsPerDay` unseen engineering words per UTC day, then returns the due cards.
+// Introduces up to `newWordsPerDay` unseen words per UTC day, only from curriculum days that have already started, then returns the due cards.
 export async function loadSupabaseDueCards(userId: string, newWordsPerDay: number) {
   const supabase: any = getSupabase();
   const existing = await supabase.from("vocabulary_cards").select("content_id, created_at").eq("user_id", userId);
@@ -160,10 +162,13 @@ export async function loadSupabaseDueCards(userId: string, newWordsPerDay: numbe
   const rows: Array<{ content_id: string | null; created_at: string }> = existing.data ?? [];
   const introducedToday = rows.filter(row => row.created_at.slice(0, 10) === todayKey() && row.content_id?.startsWith("vocabulary.w")).length;
   const known = new Set(rows.map(row => row.content_id));
-  const fresh = getLocalVocabularyCards().filter(card => !known.has(card.content_id)).slice(0, Math.max(0, newWordsPerDay - introducedToday));
+  const lessonDay = getLessonDayIndex();
+  const fresh = getLocalVocabularyCards()
+    .filter(card => card.unlock_day <= lessonDay && !known.has(card.content_id))
+    .slice(0, Math.max(0, newWordsPerDay - introducedToday));
   if (fresh.length) {
     const now = new Date().toISOString();
-    const seeded = await supabase.from("vocabulary_cards").upsert(fresh.map(card => ({ user_id: userId, ...card, next_review_at: now })), { onConflict: "user_id,content_id", ignoreDuplicates: true });
+    const seeded = await supabase.from("vocabulary_cards").upsert(fresh.map(({ unlock_day: _unlockDay, ...card }) => ({ user_id: userId, ...card, next_review_at: now })), { onConflict: "user_id,content_id", ignoreDuplicates: true });
     if (seeded.error) throw seeded.error;
   }
   const result = await supabase.from("vocabulary_cards").select("*").eq("user_id", userId).lte("next_review_at", new Date().toISOString()).order("next_review_at");

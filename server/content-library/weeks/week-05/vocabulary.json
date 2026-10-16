@@ -1,0 +1,398 @@
+{
+  "week": 5,
+  "skill": "vocabulary",
+  "items": [
+    {
+      "id": "vocabulary.w05.d01.01",
+      "titleArabic": "يفحص",
+      "titleEnglish": "Inspect",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: inspect\nIPA: /ɪnˈspɛkt/\nArabic meaning: يفحص؛ يعاين\nPart of speech: verb\nMechatronics domain: maintenance inspection\n\nExample sentences:\n1. Inspect the conveyor belt before each shift.\n   افحص سير الناقل قبل كل وردية.\n2. We inspect the robot gripper every morning.\n   نفحص ماسك الروبوت كل صباح.\n3. Inspect the cables for cuts and cracks.\n   افحص الكابلات بحثًا عن قطوع وتشققات.\n4. The technician inspected the motor mounts yesterday.\n   فحص الفني قواعد تثبيت المحرك أمس.\n5. Do not inspect the machine while it is running.\n   لا تفحص الآلة وهي تعمل.\n"
+    },
+    {
+      "id": "vocabulary.w05.d01.02",
+      "titleArabic": "قائمة تحقق",
+      "titleEnglish": "Checklist",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: checklist\nIPA: /ˈtʃɛklɪst/\nArabic meaning: قائمة تحقق\nPart of speech: noun\nMechatronics domain: maintenance inspection\n\nExample sentences:\n1. Use the checklist for every inspection.\n   استخدم قائمة التحقق في كل فحص.\n2. The checklist has ten steps.\n   تحتوي قائمة التحقق على عشر خطوات.\n3. Tick each item on the checklist.\n   ضع علامة على كل بند في قائمة التحقق.\n4. Sign the checklist when you finish.\n   وقّع قائمة التحقق عندما تنتهي.\n5. A good checklist prevents missed steps.\n   قائمة التحقق الجيدة تمنع نسيان الخطوات.\n"
+    },
+    {
+      "id": "vocabulary.w05.d01.03",
+      "titleArabic": "يُزيِّت",
+      "titleEnglish": "Lubricate",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: lubricate\nIPA: /ˈluːbrɪkeɪt/\nArabic meaning: يُزيِّت؛ يُشحِّم\nPart of speech: verb\nMechatronics domain: preventive maintenance\n\nExample sentences:\n1. Lubricate the chain once a week.\n   زيِّت السلسلة مرة في الأسبوع.\n2. Lubricate the guide rails with light oil.\n   زيِّت قضبان التوجيه بزيت خفيف.\n3. Do not lubricate the brake surfaces.\n   لا تُزيِّت أسطح الفرامل.\n4. We lubricate the gears to reduce friction.\n   نُزيِّت التروس لتقليل الاحتكاك.\n5. The manual shows where to lubricate the machine.\n   يوضّح الدليل أين تُزيِّت الآلة.\n"
+    },
+    {
+      "id": "vocabulary.w05.d01.04",
+      "titleArabic": "شحم تزييت",
+      "titleEnglish": "Grease",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: grease\nIPA: /ɡriːs/\nArabic meaning: شحم تزييت\nPart of speech: noun\nMechatronics domain: preventive maintenance\n\nExample sentences:\n1. Add grease to the bearing every month.\n   أضف الشحم إلى المحمل كل شهر.\n2. Use the grease gun on the grease nipple.\n   استخدم مسدس الشحم على حلمة التشحيم.\n3. Too much grease can damage the seal.\n   الشحم الزائد قد يتلف مانع التسرب.\n4. Wipe the old grease off the shaft first.\n   امسح الشحم القديم عن العمود أولًا.\n5. This grease works at high temperatures.\n   يعمل هذا الشحم في درجات الحرارة العالية.\n"
+    },
+    {
+      "id": "vocabulary.w05.d01.05",
+      "titleArabic": "محمل",
+      "titleEnglish": "Bearing",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: bearing\nIPA: /ˈbɛrɪŋ/\nArabic meaning: محمل (رولمان بلي)\nPart of speech: noun\nMechatronics domain: rotating machinery\n\nExample sentences:\n1. The motor shaft turns on two bearings.\n   يدور عمود المحرك على محملين.\n2. Listen for noise from the bearing.\n   استمع إلى أي صوت يصدر من المحمل.\n3. A hot bearing is a warning sign.\n   المحمل الساخن علامة تحذير.\n4. Replace the bearing if it makes a grinding noise.\n   استبدل المحمل إذا أصدر صوت احتكاك.\n5. Keep dirt away from the bearings.\n   أبعد الأوساخ عن المحامل.\n"
+    },
+    {
+      "id": "vocabulary.w05.d01.06",
+      "titleArabic": "شدّ السير",
+      "titleEnglish": "Belt tension",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: belt tension\nIPA: /ˈbɛlt ˌtɛnʃən/\nArabic meaning: شدّ السير\nPart of speech: noun\nMechatronics domain: power transmission\n\nExample sentences:\n1. Check the belt tension with a tension gauge.\n   افحص شدّ السير بمقياس الشد.\n2. Low belt tension makes the belt slip.\n   ضعف شدّ السير يجعله ينزلق.\n3. Adjust the belt tension after installation.\n   اضبط شدّ السير بعد التركيب.\n4. High belt tension can damage the bearings.\n   قد يُتلف شدّ السير الزائد المحامل.\n5. Write the belt tension value in the log.\n   اكتب قيمة شدّ السير في السجل.\n"
+    },
+    {
+      "id": "vocabulary.w05.d01.07",
+      "titleArabic": "تسرّب",
+      "titleEnglish": "Leak",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: leak\nIPA: /liːk/\nArabic meaning: تسرّب؛ يتسرّب\nPart of speech: noun / verb\nMechatronics domain: hydraulics and pneumatics\n\nExample sentences:\n1. There is an oil leak under the pump.\n   يوجد تسرّب زيت تحت المضخة.\n2. Check the air hoses for leaks.\n   افحص خراطيم الهواء بحثًا عن تسرّبات.\n3. The valve leaks when the pressure is high.\n   يتسرّب الصمام عندما يكون الضغط مرتفعًا.\n4. Report any leak to your supervisor.\n   أبلغ مشرفك عن أي تسرّب.\n5. Clean the area and find the source of the leak.\n   نظّف المكان وابحث عن مصدر التسرّب.\n"
+    },
+    {
+      "id": "vocabulary.w05.d02.01",
+      "titleArabic": "معدات الوقاية الشخصية",
+      "titleEnglish": "PPE (personal protective equipment)",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: PPE (personal protective equipment)\nIPA: /ˌpiː piː ˈiː/\nArabic meaning: معدات الوقاية الشخصية\nPart of speech: noun\nMechatronics domain: workplace safety\n\nExample sentences:\n1. Wear your PPE in the workshop.\n   ارتدِ معدات الوقاية الشخصية في الورشة.\n2. PPE includes gloves, glasses and safety shoes.\n   تشمل معدات الوقاية الشخصية القفازات والنظارات وأحذية السلامة.\n3. Check your PPE before you start work.\n   افحص معدات وقايتك قبل أن تبدأ العمل.\n4. Damaged PPE must be replaced.\n   يجب استبدال معدات الوقاية التالفة.\n5. Visitors have to wear PPE too.\n   على الزوار ارتداء معدات الوقاية أيضًا.\n"
+    },
+    {
+      "id": "vocabulary.w05.d02.02",
+      "titleArabic": "نظارات السلامة",
+      "titleEnglish": "Safety glasses",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: safety glasses\nIPA: /ˈseɪfti ˌɡlæsɪz/\nArabic meaning: نظارات السلامة\nPart of speech: noun\nMechatronics domain: workplace safety\n\nExample sentences:\n1. You must wear safety glasses when you drill.\n   يجب أن ترتدي نظارات السلامة عندما تثقب.\n2. Safety glasses protect your eyes from metal chips.\n   تحمي نظارات السلامة عينيك من رقائق المعدن.\n3. Clean your safety glasses after use.\n   نظّف نظارات السلامة بعد الاستخدام.\n4. These safety glasses fit over normal glasses.\n   تُلبس نظارات السلامة هذه فوق النظارات العادية.\n5. He forgot his safety glasses, so he stopped work.\n   نسي نظارات السلامة، فأوقف العمل.\n"
+    },
+    {
+      "id": "vocabulary.w05.d02.03",
+      "titleArabic": "خطر",
+      "titleEnglish": "Hazard",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: hazard\nIPA: /ˈhæzərd/\nArabic meaning: خطر؛ مصدر خطر\nPart of speech: noun\nMechatronics domain: risk management\n\nExample sentences:\n1. A wet floor is a slip hazard.\n   الأرضية المبتلة خطر انزلاق.\n2. Identify every hazard before you start.\n   حدّد كل مصدر خطر قبل أن تبدأ.\n3. Moving parts are a serious hazard.\n   الأجزاء المتحركة خطر جسيم.\n4. Report electrical hazards immediately.\n   أبلغ عن المخاطر الكهربائية فورًا.\n5. The sign warns workers about the hazard.\n   تحذّر اللافتة العمال من الخطر.\n"
+    },
+    {
+      "id": "vocabulary.w05.d02.04",
+      "titleArabic": "واقي الآلة",
+      "titleEnglish": "Machine guard",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: machine guard\nIPA: /məˈʃiːn ˌɡɑːrd/\nArabic meaning: واقي الآلة؛ حاجز حماية\nPart of speech: noun\nMechatronics domain: machine safety\n\nExample sentences:\n1. Never remove the machine guard during operation.\n   لا تُزِل واقي الآلة أبدًا أثناء التشغيل.\n2. The machine guard covers the rotating blade.\n   يغطي واقي الآلة الشفرة الدوّارة.\n3. The robot cell has a machine guard with an interlock.\n   خلية الروبوت مزوّدة بحاجز حماية مع قفل أمان.\n4. Put the machine guard back after maintenance.\n   أعِد واقي الآلة إلى مكانه بعد الصيانة.\n5. A broken machine guard must be repaired.\n   يجب إصلاح واقي الآلة المكسور.\n"
+    },
+    {
+      "id": "vocabulary.w05.d02.05",
+      "titleArabic": "إجراء القفل والوسم",
+      "titleEnglish": "Lockout/tagout",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: lockout/tagout\nIPA: /ˌlɑːkaʊt ˈtæɡaʊt/\nArabic meaning: إجراء القفل والوسم (عزل مصادر الطاقة)\nPart of speech: noun\nMechatronics domain: energy isolation\n\nExample sentences:\n1. Follow the lockout/tagout procedure before repairs.\n   اتبع إجراء القفل والوسم قبل الإصلاحات.\n2. Lockout/tagout stops the machine from starting by accident.\n   يمنع إجراء القفل والوسم تشغيل الآلة عن طريق الخطأ.\n3. Each worker uses their own lock in lockout/tagout.\n   يستخدم كل عامل قفله الخاص في إجراء القفل والوسم.\n4. Only authorized staff can remove a lockout tag.\n   لا يزيل بطاقة القفل إلا الموظفون المصرّح لهم.\n5. We practised the lockout/tagout steps last week.\n   تدرّبنا على خطوات القفل والوسم الأسبوع الماضي.\n"
+    },
+    {
+      "id": "vocabulary.w05.d02.06",
+      "titleArabic": "لافتة تحذير",
+      "titleEnglish": "Warning sign",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: warning sign\nIPA: /ˈwɔːrnɪŋ ˌsaɪn/\nArabic meaning: لافتة تحذير\nPart of speech: noun\nMechatronics domain: workplace safety\n\nExample sentences:\n1. Read the warning sign on the panel door.\n   اقرأ لافتة التحذير على باب اللوحة.\n2. The warning sign says \"High voltage\".\n   تقول لافتة التحذير: \"جهد عالٍ\".\n3. Put a warning sign next to the wet floor.\n   ضع لافتة تحذير بجانب الأرضية المبتلة.\n4. Yellow warning signs show a possible danger.\n   تُظهر لافتات التحذير الصفراء خطرًا محتملًا.\n5. Do not cover the warning signs.\n   لا تغطِّ لافتات التحذير.\n"
+    },
+    {
+      "id": "vocabulary.w05.d02.07",
+      "titleArabic": "مُصرَّح له",
+      "titleEnglish": "Authorized",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: authorized\nIPA: /ˈɔːθəraɪzd/\nArabic meaning: مُصرَّح له؛ مُخوَّل\nPart of speech: adjective\nMechatronics domain: access control\n\nExample sentences:\n1. Only authorized staff may open this panel.\n   يُسمح للموظفين المصرّح لهم فقط بفتح هذه اللوحة.\n2. You are not authorized to change the settings.\n   أنت غير مخوّل بتغيير الإعدادات.\n3. An authorized electrician must do this job.\n   يجب أن يقوم بهذا العمل كهربائي مخوّل.\n4. The area is for authorized persons only.\n   المنطقة مخصصة للأشخاص المصرّح لهم فقط.\n5. Ask an authorized engineer to sign the permit.\n   اطلب من مهندس مخوّل توقيع التصريح.\n"
+    },
+    {
+      "id": "vocabulary.w05.d03.01",
+      "titleArabic": "صيانة وقائية",
+      "titleEnglish": "Preventive maintenance",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: preventive maintenance\nIPA: /prɪˈvɛntɪv ˈmeɪntənəns/\nArabic meaning: صيانة وقائية\nPart of speech: noun\nMechatronics domain: maintenance planning\n\nExample sentences:\n1. Preventive maintenance reduces sudden failures.\n   تقلل الصيانة الوقائية الأعطال المفاجئة.\n2. We do preventive maintenance every Friday.\n   نجري الصيانة الوقائية كل يوم جمعة.\n3. The plan lists all preventive maintenance tasks.\n   تسرد الخطة جميع مهام الصيانة الوقائية.\n4. Preventive maintenance costs less than emergency repairs.\n   تكلّف الصيانة الوقائية أقل من الإصلاحات الطارئة.\n5. She is responsible for preventive maintenance on line 2.\n   هي مسؤولة عن الصيانة الوقائية في الخط 2.\n"
+    },
+    {
+      "id": "vocabulary.w05.d03.02",
+      "titleArabic": "فترة فاصلة",
+      "titleEnglish": "Interval",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: interval\nIPA: /ˈɪntərvəl/\nArabic meaning: فترة فاصلة\nPart of speech: noun\nMechatronics domain: maintenance planning\n\nExample sentences:\n1. Change the oil at regular intervals.\n   غيّر الزيت على فترات منتظمة.\n2. The service interval is 500 operating hours.\n   فترة الخدمة 500 ساعة تشغيل.\n3. We shortened the inspection interval after the failure.\n   قصّرنا فترة الفحص بعد العطل.\n4. Check the filter at two-week intervals.\n   افحص الفلتر كل أسبوعين.\n5. The manual gives the correct interval for each part.\n   يحدد الدليل الفترة الصحيحة لكل قطعة.\n"
+    },
+    {
+      "id": "vocabulary.w05.d03.03",
+      "titleArabic": "وقت التوقف",
+      "titleEnglish": "Downtime",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: downtime\nIPA: /ˈdaʊntaɪm/\nArabic meaning: وقت التوقف\nPart of speech: noun\nMechatronics domain: production\n\nExample sentences:\n1. Planned maintenance reduces downtime.\n   تقلل الصيانة المخططة وقت التوقف.\n2. The breakdown caused four hours of downtime.\n   سبّب العطل أربع ساعات من التوقف.\n3. We record downtime in the shift report.\n   نسجّل وقت التوقف في تقرير الوردية.\n4. Unplanned downtime is very expensive.\n   التوقف غير المخطط مكلف جدًا.\n5. We schedule big jobs during weekend downtime.\n   نجدول الأعمال الكبيرة خلال توقف نهاية الأسبوع.\n"
+    },
+    {
+      "id": "vocabulary.w05.d03.04",
+      "titleArabic": "عَمْرة",
+      "titleEnglish": "Overhaul",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: overhaul\nIPA: /ˈoʊvərhɔːl/\nArabic meaning: عَمْرة؛ صيانة شاملة\nPart of speech: noun\nMechatronics domain: maintenance planning\n\nExample sentences:\n1. The gearbox needs a full overhaul.\n   يحتاج صندوق التروس إلى عمرة كاملة.\n2. We do a major overhaul once a year.\n   نجري عمرة كبرى مرة في السنة.\n3. The overhaul took three days.\n   استغرقت العمرة ثلاثة أيام.\n4. After the overhaul, the press runs smoothly.\n   بعد العمرة يعمل المكبس بسلاسة.\n5. Plan the overhaul for the shutdown period.\n   خطّط للعمرة في فترة الإيقاف.\n"
+    },
+    {
+      "id": "vocabulary.w05.d03.05",
+      "titleArabic": "روتيني",
+      "titleEnglish": "Routine",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: routine\nIPA: /ruːˈtiːn/\nArabic meaning: روتيني؛ اعتيادي\nPart of speech: adjective\nMechatronics domain: maintenance planning\n\nExample sentences:\n1. This is a routine check, not a repair.\n   هذا فحص روتيني وليس إصلاحًا.\n2. Routine tasks are written on the board.\n   المهام الروتينية مكتوبة على اللوحة.\n3. We usually finish routine maintenance before 9 a.m.\n   ننهي الصيانة الروتينية عادةً قبل التاسعة صباحًا.\n4. Routine cleaning keeps the sensors accurate.\n   يحافظ التنظيف الروتيني على دقة الحساسات.\n5. A routine inspection found a loose bolt.\n   كشف فحص روتيني عن برغي مرتخٍ.\n"
+    },
+    {
+      "id": "vocabulary.w05.d03.06",
+      "titleArabic": "ساعات التشغيل",
+      "titleEnglish": "Operating hours",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: operating hours\nIPA: /ˈɑːpəreɪtɪŋ ˌaʊərz/\nArabic meaning: ساعات التشغيل\nPart of speech: noun\nMechatronics domain: maintenance planning\n\nExample sentences:\n1. The pump has run for 2,000 operating hours.\n   عملت المضخة 2000 ساعة تشغيل.\n2. Read the counter to see the operating hours.\n   اقرأ العدّاد لتعرف ساعات التشغيل.\n3. Replace the belt after 1,000 operating hours.\n   استبدل السير بعد 1000 ساعة تشغيل.\n4. The operating hours are shown on the HMI screen.\n   تظهر ساعات التشغيل على شاشة واجهة المشغّل (HMI).\n5. We plan service by operating hours, not by date.\n   نخطط للخدمة حسب ساعات التشغيل لا حسب التاريخ.\n"
+    },
+    {
+      "id": "vocabulary.w05.d03.07",
+      "titleArabic": "تآكل",
+      "titleEnglish": "Wear",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: wear\nIPA: /wɛr/\nArabic meaning: تآكل؛ اهتراء\nPart of speech: noun\nMechatronics domain: mechanical maintenance\n\nExample sentences:\n1. Check the gears for wear.\n   افحص التروس بحثًا عن تآكل.\n2. Some wear is normal after a year.\n   بعض التآكل طبيعي بعد عام.\n3. Dust increases wear on moving parts.\n   يزيد الغبار تآكل الأجزاء المتحركة.\n4. The brake pads show heavy wear.\n   تظهر على وسائد الفرامل علامات تآكل شديد.\n5. Good lubrication reduces wear.\n   التزييت الجيد يقلل التآكل.\n"
+    },
+    {
+      "id": "vocabulary.w05.d04.01",
+      "titleArabic": "إجراء",
+      "titleEnglish": "Procedure",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: procedure\nIPA: /prəˈsiːdʒər/\nArabic meaning: إجراء\nPart of speech: noun\nMechatronics domain: maintenance documentation\n\nExample sentences:\n1. Follow the procedure step by step.\n   اتبع الإجراء خطوة بخطوة.\n2. The procedure is written in the manual.\n   الإجراء مكتوب في الدليل.\n3. This procedure is used for all servo drives.\n   يُستخدم هذا الإجراء لجميع مشغلات السيرفو.\n4. A new procedure was approved last month.\n   تمت الموافقة على إجراء جديد الشهر الماضي.\n5. Ask your supervisor if the procedure is not clear.\n   اسأل مشرفك إذا لم يكن الإجراء واضحًا.\n"
+    },
+    {
+      "id": "vocabulary.w05.d04.02",
+      "titleArabic": "يشدّ",
+      "titleEnglish": "Tighten",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: tighten\nIPA: /ˈtaɪtn/\nArabic meaning: يشدّ؛ يُحكِم الربط\nPart of speech: verb\nMechatronics domain: mechanical assembly\n\nExample sentences:\n1. Tighten the bolts in a cross pattern.\n   اشدد البراغي بنمط متقاطع.\n2. The terminal screws are tightened every month.\n   تُشدّ براغي الأطراف كل شهر.\n3. Do not tighten the nut too much.\n   لا تشدّ الصامولة أكثر من اللازم.\n4. He tightened the clamp with a spanner.\n   شدّ المِشبك بمفتاح ربط.\n5. Loose connections must be tightened.\n   يجب شدّ التوصيلات المرتخية.\n"
+    },
+    {
+      "id": "vocabulary.w05.d04.03",
+      "titleArabic": "عزم الدوران",
+      "titleEnglish": "Torque",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: torque\nIPA: /tɔːrk/\nArabic meaning: عزم الدوران\nPart of speech: noun\nMechatronics domain: mechanical assembly\n\nExample sentences:\n1. Tighten the bolt to a torque of 25 N·m.\n   اشدد البرغي حتى عزم 25 نيوتن·متر.\n2. The torque value is given in the manual.\n   قيمة العزم مذكورة في الدليل.\n3. A torque wrench is used for this job.\n   يُستخدم مفتاح عزم لهذا العمل.\n4. The motor produces high torque at low speed.\n   ينتج المحرك عزمًا عاليًا عند السرعة المنخفضة.\n5. Too much torque can damage the thread.\n   العزم الزائد قد يتلف السن (القلاووظ).\n"
+    },
+    {
+      "id": "vocabulary.w05.d04.04",
+      "titleArabic": "مُرشِّح",
+      "titleEnglish": "Filter",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: filter\nIPA: /ˈfɪltər/\nArabic meaning: مُرشِّح؛ فلتر\nPart of speech: noun\nMechatronics domain: pneumatics and hydraulics\n\nExample sentences:\n1. The air filter is changed every three months.\n   يُغيَّر فلتر الهواء كل ثلاثة أشهر.\n2. A blocked filter reduces air pressure.\n   الفلتر المسدود يقلل ضغط الهواء.\n3. Clean the filter with compressed air.\n   نظّف الفلتر بالهواء المضغوط.\n4. The oil filter is located under the tank.\n   يقع فلتر الزيت تحت الخزان.\n5. Write the filter change in the log.\n   سجّل تغيير الفلتر في السجل.\n"
+    },
+    {
+      "id": "vocabulary.w05.d04.05",
+      "titleArabic": "حشوة إحكام",
+      "titleEnglish": "Seal",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: seal\nIPA: /siːl/\nArabic meaning: حشوة إحكام؛ مانع تسرّب\nPart of speech: noun\nMechatronics domain: hydraulics and pneumatics\n\nExample sentences:\n1. The cylinder leaks because the seal is worn.\n   تتسرّب الأسطوانة لأن مانع التسرّب متآكل.\n2. The seals are replaced during the overhaul.\n   تُستبدل موانع التسرّب أثناء العمرة.\n3. Use a new seal every time.\n   استخدم حشوة جديدة في كل مرة.\n4. Check the seal for cracks.\n   افحص الحشوة بحثًا عن تشققات.\n5. This seal keeps dust out of the motor.\n   تمنع هذه الحشوة دخول الغبار إلى المحرك.\n"
+    },
+    {
+      "id": "vocabulary.w05.d04.06",
+      "titleArabic": "يُحاذي",
+      "titleEnglish": "Align",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: align\nIPA: /əˈlaɪn/\nArabic meaning: يُحاذي؛ يضبط الاستقامة\nPart of speech: verb\nMechatronics domain: mechanical assembly\n\nExample sentences:\n1. Align the motor shaft with the pump shaft.\n   حاذِ عمود المحرك مع عمود المضخة.\n2. The pulleys are aligned with a laser tool.\n   تُضبط محاذاة البكرات بأداة ليزر.\n3. If the shafts are not aligned, the coupling wears quickly.\n   إذا لم تكن الأعمدة متحاذية، تتآكل الوصلة بسرعة.\n4. Align the sensor with the target.\n   حاذِ الحساس مع الهدف.\n5. We aligned the conveyor rollers yesterday.\n   ضبطنا محاذاة بكرات الناقل أمس.\n"
+    },
+    {
+      "id": "vocabulary.w05.d04.07",
+      "titleArabic": "أداة تثبيت",
+      "titleEnglish": "Fastener",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: fastener\nIPA: /ˈfæsənər/\nArabic meaning: أداة تثبيت (برغي، صامولة)\nPart of speech: noun\nMechatronics domain: mechanical assembly\n\nExample sentences:\n1. Bolts and nuts are common fasteners.\n   البراغي والصواميل أدوات تثبيت شائعة.\n2. Check all fasteners after transport.\n   افحص جميع أدوات التثبيت بعد النقل.\n3. Stainless steel fasteners are used outdoors.\n   تُستخدم أدوات تثبيت من الفولاذ المقاوم للصدأ في الأماكن الخارجية.\n4. A missing fastener can cause vibration.\n   قد تسبب أداة تثبيت مفقودة اهتزازًا.\n5. Keep spare fasteners in the toolbox.\n   احتفظ بأدوات تثبيت احتياطية في صندوق العدة.\n"
+    },
+    {
+      "id": "vocabulary.w05.d05.01",
+      "titleArabic": "قطعة غيار",
+      "titleEnglish": "Spare part",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: spare part\nIPA: /ˌspɛr ˈpɑːrt/\nArabic meaning: قطعة غيار\nPart of speech: noun\nMechatronics domain: maintenance stores\n\nExample sentences:\n1. We keep spare parts in the store room.\n   نحتفظ بقطع الغيار في المخزن.\n2. This spare part must be ordered from Germany.\n   يجب طلب قطعة الغيار هذه من ألمانيا.\n3. Check the number of the spare part before you order.\n   تحقّق من رقم قطعة الغيار قبل أن تطلب.\n4. Critical spare parts should be kept in stock.\n   يجب الاحتفاظ بقطع الغيار الحرجة في المخزون.\n5. The spare part arrived this morning.\n   وصلت قطعة الغيار هذا الصباح.\n"
+    },
+    {
+      "id": "vocabulary.w05.d05.02",
+      "titleArabic": "مُهترئ",
+      "titleEnglish": "Worn",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: worn\nIPA: /wɔːrn/\nArabic meaning: مُهترئ؛ متآكل\nPart of speech: adjective\nMechatronics domain: mechanical maintenance\n\nExample sentences:\n1. The worn belt must be replaced.\n   يجب استبدال السير المهترئ.\n2. These brake pads are badly worn.\n   وسائد الفرامل هذه متآكلة بشدة.\n3. A worn bearing makes a grinding noise.\n   يُصدر المحمل المتآكل صوت احتكاك.\n4. Worn cables can cause short circuits.\n   قد تسبب الكابلات المهترئة دوائر قصر.\n5. The gear teeth look worn, but they still work.\n   تبدو أسنان الترس متآكلة، لكنها ما زالت تعمل.\n"
+    },
+    {
+      "id": "vocabulary.w05.d05.03",
+      "titleArabic": "استبدال",
+      "titleEnglish": "Replacement",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: replacement\nIPA: /rɪˈpleɪsmənt/\nArabic meaning: استبدال؛ بديل\nPart of speech: noun\nMechatronics domain: maintenance stores\n\nExample sentences:\n1. The replacement motor will arrive on Monday.\n   سيصل المحرك البديل يوم الإثنين.\n2. Replacement is cheaper than repair in this case.\n   الاستبدال أرخص من الإصلاح في هذه الحالة.\n3. We need a replacement for the broken sensor.\n   نحتاج إلى بديل للحساس المعطّل.\n4. The replacement can be done in one hour.\n   يمكن إنجاز الاستبدال في ساعة واحدة.\n5. Order the replacement before the old part fails.\n   اطلب البديل قبل أن تتعطل القطعة القديمة.\n"
+    },
+    {
+      "id": "vocabulary.w05.d05.04",
+      "titleArabic": "يُجدِّد",
+      "titleEnglish": "Refurbish",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: refurbish\nIPA: /ˌriːˈfɜːrbɪʃ/\nArabic meaning: يُجدِّد؛ يعيد تأهيل\nPart of speech: verb\nMechatronics domain: repair and reuse\n\nExample sentences:\n1. The old gearbox can be refurbished.\n   يمكن تجديد صندوق التروس القديم.\n2. We refurbish used motors in our workshop.\n   نجدّد المحركات المستعملة في ورشتنا.\n3. A refurbished robot costs less than a new one.\n   يكلّف الروبوت المجدَّد أقل من الجديد.\n4. The supplier refurbished the pump in two weeks.\n   جدّد المورّد المضخة خلال أسبوعين.\n5. Refurbishing parts reduces waste.\n   يقلل تجديد القطع من النفايات.\n"
+    },
+    {
+      "id": "vocabulary.w05.d05.05",
+      "titleArabic": "رقم القطعة",
+      "titleEnglish": "Part number",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: part number\nIPA: /ˈpɑːrt ˌnʌmbər/\nArabic meaning: رقم القطعة\nPart of speech: noun\nMechatronics domain: maintenance stores\n\nExample sentences:\n1. Write the part number on the order form.\n   اكتب رقم القطعة في نموذج الطلب.\n2. The part number is printed on the label.\n   رقم القطعة مطبوع على الملصق.\n3. Two parts can look the same but have different part numbers.\n   قد تبدو قطعتان متشابهتين لكن لهما رقمان مختلفان.\n4. Please check the part number twice.\n   من فضلك تحقّق من رقم القطعة مرتين.\n5. The supplier asked for the part number and the quantity.\n   طلب المورّد رقم القطعة والكمية.\n"
+    },
+    {
+      "id": "vocabulary.w05.d05.06",
+      "titleArabic": "مورِّد",
+      "titleEnglish": "Supplier",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: supplier\nIPA: /səˈplaɪər/\nArabic meaning: مورِّد\nPart of speech: noun\nMechatronics domain: purchasing\n\nExample sentences:\n1. We ordered the bearings from a local supplier.\n   طلبنا المحامل من مورّد محلي.\n2. The supplier will deliver the parts on Thursday.\n   سيسلّم المورّد القطع يوم الخميس.\n3. Contact the supplier about the delay.\n   تواصل مع المورّد بشأن التأخير.\n4. Our main supplier is in Turkey.\n   يقع مورّدنا الرئيسي في تركيا.\n5. Compare the prices from two suppliers.\n   قارن الأسعار من مورّدَين.\n"
+    },
+    {
+      "id": "vocabulary.w05.d05.07",
+      "titleArabic": "ضمان",
+      "titleEnglish": "Warranty",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: warranty\nIPA: /ˈwɔːrənti/\nArabic meaning: ضمان\nPart of speech: noun\nMechatronics domain: purchasing\n\nExample sentences:\n1. The new drive has a two-year warranty.\n   للمشغّل الجديد ضمان لمدة سنتين.\n2. The repair is covered by the warranty.\n   الإصلاح مشمول بالضمان.\n3. Opening the case may cancel the warranty.\n   قد يؤدي فتح الغلاف إلى إلغاء الضمان.\n4. Keep the invoice for warranty claims.\n   احتفظ بالفاتورة لمطالبات الضمان.\n5. Is this motor still under warranty?\n   هل ما زال هذا المحرك تحت الضمان؟\n"
+    },
+    {
+      "id": "vocabulary.w05.d06.01",
+      "titleArabic": "تقييم المخاطر",
+      "titleEnglish": "Risk assessment",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: risk assessment\nIPA: /ˈrɪsk əˌsɛsmənt/\nArabic meaning: تقييم المخاطر\nPart of speech: noun\nMechatronics domain: safety management\n\nExample sentences:\n1. Do a risk assessment before you start the job.\n   أجرِ تقييمًا للمخاطر قبل أن تبدأ العمل.\n2. The risk assessment lists all the hazards.\n   يسرد تقييم المخاطر جميع مصادر الخطر.\n3. We update the risk assessment every year.\n   نحدّث تقييم المخاطر كل سنة.\n4. The supervisor signed the risk assessment.\n   وقّع المشرف على تقييم المخاطر.\n5. A risk assessment is needed for work at height.\n   يلزم تقييم المخاطر للعمل على ارتفاع.\n"
+    },
+    {
+      "id": "vocabulary.w05.d06.02",
+      "titleArabic": "احتمالية",
+      "titleEnglish": "Likelihood",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: likelihood\nIPA: /ˈlaɪklihʊd/\nArabic meaning: احتمالية\nPart of speech: noun\nMechatronics domain: safety management\n\nExample sentences:\n1. Rate the likelihood from 1 to 5.\n   قيّم الاحتمالية من 1 إلى 5.\n2. The likelihood of a fire is low.\n   احتمالية حدوث حريق منخفضة.\n3. Guards reduce the likelihood of injury.\n   تقلل الحواجز احتمالية الإصابة.\n4. We considered the likelihood and the severity.\n   أخذنا الاحتمالية والشدة بعين الاعتبار.\n5. Training lowers the likelihood of mistakes.\n   يقلل التدريب احتمالية الأخطاء.\n"
+    },
+    {
+      "id": "vocabulary.w05.d06.03",
+      "titleArabic": "شدّة",
+      "titleEnglish": "Severity",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: severity\nIPA: /sɪˈvɛrəti/\nArabic meaning: شدّة؛ جسامة\nPart of speech: noun\nMechatronics domain: safety management\n\nExample sentences:\n1. The severity of this hazard is high.\n   شدة هذا الخطر عالية.\n2. Multiply likelihood by severity to get the risk score.\n   اضرب الاحتمالية في الشدة لتحصل على درجة الخطر.\n3. A small cut has low severity.\n   الجرح الصغير منخفض الشدة.\n4. We ranked the hazards by severity.\n   رتّبنا المخاطر حسب شدتها.\n5. An electric shock can have high severity.\n   قد تكون الصدمة الكهربائية عالية الشدة.\n"
+    },
+    {
+      "id": "vocabulary.w05.d06.04",
+      "titleArabic": "إجراء وقائي",
+      "titleEnglish": "Control measure",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: control measure\nIPA: /kənˈtroʊl ˌmɛʒər/\nArabic meaning: إجراء وقائي (إجراء ضبط للخطر)\nPart of speech: noun\nMechatronics domain: safety management\n\nExample sentences:\n1. A machine guard is a control measure.\n   واقي الآلة إجراء وقائي.\n2. Add a control measure to reduce the risk.\n   أضف إجراءً وقائيًا لتقليل الخطر.\n3. The control measures are listed in the table.\n   الإجراءات الوقائية مدرجة في الجدول.\n4. Training is a simple control measure.\n   التدريب إجراء وقائي بسيط.\n5. Check that each control measure works.\n   تحقّق من أن كل إجراء وقائي يعمل.\n"
+    },
+    {
+      "id": "vocabulary.w05.d06.05",
+      "titleArabic": "حادث وشيك",
+      "titleEnglish": "Near miss",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: near miss\nIPA: /ˌnɪr ˈmɪs/\nArabic meaning: حادث وشيك (كاد أن يقع)\nPart of speech: noun\nMechatronics domain: incident reporting\n\nExample sentences:\n1. Report every near miss, even if nobody was hurt.\n   أبلغ عن كل حادث وشيك حتى لو لم يُصب أحد.\n2. A falling tool was a near miss yesterday.\n   كان سقوط أداة حادثًا وشيكًا أمس.\n3. Near misses help us find hidden hazards.\n   تساعدنا الحوادث الوشيكة على اكتشاف المخاطر الخفية.\n4. The near miss report was sent to the safety team.\n   أُرسل تقرير الحادث الوشيك إلى فريق السلامة.\n5. We discussed two near misses in the meeting.\n   ناقشنا حادثين وشيكين في الاجتماع.\n"
+    },
+    {
+      "id": "vocabulary.w05.d06.06",
+      "titleArabic": "إصابة",
+      "titleEnglish": "Injury",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: injury\nIPA: /ˈɪndʒəri/\nArabic meaning: إصابة\nPart of speech: noun\nMechatronics domain: workplace safety\n\nExample sentences:\n1. Gloves prevent hand injuries.\n   تمنع القفازات إصابات اليد.\n2. Report any injury to the first aid staff.\n   أبلغ موظفي الإسعافات الأولية عن أي إصابة.\n3. There were no injuries this month.\n   لم تقع أي إصابات هذا الشهر.\n4. Lifting heavy parts can cause a back injury.\n   قد يسبب رفع القطع الثقيلة إصابة في الظهر.\n5. The guard was installed to prevent injuries.\n   رُكِّب الواقي لمنع الإصابات.\n"
+    },
+    {
+      "id": "vocabulary.w05.d06.07",
+      "titleArabic": "احتياط",
+      "titleEnglish": "Precaution",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: precaution\nIPA: /prɪˈkɔːʃən/\nArabic meaning: احتياط؛ إجراء احترازي\nPart of speech: noun\nMechatronics domain: workplace safety\n\nExample sentences:\n1. Take precautions when you work with high voltage.\n   اتخذ الاحتياطات عندما تعمل مع الجهد العالي.\n2. As a precaution, switch off the main power.\n   كإجراء احترازي، افصل التيار الرئيسي.\n3. Safety glasses are a simple precaution.\n   نظارات السلامة احتياط بسيط.\n4. We took extra precautions during the test.\n   اتخذنا احتياطات إضافية أثناء الاختبار.\n5. Explain the precautions to new workers.\n   اشرح الاحتياطات للعمال الجدد.\n"
+    },
+    {
+      "id": "vocabulary.w05.d07.01",
+      "titleArabic": "إحاطة",
+      "titleEnglish": "Briefing",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: briefing\nIPA: /ˈbriːfɪŋ/\nArabic meaning: إحاطة؛ اجتماع توجيهي قصير\nPart of speech: noun\nMechatronics domain: team communication\n\nExample sentences:\n1. We have a safety briefing every morning.\n   لدينا إحاطة سلامة كل صباح.\n2. The briefing takes five minutes.\n   تستغرق الإحاطة خمس دقائق.\n3. All visitors must attend the briefing.\n   يجب على جميع الزوار حضور الإحاطة.\n4. The engineer gave a short briefing on the new robot.\n   قدّم المهندس إحاطة قصيرة عن الروبوت الجديد.\n5. Ask your questions at the end of the briefing.\n   اطرح أسئلتك في نهاية الإحاطة.\n"
+    },
+    {
+      "id": "vocabulary.w05.d07.02",
+      "titleArabic": "يُخلي",
+      "titleEnglish": "Evacuate",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: evacuate\nIPA: /ɪˈvækjueɪt/\nArabic meaning: يُخلي (المكان)\nPart of speech: verb\nMechatronics domain: emergency response\n\nExample sentences:\n1. Evacuate the building when the alarm sounds.\n   أخلِ المبنى عندما يرن الإنذار.\n2. The workshop was evacuated in three minutes.\n   أُخليت الورشة في ثلاث دقائق.\n3. Do not use the lift when you evacuate.\n   لا تستخدم المصعد عند الإخلاء.\n4. We evacuate the building in a fire drill twice a year.\n   نُخلي المبنى في تمرين الحريق مرتين في السنة.\n5. Help the visitors to evacuate safely.\n   ساعد الزوار على الإخلاء بأمان.\n"
+    },
+    {
+      "id": "vocabulary.w05.d07.03",
+      "titleArabic": "نقطة التجمّع",
+      "titleEnglish": "Assembly point",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: assembly point\nIPA: /əˈsɛmbli ˌpɔɪnt/\nArabic meaning: نقطة التجمّع\nPart of speech: noun\nMechatronics domain: emergency response\n\nExample sentences:\n1. Go to the assembly point in the car park.\n   اذهب إلى نقطة التجمع في موقف السيارات.\n2. The supervisor counts people at the assembly point.\n   يعدّ المشرف الأشخاص عند نقطة التجمع.\n3. The assembly point is marked with a green sign.\n   نقطة التجمع مُعلَّمة بلافتة خضراء.\n4. Stay at the assembly point until you are told to leave.\n   ابقَ عند نقطة التجمع حتى يُطلب منك المغادرة.\n5. Show new staff where the assembly point is.\n   أرِ الموظفين الجدد مكان نقطة التجمع.\n"
+    },
+    {
+      "id": "vocabulary.w05.d07.04",
+      "titleArabic": "طفاية حريق",
+      "titleEnglish": "Fire extinguisher",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: fire extinguisher\nIPA: /ˈfaɪər ɪkˌstɪŋɡwɪʃər/\nArabic meaning: طفاية حريق\nPart of speech: noun\nMechatronics domain: emergency response\n\nExample sentences:\n1. Use a CO2 fire extinguisher on electrical fires.\n   استخدم طفاية ثاني أكسيد الكربون في حرائق الكهرباء.\n2. The fire extinguisher is next to the door.\n   طفاية الحريق بجانب الباب.\n3. Fire extinguishers are checked every month.\n   تُفحص طفايات الحريق كل شهر.\n4. Learn how to use a fire extinguisher safely.\n   تعلّم كيف تستخدم طفاية الحريق بأمان.\n5. Never block the way to a fire extinguisher.\n   لا تسدّ الطريق إلى طفاية الحريق أبدًا.\n"
+    },
+    {
+      "id": "vocabulary.w05.d07.05",
+      "titleArabic": "إسعافات أولية",
+      "titleEnglish": "First aid",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: first aid\nIPA: /ˌfɜːrst ˈeɪd/\nArabic meaning: إسعافات أولية\nPart of speech: noun\nMechatronics domain: emergency response\n\nExample sentences:\n1. The first aid kit is in the office.\n   حقيبة الإسعافات الأولية في المكتب.\n2. Two workers are trained in first aid.\n   تدرّب عاملان على الإسعافات الأولية.\n3. Give first aid, then call the doctor.\n   قدّم الإسعافات الأولية ثم اتصل بالطبيب.\n4. Check the first aid kit every week.\n   افحص حقيبة الإسعافات الأولية كل أسبوع.\n5. He needed first aid for a small burn.\n   احتاج إلى إسعافات أولية لحرق صغير.\n"
+    },
+    {
+      "id": "vocabulary.w05.d07.06",
+      "titleArabic": "مخرج طوارئ",
+      "titleEnglish": "Emergency exit",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: emergency exit\nIPA: /ɪˈmɜːrdʒənsi ˌɛɡzɪt/\nArabic meaning: مخرج طوارئ\nPart of speech: noun\nMechatronics domain: emergency response\n\nExample sentences:\n1. Keep the emergency exits clear.\n   أبقِ مخارج الطوارئ خالية.\n2. The emergency exit is at the end of the hall.\n   مخرج الطوارئ في نهاية القاعة.\n3. Emergency exit signs stay lit at night.\n   تبقى لافتات مخارج الطوارئ مضاءة ليلًا.\n4. Never lock an emergency exit.\n   لا تُقفل مخرج الطوارئ أبدًا.\n5. Use the nearest emergency exit.\n   استخدم أقرب مخرج طوارئ.\n"
+    },
+    {
+      "id": "vocabulary.w05.d07.07",
+      "titleArabic": "إنذار",
+      "titleEnglish": "Alarm",
+      "promptTemplateId": "prompt.vocabulary.v1",
+      "sourceUrls": [],
+      "contentMarkdown": "Term: alarm\nIPA: /əˈlɑːrm/\nArabic meaning: إنذار؛ جرس إنذار\nPart of speech: noun\nMechatronics domain: emergency response\n\nExample sentences:\n1. When the alarm sounds, stop work.\n   عندما يرن الإنذار، أوقف العمل.\n2. The fire alarm is tested every Monday.\n   يُختبر إنذار الحريق كل يوم إثنين.\n3. The machine stops when an alarm is active.\n   تتوقف الآلة عندما يكون هناك إنذار نشط.\n4. Reset the alarm only after you find the cause.\n   أعد ضبط الإنذار فقط بعد أن تجد السبب.\n5. A false alarm stopped the line for ten minutes.\n   أوقف إنذار كاذب الخط لعشر دقائق.\n"
+    }
+  ]
+}

@@ -22,7 +22,7 @@ export default function Conversation() {
   const [score, setScore] = useState("");
   const [saved, setSaved] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const conversationItem = useMemo(() => ({ task: { id: "speaking" }, content: getTodayConversationLesson() }), []);
+  const conversationItem = useMemo(() => ({ task: { id: "speaking" }, content: getTodayConversationLesson() }), [user?.id]);
   const lesson = useMemo(() => parseConversationLesson(conversationItem.content.contentMarkdown), [conversationItem]);
   const targetMinutes = useStudyMode(user?.id).settings.conversationMinutes;
   const prompt = conversationItem.content.contentMarkdown;
