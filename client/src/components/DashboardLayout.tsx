@@ -42,7 +42,7 @@ const phoneTabs = menuItems.filter(item => phonePaths.includes(item.path));
 const moreItems = menuItems.filter(item => !phonePaths.includes(item.path));
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const { user, isAuthenticated, logout, signInWithEmail, verifyEmailCode, isConfigured } = useAuth();
+  const { user, isAuthenticated, logout, signInWithEmail, signInWithPassword, signUpWithPassword, isConfigured } = useAuth();
   const [location, setLocation] = useLocation();
   const [loginOpen, setLoginOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
@@ -127,7 +127,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <button onClick={() => setMoreOpen(open => !open)} aria-expanded={moreOpen} className={`flex min-h-[52px] flex-col items-center justify-center gap-1 rounded-xl text-[11px] font-medium ${moreActive || moreOpen ? "text-primary" : "text-muted-foreground"}`}><Ellipsis className="h-[22px] w-[22px]" /><span>المزيد</span></button>
         </nav>
       </div>
-      <LoginDialog open={loginOpen} onOpenChange={setLoginOpen} signInWithEmail={signInWithEmail} verifyEmailCode={verifyEmailCode} />
+      <LoginDialog open={loginOpen} onOpenChange={setLoginOpen} signInWithEmail={signInWithEmail} signInWithPassword={signInWithPassword} signUpWithPassword={signUpWithPassword} />
     </div>
   );
 }

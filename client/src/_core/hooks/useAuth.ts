@@ -37,7 +37,8 @@ export function useAuth(options?: UseAuthOptions) {
     refresh: () => undefined,
     logout: supabaseAuth.logout,
     signInWithEmail: supabaseAuth.signInWithEmail,
-    verifyEmailCode: supabaseAuth.verifyEmailCode,
+    signInWithPassword: supabaseAuth.signInWithPassword,
+    signUpWithPassword: supabaseAuth.signUpWithPassword,
     isConfigured: supabaseAuth.isConfigured,
   };
 }

@@ -37,10 +37,13 @@ export function useSupabaseAuth() {
     });
   }, []);
 
-  // The installed web app cannot receive the email link (it opens in the browser), so the same email also carries a code.
-  const verifyEmailCode = useCallback(async (email: string, token: string) => {
-    const supabase = getSupabase();
-    return supabase.auth.verifyOtp({ email, token, type: "email" });
+  // Email + password works inside the installed phone app and needs no email delivery.
+  const signInWithPassword = useCallback(async (email: string, password: string) => {
+    return getSupabase().auth.signInWithPassword({ email, password });
+  }, []);
+
+  const signUpWithPassword = useCallback(async (email: string, password: string) => {
+    return getSupabase().auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin + import.meta.env.BASE_URL } });
   }, []);
 
   const logout = useCallback(async () => {
@@ -48,5 +51,5 @@ export function useSupabaseAuth() {
     await getSupabase().auth.signOut();
   }, []);
 
-  return { user, loading, isAuthenticated: Boolean(user), isConfigured: isSupabaseConfigured, signInWithEmail, verifyEmailCode, logout };
+  return { user, loading, isAuthenticated: Boolean(user), isConfigured: isSupabaseConfigured, signInWithEmail, signInWithPassword, signUpWithPassword, logout };
 }
