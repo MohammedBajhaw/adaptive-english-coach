@@ -22,12 +22,6 @@ import writingWeek03 from "../../../server/content-library/weeks/week-03/writing
 import writingWeek04 from "../../../server/content-library/weeks/week-04/writing.json";
 import writingWeek05 from "../../../server/content-library/weeks/week-05/writing.json";
 import writingWeek06 from "../../../server/content-library/weeks/week-06/writing.json";
-import vocabularyWeek01 from "../../../server/content-library/weeks/week-01/vocabulary.json";
-import vocabularyWeek02 from "../../../server/content-library/weeks/week-02/vocabulary.json";
-import vocabularyWeek03 from "../../../server/content-library/weeks/week-03/vocabulary.json";
-import vocabularyWeek04 from "../../../server/content-library/weeks/week-04/vocabulary.json";
-import vocabularyWeek05 from "../../../server/content-library/weeks/week-05/vocabulary.json";
-import vocabularyWeek06 from "../../../server/content-library/weeks/week-06/vocabulary.json";
 
 type GrammarItem = {
   id: string;
@@ -107,46 +101,4 @@ export function getTodayContentIds() {
     speaking: getTodayConversationLesson().id,
     writing: getTodayWritingLesson().id,
   };
-}
-
-export type LocalVocabularyCard = {
-  content_id: string;
-  term: string;
-  arabic_meaning: string;
-  part_of_speech: string;
-  ipa: string;
-  engineering_domain: string;
-  examples: Array<{ english: string; arabic: string }>;
-  // Curriculum day (0-based) on which this word becomes available.
-  unlock_day: number;
-};
-
-function field(markdown: string, label: string) {
-  return markdown.match(new RegExp(`^${label}:\\s*(.+)$`, "mi"))?.[1]?.trim() ?? "";
-}
-
-// ids look like vocabulary.w05.d03.02 (or vocabulary.w01.d03 in the first four weeks).
-function unlockDayOf(id: string) {
-  const match = id.match(/\.w(\d+)\.d(\d+)/);
-  return match ? (Number(match[1]) - 1) * 7 + (Number(match[2]) - 1) : 0;
-}
-
-export function parseVocabularyItem(item: { id: string; titleEnglish: string; contentMarkdown: string }): LocalVocabularyCard {
-  const markdown = item.contentMarkdown;
-  const examples = Array.from(markdown.matchAll(/^\d+\.\s*(.+)\n\s+(.+)$/gm)).map(([, english, arabic]) => ({ english: english.trim(), arabic: arabic.trim() }));
-  return {
-    content_id: item.id,
-    term: field(markdown, "Term") || item.titleEnglish,
-    arabic_meaning: field(markdown, "Arabic meaning"),
-    part_of_speech: field(markdown, "Part of speech"),
-    ipa: field(markdown, "IPA"),
-    engineering_domain: field(markdown, "Mechatronics domain") || "mechatronics",
-    examples,
-    unlock_day: unlockDayOf(item.id),
-  };
-}
-
-// Engineering vocabulary in curriculum order. A word is introduced only once its curriculum day has arrived.
-export function getLocalVocabularyCards() {
-  return itemsOf([vocabularyWeek01, vocabularyWeek02, vocabularyWeek03, vocabularyWeek04, vocabularyWeek05, vocabularyWeek06]).map(parseVocabularyItem);
 }

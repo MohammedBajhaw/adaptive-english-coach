@@ -1,5 +1,6 @@
 import { getSupabase } from "@/lib/supabase";
-import { getLessonDayIndex, getLocalVocabularyCards, getTodayContentIds, setLearnerStartDate } from "@/lib/localLessons";
+import { getTodayContentIds, setLearnerStartDate } from "@/lib/localLessons";
+import { cardRowFor, decorateCard, loadVocabularyBank, pickNewTerms } from "@/lib/vocabularyBank";
 
 const todayKey = () => new Date().toISOString().slice(0, 10);
 
@@ -85,7 +86,7 @@ export async function loadSupabaseDashboard(userId: string, displayName?: string
   }
   const [snapshotResult, cardsResult, notificationsResult] = await Promise.all([
     supabase.from("skill_snapshots").select("*").eq("user_id", userId).order("created_at", { ascending: false }).limit(1).maybeSingle(),
-    supabase.from("vocabulary_cards").select("*").eq("user_id", userId).lte("next_review_at", new Date().toISOString()).order("next_review_at").limit(3),
+    supabase.from("vocabulary_cards").select("*").eq("user_id", userId).not("content_id", "like", "vocabulary.%").lte("next_review_at", new Date().toISOString()).order("next_review_at").limit(3),
     supabase.from("learner_notifications").select("*").eq("user_id", userId).order("created_at", { ascending: false }).limit(5),
   ]);
   if (snapshotResult.error) throw snapshotResult.error;
@@ -154,26 +155,34 @@ export async function markSupabaseNotificationRead(notificationId: string) {
   if (result.error) throw result.error;
 }
 
-// Introduces up to `newWordsPerDay` unseen words per UTC day, only from curriculum days that have already started, then returns the due cards.
+// Cards created from the previous word list are archived (hidden for good, never deleted) once the new list is in use.
+const ARCHIVED_UNTIL = "2100-01-01T00:00:00.000Z";
+let legacyArchived = false;
+
+async function archiveLegacyCards(supabase: any, userId: string) {
+  if (legacyArchived) return;
+  const { error } = await supabase.from("vocabulary_cards").update({ next_review_at: ARCHIVED_UNTIL }).eq("user_id", userId).like("content_id", "vocabulary.%").lt("next_review_at", ARCHIVED_UNTIL);
+  if (!error) legacyArchived = true;
+}
+
+// Introduces up to `newWordsPerDay` unseen terms per UTC day from the vocabulary spreadsheet, then returns the due cards.
 export async function loadSupabaseDueCards(userId: string, newWordsPerDay: number) {
   const supabase: any = getSupabase();
-  const existing = await supabase.from("vocabulary_cards").select("content_id, created_at").eq("user_id", userId);
+  const bank = await loadVocabularyBank();
+  await archiveLegacyCards(supabase, userId);
+  const existing = await supabase.from("vocabulary_cards").select("content_id, created_at").eq("user_id", userId).not("content_id", "like", "vocabulary.%");
   if (existing.error) throw existing.error;
   const rows: Array<{ content_id: string | null; created_at: string }> = existing.data ?? [];
-  const introducedToday = rows.filter(row => row.created_at.slice(0, 10) === todayKey() && row.content_id?.startsWith("vocabulary.w")).length;
-  const known = new Set(rows.map(row => row.content_id));
-  const lessonDay = getLessonDayIndex();
-  const fresh = getLocalVocabularyCards()
-    .filter(card => card.unlock_day <= lessonDay && !known.has(card.content_id))
-    .slice(0, Math.max(0, newWordsPerDay - introducedToday));
+  const introducedToday = rows.filter(row => row.created_at.slice(0, 10) === todayKey()).length;
+  const fresh = pickNewTerms(bank.terms, new Set(rows.map(row => row.content_id)), newWordsPerDay - introducedToday);
   if (fresh.length) {
     const now = new Date().toISOString();
-    const seeded = await supabase.from("vocabulary_cards").upsert(fresh.map(({ unlock_day: _unlockDay, ...card }) => ({ user_id: userId, ...card, next_review_at: now })), { onConflict: "user_id,content_id", ignoreDuplicates: true });
+    const seeded = await supabase.from("vocabulary_cards").upsert(fresh.map(term => ({ user_id: userId, ...cardRowFor(term), next_review_at: now })), { onConflict: "user_id,content_id", ignoreDuplicates: true });
     if (seeded.error) throw seeded.error;
   }
-  const result = await supabase.from("vocabulary_cards").select("*").eq("user_id", userId).lte("next_review_at", new Date().toISOString()).order("next_review_at");
+  const result = await supabase.from("vocabulary_cards").select("*").eq("user_id", userId).not("content_id", "like", "vocabulary.%").lte("next_review_at", new Date().toISOString()).order("next_review_at");
   if (result.error) throw result.error;
-  return result.data ?? [];
+  return (result.data ?? []).map((row: any) => decorateCard(row, bank));
 }
 
 export async function rateSupabaseCard(userId: string, card: any, rating: "again" | "hard" | "good" | "easy") {
