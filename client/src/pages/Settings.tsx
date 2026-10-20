@@ -21,9 +21,9 @@ type FormState = {
 };
 
 const modes: Array<{ key: StudyMode; label: string; minutes: number; description: string; vocabulary: string; conversation: string; listening: string; grammar: string; writing: string }> = [
-  { key: "steady", label: "ثبات يومي", minutes: 15, description: "لليوم المزدحم: لمس كل المهارات بدون إرهاق.", vocabulary: "5 كلمات", conversation: "5 دقائق", listening: "≈1 دقيقة · سؤالان", grammar: "5 اختيارات + تطبيق", writing: "جملة مهنية" },
-  { key: "balanced", label: "تقدم متوازن", minutes: 30, description: "الإيقاع الافتراضي لبناء تقدم ثابت في جميع المهارات.", vocabulary: "7 كلمات", conversation: "10 دقائق", listening: "≈2 د · 4 أسئلة", grammar: "10 اختيارات + تطبيق", writing: "3 جمل مهنية" },
-  { key: "intensive", label: "تحدٍّ مكثف", minutes: 45, description: "لليوم الذي تملك فيه وقتًا وطاقة للتطبيق الأعمق.", vocabulary: "10 كلمات", conversation: "13 دقيقة", listening: "≈4 د · 6 أسئلة", grammar: "20 اختيارًا + تطبيقان", writing: "5 جمل مهنية" },
+  { key: "steady", label: "ثبات يومي", minutes: 15, description: "لليوم المزدحم: لمس كل المهارات بدون إرهاق.", vocabulary: "حتى يمتلئ حمل الدورة", conversation: "5 دقائق", listening: "≈1 دقيقة · سؤالان", grammar: "5 اختيارات + تطبيق", writing: "جملة مهنية" },
+  { key: "balanced", label: "تقدم متوازن", minutes: 30, description: "الإيقاع الافتراضي لبناء تقدم ثابت في جميع المهارات.", vocabulary: "حتى يمتلئ حمل الدورة", conversation: "10 دقائق", listening: "≈2 د · 4 أسئلة", grammar: "10 اختيارات + تطبيق", writing: "3 جمل مهنية" },
+  { key: "intensive", label: "تحدٍّ مكثف", minutes: 45, description: "لليوم الذي تملك فيه وقتًا وطاقة للتطبيق الأعمق.", vocabulary: "حتى يمتلئ حمل الدورة", conversation: "13 دقيقة", listening: "≈4 د · 6 أسئلة", grammar: "20 اختيارًا + تطبيقان", writing: "5 جمل مهنية" },
 ];
 
 const tracks: Array<{ key: GoalTrack; label: string; hint: string }> = [

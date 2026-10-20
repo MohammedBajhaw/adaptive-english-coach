@@ -33,7 +33,7 @@ export const levelLabels: Record<BankLevel, string> = { Beginner: "مبتدئ", 
 export const isBankId = (id: string | null | undefined) => /^S\d-[A-Z]{4}-\d{3}$/.test(id ?? "");
 
 // New words are introduced in curriculum order (stage, then level), skipping the ones the learner already has.
-export function pickNewTerms(terms: BankTerm[], knownIds: Set<string | null>, count: number) {
+export function pickNewTerms(terms: BankTerm[], knownIds: Set<string | null | undefined>, count: number) {
   return terms.filter(term => !knownIds.has(term.id)).slice(0, Math.max(0, count));
 }
 

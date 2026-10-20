@@ -4,11 +4,11 @@ import {
   b64urlToBytes,
   bytesToB64url,
   dailyMessage,
-  decideReminders,
+  decideCycleReminder,
   encryptPayload,
-  localParts,
   vapidAuthorization,
   vocabMessage,
+  wakeMessage,
   type ReminderPrefs,
 } from "../supabase/functions/send-reminders/index";
 
@@ -86,85 +86,132 @@ describe("VAPID", () => {
   });
 });
 
+// The learner's example: the cycle starts at 04:00 and lasts 18 hours, with a reminder every two hours.
+const START = "2026-10-20T04:00:00Z";
+const at = (hoursAfterStart: number, minutes = 0) => new Date(Date.parse(START) + hoursAfterStart * 3_600_000 + minutes * 60_000);
+
 const prefs: ReminderPrefs = {
-  timezone: "Asia/Riyadh",
-  reminder_enabled: true,
-  reminder_hour_local: 20,
+  cycle_started_at: START,
+  cycle_hours: 18,
+  cycle_date_key: "2026-10-20",
+  wake_prompt_sent_at: null,
   vocab_reminder_enabled: true,
-  vocab_reminder_every_hours: 3,
-  reminder_window_start: 9,
-  reminder_window_end: 21,
+  vocab_reminder_every_hours: 2,
+  reminder_enabled: true,
+  daily_reminder_after_hours: 8,
   last_vocab_push_at: null,
   last_daily_push_date: null,
 };
+const base = { dueNonEasy: 5, pendingTasks: 5 };
+const decide = (now: Date, overrides: Partial<ReminderPrefs> = {}, extra: Partial<typeof base> = {}) =>
+  decideCycleReminder({ now, prefs: { ...prefs, ...overrides }, ...base, ...extra });
 
-describe("local time", () => {
-  it("يحوّل الوقت إلى توقيت المتعلم ويعيد التاريخ المحلي", () => {
-    expect(localParts(new Date("2026-10-16T17:30:00Z"), "Asia/Riyadh")).toEqual({ hour: 20, dateKey: "2026-10-16" });
-    expect(localParts(new Date("2026-10-16T22:30:00Z"), "Asia/Riyadh")).toEqual({ hour: 1, dateKey: "2026-10-17" });
-    expect(localParts(new Date("2026-10-16T00:10:00Z"), "UTC")).toEqual({ hour: 0, dateKey: "2026-10-16" });
+describe("vocabulary reminders every two hours", () => {
+  it("لا يرسل شيئًا قبل أن تبدأ الدورة ولا في أول ساعتين", () => {
+    expect(decide(new Date(Date.parse(START) - 60_000))).toBeNull();
+    expect(decide(at(0))).toBeNull();
+    expect(decide(at(1, 59))).toBeNull();
   });
 
-  it("يرجع إلى UTC إذا كان اسم المنطقة الزمنية غير صالح", () => {
-    expect(localParts(new Date("2026-10-16T05:00:00Z"), "Not/AZone")).toEqual({ hour: 5, dateKey: "2026-10-16" });
+  it("أول تذكير بعد ساعتين من البداية، والثاني بعد أربع", () => {
+    expect(decide(at(2))).toBe("vocab");
+    expect(decide(at(2, 5), { last_vocab_push_at: at(2).toISOString() })).toBeNull();
+    expect(decide(at(4), { last_vocab_push_at: at(2).toISOString() })).toBe("vocab");
+  });
+
+  it("لا يكرر العلامة نفسها لكن لا يعيد العلامات الفائتة عند تأخر الجدولة", () => {
+    // the cron job was down from +2h to +6h20: only one catch-up reminder, for the latest tick (+6h)
+    expect(decide(at(6, 20), { last_vocab_push_at: at(2, 1).toISOString() })).toBe("vocab");
+    expect(decide(at(6, 30), { last_vocab_push_at: at(6, 20).toISOString() })).toBeNull();
+  });
+
+  it("يصل ثماني تذكيرات في دورة 18 ساعة (عند 2 و4 و... و16)", () => {
+    let last: string | null = null;
+    let sent = 0;
+    for (let minute = 0; minute <= 18 * 60 - 1; minute += 10) {
+      const now = at(0, minute);
+      if (decide(now, { last_vocab_push_at: last, reminder_enabled: false }) === "vocab") { sent += 1; last = now.toISOString(); }
+    }
+    expect(sent).toBe(8);
+  });
+
+  it("لا يرسل إذا لم تكن هناك كلمات مستحقة غير سهلة", () => {
+    expect(decide(at(2), {}, { dueNonEasy: 0 })).toBeNull();
+  });
+
+  it("يحترم إيقاف تذكير الكلمات والفاصل المختار", () => {
+    expect(decide(at(2), { vocab_reminder_enabled: false })).toBeNull();
+    expect(decide(at(2), { vocab_reminder_every_hours: 3 })).toBeNull();
+    expect(decide(at(3), { vocab_reminder_every_hours: 3 })).toBe("vocab");
   });
 });
 
-describe("decideReminders", () => {
-  const at = (iso: string) => new Date(iso);
-  const base = { vocabularyDone: false, pendingTasks: 5 };
-
-  it("يرسل تذكير المفردات بعد مرور ثلاث ساعات داخل نافذة النهار", () => {
-    const decision = decideReminders({ ...base, now: at("2026-10-16T09:00:00Z"), prefs: { ...prefs, last_vocab_push_at: "2026-10-16T06:00:00Z" } }); // 12:00 Riyadh
-    expect(decision).toMatchObject({ vocab: true, daily: false });
+describe("end of the cycle: the wake-up prompt", () => {
+  it("بعد 18 ساعة بالضبط تُرسل رسالة «هل استيقظت؟» ولا يُرسل تذكير كلمات", () => {
+    expect(decide(at(17, 59), { reminder_enabled: false })).toBe("vocab");
+    expect(decide(at(18))).toBe("wake");
+    expect(decide(at(18), { last_vocab_push_at: at(16).toISOString() })).toBe("wake");
   });
 
-  it("يرسل أول تذكير مفردات عندما لا يوجد تذكير سابق", () => {
-    expect(decideReminders({ ...base, now: at("2026-10-16T09:00:00Z"), prefs }).vocab).toBe(true);
+  it("تُرسل مرة واحدة ثم صمت تام حتى تبدأ دورة جديدة", () => {
+    const prompted = { wake_prompt_sent_at: at(18, 3).toISOString() };
+    expect(decide(at(18, 13), prompted)).toBeNull();
+    expect(decide(at(20), prompted)).toBeNull();
+    expect(decide(at(30), prompted, { dueNonEasy: 40 })).toBeNull();
   });
 
-  it("لا يكرر قبل مرور الفترة (مع هامش تأخر الجدولة)", () => {
-    expect(decideReminders({ ...base, now: at("2026-10-16T09:00:00Z"), prefs: { ...prefs, last_vocab_push_at: "2026-10-16T07:30:00Z" } }).vocab).toBe(false);
-    // 2h51m later still counts as three hours because the cron job can drift a few minutes
-    expect(decideReminders({ ...base, now: at("2026-10-16T09:00:00Z"), prefs: { ...prefs, last_vocab_push_at: "2026-10-16T06:09:00Z" } }).vocab).toBe(true);
+  it("بعد الاستيقاظ تبدأ دورة جديدة بتذكيراتها (رسالة الدورة القديمة لا تُحتسب)", () => {
+    const nextStart = at(26);
+    const next = { cycle_started_at: nextStart.toISOString(), cycle_date_key: "2026-10-21", wake_prompt_sent_at: at(18, 3).toISOString(), last_vocab_push_at: null };
+    expect(decide(new Date(nextStart.getTime() + 2 * 3_600_000), next)).toBe("vocab");
+    expect(decide(new Date(nextStart.getTime() + 18 * 3_600_000), next)).toBe("wake");
   });
 
-  it("لا يرسل ليلًا خارج نافذة التذكير", () => {
-    expect(decideReminders({ ...base, now: at("2026-10-16T21:00:00Z"), prefs }).vocab).toBe(false); // 00:00 Riyadh
-    expect(decideReminders({ ...base, now: at("2026-10-16T05:00:00Z"), prefs }).vocab).toBe(false); // 08:00 Riyadh
-    expect(decideReminders({ ...base, now: at("2026-10-16T18:00:00Z"), prefs }).vocab).toBe(false); // 21:00 Riyadh, window ends at 21
+  it("طول الدورة قابل للتغيير", () => {
+    expect(decide(at(12), { cycle_hours: 12 })).toBe("wake");
+    expect(decide(at(12), { cycle_hours: 14, reminder_enabled: false })).toBe("vocab");
+  });
+});
+
+describe("daily plan reminder", () => {
+  it("تُرسل مرة واحدة بعد 8 ساعات من الاستيقاظ وتتقدم على تذكير الكلمات", () => {
+    expect(decide(at(8))).toBe("daily");
+    expect(decide(at(7, 59))).toBe("vocab");
   });
 
-  it("يتوقف عن تذكير المفردات بعد إكمال مهمة المفردات اليوم", () => {
-    expect(decideReminders({ ...base, vocabularyDone: true, now: at("2026-10-16T09:00:00Z"), prefs }).vocab).toBe(false);
+  it("لا تتكرر في الدورة نفسها وتتجدد في الدورة التالية", () => {
+    expect(decide(at(8, 10), { last_daily_push_date: "2026-10-20", last_vocab_push_at: at(8).toISOString() })).toBeNull();
+    expect(decide(at(10), { last_daily_push_date: "2026-10-20", last_vocab_push_at: at(8).toISOString() })).toBe("vocab");
+    const nextStart = at(26);
+    expect(decide(new Date(nextStart.getTime() + 8 * 3_600_000), { cycle_started_at: nextStart.toISOString(), cycle_date_key: "2026-10-21", last_daily_push_date: "2026-10-20" })).toBe("daily");
   });
 
-  it("يحترم إيقاف تذكير المفردات", () => {
-    expect(decideReminders({ ...base, now: at("2026-10-16T09:00:00Z"), prefs: { ...prefs, vocab_reminder_enabled: false } }).vocab).toBe(false);
-  });
-
-  it("يرسل التذكير العام في الساعة المحددة مرة واحدة في اليوم ولا يرسل تذكير المفردات معه", () => {
-    const first = decideReminders({ ...base, now: at("2026-10-16T17:00:00Z"), prefs }); // 20:00 Riyadh
-    expect(first).toMatchObject({ daily: true, vocab: false, localDateKey: "2026-10-16" });
-    const again = decideReminders({ ...base, now: at("2026-10-16T17:30:00Z"), prefs: { ...prefs, last_daily_push_date: "2026-10-16" } });
-    expect(again.daily).toBe(false);
-    const nextDay = decideReminders({ ...base, now: at("2026-10-17T17:00:00Z"), prefs: { ...prefs, last_daily_push_date: "2026-10-16" } });
-    expect(nextDay.daily).toBe(true);
-  });
-
-  it("لا يرسل التذكير العام إذا اكتملت كل مهام اليوم أو كان معطلًا أو في ساعة أخرى", () => {
-    expect(decideReminders({ ...base, pendingTasks: 0, now: at("2026-10-16T17:00:00Z"), prefs }).daily).toBe(false);
-    expect(decideReminders({ ...base, now: at("2026-10-16T17:00:00Z"), prefs: { ...prefs, reminder_enabled: false } }).daily).toBe(false);
-    expect(decideReminders({ ...base, now: at("2026-10-16T16:00:00Z"), prefs }).daily).toBe(false);
+  it("لا تُرسل إذا اكتملت المهام أو كانت معطلة", () => {
+    expect(decide(at(8), {}, { pendingTasks: 0 })).toBe("vocab");
+    expect(decide(at(8), { reminder_enabled: false })).toBe("vocab");
   });
 });
 
 describe("messages", () => {
-  it("تذكر عدد البطاقات والمهام المتبقية", () => {
-    expect(vocabMessage(7).body).toContain("7");
-    expect(vocabMessage(0).body).toContain("كلمات اليوم");
+  it("رسالة الكلمات تعد كل فئة غير سهلة", () => {
+    const message = vocabMessage({ again: 2, hard: 3, good: 4, fresh: 0 });
+    expect(message.body).toContain("9 كلمة");
+    expect(message.body).toContain("2 لم أتذكرها");
+    expect(message.body).toContain("3 صعبة");
+    expect(message.body).toContain("4 للنطق والإملاء");
+    expect(message.body).not.toContain("جديدة");
+    expect(message.url).toBe("cards");
+  });
+
+  it("رسالة الاستيقاظ تفتح صفحة الاستيقاظ وفيها زر إجراء", () => {
+    const message = wakeMessage(18);
+    expect(message.url).toBe("wake");
+    expect(message.actions[0]).toEqual({ action: "wake", title: "استيقظت" });
+    expect(message.body).toContain("18");
+  });
+
+  it("رسالة الخطة تذكر عدد المهام المتبقية", () => {
     expect(dailyMessage(3).body).toContain("3");
-    expect(vocabMessage(1).url).toBe("cards");
     expect(dailyMessage(1).url).toBe("");
   });
 });

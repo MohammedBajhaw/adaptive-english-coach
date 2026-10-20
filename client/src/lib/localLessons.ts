@@ -1,3 +1,4 @@
+import { getCycle } from "@/lib/cycle";
 import grammarWeek01 from "../../../server/content-library/weeks/week-01/grammar.json";
 import grammarWeek02 from "../../../server/content-library/weeks/week-02/grammar.json";
 import grammarWeek03 from "../../../server/content-library/weeks/week-03/grammar.json";
@@ -43,43 +44,10 @@ const listeningItems = itemsOf([listeningWeek01, listeningWeek02, listeningWeek0
 const writingItems = itemsOf([writingWeek01, writingWeek02, writingWeek03, writingWeek04, writingWeek05, writingWeek06]);
 
 // ---- Lesson day -----------------------------------------------------------
-// Lessons follow the curriculum in order, starting on the learner's first day,
-// so every learner begins with week 1 day 1 regardless of the calendar date.
-const START_KEY = "aec.lesson-start-day";
-
-function utcDay(date: Date) {
-  return Math.floor(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()) / 86_400_000);
-}
-
-let learnerStartDay: number | null = null;
-
-function readStoredStartDay() {
-  try {
-    const raw = globalThis.localStorage?.getItem(START_KEY);
-    const value = raw === null || raw === undefined ? NaN : Number(raw);
-    return Number.isFinite(value) ? value : null;
-  } catch {
-    return null;
-  }
-}
-
-// Called with the learner's first-use date (profile creation) once it is known.
-export function setLearnerStartDate(iso: string) {
-  const parsed = new Date(iso);
-  if (Number.isNaN(parsed.getTime())) return;
-  learnerStartDay = utcDay(parsed);
-  try { globalThis.localStorage?.setItem(START_KEY, String(learnerStartDay)); } catch { /* storage unavailable */ }
-}
-
-// Fallback anchor (account creation) for pages opened before the dashboard has loaded the profile.
-export function setLearnerStartDateIfMissing(iso: string) {
-  if (learnerStartDay === null && readStoredStartDay() === null) setLearnerStartDate(iso);
-}
-
-export function getLessonDayIndex(now = new Date()) {
-  const today = utcDay(now);
-  const start = learnerStartDay ?? readStoredStartDay() ?? today;
-  return Math.max(0, today - start);
+// The daily lesson follows the wake cycle: cycle 1 is week 1 day 1, cycle 2 is day 2, and so on
+// (the cycle number is advanced when the learner presses "I woke up").
+export function getLessonDayIndex() {
+  return Math.max(0, getCycle().number - 1);
 }
 
 export const curriculumDays = grammarItems.length;

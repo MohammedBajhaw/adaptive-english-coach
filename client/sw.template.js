@@ -50,6 +50,7 @@ self.addEventListener("push", event => {
     renotify: true,
     lang: "ar",
     dir: "rtl",
+    actions: Array.isArray(data.actions) ? data.actions : [],
     data: { url: scopeUrl(data.url || "") },
   }));
 });

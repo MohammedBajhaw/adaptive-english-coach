@@ -1,4 +1,5 @@
 import { useAuth } from "@/_core/hooks/useAuth";
+import CycleBanner from "@/components/CycleBanner";
 import InstallPrompt from "@/components/InstallPrompt";
 import LoginDialog from "@/components/LoginDialog";
 import PasswordDialog from "@/components/PasswordDialog";
@@ -22,6 +23,7 @@ import {
   Settings2,
   X,
 } from "lucide-react";
+import { ensureLearnerCycle } from "@/lib/supabaseLearning";
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { toast } from "sonner";
@@ -49,6 +51,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [loginOpen, setLoginOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const [passwordOpen, setPasswordOpen] = useState(false);
+  // Load the wake cycle (the app's "day") as soon as the learner is known, so every page shows the right lesson.
+  useEffect(() => { if (isAuthenticated && user?.id) void ensureLearnerCycle(user.id).catch(() => undefined); }, [isAuthenticated, user?.id]);
   // Opening a password-reset link signs the learner in and asks for a new password.
   useEffect(() => { if (recovery) setPasswordOpen(true); }, [recovery]);
   const moreActive = moreItems.some(item => item.path === location);
@@ -99,6 +103,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
         </header>
         <main className="mx-auto max-w-[1440px] px-4 py-6 pb-32 lg:px-10 lg:py-10 lg:pb-10">
+          <CycleBanner />
           <InstallPrompt />
           {children}
         </main>

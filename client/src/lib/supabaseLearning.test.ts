@@ -25,13 +25,36 @@ describe("getTodaySupabaseTaskSeed", () => {
   });
 });
 
-describe("curriculum day", () => {
-  it("يبدأ كل متعلم من اليوم الأول ثم يتقدم يومًا بيوم", async () => {
+describe("the wake cycle is the app's day", () => {
+  it("درس اليوم يتبع رقم الدورة: الدورة 1 هي اليوم الأول والدورة 2 هي اليوم الثاني", async () => {
+    const { setCycle, getCycle } = await import("./cycle");
     const lessons = await import("./localLessons");
-    lessons.setLearnerStartDate("2026-03-10T08:00:00Z");
-    expect(lessons.getLessonDayIndex(new Date("2026-03-10T23:00:00Z"))).toBe(0);
-    expect(lessons.getLessonDayIndex(new Date("2026-03-11T01:00:00Z"))).toBe(1);
-    expect(lessons.getLessonDayIndex(new Date("2026-04-14T01:00:00Z"))).toBe(35);
-    expect(lessons.getLessonDayIndex(new Date("2026-03-01T00:00:00Z"))).toBe(0);
+    const before = getCycle();
+    const cycle = (number: number) => ({ number, openedAt: "2026-10-20T01:00:00Z", startedAt: "2026-10-20T01:00:00Z", dateKey: "2026-10-20", hours: 18 });
+    try {
+      setCycle(cycle(1));
+      expect(lessons.getLessonDayIndex()).toBe(0);
+      const first = lessons.getTodayContentIds();
+      setCycle(cycle(2));
+      expect(lessons.getLessonDayIndex()).toBe(1);
+      expect(lessons.getTodayContentIds().grammar).not.toBe(first.grammar);
+      setCycle(cycle(1 + lessons.curriculumDays));
+      expect(lessons.getTodayContentIds().grammar).toBe(first.grammar); // the curriculum starts over after its last day
+    } finally {
+      setCycle(before);
+    }
+  });
+
+  it("مهام الدورة تأخذ تاريخ الدورة لا التاريخ الميلادي، وتتغير بتغيرها", async () => {
+    const { setCycle, getCycle } = await import("./cycle");
+    const before = getCycle();
+    try {
+      setCycle({ number: 4, openedAt: "2026-10-20T01:00:00Z", startedAt: "2026-10-20T01:00:00Z", dateKey: "2026-10-23", hours: 18 });
+      expect(getTodaySupabaseTaskSeed("grammar").date_key).toBe("2026-10-23");
+      setCycle({ number: 5, openedAt: "2026-10-21T01:00:00Z", startedAt: "2026-10-21T01:00:00Z", dateKey: "2026-10-24", hours: 18 });
+      expect(getTodaySupabaseTaskSeed("grammar").date_key).toBe("2026-10-24");
+    } finally {
+      setCycle(before);
+    }
   });
 });

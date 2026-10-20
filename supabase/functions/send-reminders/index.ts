@@ -1,5 +1,8 @@
-// Supabase Edge Function: sends phone reminders (Web Push) for vocabulary review and the daily plan.
-// A cron job calls it every 30 minutes (see docs in README). It has no dependencies: Web Push encryption
+// Supabase Edge Function: sends phone reminders (Web Push) that follow the learner's wake cycle:
+//   - every N hours (default 2) during the cycle: the words that are due and not easy;
+//   - once per cycle, some hours after waking: the daily plan, if tasks are left;
+//   - when the cycle's hours are over: one "did you wake up?" prompt, then silence until a new cycle starts.
+// A cron job calls it every 10 minutes (see PHONE_REMINDERS.md). It has no dependencies: Web Push encryption
 // (RFC 8291 / RFC 8188) and VAPID signing (RFC 8292) use the built-in WebCrypto API.
 //
 // Deploy with "Verify JWT" turned OFF (the caller is the cron job, protected by the x-cron-secret header).
@@ -88,56 +91,76 @@ async function sendPush(subscription: Subscription, payload: object, vapid: { pu
 
 // ----------------------------------------------------------------- scheduling
 export type ReminderPrefs = {
-  timezone: string;
-  reminder_enabled: boolean;
-  reminder_hour_local: number;
+  cycle_started_at: string | null;
+  cycle_hours: number;
+  cycle_date_key: string | null;
+  wake_prompt_sent_at: string | null;
   vocab_reminder_enabled: boolean;
   vocab_reminder_every_hours: number;
-  reminder_window_start: number;
-  reminder_window_end: number;
+  reminder_enabled: boolean;            // the daily-plan reminder
+  daily_reminder_after_hours: number;
   last_vocab_push_at: string | null;
-  last_daily_push_date: string | null;
+  last_daily_push_date: string | null;  // the cycle date key that already got its daily-plan reminder
 };
 
-// Local hour (0-23) and local calendar date (YYYY-MM-DD) in the learner's time zone.
-export function localParts(now: Date, timeZone: string) {
-  let parts: Intl.DateTimeFormatPart[];
-  try {
-    parts = new Intl.DateTimeFormat("en-CA", { timeZone, hourCycle: "h23", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit" }).formatToParts(now);
-  } catch {
-    parts = new Intl.DateTimeFormat("en-CA", { timeZone: "UTC", hourCycle: "h23", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit" }).formatToParts(now);
+export type ReminderKind = "wake" | "daily" | "vocab";
+
+const HOUR = 3_600_000;
+
+// One decision per run, in priority order: wake prompt, daily plan, vocabulary tick.
+// Reminders exist only inside the cycle: they are counted from the cycle's start, and at the end only the wake prompt is sent.
+export function decideCycleReminder(input: { now: Date; prefs: ReminderPrefs; dueNonEasy: number; pendingTasks: number }): ReminderKind | null {
+  const { now, prefs } = input;
+  if (!prefs.cycle_started_at) return null;
+  const start = Date.parse(prefs.cycle_started_at);
+  const elapsed = now.getTime() - start;
+  if (elapsed < 0) return null; // the cycle has not begun yet
+
+  if (elapsed >= prefs.cycle_hours * HOUR) {
+    const promptedThisCycle = prefs.wake_prompt_sent_at !== null && Date.parse(prefs.wake_prompt_sent_at) >= start;
+    return promptedThisCycle ? null : "wake";
   }
-  const get = (type: string) => parts.find(part => part.type === type)?.value ?? "00";
-  return { hour: Number(get("hour")) % 24, dateKey: `${get("year")}-${get("month")}-${get("day")}` };
+
+  const dailyDue = prefs.reminder_enabled
+    && elapsed >= prefs.daily_reminder_after_hours * HOUR
+    && prefs.last_daily_push_date !== prefs.cycle_date_key
+    && input.pendingTasks > 0;
+  if (dailyDue) return "daily";
+
+  if (!prefs.vocab_reminder_enabled || input.dueNonEasy <= 0) return null;
+  const every = Math.max(1, prefs.vocab_reminder_every_hours) * HOUR;
+  const tick = Math.floor(elapsed / every);
+  if (tick < 1) return null;
+  // The latest scheduled tick sends once; if the cron job was late, older ticks are not replayed.
+  const tickTime = start + tick * every;
+  const lastPush = prefs.last_vocab_push_at ? Date.parse(prefs.last_vocab_push_at) : 0;
+  return lastPush < tickTime ? "vocab" : null;
 }
 
-const TOLERANCE_MS = 10 * 60 * 1000; // the cron job runs every 30 minutes, so allow some drift
+export type DueCounts = { again: number; hard: number; good: number; fresh: number };
 
-export function decideReminders(input: { now: Date; prefs: ReminderPrefs; vocabularyDone: boolean; pendingTasks: number }) {
-  const { now, prefs } = input;
-  const local = localParts(now, prefs.timezone);
-  const daily = prefs.reminder_enabled
-    && local.hour === prefs.reminder_hour_local
-    && prefs.last_daily_push_date !== local.dateKey
-    && input.pendingTasks > 0;
-  const lastVocab = prefs.last_vocab_push_at ? new Date(prefs.last_vocab_push_at).getTime() : 0;
-  const spacedEnough = now.getTime() - lastVocab >= prefs.vocab_reminder_every_hours * 3_600_000 - TOLERANCE_MS;
-  const inWindow = local.hour >= prefs.reminder_window_start && local.hour < prefs.reminder_window_end;
-  // One notification per run: the daily-plan reminder wins over the vocabulary one.
-  const vocab = prefs.vocab_reminder_enabled && inWindow && spacedEnough && !input.vocabularyDone && !daily;
-  return { daily, vocab, localDateKey: local.dateKey };
+export function vocabMessage(counts: DueCounts) {
+  const total = counts.again + counts.hard + counts.good + counts.fresh;
+  const parts = [
+    counts.again > 0 ? `${counts.again} لم أتذكرها` : null,
+    counts.hard > 0 ? `${counts.hard} صعبة` : null,
+    counts.good > 0 ? `${counts.good} للنطق والإملاء` : null,
+    counts.fresh > 0 ? `${counts.fresh} جديدة` : null,
+  ].filter(Boolean);
+  return { title: "راجع كلماتك", body: `عندك ${total} كلمة تنتظر المراجعة: ${parts.join("، ")}.`, url: "cards", tag: "vocab-review" };
 }
 
 export function dailyMessage(pendingTasks: number) {
   return { title: "وقت دراستك اليوم", body: `بقي ${pendingTasks} من مهام خطة اليوم. ابدأ بخطوة قصيرة الآن.`, url: "", tag: "daily-plan" };
 }
 
-export function vocabMessage(dueCards: number) {
+export function wakeMessage(cycleHours: number) {
   return {
-    title: "راجع مفرداتك",
-    body: dueCards > 0 ? `عندك ${dueCards} بطاقة تنتظر المراجعة. دقيقتان تكفي.` : "كلمات اليوم الجديدة جاهزة. افتح البطاقات وراجعها.",
-    url: "cards",
-    tag: "vocab-review",
+    title: "هل استيقظت؟",
+    body: `انتهت دورتك (${cycleHours} ساعة). اضغط عندما تستيقظ لتبدأ دورة جديدة.`,
+    url: "wake",
+    tag: "wake",
+    actions: [{ action: "wake", title: "استيقظت" }],
   };
 }
 
@@ -162,8 +185,7 @@ async function handler(request: Request) {
   };
 
   const now = new Date();
-  const todayKey = now.toISOString().slice(0, 10); // daily_tasks.date_key is the UTC date
-  const profiles: Array<ReminderPrefs & { user_id: string }> = await rest("learner_profiles?select=user_id,timezone,reminder_enabled,reminder_hour_local,vocab_reminder_enabled,vocab_reminder_every_hours,reminder_window_start,reminder_window_end,last_vocab_push_at,last_daily_push_date&or=(reminder_enabled.eq.true,vocab_reminder_enabled.eq.true)");
+  const profiles: Array<ReminderPrefs & { user_id: string }> = await rest("learner_profiles?select=user_id,cycle_started_at,cycle_hours,cycle_date_key,wake_prompt_sent_at,vocab_reminder_enabled,vocab_reminder_every_hours,reminder_enabled,daily_reminder_after_hours,last_vocab_push_at,last_daily_push_date&cycle_started_at=not.is.null&or=(reminder_enabled.eq.true,vocab_reminder_enabled.eq.true)");
   if (!profiles.length) return json({ users: 0, sent: 0 });
 
   const ids = profiles.map(profile => profile.user_id).join(",");
@@ -174,20 +196,28 @@ async function handler(request: Request) {
   if (!withDevices.length) return json({ users: 0, sent: 0 });
 
   const deviceIds = withDevices.map(profile => profile.user_id).join(",");
-  const tasks: Array<{ user_id: string; task_key: string; status: string }> = await rest(`daily_tasks?select=user_id,task_key,status&date_key=eq.${todayKey}&user_id=in.(${deviceIds})`);
-  const dueRows: Array<{ user_id: string }> = await rest(`vocabulary_cards?select=user_id&next_review_at=lte.${now.toISOString()}&user_id=in.(${deviceIds})`);
+  const dateKeys = [...new Set(withDevices.map(profile => profile.cycle_date_key).filter(Boolean))].join(",");
+  const tasks: Array<{ user_id: string; date_key: string; status: string }> = dateKeys
+    ? await rest(`daily_tasks?select=user_id,date_key,status&date_key=in.(${dateKeys})&user_id=in.(${deviceIds})`)
+    : [];
+  // Due words that are not easy; cards from the retired word list are excluded.
+  const dueRows: Array<{ user_id: string; last_rating: string | null; review_count: number }> = await rest(`vocabulary_cards?select=user_id,last_rating,review_count&next_review_at=lte.${now.toISOString()}&user_id=in.(${deviceIds})&content_id=not.like.vocabulary.*&or=(last_rating.is.null,last_rating.neq.easy)`);
 
   let sent = 0, removed = 0, failed = 0;
   for (const profile of withDevices) {
-    const mine = tasks.filter(task => task.user_id === profile.user_id);
-    const completed = mine.filter(task => task.status === "completed");
-    // Tasks are created when the dashboard opens; a missing row means the day has not started.
-    const pendingTasks = 5 - completed.length;
-    const vocabularyDone = completed.some(task => task.task_key === "vocabulary");
-    const decision = decideReminders({ now, prefs: profile, vocabularyDone, pendingTasks });
-    if (!decision.daily && !decision.vocab) continue;
+    const completed = tasks.filter(task => task.user_id === profile.user_id && task.date_key === profile.cycle_date_key && task.status === "completed").length;
+    const pendingTasks = 5 - completed;
+    const mine = dueRows.filter(row => row.user_id === profile.user_id);
+    const counts: DueCounts = {
+      again: mine.filter(row => row.last_rating === "again").length,
+      hard: mine.filter(row => row.last_rating === "hard").length,
+      good: mine.filter(row => row.last_rating === "good").length,
+      fresh: mine.filter(row => row.last_rating === null).length,
+    };
+    const kind = decideCycleReminder({ now, prefs: profile, dueNonEasy: mine.length, pendingTasks });
+    if (!kind) continue;
 
-    const message = decision.daily ? dailyMessage(pendingTasks) : vocabMessage(dueRows.filter(row => row.user_id === profile.user_id).length);
+    const message = kind === "wake" ? wakeMessage(profile.cycle_hours) : kind === "daily" ? dailyMessage(pendingTasks) : vocabMessage(counts);
     let delivered = false;
     for (const subscription of byUser.get(profile.user_id) ?? []) {
       try {
@@ -201,7 +231,10 @@ async function handler(request: Request) {
       }
     }
     if (delivered) {
-      const patch = decision.daily ? { last_daily_push_date: decision.localDateKey, last_vocab_push_at: now.toISOString() } : { last_vocab_push_at: now.toISOString() };
+      const stamp = now.toISOString();
+      const patch = kind === "wake" ? { wake_prompt_sent_at: stamp }
+        : kind === "daily" ? { last_daily_push_date: profile.cycle_date_key, last_vocab_push_at: stamp }
+        : { last_vocab_push_at: stamp };
       await rest(`learner_profiles?user_id=eq.${profile.user_id}`, { method: "PATCH", body: JSON.stringify(patch) });
     }
   }

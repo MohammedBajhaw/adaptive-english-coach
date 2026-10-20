@@ -1,4 +1,5 @@
 import { useAuth } from "@/_core/hooks/useAuth";
+import { useCycle } from "@/hooks/useCycle";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { requestWritingCorrection, type WritingFeedback } from "@/lib/aiCorrection";
@@ -33,12 +34,13 @@ function parseGrammarLesson(markdown: string) {
 
 export default function Grammar() {
   const { isAuthenticated, user } = useAuth();
+  const cycle = useCycle();
   const { settings: mode } = useStudyMode(user?.id);
   const limits = { label: mode.label, questions: mode.grammarQuestions, writingPrompts: mode.grammarPrompts };
   const grammarItem = useMemo(() => {
     const item = getTodayGrammarLesson();
     return { task: { id: "grammar" }, content: item };
-  }, [user?.id]);
+  }, [user?.id, cycle.number]);
   const lesson = useMemo(() => parseGrammarLesson(grammarItem.content.contentMarkdown), [grammarItem]);
   const questions = useMemo(() => lesson.questions.slice(0, limits.questions), [lesson.questions, limits.questions]);
   const prompts = useMemo(() => lesson.writingPrompts.slice(0, limits.writingPrompts), [lesson.writingPrompts, limits.writingPrompts]);

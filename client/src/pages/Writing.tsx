@@ -1,4 +1,5 @@
 import { useAuth } from "@/_core/hooks/useAuth";
+import { useCycle } from "@/hooks/useCycle";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
@@ -22,8 +23,9 @@ function parseWritingLesson(markdown: string) {
 
 export default function Writing() {
   const { isAuthenticated, user } = useAuth();
+  const cycle = useCycle();
   const sentenceTarget = useStudyMode(user?.id).settings.writingSentences;
-  const writingItem = useMemo(() => ({ task: { id: "writing" }, content: getTodayWritingLesson() }), [user?.id]);
+  const writingItem = useMemo(() => ({ task: { id: "writing" }, content: getTodayWritingLesson() }), [user?.id, cycle.number]);
   const lesson = useMemo(() => parseWritingLesson(writingItem.content.contentMarkdown), [writingItem]);
   const [text, setText] = useState("");
   const [checks, setChecks] = useState<boolean[]>([]);

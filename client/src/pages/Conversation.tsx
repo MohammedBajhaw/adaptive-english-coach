@@ -1,4 +1,5 @@
 import { useAuth } from "@/_core/hooks/useAuth";
+import { useCycle } from "@/hooks/useCycle";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { getTodayConversationLesson } from "@/lib/localLessons";
@@ -19,10 +20,11 @@ function parseConversationLesson(markdown: string) {
 
 export default function Conversation() {
   const { isAuthenticated, user } = useAuth();
+  const cycle = useCycle();
   const [score, setScore] = useState("");
   const [saved, setSaved] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const conversationItem = useMemo(() => ({ task: { id: "speaking" }, content: getTodayConversationLesson() }), [user?.id]);
+  const conversationItem = useMemo(() => ({ task: { id: "speaking" }, content: getTodayConversationLesson() }), [user?.id, cycle.number]);
   const lesson = useMemo(() => parseConversationLesson(conversationItem.content.contentMarkdown), [conversationItem]);
   const targetMinutes = useStudyMode(user?.id).settings.conversationMinutes;
   const prompt = conversationItem.content.contentMarkdown;

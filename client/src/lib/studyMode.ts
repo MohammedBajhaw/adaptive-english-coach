@@ -5,9 +5,9 @@ export type StudyMode = "steady" | "balanced" | "intensive";
 
 // One source of truth for how each mode changes activity depth (mirrors the table in Settings).
 export const studyModeSettings = {
-  steady: { label: "ثبات يومي", newWords: 5, grammarQuestions: 5, grammarPrompts: 1, listeningMinutes: 1, listeningQuestions: 2, conversationMinutes: 5, writingSentences: 1 },
-  balanced: { label: "تقدم متوازن", newWords: 7, grammarQuestions: 10, grammarPrompts: 1, listeningMinutes: 2, listeningQuestions: 4, conversationMinutes: 10, writingSentences: 3 },
-  intensive: { label: "تحدٍّ مكثف", newWords: 10, grammarQuestions: 20, grammarPrompts: 2, listeningMinutes: 4, listeningQuestions: 6, conversationMinutes: 13, writingSentences: 5 },
+  steady: { label: "ثبات يومي", grammarQuestions: 5, grammarPrompts: 1, listeningMinutes: 1, listeningQuestions: 2, conversationMinutes: 5, writingSentences: 1 },
+  balanced: { label: "تقدم متوازن", grammarQuestions: 10, grammarPrompts: 1, listeningMinutes: 2, listeningQuestions: 4, conversationMinutes: 10, writingSentences: 3 },
+  intensive: { label: "تحدٍّ مكثف", grammarQuestions: 20, grammarPrompts: 2, listeningMinutes: 4, listeningQuestions: 6, conversationMinutes: 13, writingSentences: 5 },
 } as const;
 
 function isStudyMode(value: unknown): value is StudyMode {

@@ -1,4 +1,5 @@
 import { useAuth } from "@/_core/hooks/useAuth";
+import { useCycle } from "@/hooks/useCycle";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { getTodayListeningLesson } from "@/lib/localLessons";
@@ -22,9 +23,10 @@ function parseListeningLesson(markdown: string) {
 
 export default function Listening() {
   const { isAuthenticated, user } = useAuth();
+  const cycle = useCycle();
   const { settings: mode } = useStudyMode(user?.id);
   const limits = { label: mode.label, minutes: mode.listeningMinutes, questions: mode.listeningQuestions };
-  const listeningItem = useMemo(() => ({ task: { id: "listening" }, content: getTodayListeningLesson() }), [user?.id]);
+  const listeningItem = useMemo(() => ({ task: { id: "listening" }, content: getTodayListeningLesson() }), [user?.id, cycle.number]);
   const lesson = useMemo(() => parseListeningLesson(listeningItem.content.contentMarkdown), [listeningItem]);
   const questions = useMemo(() => lesson.questions.slice(0, limits.questions), [lesson.questions, limits.questions]);
   const [responses, setResponses] = useState<string[]>([]);

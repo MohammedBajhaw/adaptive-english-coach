@@ -1,8 +1,9 @@
 import { getSupabase } from "@/lib/supabase";
-import { getTodayContentIds, setLearnerStartDate } from "@/lib/localLessons";
+import { DEFAULT_CYCLE_HOURS, currentDateKey, cycleFromProfile, cycleToProfile, getCycle, isStartInRange, legacyCycleNumber, setCycle, startNewCycle, type CycleState } from "@/lib/cycle";
+import { getTodayContentIds } from "@/lib/localLessons";
 import { cardRowFor, decorateCard, loadVocabularyBank, pickNewTerms } from "@/lib/vocabularyBank";
+import { DEFAULT_REVIEW_HOURS, nextStrength, reviewDelayHours, type Rating } from "@/lib/vocabSession";
 
-const todayKey = () => new Date().toISOString().slice(0, 10);
 
 const taskTemplates = [
   { task_key: "vocabulary", skill: "vocabulary", title: "مراجعة مفردات هندسية", instructions: "استرجع البطاقات المستحقة وانطق كل كلمة في جملة.", minutes: 8 },
@@ -24,7 +25,7 @@ export function getTodaySupabaseTaskSeed(taskKey: string) {
   const contentIds = getTodayContentIds();
   return {
     ...template,
-    date_key: todayKey(),
+    date_key: currentDateKey(),
     content_id: contentIds[taskKey as keyof typeof contentIds],
   };
 }
@@ -45,19 +46,74 @@ export type DashboardData = {
   notifications: Array<{ id: string; title: string; content: string; readAt: string | null }>;
 };
 
+function cycleError(error: { message?: string }) {
+  return /cycle_|vocab_session_closed_at|wake_prompt/.test(error.message ?? "") ? new Error("شغّل ملف الهجرة 003_wake_cycle.sql في Supabase أولًا.") : error;
+}
+
+// Loads the wake cycle from the profile row. A learner from before the wake cycle keeps their place in the curriculum:
+// the first cycle takes the old day number and starts now.
+export async function ensureCycle(supabase: any, userId: string, profile: any): Promise<CycleState> {
+  const saved = cycleFromProfile(profile);
+  if (saved) { setCycle(saved); return saved; }
+  const now = new Date();
+  const oldDay = profile.created_at ? legacyCycleNumber(profile.created_at, now) : 1;
+  const first = startNewCycle({ number: oldDay - 1, dateKey: null, hours: profile.cycle_hours ?? DEFAULT_CYCLE_HOURS }, now, now);
+  const { error } = await supabase.from("learner_profiles").update(cycleToProfile(first)).eq("user_id", userId);
+  if (error) throw cycleError(error);
+  setCycle(first);
+  return first;
+}
+
+async function loadOrCreateProfile(supabase: any, userId: string, displayName?: string | null) {
+  const result = await supabase.from("learner_profiles").select("*").eq("user_id", userId).maybeSingle();
+  if (result.error) throw result.error;
+  if (result.data) return result.data;
+  const created = await supabase.from("learner_profiles").insert({ user_id: userId, display_name: displayName ?? "متعلم" }).select("*").single();
+  if (created.error) throw created.error;
+  return created.data;
+}
+
+// The single entry point that makes sure the learner has a profile and a loaded wake cycle
+// (pages opened before the dashboard, and the word session, call this first).
+export async function ensureLearnerCycle(userId: string, displayName?: string | null) {
+  const supabase: any = getSupabase();
+  return ensureCycle(supabase, userId, await loadOrCreateProfile(supabase, userId, displayName));
+}
+
+// "I woke up": a new cycle begins (the daily lesson advances, tasks and the vocabulary session start fresh).
+export async function wakeUp(userId: string, startAt = new Date()) {
+  const supabase: any = getSupabase();
+  const { data, error } = await supabase.from("learner_profiles").select("cycle_number,cycle_date_key,cycle_hours").eq("user_id", userId).single();
+  if (error) throw cycleError(error);
+  const next = startNewCycle({ number: data.cycle_number ?? 0, dateKey: data.cycle_date_key ?? null, hours: data.cycle_hours ?? DEFAULT_CYCLE_HOURS }, startAt, new Date());
+  const update = await supabase.from("learner_profiles").update({ ...cycleToProfile(next), wake_prompt_sent_at: null, vocab_session_closed_at: null, last_vocab_push_at: null, last_daily_push_date: null }).eq("user_id", userId);
+  if (update.error) throw cycleError(update.error);
+  setCycle(next);
+  return next;
+}
+
+// Moves the current cycle's nominal start (for example to 04:00) without starting a new cycle.
+export async function adjustCycleStart(userId: string, startAt: Date) {
+  if (!isStartInRange(startAt, new Date())) throw new Error("اختر وقتًا بين 24 ساعة ماضية و12 ساعة قادمة.");
+  const supabase: any = getSupabase();
+  const update = await supabase.from("learner_profiles").update({ cycle_started_at: startAt.toISOString(), wake_prompt_sent_at: null }).eq("user_id", userId);
+  if (update.error) throw cycleError(update.error);
+  setCycle({ ...getCycle(), startedAt: startAt.toISOString() });
+}
+
+export async function updateCycleHours(userId: string, hours: number) {
+  const supabase: any = getSupabase();
+  const update = await supabase.from("learner_profiles").update({ cycle_hours: hours }).eq("user_id", userId);
+  if (update.error) throw cycleError(update.error);
+  setCycle({ ...getCycle(), hours });
+}
+
 export async function loadSupabaseDashboard(userId: string, displayName?: string | null): Promise<DashboardData> {
   const supabase: any = getSupabase();
-  const dateKey = todayKey();
-  const profileResult = await supabase.from("learner_profiles").select("*").eq("user_id", userId).maybeSingle();
-  if (profileResult.error) throw profileResult.error;
-  let profile: any = profileResult.data;
-  if (!profile) {
-    const created = await supabase.from("learner_profiles").insert({ user_id: userId, display_name: displayName ?? "متعلم" }).select("*").single();
-    if (created.error) throw created.error;
-    profile = created.data;
-  }
-  // The profile row is created on the learner's first visit, so it marks day 1 of the curriculum.
-  if (profile.created_at) setLearnerStartDate(profile.created_at);
+  const profile = await loadOrCreateProfile(supabase, userId, displayName);
+  // The wake cycle is the app's "day": make sure it exists and is loaded before tasks are built from it.
+  const cycle = await ensureCycle(supabase, userId, profile);
+  const dateKey = cycle.dateKey ?? currentDateKey();
   const tasksResult = await supabase.from("daily_tasks").select("*").eq("user_id", userId).eq("date_key", dateKey).order("created_at");
   if (tasksResult.error) throw tasksResult.error;
   let tasks: any[] = tasksResult.data ?? [];
@@ -75,9 +131,8 @@ export async function loadSupabaseDashboard(userId: string, displayName?: string
     const progress = await supabase.from("learner_content_progress").upsert(introducedItems, { onConflict: "user_id,content_id", ignoreDuplicates: true });
     if (progress.error) throw progress.error;
   }
-  const dayStart = `${dateKey}T00:00:00.000Z`;
-  const dayEnd = new Date(Date.parse(dayStart) + 86_400_000).toISOString();
-  const attemptsResult = await supabase.from("diagnostic_attempts").select("skill").eq("user_id", userId).gte("created_at", dayStart).lt("created_at", dayEnd);
+  const cycleStart = cycle.openedAt ?? cycle.startedAt ?? new Date().toISOString();
+  const attemptsResult = await supabase.from("diagnostic_attempts").select("skill").eq("user_id", userId).gte("created_at", cycleStart);
   if (attemptsResult.error) throw attemptsResult.error;
   const recoveredTaskIds = pendingTaskIdsWithTodayEvidence(tasks, attemptsResult.data ?? []);
   if (recoveredTaskIds.length) {
@@ -138,7 +193,7 @@ export async function setSupabaseTaskStatus(taskId: string, completed: boolean) 
 
 export async function completeSupabaseTaskByKey(userId: string, taskKey: string) {
   const supabase: any = getSupabase();
-  const task = await supabase.from("daily_tasks").select("id").eq("user_id", userId).eq("task_key", taskKey).eq("date_key", todayKey()).maybeSingle();
+  const task = await supabase.from("daily_tasks").select("id").eq("user_id", userId).eq("task_key", taskKey).eq("date_key", currentDateKey()).maybeSingle();
   if (task.error) throw task.error;
   let taskId = task.data?.id;
   if (!taskId) {
@@ -165,34 +220,63 @@ async function archiveLegacyCards(supabase: any, userId: string) {
   if (!error) legacyArchived = true;
 }
 
-// Introduces up to `newWordsPerDay` unseen terms per UTC day from the vocabulary spreadsheet, then returns the due cards.
-export async function loadSupabaseDueCards(userId: string, newWordsPerDay: number) {
+// Everything the vocabulary session needs: all of the learner's cards (display text comes from the spreadsheet bank),
+// the review interval, and whether the session was closed in the current cycle. The page derives the queue and the load from this.
+export async function loadVocabSession(userId: string) {
   const supabase: any = getSupabase();
   const bank = await loadVocabularyBank();
   await archiveLegacyCards(supabase, userId);
-  const existing = await supabase.from("vocabulary_cards").select("content_id, created_at").eq("user_id", userId).not("content_id", "like", "vocabulary.%");
-  if (existing.error) throw existing.error;
-  const rows: Array<{ content_id: string | null; created_at: string }> = existing.data ?? [];
-  const introducedToday = rows.filter(row => row.created_at.slice(0, 10) === todayKey()).length;
-  const fresh = pickNewTerms(bank.terms, new Set(rows.map(row => row.content_id)), newWordsPerDay - introducedToday);
-  if (fresh.length) {
-    const now = new Date().toISOString();
-    const seeded = await supabase.from("vocabulary_cards").upsert(fresh.map(term => ({ user_id: userId, ...cardRowFor(term), next_review_at: now })), { onConflict: "user_id,content_id", ignoreDuplicates: true });
-    if (seeded.error) throw seeded.error;
-  }
-  const result = await supabase.from("vocabulary_cards").select("*").eq("user_id", userId).not("content_id", "like", "vocabulary.%").lte("next_review_at", new Date().toISOString()).order("next_review_at");
-  if (result.error) throw result.error;
-  return (result.data ?? []).map((row: any) => decorateCard(row, bank));
+  const [profile, cards] = await Promise.all([
+    supabase.from("learner_profiles").select("vocab_reminder_every_hours,vocab_session_closed_at").eq("user_id", userId).maybeSingle(),
+    supabase.from("vocabulary_cards").select("*").eq("user_id", userId).not("content_id", "like", "vocabulary.%"),
+  ]);
+  if (profile.error) throw cycleError(profile.error);
+  if (cards.error) throw cards.error;
+  const cycle = getCycle();
+  const closedAt: string | null = profile.data?.vocab_session_closed_at ?? null;
+  return {
+    cards: (cards.data ?? []).map((row: any) => decorateCard(row, bank)) as any[],
+    intervalHours: Number(profile.data?.vocab_reminder_every_hours ?? DEFAULT_REVIEW_HOURS),
+    closed: Boolean(closedAt && cycle.openedAt && closedAt >= cycle.openedAt),
+    totalWords: bank.terms.length,
+  };
 }
 
-export async function rateSupabaseCard(userId: string, card: any, rating: "again" | "hard" | "good" | "easy") {
-  const hours = { again: 4, hard: 24, good: 72, easy: 168 }[rating];
-  const strengthDelta = { again: 0, hard: 1, good: 2, easy: 3 }[rating];
-  const strengthAfter = Math.max(0, Number(card.review_strength ?? 0) + strengthDelta);
-  const nextReviewAt = new Date(Date.now() + hours * 3_600_000).toISOString();
+// Shows the next unseen word: it becomes a card the moment it is displayed, so an unrated word is still there next time.
+export async function introduceNextWord(userId: string, existing: Array<{ content_id?: string | null }>) {
   const supabase: any = getSupabase();
-  const update = await supabase.from("vocabulary_cards").update({ review_strength: strengthAfter, review_count: Number(card.review_count ?? 0) + 1, next_review_at: nextReviewAt }).eq("id", card.id);
-  if (update.error) throw update.error;
-  const review = await supabase.from("card_reviews").insert({ user_id: userId, card_id: card.id, rating, strength_after: strengthAfter });
+  const bank = await loadVocabularyBank();
+  const [term] = pickNewTerms(bank.terms, new Set(existing.map(card => card.content_id)), 1);
+  if (!term) return null;
+  const { data, error } = await supabase.from("vocabulary_cards").upsert({ user_id: userId, ...cardRowFor(term), next_review_at: new Date().toISOString() }, { onConflict: "user_id,content_id" }).select("*").single();
+  if (error) throw error;
+  return decorateCard(data, bank) as any;
+}
+
+// Saves a rating and returns the updated card. The first rating of a new word is its "intake" (it counts toward the load);
+// not-easy words come back after the fixed interval, easy words after three weeks.
+export async function rateSupabaseCard(userId: string, card: any, rating: Rating, intervalHours = DEFAULT_REVIEW_HOURS) {
+  const now = new Date();
+  const first = !card.review_count && !card.intake_at;
+  const patch = {
+    review_strength: nextStrength(rating, Number(card.review_strength ?? 0)),
+    review_count: Number(card.review_count ?? 0) + 1,
+    next_review_at: new Date(now.getTime() + reviewDelayHours(rating, intervalHours) * 3_600_000).toISOString(),
+    last_rating: rating,
+    last_reviewed_at: now.toISOString(),
+    ...(first ? { intake_rating: rating, intake_at: now.toISOString() } : {}),
+  };
+  const supabase: any = getSupabase();
+  const update = await supabase.from("vocabulary_cards").update(patch).eq("id", card.id);
+  if (update.error) throw cycleError(update.error);
+  const review = await supabase.from("card_reviews").insert({ user_id: userId, card_id: card.id, rating, strength_after: patch.review_strength });
   if (review.error) throw review.error;
+  return { ...card, ...patch };
+}
+
+// "Enough for today": no more new words this cycle.
+export async function closeVocabSession(userId: string) {
+  const supabase: any = getSupabase();
+  const update = await supabase.from("learner_profiles").update({ vocab_session_closed_at: new Date().toISOString() }).eq("user_id", userId);
+  if (update.error) throw cycleError(update.error);
 }

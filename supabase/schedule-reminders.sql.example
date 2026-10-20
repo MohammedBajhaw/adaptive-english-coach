@@ -1,4 +1,4 @@
--- Schedules the phone reminders: calls the send-reminders Edge Function every 30 minutes.
+-- Schedules the phone reminders: calls the send-reminders Edge Function every 10 minutes.
 -- Run once in Supabase: SQL Editor -> paste -> Run.
 -- Needs the pg_cron and pg_net extensions (the first two lines enable them).
 
@@ -10,7 +10,7 @@ select cron.unschedule(jobid) from cron.job where jobname = 'send-reminders';
 
 select cron.schedule(
   'send-reminders',
-  '*/30 * * * *',
+  '*/10 * * * *',
   $$
   select net.http_post(
     url := 'https://doygchyxxbgbcbztwckh.supabase.co/functions/v1/send-reminders',

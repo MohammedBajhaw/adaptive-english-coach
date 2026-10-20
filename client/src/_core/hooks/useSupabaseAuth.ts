@@ -1,14 +1,6 @@
-import { setLearnerStartDateIfMissing } from "@/lib/localLessons";
 import { getSupabase, isSupabaseConfigured } from "@/lib/supabase";
 import type { User } from "@supabase/supabase-js";
 import { useCallback, useEffect, useState } from "react";
-
-// The start date must be known before the user state is published, so lesson pages that
-// re-render on the user pick the right curriculum day.
-function publish(next: User | null, setUser: (user: User | null) => void) {
-  if (next?.created_at) setLearnerStartDateIfMissing(next.created_at);
-  setUser(next);
-}
 
 export function useSupabaseAuth() {
   const [user, setUser] = useState<User | null>(null);
@@ -20,12 +12,12 @@ export function useSupabaseAuth() {
     if (!isSupabaseConfigured) return;
     const supabase = getSupabase();
     supabase.auth.getUser().then(({ data }) => {
-      publish(data.user ?? null, setUser);
+      setUser(data.user ?? null);
       setLoading(false);
     });
     const { data: subscription } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === "PASSWORD_RECOVERY") setRecovery(true);
-      publish(session?.user ?? null, setUser);
+      setUser(session?.user ?? null);
       setLoading(false);
     });
     return () => subscription.subscription.unsubscribe();
